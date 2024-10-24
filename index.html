@@ -1,10 +1,25 @@
-<!DOCTYPE html>
+<html>
     <head>
-        <title>
-
-        </title>
+        <meta charset="utf-8">
+		<title>Login</title>
+		<link href="css/estilos.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <div class="titulo"><h2>Formulario</h2></div>
+        <form action="recibirform.php" method="post" name="formRegistro">
+
+            <div class="etiquetas">Correo:</div> 
+            <div class="inputs"><input type="text" name="correo" placeholder="Escribe tu correo"></div>
+            <div class="etiquetas">Password:</div>
+            <div class="inputs"><input type="password" placeholder="Escribe tu contraseña" name="pw" maxlength="8" required></div>
+            <div class="inputs"><input type="submit" value="Enviar"></div>
+        </form>    
+
 
     </body>
+
+
+
+
+
 </html>

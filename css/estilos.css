@@ -1,0 +1,67 @@
+body{
+    display:flex;
+	justify-content:center;
+	margin:0px;
+    background-image: url(../images/pexels-photo-1103970.jpeg);
+    background-position: center;
+    background-size: cover;
+}
+
+.titulo{
+    position:absolute;
+    font-family: roboto;
+    margin-top:100px;
+}
+
+form{
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:row;
+    align-content:center;
+    justify-content:center;
+    margin-top:250px;
+    width:350px;
+    height:300px;
+    outline:solid black 1px;
+    
+    border-radius: 15px;
+    background-color: rgba(96, 157, 159, 0.7);
+}
+
+.etiquetas{
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:225px;
+    height:40px;
+}
+
+.inputs{
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:column;
+    justify-content:center;
+    width:225px;
+    height:40px;   
+}
+
+form .inputs input[type="text"], form .inputs input[type="password"], 
+form .inputs textarea[name="opinion"], form .inputs select[name="poblacion"]{
+
+    border-bottom:solid 1.5px white;
+    border-right:solid 1.5px grey;
+    border-left:solid 1.5px black;
+    border-top:solid 1.5px black;
+    font-family:roboto;
+}
+
+form .etiquetas{
+    font-family:roboto;
+}
+
+@font-face {
+    font-family: roboto;
+    src: url(../fonts/Roboto-Medium.ttf);
+}
