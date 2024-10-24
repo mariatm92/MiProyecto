@@ -65,3 +65,16 @@ form .etiquetas{
     font-family: roboto;
     src: url(../fonts/Roboto-Medium.ttf);
 }
+
+/* A PARTIR DE AQUI ES DE LA PAGINA ADMIN */
+.wrapp{
+    display:flex;
+    justify-content: center;
+    height: 1200px;
+    width: 800px;
+    border: 1px solid black;
+}
+h1{
+    font-size: larger;
+    color: blue;
+}
