@@ -26,5 +26,5 @@ Vamos a crear un pequeño ERP basado en un hotel.Como parte de un proyecto de cl
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/mariatm92/MiProyecto.git
+   git clone https://github.com/mariatm92/MiProyecto.git 
 
