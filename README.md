@@ -20,7 +20,7 @@ Vamos a crear un pequeño ERP basado en un hotel.Como parte de un proyecto de cl
 - **HTML**: Para la estructura del contenido.
 - **CSS**: Para el estilo y diseño.
 - **JavaScript**: Para la interactividad y funcionalidades.
-- [Otras tecnologías o librerías que uses, como frameworks o bibliotecas.]
+- Aun no sabemos las librerias que vamos a usar la actualizaremos mas adelante
 
 ## Instalación
 
@@ -28,4 +28,3 @@ Vamos a crear un pequeño ERP basado en un hotel.Como parte de un proyecto de cl
    ```bash
    git clone https://github.com/mariatm92/MiProyecto.git
 
-TODO: teneis que añadir algo xdxd
