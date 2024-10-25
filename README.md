@@ -9,22 +9,22 @@ ERP.HOTEL
 - [Instalación](#instalación)
 - [Uso](#uso)
 - [Contribución](#contribución)
-- [Licencia](#licencia)
+- [Licencia](#licencia) 
 
 ## Descripción
 
-Vamos a crear un pequeño ERP basado en un hotel.Como parte de un proyecto de clase.
+Este proyecto consistirá en la creación de un ERP para el control y administración de un hotel.
+Se usarán diferentes tecnologías para ello, aunque estas pueden sufrir cambios durante el proceso de creación.
 
 ## Tecnologías Utilizadas
 
-- **HTML**: Para la estructura del contenido.
-- **CSS**: Para el estilo y diseño.
-- **JavaScript**: Para la interactividad y funcionalidades.
-- Aun no sabemos las librerias que vamos a usar la actualizaremos mas adelante
-
-## Instalación
+- **HTML**: Para la estructura del contenido. (v.HTML5)
+- **CSS**: Para el estilo y diseño. (v.CSS4)
+- **JavaScript**: Para la interactividad y funcionalidades. (v.ES14)
+- **JSon**: Para el control de datos. (v.ECMA-404)
+- **Librerias**:Estado temprano del proyecto, pendiente de actualización.
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/mariatm92/MiProyecto.git 
+   git clone https://github.com/mariatm92/MiProyecto.git
 
