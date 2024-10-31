@@ -1,26 +1,48 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-		<title>Login</title>
-		<link href="css/estilos.css" rel="stylesheet" type="text/css">
-    </head>
-    <body>
-        <!-- Issam Prueba a subir un Archivo -->
-        <div class="titulo"><h2>Formulario</h2></div>
-        <form action="recibirform.php" method="post" name="formRegistro">
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <link href="css/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="titulo">
+    <h2>Formulario</h2>
+  </div>
+  <form id="formRegistro">
+    <div class="etiquetas">Correo:</div>
+    <div class="inputs">
+      <input type="text" name="correo" placeholder="Escribe tu correo">
+    </div>
+    <div class="etiquetas">Password:</div>
+    <div class="inputs">
+      <input type="password" placeholder="Escribe tu contraseña" name="pw" maxlength="8" required>
+    </div>
+    <div class="inputs">
+      <input type="submit" value="Enviar">
+    </div>
+  </form>
 
-            <div class="etiquetas">Correo:</div> 
-            <div class="inputs"><input type="text" name="correo" placeholder="Escribe tu correo"></div>
-            <div class="etiquetas">Password:</div>
-            <div class="inputs"><input type="password" placeholder="Escribe tu contraseña" name="pw" maxlength="8" required></div>
-            <div class="inputs"><input type="submit" value="Enviar"></div>
-        </form>    
+  <script>
+    document.getElementById('formRegistro').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const correo = document.getElementsByName('correo')[0].value;
+      const pw = document.getElementsByName('pw')[0].value;
 
-
-    </body>
-
-
-
-
-
+      fetch('http://localhost:3000/usuarios')
+        .then(response => response.json())
+        .then(data => {
+          const user = data.find(user => user.correo === correo && user.pw === pw);
+          if (user) {
+            alert("Usuario válido. Datos enviados.");
+            console.log(JSON.stringify({ correo, pw }));
+          } else {
+            alert("Usuario no válido. Por favor, intente de nuevo.");
+          }
+        })
+        .catch(error => console.error('Error al leer el archivo JSON:', error));
+    });
+  </script>
+</body>
 </html>
