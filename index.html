@@ -37,7 +37,6 @@
 
 
           if (user) {
-            alert("Usuario válido. Datos enviados.");
             console.log(JSON.stringify({ correo, pw }));
 
             if (user.type === 'admin')  {
@@ -47,7 +46,6 @@
                alert("Bienvenido, usuario regular");
                window.location.href ='user.html'; //Redirigimos a la pagina
             }
-
           } else {
             alert("Usuario no válido. Por favor, intente de nuevo.");
           }
