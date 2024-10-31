@@ -1,7 +1,8 @@
 [
   {
     "correo": "admin@admin.com",
-    "pw": "admin"
+    "pw": "admin",
+     "type":true
   },
   {
     "correo": "user@user.com",
