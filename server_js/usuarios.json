@@ -1,11 +1,14 @@
 [
   {
     "correo": "admin@admin.com",
+
     "pw": "admin",
-     "type":true
+    "type": "admin"
   },
   {
     "correo": "user@user.com",
-    "pw": "user"
-  }
+    "pw": "user",
+    "type":"user"
+  } 
+
 ]
