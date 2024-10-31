@@ -22,8 +22,9 @@ Se usarán diferentes tecnologías para ello, aunque estas pueden sufrir cambios
 - **JavaScript**: Para la interactividad y funcionalidades. (v.ES14)
 - **JSon**: Para el control de datos. (v.ECMA-404)
 
-- **Librerias**:Estado temprano del proyecto, pendiente de actualización.     
-borrar es para bueba
+- **Librerias**:Estado temprano del proyecto, pendiente de actualización.
+
+
 
 
 1. Clona el repositorio:
