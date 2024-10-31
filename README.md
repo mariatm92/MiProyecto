@@ -26,5 +26,3 @@ Se usarán diferentes tecnologías para ello, aunque estas pueden sufrir cambios
 1. Clona el repositorio:
    ```bash
    git clone https://github.com/mariatm92/MiProyecto.git
-
-dnfwldfnldkfklkfnld
