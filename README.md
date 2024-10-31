@@ -22,7 +22,9 @@ Se usarán diferentes tecnologías para ello, aunque estas pueden sufrir cambios
 - **JavaScript**: Para la interactividad y funcionalidades. (v.ES14)
 - **JSon**: Para el control de datos. (v.ECMA-404)
 - **Librerias**:Estado temprano del proyecto, pendiente de actualización.     
+borrar es para bueba
 
 1. Clona el repositorio:
    ```bash
    git clone https://github.com/mariatm92/MiProyecto.git
+
