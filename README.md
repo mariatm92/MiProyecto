@@ -23,6 +23,19 @@ Se usarán diferentes tecnologías para ello, aunque estas pueden sufrir cambios
 - **JSon**: Para el control de datos. (v.ECMA-404)
 - **Librerias**:Estado temprano del proyecto, pendiente de actualización.
 
+## Instalacion
+
+Para que el programa funcione correctamente, se debe ejecutar un servidor node.js.
+
+Pasos a seguir:
+
+1 - Primero descargamos el proyecto en nuestro pc.
+2 - Entraremos en la carpeta Miproyecto\server_js. 
+3 - Abrimos la terminal de visual Studio Code y ejecutamos el comando  ```bash node server.js.
+4 - Una vez arrancado el servidor local ya podemos abrir la pagina index.html
+ 
+ - Se recomienda el uso de Visual Studio Code.
+
 1. Clona el repositorio:
    ```bash
    git clone https://github.com/mariatm92/MiProyecto.git
