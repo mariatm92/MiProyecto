@@ -30,7 +30,8 @@ Se redirigirá a una página diferente con el párametro mencionado, una consola
 - **CSS**: Para el estilo y diseño. (v.CSS4)
 - **JavaScript**: Para la interactividad y funcionalidades. (v.ES14)
 - **JSon**: Para el control de datos. (v.ECMA-404)
-- **Librerias**:Estado temprano del proyecto, pendiente de actualización.
+- **Librerias**:Estado temprano del proyecto, pendiente de actualización.     
+borrar es para bueba
 
 
 
