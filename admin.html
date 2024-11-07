@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
 		<title>Login</title>
-		<link href="css/admin.css" rel="stylesheet" type="text/css">
+		<link href="css/estilos-user-.css" rel="stylesheet" type="text/css">
   </head>
     
         <div class="wrapp">
@@ -13,9 +13,28 @@
                 <img src="images/erp.png">
                
                
-                <h1>Bienvenido</h1>
+                <h1 id="bienvenida">Bienvenido, <span id="usuarioCorreo"></span></h1>
              
                
             </div>
         </div>
+
+        <script>
+            // Función para obtener un parámetro de la URL
+            function obtenerParametroURL(nombre) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(nombre);
+            }
+    
+            // Obtener el correo de la URL
+            const correo = obtenerParametroURL('correo');
+    
+            // Si hay correo, mostrarlo en el h1
+            if (correo) {
+                document.getElementById('usuarioCorreo').textContent = correo;
+            } else {
+                // Si no hay correo, redirigir al login
+                window.location.href = 'index.html';
+            }
+        </script>
 </html>
