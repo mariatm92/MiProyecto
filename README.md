@@ -33,12 +33,12 @@ Se redirigirá a una página diferente con el párametro mencionado, una consola
 
 Para que el programa funcione correctamente, se debe ejecutar un servidor node.js.
 
-Pasos a seguir:
+> Pasos a seguir:
 
-1 - Primero descargamos el proyecto en nuestro pc.
-2 - Entraremos en la carpeta Miproyecto\server_js. 
-3 - Abrimos la terminal de visual Studio Code y ejecutamos el comando  ```bash node server.js.
-4 - Una vez arrancado el servidor local ya podemos abrir la pagina index.html
+1. Primero descargamos el proyecto en nuestro pc.
+2. Entraremos en la carpeta Miproyecto\server_js. 
+3. Abrimos la terminal de visual Studio Code y ejecutamos el comando  ``` node server.js.
+4. Una vez arrancado el servidor local ya podemos abrir la pagina index.html
  
  - Se recomienda el uso de Visual Studio Code.
 
