@@ -23,12 +23,16 @@
     </div>
   </form>
 
+  <div id="spinner"></div>
+
   <script>
     document.getElementById('formRegistro').addEventListener('submit', function(event) {
       event.preventDefault();
       
       const correo = document.getElementsByName('correo')[0].value;
       const pw = document.getElementsByName('pw')[0].value;
+
+      document.getElementById('spinner').style.display = 'block';
 
       fetch('http://localhost:3000/usuarios')
         .then(response => response.json())
@@ -38,21 +42,31 @@
           if (user) {
 
             console.log(JSON.stringify({ correo, pw }));
-
+            setTimeout(() => {
             if (user.type === 'admin')  {
                 window.location.href ='admin.html'; 
 
             } else {
 
                window.location.href ='user.html'; 
-
-
             }
+          }, 2000);
+
           } else {
             alert("Usuario no válido. Por favor, intente de nuevo.");
           }
         })
-        .catch(error => console.error('Error al leer el archivo JSON:', error));
+        .catch(error => {
+
+          console.error('Error al leer el archivo JSON:', error);
+        })
+        .finally(() => {
+          // Asegurarse de que el spinner se oculte después de 2 segundos
+          setTimeout(() => {
+            document.getElementById('spinner').style.display = 'none';
+          }, 2000); // Ocultar el spinner después de 2 segundos
+        });
+
     });
   </script>
 </body>

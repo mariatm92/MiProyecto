@@ -33,6 +33,7 @@ Se redirigirá a una página diferente con el párametro mencionado, una consola
 
 Para que el programa funcione correctamente, se debe ejecutar un servidor node.js.
 
+
 > Se recomienda el uso de Visual Studio Code.
 > Pasos a seguir:
 
