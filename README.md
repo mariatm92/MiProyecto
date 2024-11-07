@@ -13,10 +13,12 @@ ERP.HOTEL
 
 ## Descripción
 
+
 En este proyecto, creamos nuestra primera página de Log in.
 Consiste en una página principal (index.html) con un pequeño formulario, que solicita 2 parámetros (correo y contraseña).
 Con el uso de un servidor node.js, leemos un archivo .json con los usuarios y contraseñas permitidos, adicionalmente tendremos en cuenta los permisos 'admin' del usuario.
 Se redirigirá a una página diferente con el párametro mencionado, una consola de control o una página de usuario.
+
 
 
 ## Tecnologías Utilizadas
@@ -25,6 +27,21 @@ Se redirigirá a una página diferente con el párametro mencionado, una consola
 - **JavaScript**: Para la interactividad y funcionalidades. (v.ES14)
 - **JSon**: Para el control de datos. (v.ECMA-404)
 - **Librerias**:Estado temprano del proyecto, pendiente de actualización.
+
+
+## Instalacion
+
+Para que el programa funcione correctamente, se debe ejecutar un servidor node.js.
+
+Pasos a seguir:
+
+1 - Primero descargamos el proyecto en nuestro pc.
+2 - Entraremos en la carpeta Miproyecto\server_js. 
+3 - Abrimos la terminal de visual Studio Code y ejecutamos el comando  ```bash node server.js.
+4 - Una vez arrancado el servidor local ya podemos abrir la pagina index.html
+ 
+ - Se recomienda el uso de Visual Studio Code.
+
 
 
 
