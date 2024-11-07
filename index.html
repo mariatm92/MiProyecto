@@ -6,22 +6,17 @@
   <link href="css/estilos.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <div class="titulo">
-    <h2>Formulario</h2>
-  </div>
-  <form id="formRegistro">
-    <div class="etiquetas">Correo:</div>
-    <div class="inputs">
-      <input type="text" name="correo" placeholder="Escribe tu correo">
+<div class="form-box">
+<form class="form" id="formRegistro">
+    <span class="title">Log in</span>
+    <span class="subtitle">Log in with your account.</span>
+    <div class="form-container">
+			<input type="email" class="input" placeholder="Email" name="correo">
+			<input type="password" class="input" placeholder="Password" name="pw">
     </div>
-    <div class="etiquetas">Password:</div>
-    <div class="inputs">
-      <input type="password" placeholder="Escribe tu contraseña" name="pw" maxlength="8" required>
-    </div>
-    <div class="inputs">
-      <input type="submit" value="Enviar">
-    </div>
-  </form>
+    <button type="submit">Sign up</button>
+</form>
+</div>
 
   <div id="spinner"></div>
 
@@ -40,6 +35,7 @@
           const user = data.find(user => user.correo === correo && user.pw === pw);
 
           if (user) {
+
             console.log(JSON.stringify({ correo, pw }));
             setTimeout(() => {
               if (user.type === 'admin')  {
@@ -49,6 +45,7 @@
                 window.location.href =`user.html?correo=${encodeURIComponent(correo)}`; 
               }
             }, 2000);
+
           } else {
             alert("Usuario no válido. Por favor, intente de nuevo.");
             
