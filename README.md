@@ -21,7 +21,11 @@ Se usarán diferentes tecnologías para ello, aunque estas pueden sufrir cambios
 - **CSS**: Para el estilo y diseño. (v.CSS4)
 - **JavaScript**: Para la interactividad y funcionalidades. (v.ES14)
 - **JSon**: Para el control de datos. (v.ECMA-404)
-- **Librerias**:Estado temprano del proyecto, pendiente de actualización. 
+- **Librerias**:Estado temprano del proyecto, pendiente de actualización.
+
+
+
+
 
 1. Clona el repositorio:
    ```bash
