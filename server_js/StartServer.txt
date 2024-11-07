@@ -1,1 +1,0 @@
-En terminal D:\Issam\ERP\MiProyecto\server_js> node server.js

@@ -54,5 +54,6 @@ Clonación del repositorio:
 
 
 
-## Descripción
+
+## Uso
 
