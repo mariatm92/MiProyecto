@@ -46,7 +46,7 @@
                   window.location.href ='admin.html'; 
 
               } else {
-                window.location.href ='user.html'; 
+                window.location.href =`user.html?correo=${encodeURIComponent(correo)}`; 
               }
             }, 2000);
           } else {
