@@ -13,8 +13,11 @@ ERP.HOTEL
 
 ## Descripción
 
-Este proyecto consistirá en la creación de un ERP para el control y administración de un hotel.
-Se usarán diferentes tecnologías para ello, aunque estas pueden sufrir cambios durante el proceso de creación.
+En este proyecto, creamos nuestra primera página de Log in.
+Consiste en una página principal (index.html) con un pequeño formulario, que solicita 2 parámetros (correo y contraseña).
+Con el uso de un servidor node.js, leemos un archivo .json con los usuarios y contraseñas permitidos, adicionalmente tendremos en cuenta los permisos 'admin' del usuario.
+Se redirigirá a una página diferente con el párametro mencionado, una consola de control o una página de usuario.
+
 
 ## Tecnologías Utilizadas
 - **HTML**: Para la estructura del contenido. (v.HTML5)
