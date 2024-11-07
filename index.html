@@ -40,6 +40,7 @@
           const user = data.find(user => user.correo === correo && user.pw === pw);
 
           if (user) {
+
             console.log(JSON.stringify({ correo, pw }));
             setTimeout(() => {
               if (user.type === 'admin')  {
@@ -50,8 +51,10 @@
               }
             }, 2000);
 
+
           } else {
             alert("Usuario no válido. Por favor, intente de nuevo.");
+            
           }
         })
         .catch(error => {
@@ -59,9 +62,11 @@
           console.error('Error al leer el archivo JSON:', error);
         })
         .finally(() => {
+
           setTimeout(() => {
             document.getElementById('spinner').style.display = 'none';
           }, 2000); 
+
         });
 
     });
