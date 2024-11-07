@@ -40,13 +40,17 @@
           const user = data.find(user => user.correo === correo && user.pw === pw);
 
           if (user) {
-            if (user.type === 'admin')  {
-                window.location.href ='admin.html'; 
 
-            } else {
-               window.location.href ='user.html'; 
-            }
-          }, 2000);
+            console.log(JSON.stringify({ correo, pw }));
+            setTimeout(() => {
+              if (user.type === 'admin')  {
+                  window.location.href ='admin.html'; 
+
+              } else {
+                window.location.href ='user.html'; 
+              }
+            }, 2000);
+
 
           } else {
             alert("Usuario no válido. Por favor, intente de nuevo.");
@@ -58,10 +62,11 @@
           console.error('Error al leer el archivo JSON:', error);
         })
         .finally(() => {
-          // Asegurarse de que el spinner se oculte después de 2 segundos
+
           setTimeout(() => {
             document.getElementById('spinner').style.display = 'none';
-          }, 2000); // Ocultar el spinner después de 2 segundos
+          }, 2000); 
+
         });
 
     });
