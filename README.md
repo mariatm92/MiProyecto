@@ -32,8 +32,6 @@ Se redirigirá a una página diferente con el párametro mencionado, una consola
 - **JSon**: Para el control de datos. (v.ECMA-404)
 - **Librerias**:Estado temprano del proyecto, pendiente de actualización.
 
-
-
 ## Instalación
 
 Para que el programa funcione correctamente, se debe ejecutar un servidor node.js.
