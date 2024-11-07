@@ -36,14 +36,16 @@
           const user = data.find(user => user.correo === correo && user.pw === pw);
 
           if (user) {
-            if (user.type === 'admin')  {
-                window.location.href ='admin.html'; 
+            console.log(JSON.stringify({ correo, pw }));
+            setTimeout(() => {
+              if (user.type === 'admin')  {
+                  window.location.href ='admin.html'; 
 
-            } else {
-               window.location.href ='user.html'; 
+              } else {
 
-            }
-
+                window.location.href =`user.html?correo=${encodeURIComponent(correo)}`; 
+              }
+            }, 2000);
           } else {
             alert("Usuario no válido. Por favor, intente de nuevo.");
             
