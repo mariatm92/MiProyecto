@@ -40,10 +40,6 @@
           const user = data.find(user => user.correo === correo && user.pw === pw);
 
           if (user) {
-<<<<<<< HEAD
-=======
-
->>>>>>> f1e44635207c1a30bdb33e896619cf4ea01fba68
             console.log(JSON.stringify({ correo, pw }));
             setTimeout(() => {
               if (user.type === 'admin')  {
@@ -53,15 +49,6 @@
                 window.location.href ='user.html'; 
               }
             }, 2000);
-
-<<<<<<< HEAD
-            } else {
-               alert("Bienvenido, usuario regular");
-               window.location.href ='user.html'; //Redirigimos a la pagina
-            }
-=======
-
->>>>>>> f1e44635207c1a30bdb33e896619cf4ea01fba68
           } else {
             alert("Usuario no válido. Por favor, intente de nuevo.");
             
