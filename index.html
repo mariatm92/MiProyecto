@@ -36,15 +36,17 @@
           const user = data.find(user => user.correo === correo && user.pw === pw);
 
           if (user) {
-            alert("Usuario válido. Datos enviados.");
+
             console.log(JSON.stringify({ correo, pw }));
 
             if (user.type === 'admin')  {
                 window.location.href ='admin.html'; 
 
             } else {
-               alert("Bienvenido, usuario regular");
+
                window.location.href ='user.html'; 
+
+
             }
           } else {
             alert("Usuario no válido. Por favor, intente de nuevo.");
