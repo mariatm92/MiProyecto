@@ -17,37 +17,41 @@ form .etiquetas{
     width: 100%;
 
 }
-.cabecera{
+.wrapp .cabecera{
     display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
     height: 150px;
     width:100%;
-    background-color: rgb(203, 173, 228);
+    background-color: rgb(255, 255, 255);
+    margin-top: -10px;
+    box-shadow: 0px 5px 10px rgb(99, 98, 98) ;
+    
+    
 
-    border-bottom:1px dashed black;
     
 }
 .bienvenida{
 
     display:flex;
-    flex-direction: row;
-    justify-content: space-arround;
-   
+    flex-direction: column;
+    justify-content: center;
+   align-content: center;
     height: 150px;
-    width:100%;
+    width:1000px;
+    margin-right: 250px;
+  
    
 }
 
 
  img{
-    height: 110px;
-    width: 160px;
-    margin-left: 50px; margin-top: 20px;
-   
-    
-   
+    height: 150px;
+    width: 200px;
+    border-radius: 100%;
+
 }
 h1{
     display: flex;
@@ -59,26 +63,17 @@ h1{
     font-family:'Courier New', Courier, monospace;
     
     height: 60px;
-    width: 600px;
-    margin-left: 450px;
-    margin-top: 20px;
-   
-   
-    
- 
+    width: 1000px;
+
 }
 .menu{
 
     display: flex;
     justify-content: space-around;
     align-items: center;
-
-    height: 60px;
-    width: 800px;
-    margin-bottom: 20px;
-
+    height: 20px;
+    width: 1000px;
     list-style: none;
-
     font-family: roboto;
     font-size: 20px;
 
