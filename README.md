@@ -31,7 +31,6 @@ Se redirigirá a una página diferente con el párametro mencionado, una consola
 - **JavaScript**: Para la interactividad y funcionalidades. (v.ES14)
 - **JSon**: Para el control de datos. (v.ECMA-404)
 - **Librerias**:Estado temprano del proyecto, pendiente de actualización.     
-borrar es para bueba
 
 
 
