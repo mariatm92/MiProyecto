@@ -1,52 +1,76 @@
-
-
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
 		<title>Login</title>
 		<link href="css/estilos-user-.css" rel="stylesheet" type="text/css">
   </head>
-    
         <div class="wrapp">
-
             <div class="cabecera">
-
-                <img src="images/erp2.jpg">
-                
+                <img src="images/erp2.jpg"> 
                 <div class="bienvenida">
-
                     <h1 id="bienvenida">Bienvenido administrador, <span id="usuarioCorreo"></span></h1>
-
-
                     <div class="menu">
-
                         <li>Inicio</li>
                         <li>Contacto</li>
-
                     </div> 
                 </div>         
             </div>
         </div>
 
+        <div class="contenedor">
+            <h2>Lista de Empleados</h2>
+            <ul id="employeeList"></ul>
+        </div>
 
         <script>
-            
             function obtenerParametroURL(nombre) {
                 const urlParams = new URLSearchParams(window.location.search);
                 return urlParams.get(nombre);
             }
     
-         
             const correo = obtenerParametroURL('correo');
     
-            
             if (correo) {
                 document.getElementById('usuarioCorreo').textContent = correo;
             } else {
-                
                 window.location.href = 'index.html';
             }
-        </script>
 
+            fetch('http://localhost:3000/empleados')
+            .then(response => response.json())
+            .then(data => {
+                const employeeList = document.getElementById('employeeList');
+                data.empleados.forEach(employee => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${employee.id} ${employee.nombre} ${employee.apellidos} - ${employee.email} - ${employee["número de teléfono"]} - ${employee.dirección}`;
+                    employeeList.appendChild(listItem);
+
+                    // Crea un boton de borrado por cada empleado
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Eliminar';
+                    deleteButton.onclick = () => eliminarEmpleado(employee.id);
+                    listItem.appendChild(deleteButton);
+                });
+            })
+            .catch(error => console.error('Error fetching employees:', error));
+
+        function eliminarEmpleado(id) {
+            fetch(`http://localhost:3000/empleados/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.text())
+            .then(message => {
+                console.log(message);
+                // Refresh the list or update the UI as needed
+                location.reload(); // Simple way to refresh the list
+            })
+            .catch(error => console.error('Error deleting employee:', error));
+        }
+        </script>
+</body>
 </html>
+
+
+
 
