@@ -1,14 +1,6 @@
 {
   "empleados": [
     {
-      "id": "1",
-      "nombre": "Juan",
-      "apellidos": "Pérez",
-      "email": "juan.perez@example.com",
-      "número de teléfono": "+34 612 345 678",
-      "dirección": "Calle Falsa 123, Madrid, España"
-    },
-    {
       "id": "2",
       "nombre": "María",
       "apellidos": "López",
@@ -19,6 +11,14 @@
     {
       "id": "3",
       "nombre": "Carlos",
+      "apellidos": "García",
+      "email": "carlos.garcia@example.com",
+      "número de teléfono": "+34 614 567 890",
+      "dirección": "Plaza Mayor 789, Valencia, España"
+    },
+    {
+      "id": "4",
+      "nombre": "Maria",
       "apellidos": "García",
       "email": "carlos.garcia@example.com",
       "número de teléfono": "+34 614 567 890",

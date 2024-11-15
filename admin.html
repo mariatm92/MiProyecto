@@ -2,9 +2,10 @@
 <html>
     <head>
         <meta charset="utf-8">
-		<title>Login</title>
-		<link href="css/admin.css" rel="stylesheet" type="text/css">
-  </head>
+        <title>Login</title>
+        <link href="css/admin.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
         <div class="wrapp">
             <div class="cabecera">
                 <img src="images/erp2.jpg"> 
@@ -17,32 +18,13 @@
                 </div>         
             </div>
             <div class="apartadoFormu">
-
                 <button>Agregar</button>
                 <div class="conrnidousuario">
-
-                     <div class="usuarioGson">
-                        <ul id="employeeList">
-                            <li>id</li>
-                            <li>nombre</li>
-                            <li>apellido</li>
-                            <li>tele</li>
-                            <li>email</li>
-                            <li>email</li>
-                        </ul>
-                        <div class="accionUsiario">
-                            <button>Borrar</button>
-                            <button>Modificar</button>
-                        </div>   
+                    <div class="usuarioGson">
+                        <!-- Los datos de cada empleado se cargarán aquí dinámicament e -->
                     </div>
                 </div>
-
-
-
             </div>
-
-
-
         </div>
 
         <script>
@@ -50,9 +32,8 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 return urlParams.get(nombre);
             }
-    
+
             const correo = obtenerParametroURL('correo');
-    
             if (correo) {
                 document.getElementById('usuarioCorreo').textContent = correo;
             } else {
@@ -62,33 +43,52 @@
             fetch('http://localhost:3000/empleados')
             .then(response => response.json())
             .then(data => {
-                const employeeList = document.getElementById('employeeList');
-                data.empleados.forEach(employee => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `${employee.id} ${employee.nombre} ${employee.apellidos} - ${employee.email} - ${employee["número de teléfono"]} - ${employee.dirección}`;
-                    employeeList.appendChild(listItem);
+                const usuarioGson = document.querySelector('.usuarioGson'); // Obtener el contenedor donde se van a cargar los empleados
 
-                    // Crea un boton de borrado por cada empleado
+                // Limpiar el contenido de usuarioGson por si ya había contenido previo
+                usuarioGson.innerHTML = '';
+
+                data.empleados.forEach(employee => {
+                    // Crear un div contenedor para los datos del empleado
+                    const employeeDetails = document.createElement('div');
+                    employeeDetails.classList.add('employeeDetails'); // Se puede usar esta clase para estilizar el contenedor
+
+                    // Crear un bloque de datos con separación entre cada campo
+                    employeeDetails.innerHTML = `
+                        <div class="employeeField"> ${employee.id}</div>
+                        <div class="employeeField"> ${employee.nombre}</div>
+                        <div class="employeeField"> ${employee.apellidos}</div>
+                        <div class="employeeField"> ${employee.email}</div>
+                        <div class="employeeField"> ${employee["número de teléfono"]}</div>
+                        <div class="employeeField"> ${employee.dirección}</div>
+                    `;
+
+                    // Crear el botón de eliminar
                     const deleteButton = document.createElement('button');
                     deleteButton.textContent = 'Eliminar';
                     deleteButton.onclick = () => eliminarEmpleado(employee.id);
-                    listItem.appendChild(deleteButton);
+
+                    // Añadir el botón al div del empleado
+                    employeeDetails.appendChild(deleteButton);
+
+                    // Añadir el div con los detalles del empleado al contenedor .usuarioGson
+                    usuarioGson.appendChild(employeeDetails);
                 });
             })
             .catch(error => console.error('Error fetching employees:', error));
 
-        function eliminarEmpleado(id) {
-            fetch(`http://localhost:3000/empleados/${id}`, {
-                method: 'DELETE'
-            })
-            .then(response => response.text())
-            .then(message => {
-                console.log(message);
-                // Refresh the list or update the UI as needed
-                location.reload(); // Simple way to refresh the list
-            })
-            .catch(error => console.error('Error deleting employee:', error));
-        }
+            function eliminarEmpleado(id) {
+                fetch(`http://localhost:3000/empleados/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.text())
+                .then(message => {
+                    console.log(message);
+                    // Recargar la lista o actualizar la UI como se necesite
+                    location.reload(); // Método sencillo de refrescar la lista
+                })
+                .catch(error => console.error('Error deleting employee:', error));
+            }
         </script>
-</body>
+    </body>
 </html>
