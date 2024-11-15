@@ -21,18 +21,8 @@
                 <button>Agregar</button>
 
                 <div class="conrnidousuario">
-                    <div class="claseInfo">
-                        <li>Id</li>
-                        <li>Nombre</li>
-                        <li>Apellidos</li>
-                        <li>Email</li>
-                        <li>Telefono</li>
-                        <li>Direccion</li>
-                        <li>Opciones</li>
-                    </div>     
-
                     <div class="usuarioGson">
-                        <!-- Los datos de cada empleado se cargarán aquí dinámicamente -->
+                        <!-- Los datos de cada empleado se cargarán aquí dinámicament e -->
                     </div>
                 </div>
             </div>
@@ -56,51 +46,40 @@
             fetch('http://localhost:3000/empleados')
             .then(response => response.json())  // Parseamos la respuesta como JSON
             .then(data => {
-                const usuarioGson = document.querySelector('.usuarioGson');
-                usuarioGson.innerHTML = '';  // Limpiar cualquier contenido previo
+                const usuarioGson = document.querySelector('.usuarioGson'); // Obtener el contenedor donde se van a cargar los empleados
 
-                if (data.empleados && Array.isArray(data.empleados)) {
-                    // Recorremos la lista de empleados
-                    data.empleados.forEach(employee => {
-                        const employeeDetails = document.createElement('div');
-                        employeeDetails.classList.add('employeeDetails');  // Clase para cada empleado
+                // Limpiar el contenido de usuarioGson por si ya había contenido previo
+                usuarioGson.innerHTML = '';
 
-                        // Crear un bloque de HTML con los datos del empleado
-                        employeeDetails.innerHTML = `
-                            <div class="employeeField">${employee.id}</div>
-                            <div class="employeeField">${employee.nombre}</div>
-                            <div class="employeeField">${employee.apellidos}</div>
-                            <div class="employeeField">${employee.email}</div>
-                            <div class="employeeField">${employee["número de teléfono"]}</div>
-                            <div class="employeeField">${employee.dirección}</div>
-                        `;
+                data.empleados.forEach(employee => {
+                    // Crear un div contenedor para los datos del empleado
+                    const employeeDetails = document.createElement('div');
+                    employeeDetails.classList.add('employeeDetails'); // Se puede usar esta clase para estilizar el contenedor
 
-                        // Crear los botones de acción (editar y eliminar)
-                        const editButton = document.createElement('button');
-                        editButton.textContent = 'Editar';
-                        editButton.onclick = () => editarEmpleado(employee.id);
+                    // Crear un bloque de datos con separación entre cada campo
+                    employeeDetails.innerHTML = `
+                        <div class="employeeField"> ${employee.id}</div>
+                        <div class="employeeField"> ${employee.nombre}</div>
+                        <div class="employeeField"><strong>Apellido:</strong> ${employee.apellidos}</div>
+                        <div class="employeeField"><strong>Email:</strong> ${employee.email}</div>
+                        <div class="employeeField"><strong>Teléfono:</strong> ${employee["número de teléfono"]}</div>
+                        <div class="employeeField"><strong>Dirección:</strong> ${employee.dirección}</div>
+                    `;
 
-                        const deleteButton = document.createElement('button');
-                        deleteButton.textContent = 'Eliminar';
-                        deleteButton.onclick = () => eliminarEmpleado(employee.id);
+                    // Crear el botón de eliminar
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Eliminar';
+                    deleteButton.onclick = () => eliminarEmpleado(employee.id);
 
-                        // Añadir los botones al div del empleado
-                        employeeDetails.appendChild(editButton);
-                        employeeDetails.appendChild(deleteButton);
+                    // Añadir el botón al div del empleado
+                    employeeDetails.appendChild(deleteButton);
 
-                        // Añadir los detalles del empleado al contenedor
-                        usuarioGson.appendChild(employeeDetails);
-                    });
-                } else {
-                    usuarioGson.innerHTML = 'No se encontraron empleados.';
-                }
+                    // Añadir el div con los detalles del empleado al contenedor .usuarioGson
+                    usuarioGson.appendChild(employeeDetails);
+                });
             })
-            .catch(error => {
-                console.error('Error fetching employees:', error);
-                document.querySelector('.usuarioGson').innerHTML = 'Error al cargar los empleados.';
-            });
+            .catch(error => console.error('Error fetching employees:', error));
 
-            // Función para eliminar un empleado
             function eliminarEmpleado(id) {
                 fetch(`http://localhost:3000/empleados/${id}`, {
                     method: 'DELETE'
@@ -108,15 +87,10 @@
                 .then(response => response.text())
                 .then(message => {
                     console.log(message);
-                    location.reload();  // Recargar la página después de eliminar
+                    // Recargar la lista o actualizar la UI como se necesite
+                    location.reload(); // Método sencillo de refrescar la lista
                 })
                 .catch(error => console.error('Error deleting employee:', error));
-            }
-
-            // Función de editar empleado (puedes mostrar un modal aquí)
-            function editarEmpleado(id) {
-                alert(`Editar empleado con ID: ${id}`);
-                // Aquí puedes agregar la lógica para mostrar un modal con el formulario de edición
             }
         </script>
     </body>
