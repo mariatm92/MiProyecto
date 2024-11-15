@@ -26,10 +26,8 @@ header {
   background-color: #f1f7fe; 
   width: 100%;
   height: 150px;
-  border-bottom: 4px outset rgb(0, 0, 0);
+  border-bottom: 4px outset #0066ff;
   
-
-
 }
 .logo img {
   width: 100%;
