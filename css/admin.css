@@ -1,0 +1,144 @@
+/* Estilos generales */
+form .etiquetas {
+    font-family: roboto;
+}
+
+@font-face {
+    font-family: roboto;
+    src: url(../fonts/Roboto-Medium.ttf);
+}
+
+/* --------------A PARTIR DE AQUI ES DE LA PAGINA ADMIN ----------------*/
+.wrapp {
+    display: flex;
+    flex-direction: column;
+    min-height: 1200px;
+    width: 100%;
+}
+
+.wrapp .cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    height: 150px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    margin-top: -10px;
+    box-shadow: 0px 5px 10px rgb(99, 98, 98);
+}
+
+.bienvenida {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 150px;
+    width: 1000px;
+    margin-right: 250px;
+}
+
+img {
+    height: 150px;
+    width: 200px;
+    border-radius: 100%;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    height: 60px;
+    width: 1000px;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 20px;
+    width: 1000px;
+    list-style: none;
+    font-family: roboto;
+    font-size: 20px;
+}
+
+.apartadoFormu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 650px;
+    width: 100%;
+    margin-top: 70px;
+}
+
+.wrapp .apartadoFormu button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 50px;
+    width: 110px;
+    margin-left: 70px;
+}
+
+.conrnidousuario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    width: 100%;
+    margin-top: 20px;
+    background-color: rgb(148, 194, 206);
+}
+
+.usuarioGson {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrado de todos los empleados */
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.employeeDetails {
+    display: flex;
+    justify-content: space-around; /* Separar los campos del empleado */
+    align-items: center;
+    width: 100%;
+    margin: 10px 0; /* Espacio entre los elementos de los empleados */
+    padding: 10px;
+    outline: solid 2px black;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.employeeField {
+    margin: 0 10px; /* Separación entre los campos */
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+}
+
+button {
+    margin-left: 20px;
+    padding: 6px 12px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkred;
+}
+
+li {
+    list-style: none;
+}
