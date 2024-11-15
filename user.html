@@ -11,41 +11,39 @@
 
             <div class="cabecera">
 
+                <img src="images/erp2.jpg">
+
                 <div class="bienvenida">
 
-                    <img src="images/erp.png">
+                    <h1 id="bienvenida">Bienvenido usuario, <span id="usuarioCorreo"></span></h1>
 
-                    <h1 id="bienvenida">Bienvenido, <span id="usuarioCorreo"></span></h1>
+                    <div class="menu">
+
+                        <li>Inicio</li>
+                        <li>Contacto</li>
+
+                    </div> 
 
                 </div>   
 
-                <div class="menu">
-
-                    <li>Inicio</li>
-                    <li>Contacto</li>
-
-                </div>    
+   
              
                
             </div>
         </div>
 
         <script>
-            // Función para obtener un parámetro de la URL
             function obtenerParametroURL(nombre) {
                 const urlParams = new URLSearchParams(window.location.search);
                 return urlParams.get(nombre);
             }
     
-            // Obtener el correo de la URL
             const correo = obtenerParametroURL('correo');
     
-            // Si hay correo, mostrarlo en el h1
             if (correo) {
                 document.getElementById('usuarioCorreo').textContent = correo;
             } else {
-                // Si no hay correo, redirigir al login
-                window.location.href = 'login.html';
+                window.location.href = 'index.html';
             }
         </script>
 
