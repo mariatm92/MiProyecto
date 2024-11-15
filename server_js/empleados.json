@@ -1,20 +1,20 @@
 {
   "empleados": [
-    {
-      "id": "3",
-      "nombre": "Carlos",
-      "apellidos": "García",
-      "email": "carlos.garcia@example.com",
-      "número de teléfono": "+34 614 567 890",
-      "dirección": "Plaza Mayor 789, Valencia, España"
-    },
-    {
-      "id": "4",
-      "nombre": "Maria",
-      "apellidos": "García",
-      "email": "carlos.garcia@example.com",
-      "número de teléfono": "+34 614 567 890",
-      "dirección": "Plaza Mayor 789, Valencia, España"
-    }
+      {
+          "id": 1,
+          "nombre": "Juan",
+          "apellidos": "Pérez",
+          "email": "juan@example.com",
+          "número de teléfono": "123456789",
+          "dirección": "Calle Falsa 123"
+      },
+      {
+          "id": 2,
+          "nombre": "Ana",
+          "apellidos": "González",
+          "email": "ana@example.com",
+          "número de teléfono": "987654321",
+          "dirección": "Avenida Siempre Viva 456"
+      }
   ]
 }
