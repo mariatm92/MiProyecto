@@ -169,7 +169,8 @@
                         event.preventDefault();
                         
                         // Obtener los valores del formulario
-                        const id = document.getElementById('modifyId').value;
+                        const id = '1732188438172';
+                        console.log(id); 
                         const nombre = document.getElementById('modifyNombre').value;
                         const apellidos = document.getElementById('modifyApellidos').value;
                         const telefono = document.getElementById('modifyTelefono').value;
@@ -187,12 +188,12 @@
                         };
 
                         // Enviar solicitud de modificación al servidor
-                        fetch(`http://localhost:3000/empleados/${id}`, {
+                        fetch('http://localhost:3000/empleados/modify', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify(empleadoModificado)
+                            body: JSON.stringify(empleadoModificado), // empleadoModificado debe contener el id
                         })
                         .then(response => response.json())
                         .then(data => {
@@ -207,7 +208,6 @@
                     });
                 }
              // Rellenar los campos con los datos del empleado
-             document.getElementById('modifyId').value = employee.id;
                 document.getElementById('modifyNombre').value = employee.nombre;
                 document.getElementById('modifyApellidos').value = employee.apellidos;
                 document.getElementById('modifyTelefono').value = employee["número de teléfono"];
@@ -237,7 +237,6 @@
 
                             // Crear un bloque de datos con separación entre cada campo
                             employeeDetails.innerHTML = `
-                                <div class="employeeField"> ${employee.id}</div>
                                 <div class="employeeField"><strong>Nombre:</strong> ${employee.nombre}</div>
                                 <div class="employeeField"><strong>Apellido:</strong> ${employee.apellidos}</div>
                                 <div class="employeeField"><strong>Email:</strong> ${employee.email}</div>
