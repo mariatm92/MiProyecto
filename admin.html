@@ -64,10 +64,11 @@
             }
 
             const correo = obtenerParametroURL('correo');
+
             if (correo) {
                 document.getElementById('usuarioCorreo').textContent = correo;
             } else {
-                window.location.href = 'index.html';dsa
+                window.location.href = 'index.html';
             }
 
             // Función para abrir el modal
@@ -91,15 +92,6 @@
                 const telefono = document.getElementById('telefono').value;
                 const email = document.getElementById('email').value;
                 const direccion = document.getElementById('direccion').value;
-                    // Crear un bloque de datos con separación entre cada campo
-                    employeeDetails.innerHTML = `
-                        <div class="employeeField"> ${employee.id}</div>
-                        <div class="employeeField"> ${employee.nombre}</div>
-                        <div class="employeeField"> ${employee.apellidos}</div>
-                        <div class="employeeField"> ${employee.email}</div>
-                        <div class="employeeField"> ${employee["número de teléfono"]}</div>
-                        <div class="employeeField"> ${employee.dirección}</div>
-                    `;
 
                 // Crear el nuevo objeto de empleado
                 const nuevoEmpleado = {
