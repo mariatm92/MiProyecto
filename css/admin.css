@@ -116,6 +116,7 @@ h1 {
     width: 100%;
 }
 
+
 .employeeDetails {
     display: flex;
     justify-content: space-around; /* Separar los campos del empleado */
@@ -129,7 +130,7 @@ h1 {
 }
 
 .employeeField {
-    margin: 0 10px; /* Separación entre los campos */
+    margin:10px; /* Separación entre los campos */
     font-size: 14px;
     display: flex;
     justify-content: space-between;
@@ -216,37 +217,4 @@ form button {
 
 form button:hover {
     background-color: darkgreen;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover {
-    color: black;
 }
