@@ -1,36 +1,3 @@
 {
-  "empleados": [
-    {
-      "id": "3",
-      "nombre": "Carlos",
-      "apellidos": "García",
-      "email": "carlos.garcia@example.com",
-      "número de teléfono": "+34 614 567 890",
-      "dirección": "Plaza Mayor 789, Valencia, España"
-    },
-    {
-      "id": "4",
-      "nombre": "Maria",
-      "apellidos": "García",
-      "email": "carlos.garcia@example.com",
-      "número de teléfono": "+34 614 567 890",
-      "dirección": "Plaza Mayor 789, Valencia, España"
-    },
-    {
-      "id": "5",
-      "nombre": "JesuCristo",
-      "apellidos": "Rey",
-      "telefono": "999",
-      "email": "Yisus@HolyHeaven.com",
-      "dirección": "C/EdenGarden Nº3"
-    },
-    {
-      "id": "1732187077975",
-      "nombre": "Fulgencio",
-      "apellidos": "Menendez",
-      "telefono": "674983445",
-      "email": "FulMe@gmail.com",
-      "dirección": "C/El quinto pino Nº7"
-    }
-  ]
+  "empleados": []
 }
