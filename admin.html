@@ -81,6 +81,14 @@
                 document.getElementById('addEmployeeModal').style.display = 'none';
             }
 
+            // Cerrar modal al hacer clic fuera de él
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('addEmployeeModal');
+                if (event.target === modal) {
+                    cerrarModal();
+                }
+            });
+
             // Manejo del envío del formulario
             document.getElementById('addEmployeeForm').addEventListener('submit', function(event) {
                 event.preventDefault(); // Evitar el comportamiento por defecto del formulario

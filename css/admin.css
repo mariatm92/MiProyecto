@@ -118,7 +118,7 @@ h1 {
 }
 
 .employeeField {
-    margin: 0 10px; /* Separación entre los campos */
+    margin:10px; /* Separación entre los campos */
     font-size: 14px;
     display: flex;
     justify-content: space-between;
