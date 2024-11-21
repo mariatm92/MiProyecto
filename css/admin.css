@@ -105,6 +105,7 @@ h1 {
     width: 100%;
 }
 
+
 .employeeDetails {
     display: flex;
     justify-content: space-around; /* Separar los campos del empleado */
@@ -118,7 +119,7 @@ h1 {
 }
 
 .employeeField {
-    margin: 0 10px; /* Separación entre los campos */
+    margin:10px; /* Separación entre los campos */
     font-size: 14px;
     display: flex;
     justify-content: space-between;
@@ -205,4 +206,5 @@ form button {
 
 form button:hover {
     background-color: darkgreen;
+
 }

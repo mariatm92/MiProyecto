@@ -40,7 +40,6 @@ Para que el programa funcione correctamente, se debe ejecutar un servidor node.j
 
  - Se recomienda el uso de Visual Studio Code.
 
-
 1. Primero descargamos el proyecto en nuestro pc.
 2. Entraremos en la carpeta Miproyecto\server_js.
 3. Abrimos la terminal de visual Studio Code y ejecutamos el comando `node server.js`.
