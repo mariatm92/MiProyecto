@@ -18,12 +18,7 @@
                 </div>         
             </div>
             <div class="apartadoFormu">
-<<<<<<< HEAD
-                <button>Agregar</button>
-
-=======
                 <button onclick="abrirModal()">Agregar</button>
->>>>>>> 4be96723a3fe7b9d94c1694179c76e91791bea1e
                 <div class="conrnidousuario">
                     <div class="usuarioGson">
                         <!-- Los datos de cada empleado se cargarán aquí dinámicamente -->
@@ -76,18 +71,10 @@
                 window.location.href = 'admin.html'; // Si no hay correo, redirige
             }
 
-<<<<<<< HEAD
-            // Función para obtener los empleados desde la API
-            fetch('http://localhost:3000/empleados')
-            .then(response => response.json())  // Parseamos la respuesta como JSON
-            .then(data => {
-                const usuarioGson = document.querySelector('.usuarioGson'); // Obtener el contenedor donde se van a cargar los empleados
-=======
             // Función para abrir el modal
             function abrirModal() {
                 document.getElementById('addEmployeeModal').style.display = 'block';
             }
->>>>>>> 4be96723a3fe7b9d94c1694179c76e91791bea1e
 
             // Función para cerrar el modal
             function cerrarModal() {
@@ -97,18 +84,6 @@
             // Manejo del envío del formulario
             document.getElementById('addEmployeeForm').addEventListener('submit', function(event) {
                 event.preventDefault(); // Evitar el comportamiento por defecto del formulario
-
-<<<<<<< HEAD
-                    // Crear un bloque de datos con separación entre cada campo
-                    employeeDetails.innerHTML = `
-                        <div class="employeeField"> <strong>Id : </strong>${employee.id}</div>
-                        <div class="employeeField"> <strong>Nombre : </strong>${employee.nombre}</div>
-                        <div class="employeeField"><strong>Apellido : </strong> ${employee.apellidos}</div>
-                        <div class="employeeField"><strong>Email : </strong> ${employee.email}</div>
-                        <div class="employeeField"><strong>Teléfono : </strong> ${employee["número de teléfono"]}</div>
-                        <div class="employeeField"><strong>Dirección : </strong> ${employee.dirección}</div>
-                    `;
-=======
                 // Obtener los datos del formulario
                 const id = document.getElementById('id').value;
                 const nombre = document.getElementById('nombre').value;
@@ -116,7 +91,6 @@
                 const telefono = document.getElementById('telefono').value;
                 const email = document.getElementById('email').value;
                 const direccion = document.getElementById('direccion').value;
->>>>>>> 4be96723a3fe7b9d94c1694179c76e91791bea1e
 
                 // Crear el nuevo objeto de empleado
                 const nuevoEmpleado = {
@@ -149,7 +123,100 @@
                     alert('No se pudo agregar el empleado. Intenta nuevamente.');
                 });
             });
+            // Función para mostrar el formulario de modificación de empleado
+            function mostrarFormularioModificar(employee) {
+                // Crear el modal de modificación si no existe
+                let modifyModal = document.getElementById('modifyEmployeeModal');
+                if (!modifyModal) {
+                    modifyModal = document.createElement('div');
+                    modifyModal.id = 'modifyEmployeeModal';
+                    modifyModal.className = 'modal';
+                    modifyModal.innerHTML = `
+                        <div class="modal-content">
+                            <span class="close" onclick="cerrarModalModificar()">&times;</span>
+                            <h2>Modificar Empleado</h2>
+                            <form id="modifyEmployeeForm">
+                                <input type="hidden" id="modifyId" name="id">
 
+                                <label for="modifyNombre">Nombre:</label>
+                                <input type="text" id="modifyNombre" name="nombre" required><br>
+
+                                <label for="modifyApellidos">Apellidos:</label>
+                                <input type="text" id="modifyApellidos" name="apellidos" required><br>
+
+                                <label for="modifyTelefono">Teléfono:</label>
+                                <input type="text" id="modifyTelefono" name="telefono" required><br>
+
+                                <label for="modifyEmail">Email:</label>
+                                <input type="email" id="modifyEmail" name="email" required><br>
+
+                                <label for="modifyDireccion">Dirección:</label>
+                                <input type="text" id="modifyDireccion" name="direccion" required><br>
+
+                                <button type="submit">Aceptar Cambios</button>
+                            </form>
+                        </div>
+                    `;
+                    document.body.appendChild(modifyModal);
+
+                    // Agregar event listener para el formulario de modificación
+                    document.getElementById('modifyEmployeeForm').addEventListener('submit', function(event) {
+                        event.preventDefault();
+                        
+                        // Obtener los valores del formulario
+                        const id = document.getElementById('modifyId').value;
+                        const nombre = document.getElementById('modifyNombre').value;
+                        const apellidos = document.getElementById('modifyApellidos').value;
+                        const telefono = document.getElementById('modifyTelefono').value;
+                        const email = document.getElementById('modifyEmail').value;
+                        const direccion = document.getElementById('modifyDireccion').value;
+
+                        // Crear objeto de empleado modificado
+                        const empleadoModificado = {
+                            id: id,
+                            nombre: nombre,
+                            apellidos: apellidos,
+                            telefono: telefono,
+                            email: email,
+                            dirección: direccion
+                        };
+
+                        // Enviar solicitud de modificación al servidor
+                        fetch(`http://localhost:3000/empleados/${id}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(empleadoModificado)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Empleado modificado:', data);
+                            cerrarModalModificar();
+                            actualizarListaEmpleados();
+                        })
+                        .catch(error => {
+                            console.error('Error al modificar empleado:', error);
+                            alert('No se pudo modificar el empleado. Intenta nuevamente.');
+                        });
+                    });
+                }
+             // Rellenar los campos con los datos del empleado
+             document.getElementById('modifyId').value = employee.id;
+                document.getElementById('modifyNombre').value = employee.nombre;
+                document.getElementById('modifyApellidos').value = employee.apellidos;
+                document.getElementById('modifyTelefono').value = employee["número de teléfono"];
+                document.getElementById('modifyEmail').value = employee.email;
+                document.getElementById('modifyDireccion').value = employee.dirección;
+
+                // Mostrar el modal
+                modifyModal.style.display = 'block';
+            }
+
+            // Función para cerrar el modal de modificación
+            function cerrarModalModificar() {
+                document.getElementById('modifyEmployeeModal').style.display = 'none';
+            }
             // Función para actualizar la lista de empleados
             function actualizarListaEmpleados() {
                 const usuarioGson = document.querySelector('.usuarioGson');
@@ -178,8 +245,15 @@
                             deleteButton.textContent = 'Eliminar';
                             deleteButton.onclick = () => eliminarEmpleado(employee.id);
 
+                           // Crear el botón de "Modificar"
+                            const modifyButton = document.createElement('button');
+                            modifyButton.textContent = 'Modificar';
+                            modifyButton.onclick = () => mostrarFormularioModificar(employee);
+
                             // Añadir el botón al div del empleado
                             employeeDetails.appendChild(deleteButton);
+
+                            employeeDetails.appendChild(modifyButton);
 
                             // Añadir el div con los detalles del empleado al contenedor .usuarioGson
                             usuarioGson.appendChild(employeeDetails);
@@ -187,6 +261,7 @@
                     })
                     .catch(error => console.error('Error fetching employees:', error));
             }
+            
 
             // Función para eliminar un empleado
             function eliminarEmpleado(id) {
