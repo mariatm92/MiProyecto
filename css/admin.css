@@ -1,6 +1,6 @@
-/* Estilos generales */
-form .etiquetas {
-    font-family: roboto;
+
+form .etiquetas{
+    font-family:roboto;
 }
 
 @font-face {
@@ -8,55 +8,68 @@ form .etiquetas {
     src: url(../fonts/Roboto-Medium.ttf);
 }
 
+
 /* --------------A PARTIR DE AQUI ES DE LA PAGINA ADMIN ----------------*/
-.wrapp {
-    display: flex;
+.wrapp{
+    display:flex;
     flex-direction: column;
+   
     min-height: 1200px;
     width: 100%;
-}
+    
 
-.wrapp .cabecera {
-    display: flex;
+}
+.wrapp .cabecera{
+    display:flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-around;
     align-content: center;
     height: 150px;
-    width: 100%;
+    width:100%;
     background-color: rgb(255, 255, 255);
     margin-top: -10px;
-    box-shadow: 0px 5px 10px rgb(99, 98, 98);
-}
+    box-shadow: 0px 5px 10px rgb(99, 98, 98) ;
+    
 
-.bienvenida {
-    display: flex;
+
+    
+}
+.bienvenida{
+
+    display:flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
+   align-content: center;
     height: 150px;
-    width: 1000px;
+    width:1000px;
     margin-right: 250px;
+  
+   
 }
 
-img {
+
+ img{
     height: 150px;
     width: 200px;
     border-radius: 100%;
-}
 
-h1 {
+}
+h1{
     display: flex;
     justify-content: center;
     align-items: center;
+
     font-size: 30px;
     color: black;
-    font-family: 'Courier New', Courier, monospace;
+    font-family:'Courier New', Courier, monospace;
+    
     height: 60px;
     width: 1000px;
-}
 
-.menu {
+}
+.menu{
+
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -65,82 +78,153 @@ h1 {
     list-style: none;
     font-family: roboto;
     font-size: 20px;
+
 }
 
-.apartadoFormu {
-    display: flex;
+.apartadoFormu{
+
+    display:flex;
+  
     flex-direction: column;
     justify-content: flex-start;
+
     height: 650px;
-    width: 100%;
+    width:100%;
+   
+
     margin-top: 70px;
+
 }
 
-.wrapp .apartadoFormu button {
-    display: flex;
+.wrapp .apartadoFormu button{
+
+    display:flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    
     height: 50px;
-    width: 110px;
+    width:110px;
     margin-left: 70px;
 }
 
-.conrnidousuario {
-    display: flex;
+.conrnidousuario{
+
+    display:flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    height: auto;
-    width: 100%;
+
+   justify-content: flex-start;
+   
+   height: auto;
+   width:100%;
+
     margin-top: 20px;
-    background-color: rgb(148, 194, 206);
+  
+   background-color: rgb(148, 194, 206);
 }
 
-.usuarioGson {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centrado de todos los empleados */
-    justify-content: flex-start;
-    width: 100%;
-}
+.usuarioGson{
 
-.employeeDetails {
-    display: flex;
-    justify-content: space-around; /* Separar los campos del empleado */
+    display:flex;
     align-items: center;
-    width: 100%;
-    margin: 10px 0; /* Espacio entre los elementos de los empleados */
-    padding: 10px;
-    outline: solid 2px black;
+    justify-content: space-around;
+
+    height: 70px;
+    width:1700px;
+    outline: solid 2px black;   
     border-radius: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+
 }
 
-.employeeField {
-    margin: 0 10px; /* Separación entre los campos */
-    font-size: 14px;
-    display: flex;
-    justify-content: space-between;
-    width: auto;
+.accionUsiario{
+
+    display:flex; 
+    flex-direction: column;
+    justify-content: space-around;
+    height: 70px;
+    width:150px;
+
+    
 }
 
-button {
-    margin-left: 20px;
-    padding: 6px 12px;
-    background-color: red;
+.wrapp .apartadoFormu .conrnidousuario .usuarioGson .accionUsiario button {
+
+    height: 30px;
+    width:60px;
+    
+}
+
+li{
+    list-style: none;
+}
+
+
+/* Estilos para el Modal */
+.modal {
+    display: none; /* Ocultar el modal por defecto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Formulario */
+form label {
+    display: block;
+    margin: 5px 0;
+}
+
+form input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 10px;
+    background-color: green;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: darkred;
-}
-
-li {
-    list-style: none;
+form button:hover {
+    background-color: darkgreen;
 }
 
 /* Estilos para el Modal */
