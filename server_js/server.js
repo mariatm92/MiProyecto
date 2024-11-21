@@ -66,6 +66,31 @@ app.get('/admin', (req, res) => {
   res.sendFile(path.join(projectDir, 'admin.html'));
 });
 
+app.post('/empleados', (req, res) => {
+  const filePath = path.join(__dirname, 'empleados.json');
+  const nuevoEmpleado = req.body;
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      return res.status(500).send('Error reading the file');
+    }
+
+    let empleados = JSON.parse(data).empleados;
+    empleados.push(nuevoEmpleado);
+
+    fs.writeFile(filePath, JSON.stringify({ empleados: empleados }, null, 2), (err) => {
+      if (err) {
+        console.error('Error writing file:', err);
+        return res.status(500).send('Error writing the file');
+      }
+
+      res.status(200).json(nuevoEmpleado); // Retorna el nuevo empleado agregado
+    });
+  });
+});
+
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
