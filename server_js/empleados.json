@@ -23,6 +23,14 @@
       "telefono": "653786112",
       "email": "JoseMa@gmail.com",
       "dirección": "C/PlazaMayor Nº9"
+    },
+    {
+      "id": "1732192426864",
+      "nombre": "Yisus",
+      "apellidos": "Christ",
+      "telefono": "999999999",
+      "email": "Nazareno@gmail.com",
+      "dirección": "Eden Nº3"
     }
   ]
 }
