@@ -78,6 +78,14 @@
                 document.getElementById('addEmployeeModal').style.display = 'none';
             }
 
+            // Cerrar modal al hacer clic fuera de él
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('addEmployeeModal');
+                if (event.target === modal) {
+                    cerrarModal();
+                }
+            });
+
             // Manejo del envío del formulario
             document.getElementById('addEmployeeForm').addEventListener('submit', function(event) {
                 event.preventDefault(); 
@@ -137,7 +145,7 @@
                             // Crear un bloque de datos con separación entre cada campo
                             employeeDetails.innerHTML = `
                                 <div class="employeeField"> ${employee.id}</div>
-                                <div class="employeeField"> ${employee.nombre}</div>
+                                <div class="employeeField"><strong>Nombre:</strong> ${employee.nombre}</div>
                                 <div class="employeeField"><strong>Apellido:</strong> ${employee.apellidos}</div>
                                 <div class="employeeField"><strong>Email:</strong> ${employee.email}</div>
                                 <div class="employeeField"><strong>Teléfono:</strong> ${employee["número de teléfono"]}</div>
