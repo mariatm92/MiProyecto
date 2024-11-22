@@ -1,14 +1,6 @@
 {
   "empleados": [
     {
-      "id": "1732188438172",
-      "nombre": "Carlitos",
-      "apellidos": "Brown",
-      "telefono": "998654221",
-      "email": "Carlitos@gmail.com",
-      "dirección": "C/Melancolia"
-    },
-    {
       "id": "1732188515398",
       "nombre": "MariCarmen",
       "apellidos": "Filomeno",
@@ -31,14 +23,6 @@
       "telefono": "999999999",
       "email": "Nazareno@gmail.com",
       "dirección": "Eden Nº3"
-    },
-    {
-      "id": "1732193377692",
-      "nombre": "Carlitosq",
-      "apellidos": "Brown",
-      "telefono": "674876221",
-      "email": "Carlitos@gmail.com",
-      "dirección": "C/Melancolia"
     }
   ]
 }
