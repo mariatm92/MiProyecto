@@ -126,6 +126,7 @@ app.post('/empleados/modify', (req, res) => {
         empleado.id === employeeId
           ? { ...empleado, ...empleadoActualizado }
           : empleado
+          
       );
     
       // Escribir los datos actualizados en el archivo

@@ -142,7 +142,7 @@
                             <span class="close" onclick="cerrarModalModificar()">&times;</span>
                             <h2>Modificar Empleado</h2>
                             <form id="modifyEmployeeForm">
-                                <input type="hidden" id="modifyId" name="id">
+                                <input type="text" id="modifyId" name="id">
 
                                 <label for="modifyNombre">Nombre:</label>
                                 <input type="text" id="modifyNombre" name="nombre" required><br>
@@ -171,7 +171,6 @@
                         
                         // Obtener los valores del formulario
                         const id = employee.id;
-                        console.log("CACA");
                         console.log(employee.id);
                         const nombre = document.getElementById('modifyNombre').value;
                         const apellidos = document.getElementById('modifyApellidos').value;
@@ -210,9 +209,10 @@
                     });
                 }
              // Rellenar los campos con los datos del empleado
+             
                 document.getElementById('modifyNombre').value = employee.nombre;
                 document.getElementById('modifyApellidos').value = employee.apellidos;
-                document.getElementById('modifyTelefono').value = employee["número de teléfono"];
+                document.getElementById('modifyTelefono').value = employee.telefono;
                 document.getElementById('modifyEmail').value = employee.email;
                 document.getElementById('modifyDireccion').value = employee.dirección;
 
@@ -242,7 +242,7 @@
                                 <div class="employeeField"><strong>Nombre:</strong> ${employee.nombre}</div>
                                 <div class="employeeField"><strong>Apellido:</strong> ${employee.apellidos}</div>
                                 <div class="employeeField"><strong>Email:</strong> ${employee.email}</div>
-                                <div class="employeeField"><strong>Teléfono:</strong> ${employee["número de teléfono"]}</div>
+                                <div class="employeeField"><strong>Teléfono:</strong> ${employee.telefono}</div>
                                 <div class="employeeField"><strong>Dirección:</strong> ${employee.dirección}</div>
                             `;
 
