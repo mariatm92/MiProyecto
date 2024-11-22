@@ -130,6 +130,8 @@
             });
             // Función para mostrar el formulario de modificación de empleado
             function mostrarFormularioModificar(employee) {
+
+
                 // Crear el modal de modificación si no existe
                 let modifyModal = document.getElementById('modifyEmployeeModal');
                 if (!modifyModal) {
@@ -169,8 +171,8 @@
                         event.preventDefault();
                         
                         // Obtener los valores del formulario
-                        const id = document.getElementById('modifyId').value;
-                        console.log(id); 
+
+                        const id = employee.id;
                         const nombre = document.getElementById('modifyNombre').value;
                         const apellidos = document.getElementById('modifyApellidos').value;
                         const telefono = document.getElementById('modifyTelefono').value;
