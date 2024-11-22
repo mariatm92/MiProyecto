@@ -130,7 +130,8 @@
             });
             // Función para mostrar el formulario de modificación de empleado
             function mostrarFormularioModificar(employee) {
-                console.log(employee);
+
+
                 // Crear el modal de modificación si no existe
                 let modifyModal = document.getElementById('modifyEmployeeModal');
                 if (!modifyModal) {
@@ -170,9 +171,8 @@
                         event.preventDefault();
                         
                         // Obtener los valores del formulario
+
                         const id = employee.id;
-                        console.log("CACA");
-                        console.log(employee.id);
                         const nombre = document.getElementById('modifyNombre').value;
                         const apellidos = document.getElementById('modifyApellidos').value;
                         const telefono = document.getElementById('modifyTelefono').value;
@@ -242,7 +242,7 @@
                                 <div class="employeeField"><strong>Nombre:</strong> ${employee.nombre}</div>
                                 <div class="employeeField"><strong>Apellido:</strong> ${employee.apellidos}</div>
                                 <div class="employeeField"><strong>Email:</strong> ${employee.email}</div>
-                                <div class="employeeField"><strong>Teléfono:</strong> ${employee["número de teléfono"]}</div>
+                                <div class="employeeField"><strong>Teléfono:</strong> ${employee.telefono}</div>
                                 <div class="employeeField"><strong>Dirección:</strong> ${employee.dirección}</div>
                             `;
 
