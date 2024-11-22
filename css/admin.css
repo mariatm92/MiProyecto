@@ -96,7 +96,18 @@ h1 {
     margin-top: 20px;
     background-color: rgb(148, 194, 206);
 }
+.claseInfo{
+    display: flex;
+    justify-content: space-around; /* Separar los campos del empleado */
+    align-items: center;
+    
+    margin: 10px ; /* Espacio entre los elementos de los empleados */
+    height: 50px;
+    width: 100%;
+    background-color: rgb(199, 148, 206);
 
+
+}
 .usuarioGson {
     display: flex;
     flex-direction: column;
@@ -111,8 +122,8 @@ h1 {
     justify-content: space-around; /* Separar los campos del empleado */
     align-items: center;
     width: 100%;
-    margin: 10px 0; /* Espacio entre los elementos de los empleados */
-    padding: 10px;
+    margin: 10px ; /* Espacio entre los elementos de los empleados */
+    
     outline: solid 2px black;
     border-radius: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
@@ -206,5 +217,4 @@ form button {
 
 form button:hover {
     background-color: darkgreen;
-
 }
