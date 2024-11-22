@@ -169,7 +169,7 @@
                         event.preventDefault();
                         
                         // Obtener los valores del formulario
-                        const id = '1732188438172';
+                        const id = document.getElementById('modifyId').value;
                         console.log(id); 
                         const nombre = document.getElementById('modifyNombre').value;
                         const apellidos = document.getElementById('modifyApellidos').value;
@@ -210,7 +210,7 @@
              // Rellenar los campos con los datos del empleado
                 document.getElementById('modifyNombre').value = employee.nombre;
                 document.getElementById('modifyApellidos').value = employee.apellidos;
-                document.getElementById('modifyTelefono').value = employee["número de teléfono"];
+                document.getElementById('modifyTelefono').value = employee.telefono;
                 document.getElementById('modifyEmail').value = employee.email;
                 document.getElementById('modifyDireccion').value = employee.dirección;
 
@@ -222,6 +222,13 @@
             function cerrarModalModificar() {
                 document.getElementById('modifyEmployeeModal').style.display = 'none';
             }
+
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('modifyEmployeeModal');
+                if (event.target === modal) {
+                    cerrarModalModificar();
+                }
+            });
             // Función para actualizar la lista de empleados
             function actualizarListaEmpleados() {
                 const usuarioGson = document.querySelector('.usuarioGson');
