@@ -2,11 +2,11 @@
   "empleados": [
     {
       "id": "1732188438172",
-      "nombre": "Fulgencio",
-      "apellidos": "Menendez",
-      "telefono": "674983445",
-      "email": "FulMe@gmail.com",
-      "dirección": "C/El quinto pino Nº7"
+      "nombre": "Carlitos",
+      "apellidos": "Brown",
+      "telefono": "998654221",
+      "email": "Carlitos@gmail.com",
+      "dirección": "C/Melancolia"
     },
     {
       "id": "1732188515398",
@@ -31,6 +31,14 @@
       "telefono": "999999999",
       "email": "Nazareno@gmail.com",
       "dirección": "Eden Nº3"
+    },
+    {
+      "id": "1732193377692",
+      "nombre": "Carlitosq",
+      "apellidos": "Brown",
+      "telefono": "674876221",
+      "email": "Carlitos@gmail.com",
+      "dirección": "C/Melancolia"
     }
   ]
 }
