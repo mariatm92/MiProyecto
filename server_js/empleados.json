@@ -1,54 +1,36 @@
 {
   "empleados": [
     {
-      "id": "1732188438172",
-
-      "nombre": "eoeoefeh567",
-      "apellidos": "jkdvbksd",
-      "telefono": "undefined",
-      "email": "ee@ee.com",
-      "dirección": "hkdhvksdvb"
-
-    },
-    {
       "id": "1732188515398",
-      "nombre": "MariCarmen 333",
-      "apellidos": "Filomeno",
-      "telefono": "3444",
-      "email": "MariFil@gmail.com",
-      "dirección": "C/CuartelDeLosVinos"
+      "nombre": "Felipe VI ",
+      "apellidos": "El preparao",
+      "telefono": "985224178",
+      "email": "JoseMa@gmail.com",
+      "dirección": "C/PlazaMayor Nº9"
     },
     {
       "id": "1732188564596",
-      "nombre": "Jose Llama Paco Llama Juan",
-      "apellidos": "Manuel",
-      "telefono": "undefined",
+      "nombre": "Remedios",
+      "apellidos": "Fernandez",
+      "telefono": "887452145",
       "email": "JoseMa@gmail.com",
       "dirección": "C/PlazaMayor Nº9"
     },
     {
       "id": "1732263119890",
-      "nombre": "Jose Llama",
-      "apellidos": "Manuel",
+      "nombre": "Alonso",
+      "apellidos": "Giorgio",
       "telefono": "undefined",
       "email": "JoseMa@gmail.com",
       "dirección": "C/PlazaMayor Nº9"
     },
     {
       "id": "1732192426864",
-      "nombre": "Yisus",
-      "apellidos": "Christ",
-      "telefono": "999999999",
-      "email": "Nazareno@gmail.com",
-      "dirección": "Eden Nº3"
-    },
-    {
-      "id": "1732193377692",
-      "nombre": "Carlitosq",
-      "apellidos": "Brown",
-      "telefono": "674876221",
-      "email": "Carlitos@gmail.com",
-      "dirección": "C/Melancolia"
+      "nombre": "Federica",
+      "apellidos": "Alonso",
+      "telefono": "undefined",
+      "email": "JoseMa@gmail.com",
+      "dirección": "C/PlazaMayor Nº9"
     }
   ]
 }
