@@ -120,13 +120,14 @@ app.post('/empleados/modify', (req, res) => {
           return res.status(404).send('Empleado no encontrado');
       }
 
+      console.log(employeeId);
       // Actualizar el empleado manteniendo su ID original
-      empleados[employeeIndex] = {
-          ...empleados[employeeIndex], // Mantener los datos previos
-          ...empleadoActualizado, // Actualizar con los nuevos datos
-          id: employeeId  // Asegurar que el ID no cambie
-      };
-
+      empleados = empleados.map(empleado =>
+        empleado.id === employeeId
+          ? { ...empleado, ...empleadoActualizado }
+          : empleado
+      );
+    
       // Escribir los datos actualizados en el archivo
       fs.writeFile(filePath, JSON.stringify(empleadosData, null, 2), (err) => {
           if (err) {
