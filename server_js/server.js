@@ -126,9 +126,9 @@ app.post('/empleados/modify', (req, res) => {
         empleado.id === employeeId
           ? { ...empleado, ...empleadoActualizado }
           : empleado
-          
       );
     
+
       // Escribir los datos actualizados en el archivo
       fs.writeFile(filePath, JSON.stringify(empleadosData, null, 2), (err) => {
           if (err) {
