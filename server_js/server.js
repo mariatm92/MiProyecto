@@ -101,48 +101,41 @@ app.post('/empleados/modify', (req, res) => {
   console.log('Datos actualizados:', empleadoActualizado);
 
   fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      return res.status(500).send('Error reading the file');
+    }
+
+    let empleadosData = JSON.parse(data);
+    let empleados = empleadosData.empleados;
+
+    console.log('Empleados actuales:', empleados);
+
+    // Encontrar el índice del empleado a actualizar usando el ID
+    const employeeIndex = empleados.findIndex(emp => emp.id.toString() === employeeId.toString());
+
+    console.log('Índice encontrado:', employeeIndex);
+
+    if (employeeIndex === -1) {
+      return res.status(404).send('Empleado no encontrado');
+    }
+
+    console.log(employeeId);
+    // Actualizar el empleado manteniendo su ID original
+    empleados[employeeIndex] = { ...empleados[employeeIndex], ...empleadoActualizado };
+
+    // Escribir los datos actualizados en el archivo
+    fs.writeFile(filePath, JSON.stringify(empleadosData, null, 2), (err) => {
       if (err) {
-          console.error('Error reading file:', err);
-          return res.status(500).send('Error reading the file');
+        console.error('Error writing file:', err);
+        return res.status(500).send('Error writing the file');
       }
 
-      let empleadosData = JSON.parse(data);
-      let empleados = empleadosData.empleados;
-
-      console.log('Empleados actuales:', empleados);
-
-      // Encontrar el índice del empleado a actualizar usando el ID
-      const employeeIndex = empleados.findIndex(emp => emp.id.toString() === employeeId.toString());
-
-      console.log('Índice encontrado:', employeeIndex);
-
-      if (employeeIndex === -1) {
-          return res.status(404).send('Empleado no encontrado');
-      }
-
-
-      console.log(employeeId);
-      // Actualizar el empleado manteniendo su ID original
-      empleados = empleados.map(empleado =>
-        empleado.id === employeeId
-          ? { ...empleado, ...empleadoActualizado }
-          : empleado
-      );
-    
-
-      // Escribir los datos actualizados en el archivo
-      fs.writeFile(filePath, JSON.stringify(empleadosData, null, 2), (err) => {
-          if (err) {
-              console.error('Error writing file:', err);
-              return res.status(500).send('Error writing the file');
-          }
-
-          // Enviar la respuesta con el empleado actualizado
-          res.status(200).json(empleados[employeeIndex]);
-      });
+      // Enviar la respuesta con el empleado actualizado
+      res.status(200).json(empleados[employeeIndex]);
+    });
   });
 });
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
