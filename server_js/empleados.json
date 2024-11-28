@@ -1,14 +1,6 @@
 {
   "empleados": [
     {
-      "id": "1732188515398",
-      "nombre": "Felipe VI ",
-      "apellidos": "El preparao",
-      "telefono": "985224178",
-      "email": "JoseMa@gmail.com",
-      "dirección": "C/PlazaMayor Nº9"
-    },
-    {
       "id": "1732188564596",
       "nombre": "Remedios",
       "apellidos": "Fernandez",
