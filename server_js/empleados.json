@@ -1,14 +1,6 @@
 {
   "empleados": [
     {
-      "id": "1732188515398",
-      "nombre": "Felipe V",
-      "apellidos": "El preparao",
-      "telefono": "985224178",
-      "email": "JoseMa@gmail.com",
-      "dirección": "C/PlazaMayor Nº9"
-    },
-    {
       "id": "1732188564596",
       "nombre": "Remedios",
       "apellidos": "Fernandez",
@@ -42,7 +34,7 @@
     },
     {
       "id": "1732788845465",
-      "nombre": "trrrt",
+      "nombre": "trrrtaaaaaaaaaaaaa",
       "apellidos": "rhr",
       "telefono": "hr",
       "email": "hr@dfjm.es",
