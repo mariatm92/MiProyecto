@@ -1,0 +1,33 @@
+[
+  {
+    "id": 27,
+    "producto": "Sin pensión",
+    "precio": 0
+  },
+  {
+    "id": 28,
+    "producto": "Solo desayuno",
+    "precio": 25
+  },
+  {
+    "id": 29,
+    "producto": "Media pensión",
+    "precio": 50
+  },
+  {
+    "id": 30,
+    "producto": "Pensión completa",
+    "precio": 80
+  },
+  {
+    "id": 31,
+    "producto": "Todo incluido",
+    "precio": 120
+  },
+  {
+    "id": 32,
+    "producto": "Todo incluido sin alcohol",
+    "precio": 100
+  }
+
+]
