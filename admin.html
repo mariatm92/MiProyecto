@@ -39,14 +39,14 @@
                     <label for="apellidos">Apellidos:</label>
                     <input type="text" id="apellidos" name="apellidos" required><br>
 
-                    <label for="telefono">Teléfono:</label>
-                    <input type="text" id="telefono" name="telefono" required><br>
+                    <label for="edad">Teléfono:</label>
+                    <input type="text" id="edad" name="edad" required><br>
 
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required><br>
+                    <label for="nacionalidad">Email:</label>
+                    <input type="email" id="nacionalidad" name="nacionalidad" required><br>
 
-                    <label for="direccion">Dirección:</label>
-                    <input type="text" id="direccion" name="direccion" required><br>
+                    <label for="genero">Dirección:</label>
+                    <input type="text" id="genero" name="genero" required><br>
 
                     <button type="submit">Agregar Empleado</button>
                 </form>
@@ -93,18 +93,18 @@
                 // Obtain form data without explicitly getting the ID
                 const nombre = document.getElementById('nombre').value;
                 const apellidos = document.getElementById('apellidos').value;
-                const telefono = document.getElementById('telefono').value;
-                const email = document.getElementById('email').value;
-                const direccion = document.getElementById('direccion').value;
+                const edad = document.getElementById('edad').value;
+                const nacionalidad = document.getElementById('nacionalidad').value;
+                const genero = document.getElementById('genero').value;
                 
                 // Create the new employee object without the ID
                 const nuevoEmpleado = {
                     id: Date.now().toString(),
                     nombre: nombre,
                     apellidos: apellidos,
-                    telefono: telefono,
-                    email: email,
-                    dirección: direccion
+                    edad: edad,
+                    nacionalidad: nacionalidad,
+                    genero: genero
                 };
                 
                 // Send data to server to add new employee
@@ -151,14 +151,14 @@
                                 <label for="modifyApellidos">Apellidos:</label>
                                 <input type="text" id="modifyApellidos" name="apellidos" required><br>
 
-                                <label for="modifyTelefono">Teléfono:</label>
-                                <input type="text" id="modifyTelefono" name="telefono" required><br>
+                                <label for="modifyTelefono">Edad:</label>
+                                <input type="text" id="modifyEdad" name="edad" required><br>
 
-                                <label for="modifyEmail">Email:</label>
-                                <input type="email" id="modifyEmail" name="email" required><br>
+                                <label for="modifyNacionalidad">Nacionalidad:</label>
+                                <input type="nacionalidad" id="modifyNacionalidad" name="nacionalidad" required><br>
 
-                                <label for="modifyDireccion">Dirección:</label>
-                                <input type="text" id="modifyDireccion" name="direccion" required><br>
+                                <label for="modifyGenero">Genero:</label>
+                                <input type="text" id="modifyGenero" name="genero" required><br>
 
                                 <button type="submit">Aceptar Cambios</button>
                             </form>
@@ -176,18 +176,18 @@
                         console.log(id);
                         const nombre = document.getElementById('modifyNombre').value;
                         const apellidos = document.getElementById('modifyApellidos').value;
-                        const telefono = document.getElementById('modifyTelefono').value;
-                        const email = document.getElementById('modifyEmail').value;
-                        const direccion = document.getElementById('modifyDireccion').value;
+                        const edad = document.getElementById('modifyEdad').value;
+                        const nacionalidad = document.getElementById('modifyNacionalidad').value;
+                        const genero = document.getElementById('modifyGenero').value;
 
                         // Crear objeto de empleado modificado
                         const empleadoModificado = {
                             id: id,
                             nombre: nombre,
                             apellidos: apellidos,
-                            telefono: telefono,
-                            email: email,
-                            dirección: direccion
+                            edad: edad,
+                            nacionalidad: nacionalidad,
+                            genero: genero
                         };
 
                         // Enviar solicitud de modificación al servidor
@@ -214,9 +214,9 @@
                 document.getElementById('modifyId').value = employee.id;
                 document.getElementById('modifyNombre').value = employee.nombre;
                 document.getElementById('modifyApellidos').value = employee.apellidos;
-                document.getElementById('modifyTelefono').value = employee.telefono;
-                document.getElementById('modifyEmail').value = employee.email;
-                document.getElementById('modifyDireccion').value = employee.dirección;
+                document.getElementById('modifyEdad').value = employee.edad;
+                document.getElementById('modifyNacionalidad').value = employee.nacionalidad;
+                document.getElementById('modifyGenero').value = employee.genero;
 
                 // Mostrar el modal
                 modifyModal.style.display = 'block';
@@ -250,9 +250,9 @@
                             employeeDetails.innerHTML = `
                                 <div class="employeeField"><strong>Nombre:&nbsp;</strong> ${employee.nombre}</div>
                                 <div class="employeeField"><strong>Apellido:&nbsp;</strong> ${employee.apellidos}</div>
-                                <div class="employeeField"><strong>Email:&nbsp;</strong> ${employee.email}</div>
-                                <div class="employeeField"><strong>Teléfono:&nbsp;</strong> ${employee.telefono}</div>
-                                <div class="employeeField"><strong>Dirección:&nbsp;</strong> ${employee.dirección}</div>
+                                <div class="employeeField"><strong>Edad:&nbsp;</strong> ${employee.edad}</div>
+                                <div class="employeeField"><strong>Nacionalidad:&nbsp;</strong> ${employee.nacionalidad}</div>
+                                <div class="employeeField"><strong>Genero:&nbsp;</strong> ${employee.genero}</div>
                             `;
 
                             // Crear el botón de eliminar
