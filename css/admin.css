@@ -156,6 +156,11 @@ li {
     list-style: none;
 }
 
+li a{
+    text-decoration: none;
+    color:inherit;
+}
+
 /* Estilos para el Modal */
 .modal {
     display: none; /* Ocultar el modal por defecto */
