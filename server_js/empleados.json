@@ -1,54 +1,22 @@
 {
   "empleados": [
     {
-      "id": "1732188564596",
-      "nombre": "Remedios",
-      "apellidos": "Fernandez",
-      "telefono": "887452145",
-      "email": "JoseMa@gmail.com",
-      "dirección": "C/PlazaMayor Nº9"
+      "id": "1732870380351",
+      "nombre": "Sandra",
+      "apellidos": "Gonzalez",
+      "edad": "30",
+      "nacionalidad": "Española",
+      "genero": "Femenino"
     },
     {
 
-      "id": "1732263119890",
-      "nombre": "Alonsa",
-      "apellidos": "Giorgio",
-      "telefono": "undefined",
-      "email": "JoseMa@gmail.com",
-      "dirección": "C/PlazaMayor Nº9"
-    },
-    {
+      "id": "1736494591747",
+      "nombre": "Pepe",
+      "apellidos": "paplotes",
+      "edad": "35",
+      "nacionalidad": "Española",
+      "genero": "Masculino"
 
-      "id": "1732192426864",
-      "nombre": "Federica",
-      "apellidos": "Alonso",
-      "telefono": "undefined",
-      "email": "JoseMa@gmail.com",
-      "dirección": "C/PlazaMayor Nº9"
-    },
-    {
-      "id": "1732265365023",
-      "nombre": "juana la loca",
-      "apellidos": "jkdvbksd",
-      "telefono": "undefined",
-      "email": "ee@ee.com",
-      "dirección": "hkdhvksdvb"
-    },
-    {
-      "id": "1732788554332",
-      "nombre": "holasss",
-      "apellidos": "prueba",
-      "telefono": "610",
-      "email": "aaaa@aaa.com",
-      "dirección": "dvev"
-    },
-    {
-      "id": "1732788845465",
-      "nombre": "PaAmbOli",
-      "apellidos": "rhr",
-      "telefono": "hr",
-      "email": "hr@dfjm.es",
-      "dirección": "vsd"
     }
   ]
 }
