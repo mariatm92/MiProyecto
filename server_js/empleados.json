@@ -1,54 +1,124 @@
 {
-  "empleados": [
+  "clientes": [
     {
-      "id": "1732188564596",
-      "nombre": "Remedios",
-      "apellidos": "Fernandez",
-      "telefono": "887452145",
-      "email": "JoseMa@gmail.com",
-      "dirección": "C/PlazaMayor Nº9"
+      "id": "1732870380351",
+      "nombre": "Sandra",
+      "apellidos": "Gonzalez",
+      "edad": 30,
+      "nacionalidad": "Española",
+      "genero": "Femenino"
     },
     {
-
-      "id": "1732263119890",
-      "nombre": "Alonsa",
-      "apellidos": "Giorgio",
-      "telefono": "undefined",
-      "email": "JoseMa@gmail.com",
-      "dirección": "C/PlazaMayor Nº9"
+      "id": "1736494591747",
+      "nombre": "Pepe",
+      "apellidos": "Paplotes",
+      "edad": 35,
+      "nacionalidad": "Española",
+      "genero": "Masculino"
     },
     {
-
-      "id": "1732192426864",
-      "nombre": "Federica",
-      "apellidos": "Alonso",
-      "telefono": "undefined",
-      "email": "JoseMa@gmail.com",
-      "dirección": "C/PlazaMayor Nº9"
+      "id": "1736494591748",
+      "nombre": "María",
+      "apellidos": "López",
+      "edad": 28,
+      "nacionalidad": "Mexicana",
+      "genero": "Femenino"
     },
     {
-      "id": "1732265365023",
-      "nombre": "juana la loca",
-      "apellidos": "jkdvbksd",
-      "telefono": "undefined",
-      "email": "ee@ee.com",
-      "dirección": "hkdhvksdvb"
+      "id": "1736494591749",
+      "nombre": "John",
+      "apellidos": "Smith",
+      "edad": 42,
+      "nacionalidad": "Británica",
+      "genero": "Masculino"
     },
     {
-      "id": "1732788554332",
-      "nombre": "holasss",
-      "apellidos": "prueba",
-      "telefono": "610",
-      "email": "aaaa@aaa.com",
-      "dirección": "dvev"
+      "id": "1736494591750",
+      "nombre": "Ana",
+      "apellidos": "García",
+      "edad": 33,
+      "nacionalidad": "Argentina",
+      "genero": "Femenino"
     },
     {
-      "id": "1732788845465",
-      "nombre": "PaAmbOli",
-      "apellidos": "rhr",
-      "telefono": "hr",
-      "email": "hr@dfjm.es",
-      "dirección": "vsd"
+      "id": "1736494591751",
+      "nombre": "Luigi",
+      "apellidos": "Rossi",
+      "edad": 45,
+      "nacionalidad": "Italiana",
+      "genero": "Masculino"
+    },
+    {
+      "id": "1736494591752",
+      "nombre": "Sophie",
+      "apellidos": "Dubois",
+      "edad": 29,
+      "nacionalidad": "Francesa",
+      "genero": "Femenino"
+    },
+    {
+      "id": "1736494591753",
+      "nombre": "Hans",
+      "apellidos": "Weber",
+      "edad": 38,
+      "nacionalidad": "Alemana",
+      "genero": "Masculino"
+    },
+    {
+      "id": "1736494591754",
+      "nombre": "Yuki",
+      "apellidos": "Tanaka",
+      "edad": 31,
+      "nacionalidad": "Japonesa",
+      "genero": "Femenino"
+    },
+    {
+      "id": "1736494591755",
+      "nombre": "Carlos",
+      "apellidos": "Santos",
+      "edad": 40,
+      "nacionalidad": "Brasileña",
+      "genero": "Masculino"
+    },
+    {
+      "id": "1736494591756",
+      "nombre": "Emma",
+      "apellidos": "Anderson",
+      "edad": 36,
+      "nacionalidad": "Estadounidense",
+      "genero": "Femenino"
+    },
+    {
+      "id": "1736494591757",
+      "nombre": "Pavel",
+      "apellidos": "Ivanov",
+      "edad": 44,
+      "nacionalidad": "Rusa",
+      "genero": "Masculino"
+    },
+    {
+      "id": "1736494591758",
+      "nombre": "Sara",
+      "apellidos": "Cohen",
+      "edad": 27,
+      "nacionalidad": "Israelí",
+      "genero": "Femenino"
+    },
+    {
+      "id": "1736494591759",
+      "nombre": "Lars",
+      "apellidos": "Nilsson",
+      "edad": 39,
+      "nacionalidad": "Sueca",
+      "genero": "Masculino"
+    },
+    {
+      "id": "1736494591760",
+      "nombre": "Ming",
+      "apellidos": "Zhang",
+      "edad": 34,
+      "nacionalidad": "China",
+      "genero": "Femenino"
     }
   ]
 }

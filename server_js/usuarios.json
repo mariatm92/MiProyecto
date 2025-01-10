@@ -1,13 +1,439 @@
-[
-  {
-    "correo": "admin@admin.com",
-    "pw": "admin",
-    "type": "admin"
-  },
-  {
-    "correo": "user@user.com",
-    "pw": "user",
-    "type":"user"
-  } 
-
-]
+{
+  "reservas": [
+    {
+      "id": "RES001",
+      "cliente": {
+        "id": "1732870380351",
+        "nombre": "Sandra",
+        "apellidos": "Gonzalez",
+        "edad": "30",
+        "nacionalidad": "Española"
+      },
+      "habitacion": {
+        "tipo": "Suite Luxe",
+        "precio": 320
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 120
+      },
+      "servicios": [
+        {
+          "nombre": "Spa",
+          "precio": 50
+        },
+        {
+          "nombre": "Servicio de habitaciones",
+          "precio": 5
+        }
+      ],
+      "precioTotal": 495
+    },
+    {
+      "id": "RES002",
+      "cliente": {
+        "id": "1736494591747",
+        "nombre": "Pepe",
+        "apellidos": "Paplotes",
+        "edad": "35",
+        "nacionalidad": "Española"
+      },
+      "habitacion": {
+        "tipo": "Habitación con Vista al Mar/Montaña",
+        "precio": 190
+      },
+      "regimen": {
+        "tipo": "Media pensión",
+        "precio": 50
+      },
+      "servicios": [
+        {
+          "nombre": "Parking",
+          "precio": 15
+        },
+        {
+          "nombre": "Gimnasio",
+          "precio": 10
+        }
+      ],
+      "precioTotal": 265
+    },
+    {
+      "id": "RES003",
+      "cliente": {
+        "id": "1736494591748",
+        "nombre": "María",
+        "apellidos": "López",
+        "edad": "28",
+        "nacionalidad": "Mexicana"
+      },
+      "habitacion": {
+        "tipo": "Junior Suite",
+        "precio": 220
+      },
+      "regimen": {
+        "tipo": "Pensión completa",
+        "precio": 80
+      },
+      "servicios": [
+        {
+          "nombre": "Masaje",
+          "precio": 60
+        },
+        {
+          "nombre": "Excursiones",
+          "precio": 40
+        }
+      ],
+      "precioTotal": 400
+    },
+    {
+      "id": "RES004",
+      "cliente": {
+        "id": "1736494591749",
+        "nombre": "John",
+        "apellidos": "Smith",
+        "edad": "42",
+        "nacionalidad": "Británica"
+      },
+      "habitacion": {
+        "tipo": "Habitación para Mascotas",
+        "precio": 150
+      },
+      "regimen": {
+        "tipo": "Solo desayuno",
+        "precio": 25
+      },
+      "servicios": [
+        {
+          "nombre": "Alquiler de bicicletas",
+          "precio": 15
+        },
+        {
+          "nombre": "Minibar",
+          "precio": 20
+        }
+      ],
+      "precioTotal": 210
+    },
+    {
+      "id": "RES005",
+      "cliente": {
+        "id": "1736494591750",
+        "nombre": "Ana",
+        "apellidos": "García",
+        "edad": "33",
+        "nacionalidad": "Argentina"
+      },
+      "habitacion": {
+        "tipo": "Habitación Doble",
+        "precio": 160
+      },
+      "regimen": {
+        "tipo": "Todo incluido sin alcohol",
+        "precio": 100
+      },
+      "servicios": [
+        {
+          "nombre": "Spa",
+          "precio": 50
+        },
+        {
+          "nombre": "Servicio de lavandería",
+          "precio": 10
+        }
+      ],
+      "precioTotal": 320
+    },
+    {
+      "id": "RES006",
+      "cliente": {
+        "id": "1736494591751",
+        "nombre": "Luigi",
+        "apellidos": "Rossi",
+        "edad": "45",
+        "nacionalidad": "Italiana"
+      },
+      "habitacion": {
+        "tipo": "Habitación Standard",
+        "precio": 120
+      },
+      "regimen": {
+        "tipo": "Media pensión",
+        "precio": 50
+      },
+      "servicios": [
+        {
+          "nombre": "Parking",
+          "precio": 15
+        },
+        {
+          "nombre": "Servicio de habitaciones",
+          "precio": 5
+        }
+      ],
+      "precioTotal": 190
+    },
+    {
+      "id": "RES007",
+      "cliente": {
+        "id": "1736494591752",
+        "nombre": "Sophie",
+        "apellidos": "Dubois",
+        "edad": "29",
+        "nacionalidad": "Francesa"
+      },
+      "habitacion": {
+        "tipo": "Suite Luxe",
+        "precio": 320
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 120
+      },
+      "servicios": [
+        {
+          "nombre": "Masaje",
+          "precio": 60
+        },
+        {
+          "nombre": "Spa",
+          "precio": 50
+        }
+      ],
+      "precioTotal": 550
+    },
+    {
+      "id": "RES008",
+      "cliente": {
+        "id": "1736494591753",
+        "nombre": "Hans",
+        "apellidos": "Weber",
+        "edad": "38",
+        "nacionalidad": "Alemana"
+      },
+      "habitacion": {
+        "tipo": "Habitación de Larga Estancia",
+        "precio": 100
+      },
+      "regimen": {
+        "tipo": "Pensión completa",
+        "precio": 80
+      },
+      "servicios": [
+        {
+          "nombre": "Gimnasio",
+          "precio": 10
+        },
+        {
+          "nombre": "Servicio de lavandería",
+          "precio": 10
+        }
+      ],
+      "precioTotal": 200
+    },
+    {
+      "id": "RES009",
+      "cliente": {
+        "id": "1736494591754",
+        "nombre": "Yuki",
+        "apellidos": "Tanaka",
+        "edad": "31",
+        "nacionalidad": "Japonesa"
+      },
+      "habitacion": {
+        "tipo": "Habitación con Vista al Mar/Montaña",
+        "precio": 190
+      },
+      "regimen": {
+        "tipo": "Solo desayuno",
+        "precio": 25
+      },
+      "servicios": [
+        {
+          "nombre": "Excursiones",
+          "precio": 40
+        },
+        {
+          "nombre": "Alquiler de bicicletas",
+          "precio": 15
+        }
+      ],
+      "precioTotal": 270
+    },
+    {
+      "id": "RES010",
+      "cliente": {
+        "id": "1736494591755",
+        "nombre": "Carlos",
+        "apellidos": "Santos",
+        "edad": "40",
+        "nacionalidad": "Brasileña"
+      },
+      "habitacion": {
+        "tipo": "Junior Suite",
+        "precio": 220
+      },
+      "regimen": {
+        "tipo": "Todo incluido sin alcohol",
+        "precio": 100
+      },
+      "servicios": [
+        {
+          "nombre": "Minibar",
+          "precio": 20
+        },
+        {
+          "nombre": "Servicio de habitaciones",
+          "precio": 5
+        }
+      ],
+      "precioTotal": 345
+    },
+    {
+      "id": "RES011",
+      "cliente": {
+        "id": "1736494591756",
+        "nombre": "Emma",
+        "apellidos": "Anderson",
+        "edad": "36",
+        "nacionalidad": "Estadounidense"
+      },
+      "habitacion": {
+        "tipo": "Habitación Accesible o Adaptada",
+        "precio": 130
+      },
+      "regimen": {
+        "tipo": "Media pensión",
+        "precio": 50
+      },
+      "servicios": [
+        {
+          "nombre": "Transporte",
+          "precio": 25
+        },
+        {
+          "nombre": "Guardaequipaje",
+          "precio": 5
+        }
+      ],
+      "precioTotal": 210
+    },
+    {
+      "id": "RES012",
+      "cliente": {
+        "id": "1736494591757",
+        "nombre": "Pavel",
+        "apellidos": "Ivanov",
+        "edad": "44",
+        "nacionalidad": "Rusa"
+      },
+      "habitacion": {
+        "tipo": "Habitación compartida",
+        "precio": 80
+      },
+      "regimen": {
+        "tipo": "Sin pensión",
+        "precio": 0
+      },
+      "servicios": [
+        {
+          "nombre": "Alquiler de coches",
+          "precio": 50
+        },
+        {
+          "nombre": "Parking",
+          "precio": 15
+        }
+      ],
+      "precioTotal": 145
+    },
+    {
+      "id": "RES013",
+      "cliente": {
+        "id": "1736494591758",
+        "nombre": "Sara",
+        "apellidos": "Cohen",
+        "edad": "27",
+        "nacionalidad": "Israelí"
+      },
+      "habitacion": {
+        "tipo": "Habitación Standard",
+        "precio": 120
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 120
+      },
+      "servicios": [
+        {
+          "nombre": "Spa",
+          "precio": 50
+        },
+        {
+          "nombre": "Masaje",
+          "precio": 60
+        }
+      ],
+      "precioTotal": 350
+    },
+    {
+      "id": "RES014",
+      "cliente": {
+        "id": "1736494591759",
+        "nombre": "Lars",
+        "apellidos": "Nilsson",
+        "edad": "39",
+        "nacionalidad": "Sueca"
+      },
+      "habitacion": {
+        "tipo": "Habitación para Mascotas",
+        "precio": 150
+      },
+      "regimen": {
+        "tipo": "Pensión completa",
+        "precio": 80
+      },
+      "servicios": [
+        {
+          "nombre": "Alquiler de bicicletas",
+          "precio": 15
+        },
+        {
+          "nombre": "Excursiones",
+          "precio": 40
+        }
+      ],
+      "precioTotal": 285
+    },
+    {
+      "id": "RES015",
+      "cliente": {
+        "id": "1736494591760",
+        "nombre": "Ming",
+        "apellidos": "Zhang",
+        "edad": "34",
+        "nacionalidad": "China"
+      },
+      "habitacion": {
+        "tipo": "Habitación Doble",
+        "precio": 160
+      },
+      "regimen": {
+        "tipo": "Solo desayuno",
+        "precio": 25
+      },
+      "servicios": [
+        {
+          "nombre": "Servicio de habitaciones",
+          "precio": 5
+        },
+        {
+          "nombre": "Gimnasio",
+          "precio": 10
+        }
+      ],
+      "precioTotal": 200
+    }
+  ]
+}
