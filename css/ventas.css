@@ -1,3 +1,12 @@
+form .etiquetas {
+    font-family: roboto;
+}
+
+@font-face {
+    font-family: roboto;
+    src: url(../fonts/Roboto-Medium.ttf);
+}
+
 .wrapp {
     display: flex;
     flex-direction: column;
@@ -43,4 +52,24 @@ h1 {
     font-family: 'Courier New', Courier, monospace;
     height: 60px;
     width: 1000px;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 20px;
+    width: 1000px;
+    list-style: none;
+    font-family: roboto;
+    font-size: 20px;
+}
+
+li {
+    list-style: none;
+}
+
+li a{
+    text-decoration: none;
+    color:inherit;
 }
