@@ -65,6 +65,11 @@ h1 {
     font-size: 20px;
 }
 
+
+.menu #IniAdmin{
+    cursor: pointer;
+}
+
 li {
     list-style: none;
 }
