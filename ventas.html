@@ -12,12 +12,23 @@
                 <div class="bienvenida">
                     <h1 id="bienvenida">Bienvenido al apartado de ventas</span></h1>
                     <div class="menu">
-                        <li>Inicio Admin</li>
+                        <li onclick="redirigirAdmin()" id="IniAdmin">Inicio Admin</li>
                         <li>Contacto</li>
                         <li><a href="ventas.html">Ventas</a></li>
                     </div> 
                 </div>         
             </div>
         </div>
+
+        <script>
+            // JavaScript para redirigir a admin.html con parámetros de correo
+            function redirigirAdmin() {
+                // Aquí tomas el valor del correo desde algún lugar, por ejemplo, un campo de entrada
+                var correo = "admin@admin.com";  // Este valor puede ser dinámico
+
+                // Rediriges a admin.html con el correo como parámetro
+                window.location.href = `admin.html?correo=${encodeURIComponent(correo)}`;
+            }
+        </script>
     </body>
 </html>
