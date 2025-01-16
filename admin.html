@@ -32,7 +32,7 @@
         <div id="addEmployeeModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="cerrarModal()">&times;</span>
-                <h2>Agregar Nuevo Empleado</h2>
+                <h2>Nuevo Cliente</h2>
                 <form id="addEmployeeForm">
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" required><br>
@@ -40,16 +40,16 @@
                     <label for="apellidos">Apellidos:</label>
                     <input type="text" id="apellidos" name="apellidos" required><br>
 
-                    <label for="edad">Teléfono:</label>
+                    <label for="edad">Edad:</label>
                     <input type="text" id="edad" name="edad" required><br>
 
-                    <label for="nacionalidad">Email:</label>
+                    <label for="nacionalidad">Nacionalidad:</label>
                     <input type="email" id="nacionalidad" name="nacionalidad" required><br>
 
-                    <label for="genero">Dirección:</label>
+                    <label for="genero">Genero:</label>
                     <input type="text" id="genero" name="genero" required><br>
 
-                    <button type="submit">Agregar Empleado</button>
+                    <button type="submit">Agregar Cliente</button>
                 </form>
             </div>
         </div>
@@ -118,15 +118,15 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Empleado agregado:', data);
+                    console.log('Cliente agregado:', data);
                     // Close the modal
                     cerrarModal();
                     // Update employee list
                     actualizarListaEmpleados();
                 })
                 .catch(error => {
-                    console.error('Error al agregar empleado:', error);
-                    alert('No se pudo agregar el empleado. Intenta nuevamente.');
+                    console.error('Error al agregar el cliente:', error);
+                    alert('No se pudo agregar el cliente. Intenta nuevamente.');
                 });
             });
             // Función para mostrar el formulario de modificación de empleado
@@ -142,7 +142,7 @@
                     modifyModal.innerHTML = `
                         <div class="modal-content">
                             <span class="close" onclick="cerrarModalModificar()">&times;</span>
-                            <h2>Modificar Empleado</h2>
+                            <h2>Modificar Cliente</h2>
                             <form id="modifyEmployeeForm">
                                 <input type="hidden" id="modifyId" name="id">
 
@@ -193,7 +193,7 @@
 
                         // Enviar solicitud de modificación al servidor
                         fetch('http://localhost:3000/empleados/modify', {
-                            method: 'POST',
+                            method: 'POST ',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
@@ -206,8 +206,8 @@
                             actualizarListaEmpleados();
                         })
                         .catch(error => {
-                            console.error('Error al modificar empleado:', error);
-                            alert('No se pudo modificar el empleado. Intenta nuevamente.');
+                            console.error('Error al modificar el cliente:', error);
+                            alert('No se pudo modificar el cliente. Intenta nuevamente.');
                         });
                     });
                 }
