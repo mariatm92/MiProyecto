@@ -3,26 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>Ventas</title>
-        <link href="css/ventas.css" rel="stylesheet" type="text/css">
-        <style>
-            .reservaDetails {
-                border: 1px solid #ddd;
-                margin: 10px 0;
-                padding: 15px;
-                border-radius: 5px;
-                background-color: #f9f9f9;
-            }
-            .reservaField {
-                margin: 5px 0;
-            }
-            .reservaField ul {
-                margin: 5px 0;
-                padding-left: 20px;
-            }
-            .reservaField strong {
-                color: #444;
-            }
-        </style>
+        <link href="css/reservas.css" rel="stylesheet" type="text/css">
+        
     </head>
     <body>
         <div class="wrapp">
@@ -32,8 +14,8 @@
                     <h1 id="bienvenida">Bienvenido al apartado de ventas</h1>
                     <div class="menu">
                         <li onclick="redirigirAdmin()" id="IniAdmin">Inicio Admin</li>
-                        <li>Contacto</li>
-                        <li><a href="ventas.html">Ventas</a></li>
+                        <li><a href="graficos.html">Gráficos</a></li>
+                        <li><a href="reservas.html">Reservas</a></li>
                     </div> 
                 </div>         
             </div>
@@ -52,15 +34,7 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 return urlParams.get(nombre);
             }
-            /*
-            const correo = obtenerParametroURL('correo');
-
-            if (correo) {
-                document.getElementById('bienvenida').innerHTML = `Bienvenido al apartado de ventas, <span id="usuarioCorreo">${correo}</span>`;
-            } else {
-                window.location.href = 'admin.html';
-            }
-*/
+            
             // Función para mostrar las reservas
             function mostrarReservas() {
                 const usuarioGson = document.querySelector('.usuarioGson');
@@ -101,7 +75,7 @@
             mostrarReservas();
 
             function redirigirAdmin() {
-                var correo = document.getElementById('usuarioCorreo').textContent;
+                var correo = "admin@admin.com";
                 window.location.href = `admin.html?correo=${encodeURIComponent(correo)}`;
             }
         </script>
