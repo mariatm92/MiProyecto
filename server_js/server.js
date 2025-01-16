@@ -10,6 +10,18 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname));
 
+app.get('/reservas', (req, res) => { 
+  const filePath = path.join(__dirname, 'reservas.json'); 
+  fs.readFile(filePath, 'utf8', (err, data) => { 
+    if (err) { 
+      console.error('Error reading file:', err); 
+      res.status(500).send('Error reading the file'); 
+    } else { 
+      res.json(JSON.parse(data)); 
+    } 
+  }); 
+});
+
 app.get('/usuarios', (req, res) => {
   const filePath = path.join(__dirname, 'usuarios.json');
   fs.readFile(filePath, 'utf8', (err, data) => {
@@ -147,6 +159,18 @@ app.post('/empleados/modify', (req, res) => {
       // Enviar la respuesta con el empleado actualizado
       res.status(200).json(empleados[employeeIndex]);
     });
+  });
+});
+
+app.get('/reservas', (req, res) => {
+  const filePath = path.join(__dirname, 'reservas.json');
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      res.status(500).send('Error reading the file');
+    } else {
+      res.json(JSON.parse(data));
+    }
   });
 });
 
