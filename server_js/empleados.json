@@ -4,7 +4,7 @@
       "id": "1732870380351",
       "nombre": "Sandra",
       "apellidos": "Gonzalez",
-      "edad": 30,
+      "edad": "30",
       "nacionalidad": "Española",
       "genero": "Femenino"
     },
@@ -44,7 +44,7 @@
       "id": "1736494591751",
       "nombre": "Luigi",
       "apellidos": "Rossi",
-      "edad": 45,
+      "edad": "45",
       "nacionalidad": "Italiana",
       "genero": "Masculino"
     },
