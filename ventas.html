@@ -2,15 +2,34 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Login</title>
+        <title>Ventas</title>
         <link href="css/ventas.css" rel="stylesheet" type="text/css">
+        <style>
+            .reservaDetails {
+                border: 1px solid #ddd;
+                margin: 10px 0;
+                padding: 15px;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+            }
+            .reservaField {
+                margin: 5px 0;
+            }
+            .reservaField ul {
+                margin: 5px 0;
+                padding-left: 20px;
+            }
+            .reservaField strong {
+                color: #444;
+            }
+        </style>
     </head>
     <body>
         <div class="wrapp">
             <div class="cabecera">
                 <img src="images/erp2.jpg"> 
                 <div class="bienvenida">
-                    <h1 id="bienvenida">Bienvenido al apartado de ventas</span></h1>
+                    <h1 id="bienvenida">Bienvenido al apartado de ventas</h1>
                     <div class="menu">
                         <li onclick="redirigirAdmin()" id="IniAdmin">Inicio Admin</li>
                         <li>Contacto</li>
@@ -18,15 +37,72 @@
                     </div> 
                 </div>         
             </div>
+            <div class="apartadoReservas">
+                <button onclick="abrirModal()">Agregar Reserva</button>
+                <div class="contenidoUsuario">
+                    <div class="usuarioGson">
+                        <!-- Las reservas se cargarán aquí dinámicamente -->
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script>
-            // JavaScript para redirigir a admin.html con parámetros de correo
-            function redirigirAdmin() {
-                // Aquí tomas el valor del correo desde algún lugar, por ejemplo, un campo de entrada
-                var correo = "admin@admin.com";  // Este valor puede ser dinámico
+            // Función para obtener parámetros de la URL
+            function obtenerParametroURL(nombre) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(nombre);
+            }
 
-                // Rediriges a admin.html con el correo como parámetro
+            const correo = obtenerParametroURL('correo');
+
+            if (correo) {
+                document.getElementById('bienvenida').innerHTML = `Bienvenido al apartado de ventas, <span id="usuarioCorreo">${correo}</span>`;
+            } else {
+                window.location.href = 'admin.html';
+            }
+
+            // Función para mostrar las reservas
+            function mostrarReservas() {
+                const usuarioGson = document.querySelector('.usuarioGson');
+                usuarioGson.innerHTML = '';
+
+                fetch('http://localhost:3000/reservas')
+                    .then(response => response.json())
+                    .then(data => {
+                        data.reservas.forEach(reserva => {
+                            const reservaDetails = document.createElement('div');
+                            reservaDetails.classList.add('reservaDetails');
+
+                            reservaDetails.innerHTML = `
+                                <div class="reservaField"><strong>ID Reserva:</strong> ${reserva.id}</div>
+                                <div class="reservaField"><strong>Cliente:</strong> ${reserva.cliente.nombre} ${reserva.cliente.apellidos}</div>
+                                <div class="reservaField"><strong>Edad:</strong> ${reserva.cliente.edad} años</div>
+                                <div class="reservaField"><strong>Nacionalidad:</strong> ${reserva.cliente.nacionalidad}</div>
+                                <div class="reservaField"><strong>Habitación:</strong> ${reserva.habitacion.tipo} - Precio: ${reserva.habitacion.precio}€</div>
+                                <div class="reservaField"><strong>Régimen:</strong> ${reserva.regimen.tipo} - Precio: ${reserva.regimen.precio}€</div>
+                                <div class="reservaField"><strong>Servicios:</strong>
+                                    <ul>
+                                        ${reserva.servicios.map(servicio => `<li>${servicio.nombre} - Precio: ${servicio.precio}€</li>`).join('')}
+                                    </ul>
+                                </div>
+                                <div class="reservaField"><strong>Precio Total:</strong> ${reserva.precioTotal}€</div>
+                            `;
+
+                            usuarioGson.appendChild(reservaDetails);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener reservas:', error);
+                        usuarioGson.innerHTML = '<p>Error al cargar las reservas</p>';
+                    });
+            }
+
+            // Cargar las reservas al iniciar la página
+            mostrarReservas();
+
+            function redirigirAdmin() {
+                var correo = document.getElementById('usuarioCorreo').textContent;
                 window.location.href = `admin.html?correo=${encodeURIComponent(correo)}`;
             }
         </script>
