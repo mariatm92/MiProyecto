@@ -149,6 +149,18 @@ app.post('/empleados/modify', (req, res) => {
   });
 });
 
+app.get('/reservas', (req, res) => {
+  const filePath = path.join(__dirname, 'reservas.json');
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      res.status(500).send('Error reading the file');
+    } else {
+      res.json(JSON.parse(data));
+    }
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
