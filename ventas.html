@@ -38,7 +38,6 @@
                 </div>         
             </div>
             <div class="apartadoReservas">
-                <button onclick="abrirModal()">Agregar Reserva</button>
                 <div class="contenidoUsuario">
                     <div class="usuarioGson">
                         <!-- Las reservas se cargarán aquí dinámicamente -->
@@ -53,7 +52,7 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 return urlParams.get(nombre);
             }
-
+            /*
             const correo = obtenerParametroURL('correo');
 
             if (correo) {
@@ -61,7 +60,7 @@
             } else {
                 window.location.href = 'admin.html';
             }
-
+*/
             // Función para mostrar las reservas
             function mostrarReservas() {
                 const usuarioGson = document.querySelector('.usuarioGson');
