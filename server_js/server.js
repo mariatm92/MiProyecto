@@ -33,7 +33,20 @@ app.get('/empleados', (req, res) => {
     }
   }); 
 });
+/* ---------------------DE AQUI------------------------*/
+app.get('/reservas', (req, res) => {
+  const filePath = path.join(__dirname, 'reservas.json');
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      res.status(500).send('Error reading the file');
+    } else {
+      res.json(JSON.parse(data));
+    }
+  }); 
+});
 
+/* -------------------HASTA AQUI -------------------*/
 app.delete('/empleados/:id', (req, res) => {
   const filePath = path.join(__dirname, 'empleados.json');
   const employeeId = req.params.id;

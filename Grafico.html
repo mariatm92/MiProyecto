@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      // Cargamos la API de visualización
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(initChart);
+
+     function initChart() {
+        try {
+          // Cargar datos del JSON
+          const response =  fetch('http://localhost:3000/reservas');
+          const data =  response.json();
+          drawChart(data);
+        } catch (error) {
+          console.error('Error cargando los datos:', error);
+          document.getElementById('chart_div').innerHTML = 'Error cargando los datos. Por favor, verifica que el archivo JSON es accesible.';
+        }
+      }
+
+      function drawChart(jsonData) {
+        // Procesar datos para contar tipos de habitaciones
+        const tiposHabitacion = {};
+        jsonData.reservas.forEach(reserva => {
+          const tipo = reserva.habitacion.tipo;
+          tiposHabitacion[tipo] = (tiposHabitacion[tipo] || 0) + 1;
+        });
+
+        // Crear array de datos para Google Charts
+        const dataArray = [['Tipo de Habitación', 'Cantidad']];
+        Object.entries(tiposHabitacion).forEach(([tipo, cantidad]) => {
+          dataArray.push([tipo, cantidad]);
+        });
+
+        // Crear el objeto DataTable
+        var data = google.visualization.arrayToDataTable(dataArray);
+
+        // Opciones del gráfico
+        var options = {
+          title: 'Distribución de Tipos de Habitaciones Reservadas',
+          width: 800,
+          height: 500,
+          is3D: true,
+          colors: ['#4285F4', '#DB4437', '#F4B400', '#0F9D58', '#AB47BC', '#00ACC1', '#FF7043', '#9E9E9E'],
+          chartArea: {width: '100%', height: '80%'},
+          legend: {position: 'right', alignment: 'center'},
+          tooltip: {showColorCode: true, trigger: 'selection'}
+        };
+
+        // Crear y dibujar el gráfico
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+
+        // Añadir información sobre la última actualización
+        const updateInfo = document.createElement('div');
+        updateInfo.style.textAlign = 'center';
+        updateInfo.style.marginTop = '10px';
+        updateInfo.innerHTML = `Última actualización: ${new Date().toLocaleString()}`;
+        document.getElementById('chart_div').parentNode.appendChild(updateInfo);
+      }
+
+      // Función para actualizar el gráfico cada cierto tiempo
+      function setupAutoRefresh(intervalMinutes) {
+        setInterval(initChart, intervalMinutes * 60 * 1000);
+      }
+
+      // Configurar actualización automática cada 5 minutos
+      setupAutoRefresh(5);
+    </script>
+    <style>
+      .error-message {
+        color: red;
+        padding: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chart_div"></div>
+  </body>
+</html>
