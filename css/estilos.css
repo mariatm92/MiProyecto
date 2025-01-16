@@ -63,9 +63,10 @@ header {
     overflow: hidden;
     border-radius: 16px;
     color: #010101;
-    height: 800px;
+    height: 500px;
     filter: opacity(1);
-    margin-left: 10px;
+    margin-left: 20px;
+   
    
     
   }
@@ -77,6 +78,7 @@ header {
     padding: 32px 24px 24px;
     gap: 16px;
     text-align: center;
+    
   }
   
   /*Form text*/
@@ -99,6 +101,7 @@ header {
     background-color: #fff;
     margin: 1rem 0 .5rem;
     width: 100%;
+    
   }
   
   .input {
@@ -118,6 +121,7 @@ header {
     font-size: .85rem;
     background-color: #e0ecfb;
     box-shadow: rgb(0 0 0 / 8%) 0 -1px;
+    
   }
   
   .form-section a {
@@ -143,6 +147,7 @@ header {
     cursor: pointer;
     transition: background-color .3s ease;
     font-family: MiFuente;
+   
   
   }
   
