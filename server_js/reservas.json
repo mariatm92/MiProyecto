@@ -7,7 +7,8 @@
         "nombre": "Yuki",
         "apellidos": "Tanaka",
         "edad": "31",
-        "nacionalidad": "Japonesa"
+        "nacionalidad": "Japonesa",
+        "hijos": 0
       },
       "habitacion": {
         "tipo": "Habitación Individual",
@@ -36,7 +37,8 @@
         "nombre": "Carlos",
         "apellidos": "Santos",
         "edad": "40",
-        "nacionalidad": "Brasileña"
+        "nacionalidad": "Brasileña",
+        "hijos": 3
       },
       "habitacion": {
         "tipo": "Habitación Doble",
@@ -65,7 +67,8 @@
         "nombre": "Emma",
         "apellidos": "Anderson",
         "edad": "36",
-        "nacionalidad": "Estadounidense"
+        "nacionalidad": "Estadounidense",
+        "hijos": 2
       },
       "habitacion": {
         "tipo": "Suite Luxe",
@@ -94,7 +97,8 @@
         "nombre": "Pavel",
         "apellidos": "Ivanov",
         "edad": "44",
-        "nacionalidad": "Rusa"
+        "nacionalidad": "Rusa",
+        "hijos": 1
       },
       "habitacion": {
         "tipo": "Junior Suite",
@@ -123,7 +127,8 @@
         "nombre": "Sara",
         "apellidos": "Cohen",
         "edad": "27",
-        "nacionalidad": "Israelí"
+        "nacionalidad": "Israelí",
+        "hijos": 0
       },
       "habitacion": {
         "tipo": "Habitación Doble",
@@ -152,7 +157,8 @@
         "nombre": "Lars",
         "apellidos": "Nilsson",
         "edad": "39",
-        "nacionalidad": "Sueca"
+        "nacionalidad": "Sueca",
+        "hijos": 2
       },
       "habitacion": {
         "tipo": "Habitación Standard",
@@ -181,7 +187,8 @@
         "nombre": "Ming",
         "apellidos": "Zhang",
         "edad": "34",
-        "nacionalidad": "China"
+        "nacionalidad": "China",
+        "hijos": 1
       },
       "habitacion": {
         "tipo": "Habitación Individual",
@@ -210,7 +217,8 @@
         "nombre": "Aisha",
         "apellidos": "Khan",
         "edad": "32",
-        "nacionalidad": "India"
+        "nacionalidad": "India",
+        "hijos": 3
       },
       "habitacion": {
         "tipo": "Suite Luxe",
@@ -239,7 +247,8 @@
         "nombre": "David",
         "apellidos": "O'Connor",
         "edad": "46",
-        "nacionalidad": "Irlandesa"
+        "nacionalidad": "Irlandesa",
+        "hijos": 2
       },
       "habitacion": {
         "tipo": "Junior Suite",
@@ -268,7 +277,8 @@
         "nombre": "Fatima",
         "apellidos": "Al-Hassan",
         "edad": "29",
-        "nacionalidad": "Egipcia"
+        "nacionalidad": "Egipcia",
+        "hijos": 1
       },
       "habitacion": {
         "tipo": "Habitación Standard",
@@ -290,3 +300,7 @@
       ],
       "precioTotal": 310
     }
+
+  ]
+}
+
