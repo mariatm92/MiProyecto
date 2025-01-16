@@ -78,3 +78,88 @@ li a{
     text-decoration: none;
     color:inherit;
 }
+
+.apartadoFormu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 650px;
+    width: 100%;
+    margin-top: 70px;
+}
+
+.wrapp .apartadoFormu button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 50px;
+    width: 110px;
+    margin-left: 70px;
+}
+
+.conrnidousuario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    width: 100%;
+    margin-top: 20px;
+  
+}
+.claseInfo{
+    display: flex;
+    justify-content: space-around; /* Separar los campos del empleado */
+    align-items: center;
+    
+    margin: 10px ; /* Espacio entre los elementos de los empleados */
+    height: 50px;
+    width: 100%;
+    background-color: rgb(199, 148, 206);
+
+
+}
+.usuarioGson {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrado de todos los empleados */
+    justify-content: flex-start;
+    width: 100%;
+}
+
+
+.employeeDetails {
+    display: flex;
+    justify-content: space-evenly; /* Separar los campos del empleado */
+    align-items: center;
+    width: 100%;
+    margin: 10px ; /* Espacio entre los elementos de los empleados */
+     background-color: rgb(148, 194, 206);
+    outline: solid 2px black;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.employeeField {
+    margin:20px; /* Separación entre los campos */
+    margin-right: 10px;
+    font-size: 14px;
+    display: flex;
+    width: 250px;
+   
+}
+
+button {
+    margin-left: 30px;
+    padding: 6px 12px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkred;
+}
