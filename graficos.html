@@ -63,7 +63,7 @@
         function drawCharts(reservations) {
             drawRoomTypeChart(reservations);
             drawAgeChart(reservations);
-            drawChildrenChart(reservations);
+       //     drawChildrenChart(reservations);
             drawServiceCountChart(reservations);
             drawServiceTypeChart(reservations);
             drawPriceChart(reservations);
@@ -121,7 +121,7 @@
             chart.draw(data, options);
         }
 
-        function drawChildrenChart(reservations) {
+    /*  function drawChildrenChart(reservations) {
             const childrenCounts = {};
             
             reservations.forEach(reservation => {
@@ -144,7 +144,7 @@
 
             const chart = new google.visualization.BarChart(document.getElementById('reservationsByChildren'));
             chart.draw(data, options);
-        }
+        }*/
 
         function drawServiceCountChart(reservations) {
             const serviceCountCounts = {};
