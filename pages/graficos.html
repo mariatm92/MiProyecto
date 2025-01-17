@@ -27,6 +27,7 @@
             <div id="reservationsByRoomType" class="chart"></div>
             <div id="reservationsByAge" class="chart"></div>
             <div id="reservationsByChildren" class="chart"></div>
+            <div id="reservationsByMonth" class="chart"></div>
             <div id="reservationsByServiceCount" class="chart"></div>
             <div id="reservationsByServiceType" class="chart"></div>
             <div id="reservationsByPrice" class="chart"></div>
@@ -114,7 +115,7 @@
             ]);
 
             const options = {
-                title: 'Reservations by Room Type',
+                title: 'Reservas por tipo de habitación',
                 height: 400,
                 legend: { position: 'bottom' },
                 bar: { groupWidth: '75%' },
@@ -139,7 +140,7 @@
             ]);
 
             const options = {
-                title: 'Reservations by Age',
+                title: 'Reservas por edad',
                 height: 400,    
                 legend: { position: 'bottom' },
                 hAxis: { title: 'Age' },
@@ -165,7 +166,7 @@
             ]);
 
             const options = {
-                title: 'Reservations by Number of Services',
+                title: 'Reservas por número de servicios',
                 height: 400,
                 legend: { position: 'bottom' },
                 bar: { groupWidth: '75%' },
