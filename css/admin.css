@@ -154,15 +154,16 @@ button:hover {
 
 li {
     list-style: none;
+    cursor: pointer;
 }
 
 li:hover {
     color: rgb(148, 194, 206);
 }
 
-li a{
+li a {
     text-decoration: none;
-    color:inherit;
+    color: inherit;
 }
 
 /* Estilos para el Modal */
