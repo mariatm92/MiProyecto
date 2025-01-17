@@ -1,121 +1,124 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Login</title>
-        <link href="../css/admin.css" rel="stylesheet" type="text/css">
-    </head>
-    <body>
-        <div class="wrapp">
-            <div class="cabecera">
-                <a href="index.html"><img src="../images/erp2.jpg" alt="ERP"></a>
-                <div class="bienvenida">
-                    <h1 id="bienvenida">Bienvenido administrador, <span id="usuarioCorreo"></span></h1>
-                    <div class="menu">
-                        <li><a href="">Clientes</a></li>
-                        <li>Productos</li>
-                        <li><a href="reservas.html">Reservas</a></li>
-                    </div> 
-                </div>         
-            </div>
-            <div class="apartadoFormu">
-                <button onclick="abrirModal()">Agregar</button>
-                <div class="conrnidousuario">
-                    <div class="usuarioGson">
-                        <!-- Los datos de cada empleado se cargarán aquí dinámicamente -->
-                    </div>
+
+
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link href="../css/admin.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class="wrapp">
+        <div class="cabecera">
+            <a href="index.html"><img src="../images/erp2.jpg" alt="ERP"></a>
+            <div class="bienvenida">
+                <h1 id="bienvenida">Bienvenido administrador, <span id="usuarioCorreo"></span></h1>
+                <div class="menu">
+                    <li><a href="">Clientes</a></li>
+                    <li>Productos</li>
+                    <li><a href="reservas.html">Reservas</a></li>
                 </div>
             </div>
         </div>
-
-        <!-- Modal de Agregar Empleado -->
-        <div id="addEmployeeModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="cerrarModal()">&times;</span>
-                <h2>Nuevo Cliente</h2>
-                <form id="addEmployeeForm">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required><br>
-
-                    <label for="apellidos">Apellidos:</label>
-                    <input type="text" id="apellidos" name="apellidos" required><br>
-
-                    <label for="edad">Edad:</label>
-                    <input type="text" id="edad" name="edad" required><br>
-
-                    <label for="nacionalidad">Nacionalidad:</label>
-                    <input type="email" id="nacionalidad" name="nacionalidad" required><br>
-
-                    <label for="genero">Genero:</label>
-                    <input type="text" id="genero" name="genero" required><br>
-
-                    <button type="submit">Agregar Cliente</button>
-                </form>
+        <div class="apartadoFormu">
+            <button onclick="abrirModal()">Agregar</button>
+            <div class="conrnidousuario">
+                <div class="usuarioGson">
+                    <!-- Los datos de cada empleado se cargarán aquí dinámicamente -->
+                </div>
             </div>
         </div>
+    </div>
 
-        <script>
-            // Función para obtener parámetros de la URL
-            function obtenerParametroURL(nombre) {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get(nombre);
+    <!-- Modal de Agregar Empleado -->
+    <div id="addEmployeeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <h2>Nuevo Cliente</h2>
+            <form id="addEmployeeForm">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required><br>
+
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" required><br>
+
+                <label for="edad">Edad:</label>
+                <input type="text" id="edad" name="edad" required><br>
+
+                <label for="nacionalidad">Nacionalidad:</label>
+                <input type="email" id="nacionalidad" name="nacionalidad" required><br>
+
+                <label for="genero">Genero:</label>
+                <input type="text" id="genero" name="genero" required><br>
+
+                <button type="submit">Agregar Cliente</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Función para obtener parámetros de la URL
+        function obtenerParametroURL(nombre) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(nombre);
+        }
+
+        const correo = obtenerParametroURL('correo');
+
+        if (correo) {
+            document.getElementById('usuarioCorreo').textContent = correo;
+        } else {
+            window.location.href = 'admin.html'; // Si no hay correo, redirige
+        }
+
+        // Función para abrir el modal
+        function abrirModal() {
+            document.getElementById('addEmployeeModal').style.display = 'block';
+        }
+
+        // Función para cerrar el modal
+        function cerrarModal() {
+            document.getElementById('addEmployeeModal').style.display = 'none';
+        }
+
+        // Cerrar modal al hacer clic fuera de él
+        window.addEventListener('click', function (event) {
+            const modal = document.getElementById('addEmployeeModal');
+            if (event.target === modal) {
+                cerrarModal();
             }
+        });
 
-            const correo = obtenerParametroURL('correo');
+        // Manejo del envío del formulario
+        document.getElementById('addEmployeeForm').addEventListener('submit', function (event) {
+            event.preventDefault();
 
-            if (correo) {
-                document.getElementById('usuarioCorreo').textContent = correo;
-            } else {
-                window.location.href = 'admin.html'; // Si no hay correo, redirige
-            }
+            // Obtain form data without explicitly getting the ID
+            const nombre = document.getElementById('nombre').value;
+            const apellidos = document.getElementById('apellidos').value;
+            const edad = document.getElementById('edad').value;
+            const nacionalidad = document.getElementById('nacionalidad').value;
+            const genero = document.getElementById('genero').value;
 
-            // Función para abrir el modal
-            function abrirModal() {
-                document.getElementById('addEmployeeModal').style.display = 'block';
-            }
+            // Create the new employee object without the ID
+            const nuevoEmpleado = {
+                id: Date.now().toString(),
+                nombre: nombre,
+                apellidos: apellidos,
+                edad: edad,
+                nacionalidad: nacionalidad,
+                genero: genero
+            };
 
-            // Función para cerrar el modal
-            function cerrarModal() {
-                document.getElementById('addEmployeeModal').style.display = 'none';
-            }
-
-            // Cerrar modal al hacer clic fuera de él
-            window.addEventListener('click', function(event) {
-                const modal = document.getElementById('addEmployeeModal');
-                if (event.target === modal) {
-                    cerrarModal();
-                }
-            });
-
-            // Manejo del envío del formulario
-            document.getElementById('addEmployeeForm').addEventListener('submit', function(event) {
-                event.preventDefault(); 
-                
-                // Obtain form data without explicitly getting the ID
-                const nombre = document.getElementById('nombre').value;
-                const apellidos = document.getElementById('apellidos').value;
-                const edad = document.getElementById('edad').value;
-                const nacionalidad = document.getElementById('nacionalidad').value;
-                const genero = document.getElementById('genero').value;
-                
-                // Create the new employee object without the ID
-                const nuevoEmpleado = {
-                    id: Date.now().toString(),
-                    nombre: nombre,
-                    apellidos: apellidos,
-                    edad: edad,
-                    nacionalidad: nacionalidad,
-                    genero: genero
-                };
-                
-                // Send data to server to add new employee
-                fetch('http://localhost:3000/empleados', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(nuevoEmpleado)
-                })
+            // Send data to server to add new employee
+            fetch('http://localhost:3000/empleados', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(nuevoEmpleado)
+            })
                 .then(response => response.json())
                 .then(data => {
                     console.log('Cliente agregado:', data);
@@ -128,18 +131,18 @@
                     console.error('Error al agregar el cliente:', error);
                     alert('No se pudo agregar el cliente. Intenta nuevamente.');
                 });
-            });
-            // Función para mostrar el formulario de modificación de empleado
-            function mostrarFormularioModificar(employee) {
+        });
+        // Función para mostrar el formulario de modificación de empleado
+        function mostrarFormularioModificar(employee) {
 
 
-                // Crear el modal de modificación si no existe
-                let modifyModal = document.getElementById('modifyEmployeeModal');
-                if (!modifyModal) {
-                    modifyModal = document.createElement('div');
-                    modifyModal.id = 'modifyEmployeeModal';
-                    modifyModal.className = 'modal';
-                    modifyModal.innerHTML = `
+            // Crear el modal de modificación si no existe
+            let modifyModal = document.getElementById('modifyEmployeeModal');
+            if (!modifyModal) {
+                modifyModal = document.createElement('div');
+                modifyModal.id = 'modifyEmployeeModal';
+                modifyModal.className = 'modal';
+                modifyModal.innerHTML = `
                         <div class="modal-content">
                             <span class="close" onclick="cerrarModalModificar()">&times;</span>
                             <h2>Modificar Cliente</h2>
@@ -165,40 +168,40 @@
                             </form>
                         </div>
                     `;
-                    document.body.appendChild(modifyModal);
+                document.body.appendChild(modifyModal);
 
-                    // Agregar event listener para el formulario de modificación
-                    document.getElementById('modifyEmployeeForm').addEventListener('submit', function(event) {
-                        event.preventDefault();
-                        
-                        // Obtener los valores del formulario
+                // Agregar event listener para el formulario de modificación
+                document.getElementById('modifyEmployeeForm').addEventListener('submit', function (event) {
+                    event.preventDefault();
 
-                        const id = document.getElementById('modifyId').value;
-                        console.log(id);
-                        const nombre = document.getElementById('modifyNombre').value;
-                        const apellidos = document.getElementById('modifyApellidos').value;
-                        const edad = document.getElementById('modifyEdad').value;
-                        const nacionalidad = document.getElementById('modifyNacionalidad').value;
-                        const genero = document.getElementById('modifyGenero').value;
+                    // Obtener los valores del formulario
 
-                        // Crear objeto de empleado modificado
-                        const empleadoModificado = {
-                            id: id,
-                            nombre: nombre,
-                            apellidos: apellidos,
-                            edad: edad,
-                            nacionalidad: nacionalidad,
-                            genero: genero
-                        };
+                    const id = document.getElementById('modifyId').value;
+                    console.log(id);
+                    const nombre = document.getElementById('modifyNombre').value;
+                    const apellidos = document.getElementById('modifyApellidos').value;
+                    const edad = document.getElementById('modifyEdad').value;
+                    const nacionalidad = document.getElementById('modifyNacionalidad').value;
+                    const genero = document.getElementById('modifyGenero').value;
 
-                        // Enviar solicitud de modificación al servidor
-                        fetch('http://localhost:3000/empleados/modify', {
-                            method: 'POST ',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(empleadoModificado), // empleadoModificado debe contener el id
-                        })
+                    // Crear objeto de empleado modificado
+                    const empleadoModificado = {
+                        id: id,
+                        nombre: nombre,
+                        apellidos: apellidos,
+                        edad: edad,
+                        nacionalidad: nacionalidad,
+                        genero: genero
+                    };
+
+                    // Enviar solicitud de modificación al servidor
+                    fetch('http://localhost:3000/empleados/modify', {
+                        method: 'POST ',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(empleadoModificado), // empleadoModificado debe contener el id
+                    })
                         .then(response => response.json())
                         .then(data => {
                             console.log('Empleado modificado:', data);
@@ -209,46 +212,46 @@
                             console.error('Error al modificar el cliente:', error);
                             alert('No se pudo modificar el cliente. Intenta nuevamente.');
                         });
-                    });
-                }
-             // Rellenar los campos con los datos del empleado
-                document.getElementById('modifyId').value = employee.id;
-                document.getElementById('modifyNombre').value = employee.nombre;
-                document.getElementById('modifyApellidos').value = employee.apellidos;
-                document.getElementById('modifyEdad').value = employee.edad;
-                document.getElementById('modifyNacionalidad').value = employee.nacionalidad;
-                document.getElementById('modifyGenero').value = employee.genero;
-
-                // Mostrar el modal
-                modifyModal.style.display = 'block';
+                });
             }
+            // Rellenar los campos con los datos del empleado
+            document.getElementById('modifyId').value = employee.id;
+            document.getElementById('modifyNombre').value = employee.nombre;
+            document.getElementById('modifyApellidos').value = employee.apellidos;
+            document.getElementById('modifyEdad').value = employee.edad;
+            document.getElementById('modifyNacionalidad').value = employee.nacionalidad;
+            document.getElementById('modifyGenero').value = employee.genero;
 
-            // Función para cerrar el modal de modificación
-            function cerrarModalModificar() {
-                document.getElementById('modifyEmployeeModal').style.display = 'none';
+            // Mostrar el modal
+            modifyModal.style.display = 'block';
+        }
+
+        // Función para cerrar el modal de modificación
+        function cerrarModalModificar() {
+            document.getElementById('modifyEmployeeModal').style.display = 'none';
+        }
+
+        window.addEventListener('click', function (event) {
+            const modal = document.getElementById('modifyEmployeeModal');
+            if (event.target === modal) {
+                cerrarModalModificar();
             }
+        });
+        // Función para actualizar la lista de empleados
+        function actualizarListaEmpleados() {
+            const usuarioGson = document.querySelector('.usuarioGson');
+            usuarioGson.innerHTML = ''; // Limpiar la lista antes de cargar los empleados
 
-            window.addEventListener('click', function(event) {
-                const modal = document.getElementById('modifyEmployeeModal');
-                if (event.target === modal) {
-                    cerrarModalModificar();
-                }
-            });
-            // Función para actualizar la lista de empleados
-            function actualizarListaEmpleados() {
-                const usuarioGson = document.querySelector('.usuarioGson');
-                usuarioGson.innerHTML = ''; // Limpiar la lista antes de cargar los empleados
+            fetch('http://localhost:3000/empleados')
+                .then(response => response.json())
+                .then(data => {
+                    data.empleados.forEach(employee => {
+                        // Crear un div contenedor para los datos del empleado
+                        const employeeDetails = document.createElement('div');
+                        employeeDetails.classList.add('employeeDetails'); // Se puede usar esta clase para estilizar el contenedor
 
-                fetch('http://localhost:3000/empleados')
-                    .then(response => response.json())
-                    .then(data => {
-                        data.empleados.forEach(employee => {
-                            // Crear un div contenedor para los datos del empleado
-                            const employeeDetails = document.createElement('div');
-                            employeeDetails.classList.add('employeeDetails'); // Se puede usar esta clase para estilizar el contenedor
-
-                            // Crear un bloque de datos con separación entre cada campo
-                            employeeDetails.innerHTML = `
+                        // Crear un bloque de datos con separación entre cada campo
+                        employeeDetails.innerHTML = `
                                 <div class="employeeField"><strong>Nombre:&nbsp;</strong> ${employee.nombre}</div>
                                 <div class="employeeField"><strong>Apellido:&nbsp;</strong> ${employee.apellidos}</div>
                                 <div class="employeeField"><strong>Edad:&nbsp;</strong> ${employee.edad}</div>
@@ -256,34 +259,34 @@
                                 <div class="employeeField"><strong>Genero:&nbsp;</strong> ${employee.genero}</div>
                             `;
 
-                            // Crear el botón de eliminar
-                            const deleteButton = document.createElement('button');
-                            deleteButton.textContent = 'Eliminar';
-                            deleteButton.onclick = () => eliminarEmpleado(employee.id);
+                        // Crear el botón de eliminar
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Eliminar';
+                        deleteButton.onclick = () => eliminarEmpleado(employee.id);
 
-                           // Crear el botón de "Modificar"
-                            const modifyButton = document.createElement('button');
-                            modifyButton.textContent = 'Modificar';
-                            modifyButton.onclick = () => mostrarFormularioModificar(employee);
+                        // Crear el botón de "Modificar"
+                        const modifyButton = document.createElement('button');
+                        modifyButton.textContent = 'Modificar';
+                        modifyButton.onclick = () => mostrarFormularioModificar(employee);
 
-                            // Añadir el botón al div del empleado
-                            employeeDetails.appendChild(deleteButton);
+                        // Añadir el botón al div del empleado
+                        employeeDetails.appendChild(deleteButton);
 
-                            employeeDetails.appendChild(modifyButton);
+                        employeeDetails.appendChild(modifyButton);
 
-                            // Añadir el div con los detalles del empleado al contenedor .usuarioGson
-                            usuarioGson.appendChild(employeeDetails);
-                        });
-                    })
-                    .catch(error => console.error('Error fetching employees:', error));
-            }
-            
-
-            // Función para eliminar un empleado
-            function eliminarEmpleado(id) {
-                fetch(`http://localhost:3000/empleados/${id}`, {
-                    method: 'DELETE'
+                        // Añadir el div con los detalles del empleado al contenedor .usuarioGson
+                        usuarioGson.appendChild(employeeDetails);
+                    });
                 })
+                .catch(error => console.error('Error fetching employees:', error));
+        }
+
+
+        // Función para eliminar un empleado
+        function eliminarEmpleado(id) {
+            fetch(`http://localhost:3000/empleados/${id}`, {
+                method: 'DELETE'
+            })
                 .then(response => response.text())
                 .then(message => {
                     console.log(message);
@@ -291,10 +294,11 @@
                     location.reload(); // Método sencillo de refrescar la lista
                 })
                 .catch(error => console.error('Error deleting employee:', error));
-            }
+        }
 
-            // Inicializar la lista de empleados al cargar la página
-            actualizarListaEmpleados();
-        </script>
-    </body>
+        // Inicializar la lista de empleados al cargar la página
+        actualizarListaEmpleados();
+    </script>
+</body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,21 +9,25 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <link href="../css/graficos.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
     <div class="wrapp">
         <div class="cabecera">
-            <img src="../images/erp2.jpg"> 
+
+            <img src="../images/erp2.jpg">
+
             <div class="bienvenida">
                 <h1 id="bienvenida">Bienvenido al apartado de gráficos</span></h1>
                 <div class="menu">
                     <li onclick="redirigirAdmin()" id="IniAdmin">Inicio</li>
                     <li><a href="graficos.html">Gráficos</a></li>
                     <li><a href="reservas.html">Reservas</a></li>
-                </div> 
-            </div>         
+
+                </div>
+            </div>
         </div>
         <h1>Gráficos sobre el análisis de las reservas</h1>
-        
+
         <div class="chart-container">
             <div id="reservationsByRoomType" class="chart"></div>
             <div id="reservationsByAge" class="chart"></div>
@@ -36,7 +41,7 @@
         </div>
 
         <script>
-            google.charts.load('current', {'packages':['corechart']});
+            google.charts.load('current', { 'packages': ['corechart'] });
             google.charts.setOnLoadCallback(initCharts);
 
             function initCharts() {
@@ -44,149 +49,149 @@
             }
 
 
-        function fetchReservationData() {
-    fetch('http://localhost:3000/reservas', {
-        method: 'GET'
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-    })
-    //Todo bien
-    .then(data => {
-        drawCharts(data.reservas);  // Note: Adjusted to handle nested 'reservas' array
-    })
-    .catch(error => {
-        console.error('Error fetching reservation data:', error);
-    });
-    }
-        function drawCharts(reservations) {
-            drawMonthChart(reservations);
-            drawRoomTypeChart(reservations);
-            drawAgeChart(reservations);
-            drawServiceCountChart(reservations);
-            drawServiceTypeChart(reservations);
-            drawPriceChart(reservations);
-            drawNationalityChart(reservations);
-            drawAgeRangeChart(reservations);
-            
-        }
+            function fetchReservationData() {
+                fetch('http://localhost:3000/reservas', {
+                    method: 'GET'
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
+                        return response.json();
+                    })
+                    //Todo bien
+                    .then(data => {
+                        drawCharts(data.reservas);  // Note: Adjusted to handle nested 'reservas' array
+                    })
+                    .catch(error => {
+                        console.error('Error fetching reservation data:', error);
+                    });
+            }
+            function drawCharts(reservations) {
+                drawMonthChart(reservations);
+                drawRoomTypeChart(reservations);
+                drawAgeChart(reservations);
+                drawServiceCountChart(reservations);
+                drawServiceTypeChart(reservations);
+                drawPriceChart(reservations);
+                drawNationalityChart(reservations);
+                drawAgeRangeChart(reservations);
 
-        function drawMonthChart(reservations) {
-    const monthCounts = {};
-    
-    reservations.forEach(reservation => {
-        const month = reservation.mes;
-        monthCounts[month] = (monthCounts[month] || 0) + 1;
-    });
+            }
 
-    const data = google.visualization.arrayToDataTable([
-        ['Month', 'Count'],
-        ...Object.entries(monthCounts)
-    ]);
+            function drawMonthChart(reservations) {
+                const monthCounts = {};
 
-    const options = {
-        title: 'Reservas por Meses',
-        height: 400,
-        legend: { position: 'bottom' },
-        bar: { groupWidth: '75%' },
-        vAxis: { minValue: 0 }
-    };
-
-    const chart = new google.visualization.BarChart(document.getElementById('reservationsByMonth'));
-    chart.draw(data, options);
-}
-
-//TodoÇBien
-
-        function drawRoomTypeChart(reservations) {
-            const roomTypeCounts = {};
-            
-            reservations.forEach(reservation => {
-                const roomType = reservation.habitacion.tipo;
-                roomTypeCounts[roomType] = (roomTypeCounts[roomType] || 0) + 1;
-            });
-
-            const data = google.visualization.arrayToDataTable([
-                ['Room Type', 'Count'],
-                ...Object.entries(roomTypeCounts)
-            ]);
-
-            const options = {
-                title: 'Reservas por tipo de habitación',
-                height: 400,
-                legend: { position: 'bottom' },
-                bar: { groupWidth: '75%' },
-                vAxis: { minValue: 0 }
-            };
-
-            const chart = new google.visualization.BarChart(document.getElementById('reservationsByRoomType'));
-            chart.draw(data, options);
-        }
-
-        function drawAgeChart(reservations) {
-            const ageCounts = {};
-            
-            reservations.forEach(reservation => {
-                const age = parseInt(reservation.cliente.edad);
-                ageCounts[age] = (ageCounts[age] || 0) + 1;
-            });
-
-            const data = google.visualization.arrayToDataTable([
-                ['Age', 'Count'],
-                ...Object.entries(ageCounts).map(([age, count]) => [parseInt(age), count])
-            ]);
-
-            const options = {
-                title: 'Reservas por edad',
-                height: 400,    
-                legend: { position: 'bottom' },
-                hAxis: { title: 'Age' },
-                vAxis: { title: 'Count' }
-            };
-
-            const chart = new google.visualization.LineChart(document.getElementById('reservationsByAge'));
-            chart.draw(data, options);
-        }
-
-        //TODO BIEN
-        function drawServiceCountChart(reservations) {
-            const serviceCountCounts = {};
-            
-            reservations.forEach(reservation => {
-                const serviceCount = reservation.servicios.length;
-                serviceCountCounts[serviceCount] = (serviceCountCounts[serviceCount] || 0) + 1;
-            });
-
-            const data = google.visualization.arrayToDataTable([
-                ['Number of Services', 'Count'],
-                ...Object.entries(serviceCountCounts)
-            ]);
-
-            const options = {
-                title: 'Reservas por número de servicios',
-                height: 400,
-                legend: { position: 'bottom' },
-                bar: { groupWidth: '75%' },
-                vAxis: { minValue: 0 }
-            };
-
-            const chart = new google.visualization.BarChart(document.getElementById('reservationsByServiceCount'));
-            chart.draw(data, options);
-        }
-
-        //ODO BIEN
-        function drawServiceTypeChart(reservations) {
-            const serviceTypeCounts = {};
-            
-            reservations.forEach(reservation => {
-                reservation.servicios.forEach(service => {
-                    serviceTypeCounts[service.nombre] = (serviceTypeCounts[service.nombre] || 0) + 1;
+                reservations.forEach(reservation => {
+                    const month = reservation.mes;
+                    monthCounts[month] = (monthCounts[month] || 0) + 1;
                 });
-            });
-        
+
+                const data = google.visualization.arrayToDataTable([
+                    ['Month', 'Count'],
+                    ...Object.entries(monthCounts)
+                ]);
+
+                const options = {
+                    title: 'Reservas por Meses',
+                    height: 400,
+                    legend: { position: 'bottom' },
+                    bar: { groupWidth: '75%' },
+                    vAxis: { minValue: 0 }
+                };
+
+                const chart = new google.visualization.BarChart(document.getElementById('reservationsByMonth'));
+                chart.draw(data, options);
+            }
+
+            //TodoÇBien
+
+            function drawRoomTypeChart(reservations) {
+                const roomTypeCounts = {};
+
+                reservations.forEach(reservation => {
+                    const roomType = reservation.habitacion.tipo;
+                    roomTypeCounts[roomType] = (roomTypeCounts[roomType] || 0) + 1;
+                });
+
+                const data = google.visualization.arrayToDataTable([
+                    ['Room Type', 'Count'],
+                    ...Object.entries(roomTypeCounts)
+                ]);
+
+                const options = {
+                    title: 'Reservas por tipo de habitación',
+                    height: 400,
+                    legend: { position: 'bottom' },
+                    bar: { groupWidth: '75%' },
+                    vAxis: { minValue: 0 }
+                };
+
+                const chart = new google.visualization.BarChart(document.getElementById('reservationsByRoomType'));
+                chart.draw(data, options);
+            }
+
+            function drawAgeChart(reservations) {
+                const ageCounts = {};
+
+                reservations.forEach(reservation => {
+                    const age = parseInt(reservation.cliente.edad);
+                    ageCounts[age] = (ageCounts[age] || 0) + 1;
+                });
+
+                const data = google.visualization.arrayToDataTable([
+                    ['Age', 'Count'],
+                    ...Object.entries(ageCounts).map(([age, count]) => [parseInt(age), count])
+                ]);
+
+                const options = {
+                    title: 'Reservas por edad',
+                    height: 400,
+                    legend: { position: 'bottom' },
+                    hAxis: { title: 'Age' },
+                    vAxis: { title: 'Count' }
+                };
+
+                const chart = new google.visualization.LineChart(document.getElementById('reservationsByAge'));
+                chart.draw(data, options);
+            }
+
+            //TODO BIEN
+            function drawServiceCountChart(reservations) {
+                const serviceCountCounts = {};
+
+                reservations.forEach(reservation => {
+                    const serviceCount = reservation.servicios.length;
+                    serviceCountCounts[serviceCount] = (serviceCountCounts[serviceCount] || 0) + 1;
+                });
+
+                const data = google.visualization.arrayToDataTable([
+                    ['Number of Services', 'Count'],
+                    ...Object.entries(serviceCountCounts)
+                ]);
+
+                const options = {
+                    title: 'Reservas por número de servicios',
+                    height: 400,
+                    legend: { position: 'bottom' },
+                    bar: { groupWidth: '75%' },
+                    vAxis: { minValue: 0 }
+                };
+
+                const chart = new google.visualization.BarChart(document.getElementById('reservationsByServiceCount'));
+                chart.draw(data, options);
+            }
+
+            //ODO BIEN
+            function drawServiceTypeChart(reservations) {
+                const serviceTypeCounts = {};
+
+                reservations.forEach(reservation => {
+                    reservation.servicios.forEach(service => {
+                        serviceTypeCounts[service.nombre] = (serviceTypeCounts[service.nombre] || 0) + 1;
+                    });
+                });
+
 
 
                 const data = google.visualization.arrayToDataTable([
@@ -207,7 +212,7 @@
 
             function drawPriceChart(reservations) {
                 const priceCounts = {};
-                
+
                 reservations.forEach(reservation => {
                     const price = reservation.precioTotal;
                     priceCounts[price] = (priceCounts[price] || 0) + 1;
@@ -220,7 +225,7 @@
 
                 const options = {
                     title: 'Reservas por precio total',
-                    height: 400,    
+                    height: 400,
                     legend: { position: 'bottom' },
                     hAxis: { title: 'Price' },
                     vAxis: { title: 'Count' }
@@ -232,7 +237,6 @@
 
             function drawNationalityChart(reservations) {
                 const nationalityCounts = {};
-                
                 reservations.forEach(reservation => {
                     const nationality = reservation.cliente.nacionalidad;
                     nationalityCounts[nationality] = (nationalityCounts[nationality] || 0) + 1;
@@ -255,42 +259,44 @@
             }
 
             function drawAgeRangeChart(reservations) {
-        const ageRangeCounts = {
-            'Under 25': 0,
-            '25 to 60': 0,
-            'Over 60': 0
-        };
-        
-        reservations.forEach(reservation => {
-            const age = parseInt(reservation.cliente.edad);
-            if (age < 25) {
-                ageRangeCounts['Under 25']++;
-            } else if (age > 60) {
-                ageRangeCounts['Over 60']++;
-            } else {
-                ageRangeCounts['25 to 60']++;
+                const ageRangeCounts = {
+                    'Under 25': 0,
+                    '25 to 60': 0,
+                    'Over 60': 0
+                };
+
+                reservations.forEach(reservation => {
+                    const age = parseInt(reservation.cliente.edad);
+                    if (age < 25) {
+                        ageRangeCounts['Under 25']++;
+                    } else if (age > 60) {
+                        ageRangeCounts['Over 60']++;
+                    } else {
+                        ageRangeCounts['25 to 60']++;
+                    }
+                });
+
+                const data = google.visualization.arrayToDataTable([
+                    ['Age Range', 'Count'],
+                    ...Object.entries(ageRangeCounts)
+                ]);
+
+                const options = {
+                    title: 'Reservas por rango de edad',
+                    height: 400,
+                    legend: { position: 'bottom' }
+                };
+
+                const chart = new google.visualization.PieChart(document.getElementById('reservationsByAgeRange'));
+                chart.draw(data, options);
             }
-        });
-
-        const data = google.visualization.arrayToDataTable([
-            ['Age Range', 'Count'],
-            ...Object.entries(ageRangeCounts)
-        ]);
-
-        const options = {                 
-            title: 'Reservas por rango de edad',
-            height: 400,
-            legend: { position: 'bottom' }
-        };
-
-        const chart = new google.visualization.PieChart(document.getElementById('reservationsByAgeRange'));
-        chart.draw(data, options);
-        }
-        function redirigirAdmin() {
-            var correo = "admin@admin.com";
-            window.location.href = `admin.html?correo=${encodeURIComponent(correo)}`;
-        }
+            function redirigirAdmin() {
+                var correo = "admin@admin.com";
+                window.location.href = `admin.html?correo=${encodeURIComponent(correo)}`;
+            }
         </script>
     </div>
 </body>
+
 </html>
+
