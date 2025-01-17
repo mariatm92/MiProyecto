@@ -44,6 +44,8 @@ Para que el programa funcione correctamente, se debe ejecutar un servidor node.j
 2. Entraremos en la carpeta Miproyecto\server_js.
 3. Abrimos la terminal de visual Studio Code y ejecutamos el comando `node server.js`.
 4. Una vez arrancado el servidor local ya podemos abrir la pagina index.html.
+5. Para poder entrar en el apartado admin se puede usar el usuario de prueba: "admin@admin.com" y contraseña: "admin".
+6. Para entrar en el apartado de usuarios se puede usar el usuario de prueba: "user@user.com" y contraseña: "user".
 
 Clonación del repositorio:
 
