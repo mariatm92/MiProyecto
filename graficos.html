@@ -29,6 +29,7 @@
     <h1>Reservations Analytics Dashboard</h1>
     
     <div class="chart-container">
+        <div id="reservationsByMonth" class="chart"></div>
         <div id="reservationsByRoomType" class="chart"></div>
         <div id="reservationsByAge" class="chart"></div>
         <div id="reservationsByChildren" class="chart"></div>
@@ -61,15 +62,42 @@
         }
 
         function drawCharts(reservations) {
+            drawMonthChart(reservations);
             drawRoomTypeChart(reservations);
             drawAgeChart(reservations);
-            drawChildrenChart(reservations);
             drawServiceCountChart(reservations);
             drawServiceTypeChart(reservations);
             drawPriceChart(reservations);
             drawNationalityChart(reservations);
             drawAgeRangeChart(reservations);
+            
         }
+
+        function drawMonthChart(reservations) {
+    const monthCounts = {};
+    
+    reservations.forEach(reservation => {
+        const month = reservation.mes;
+        monthCounts[month] = (monthCounts[month] || 0) + 1;
+    });
+
+    const data = google.visualization.arrayToDataTable([
+        ['Month', 'Count'],
+        ...Object.entries(monthCounts)
+    ]);
+
+    const options = {
+        title: 'Reservas por Meses',
+        height: 400,
+        legend: { position: 'bottom' },
+        bar: { groupWidth: '75%' },
+        vAxis: { minValue: 0 }
+    };
+
+    const chart = new google.visualization.BarChart(document.getElementById('reservationsByMonth'));
+    chart.draw(data, options);
+}
+
 
         function drawRoomTypeChart(reservations) {
             const roomTypeCounts = {};
@@ -118,31 +146,6 @@
             };
 
             const chart = new google.visualization.LineChart(document.getElementById('reservationsByAge'));
-            chart.draw(data, options);
-        }
-
-        function drawChildrenChart(reservations) {
-            const childrenCounts = {};
-            
-            reservations.forEach(reservation => {
-                const children = reservation.cliente.hijos;
-                childrenCounts[children] = (childrenCounts[children] || 0) + 1;
-            });
-
-            const data = google.visualization.arrayToDataTable([
-                ['Children', 'Count'],
-                ...Object.entries(childrenCounts)
-            ]);
-
-            const options = {
-                title: 'Reservations by Number of Children',
-                height: 400,
-                legend: { position: 'bottom' },
-                bar: { groupWidth: '75%' },
-                vAxis: { minValue: 0 }
-            };
-
-            const chart = new google.visualization.BarChart(document.getElementById('reservationsByChildren'));
             chart.draw(data, options);
         }
 
