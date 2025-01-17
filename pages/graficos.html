@@ -13,13 +13,16 @@
 <body>
     <div class="wrapp">
         <div class="cabecera">
+
             <img src="../images/erp2.jpg">
+
             <div class="bienvenida">
                 <h1 id="bienvenida">Bienvenido al apartado de gráficos</span></h1>
                 <div class="menu">
                     <li onclick="redirigirAdmin()" id="IniAdmin">Inicio</li>
                     <li><a href="graficos.html">Gráficos</a></li>
                     <li><a href="reservas.html">Reservas</a></li>
+
                 </div>
             </div>
         </div>
@@ -234,7 +237,6 @@
 
             function drawNationalityChart(reservations) {
                 const nationalityCounts = {};
-
                 reservations.forEach(reservation => {
                     const nationality = reservation.cliente.nacionalidad;
                     nationalityCounts[nationality] = (nationalityCounts[nationality] || 0) + 1;
@@ -297,3 +299,4 @@
 </body>
 
 </html>
+
