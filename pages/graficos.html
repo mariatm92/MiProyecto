@@ -186,7 +186,6 @@
                     serviceTypeCounts[service.nombre] = (serviceTypeCounts[service.nombre] || 0) + 1;
                 });
             });
-
             const data = google.visualization.arrayToDataTable([
                 ['Service Type', 'Count'],
                 ...Object.entries(serviceTypeCounts)
@@ -287,4 +286,3 @@
     </script>
 </body>
 </html>
-a
