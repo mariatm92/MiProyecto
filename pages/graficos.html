@@ -49,18 +49,22 @@
         }
 
         function fetchReservationData() {
-            $.ajax({
-                url: 'http://localhost:3000/reservas',
-                method: 'GET',
-                success: function(data) {
-                    drawCharts(data.reservas);  // Note: Adjusted to handle nested 'reservas' array
-                },
-                error: function(error) {
-                    console.error('Error fetching reservation data:', error);
-                }
-            });
+    fetch('http://localhost:3000/reservas', {
+        method: 'GET'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
         }
-
+        return response.json();
+    })
+    .then(data => {
+        drawCharts(data.reservas);  // Note: Adjusted to handle nested 'reservas' array
+    })
+    .catch(error => {
+        console.error('Error fetching reservation data:', error);
+    });
+    }
         function drawCharts(reservations) {
             drawMonthChart(reservations);
             drawRoomTypeChart(reservations);
