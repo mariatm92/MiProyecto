@@ -14,27 +14,33 @@
                 <div class="menu">
                     <li onclick="redirigirAdmin()" id="IniAdmin">Clientes</li>
                     <li><a href="graficos.html">Gráficos</a></li>
-                    <li><a href="reservas.html">Reservas</a></li>
+                    <li><a href="reservas.html">Reservas</a></li><li>
+                        >
                 </div> 
             </div>         
         </div>
         <div class="apartadoStock">
             <div class="contenidoStock">
-                <h2>Habitaciones</h2>
-                <div id="habitacionesStock" class="stockGson"></div>
+
                 <h2>Servicios</h2>
-                <div id="serviciosStock" class="stockGson"></div>
+                <div id="servicioshotel" class="serviciosht"></div>
+                <h2>Stock Habitaciones</h2>
+                <div id="habitacionesStock" class="serviciosht"></div>
+                <h2>Stock Servicios</h2>
+                <div id="serviciosStock" class="serviciosht"></div>
             </div>
         </div>
     </div>
 
     <script>
         function mostrarStock() {
+            const servicioshotel = document.getElementById('servicioshotel');
             const habitacionesStock = document.getElementById('habitacionesStock');
             const serviciosStock = document.getElementById('serviciosStock');
             
             habitacionesStock.innerHTML = '';
             serviciosStock.innerHTML = '';
+            
 
             fetch('http://localhost:3000/stock.json')
                 .then(response => {
@@ -80,10 +86,41 @@
                     habitacionesStock.innerHTML = '<p>Error al cargar las habitaciones</p>';
                     serviciosStock.innerHTML = '<p>Error al cargar los servicios</p>';
                 });
+                fetch('http://localhost:3000/servicios.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al obtener los servicios');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Mostrar productos (servicios)
+                    data.forEach(servicio => {
+                        const servicioDetails = document.createElement('div');
+                        servicioDetails.classList.add('stockDetails');
+
+                        servicioDetails.innerHTML = `
+                            <div class="stockField"><strong>ID Producto:</strong> ${servicio.id}</div>
+                            <div class="stockField"><strong>Producto:</strong> ${servicio.Producto}</div>
+                            <div class="stockField"><strong>Precio:</strong> ${servicio.Precio}€</div>
+                        `;
+
+                        servicioshotel.appendChild(servicioDetails);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al cargar los servicios:', error);
+                    serviciosStock.innerHTML = '<p>Error al cargar los servicios</p>';
+                });
+                
         }
 
         // Cargar el stock al iniciar la página
         mostrarStock();
+        function redirigirAdmin() {
+                var correo = "admin@admin.com";
+                window.location.href = `admin.html?correo=${encodeURIComponent(correo)}`;
+         }
 
     
     </script>
