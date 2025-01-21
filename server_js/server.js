@@ -30,6 +30,22 @@ app.get('/habitaciones', (req, res) => {
       }
   });
 });
+<<<<<<< HEAD
+app.get('/regimen', (req, res) => {
+  const filePath = path.join(__dirname, 'regimen.json');
+  console.log('Intentando leer el archivo:', filePath); // Mensaje de depuración
+  fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+          console.error('Error leyendo el archivo:', err);
+          res.status(500).send('Error reading the file');
+      } else {
+          res.json(JSON.parse(data));
+      }
+  });
+});
+
+=======
+>>>>>>> 50d4fbc3f12e729fcf15952fdf66a4fe5850241c
 
 
 app.get('/servicios', (req, res) => {
