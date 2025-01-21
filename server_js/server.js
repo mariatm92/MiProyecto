@@ -30,6 +30,7 @@ app.get('/habitaciones', (req, res) => {
       }
   });
 });
+<<<<<<< HEAD
 app.get('/regimen', (req, res) => {
   const filePath = path.join(__dirname, 'regimen.json');
   console.log('Intentando leer el archivo:', filePath); // Mensaje de depuración
@@ -43,6 +44,8 @@ app.get('/regimen', (req, res) => {
   });
 });
 
+=======
+>>>>>>> 50d4fbc3f12e729fcf15952fdf66a4fe5850241c
 
 
 app.get('/servicios', (req, res) => {
