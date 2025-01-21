@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Login</title>
-        <link href="css/ventas.css" rel="stylesheet" type="text/css">
-    </head>
-    <body>
-        <div class="wrapp">
-            <div class="cabecera">
-                <img src="images/erp2.jpg"> 
-                <div class="bienvenida">
-                    <h1 id="bienvenida">Bienvenido al apartado de ventas</span></h1>
-                    <div class="menu">
-                        <li onclick="redirigirAdmin()" id="IniAdmin">Inicio Admin</li>
-                        <li><a href="Grafico.html">Graficos</a></li>
-                        <li><a href="ventas.html">Ventas</a></li>
-                    </div> 
-                </div>         
+
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link href="css/ventas.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class="wrapp">
+        <div class="cabecera">
+            <img src="images/erp2.jpg">
+            <div class="bienvenida">
+                <h1 id="bienvenida">Bienvenido al apartado de ventas</span></h1>
+                <div class="menu">
+                    <li onclick="redirigirAdmin()" id="IniAdmin">Inicio Admin</li>
+                    <li><a href="Grafico.html">Graficos</a></li>
+                    <li><a href="ventas.html">Ventas</a></li>
+                </div>
             </div>
         </div>
+    </div>
 
-        <script>
-            // JavaScript para redirigir a admin.html con parámetros de correo
-            function redirigirAdmin() {
-                // Aquí tomas el valor del correo desde algún lugar, por ejemplo, un campo de entrada
-                var correo = "admin@admin.com";  // Este valor puede ser dinámico
+    <script>
+        // JavaScript para redirigir a admin.html con parámetros de correo
+        function redirigirAdmin() {
+            // Aquí tomas el valor del correo desde algún lugar, por ejemplo, un campo de entrada
+            var correo = "admin@admin.com";  // Este valor puede ser dinámico
 
-                // Rediriges a admin.html con el correo como parámetro
-                window.location.href = `admin.html?correo=${encodeURIComponent(correo)}`;
-            }
-        </script>
-    </body>
+            // Rediriges a admin.html con el correo como parámetro
+            window.location.href = `admin.html?correo=${encodeURIComponent(correo)}`;
+        }
+    </script>
+</body>
+
 </html>
