@@ -17,6 +17,21 @@ const projectRoot = path.join(__dirname, '..');
 app.use(express.static(projectRoot));
 
 
+
+app.get('/habitaciones', (req, res) => {
+  const filePath = path.join(__dirname, 'habitaciones.json');
+  console.log('Intentando leer el archivo:', filePath); // Mensaje de depuración
+  fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+          console.error('Error leyendo el archivo:', err);
+          res.status(500).send('Error reading the file');
+      } else {
+          res.json(JSON.parse(data));
+      }
+  });
+});
+
+
 app.get('/servicios', (req, res) => {
   const filePath = path.join(__dirname, 'servicios.json');
   console.log('Intentando leer el archivo:', filePath); // Mensaje de depuración
