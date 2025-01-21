@@ -76,47 +76,11 @@
         "cantidad": 7
       },
       {
-        "id": 4,
-        "producto": "Bodas",
-        "precio": 3000,
-        "cantidad": 4
-      },
-   /*   {
-        "id": 5,
-        "producto": "Transporte",
-        "precio": 25,
-        "cantidad": 30
-      },*/
-      {
         "id": 6,
         "producto": "Excursiones",
         "precio": 40,
         "cantidad": 20
       },
-     /*  {
-        "id": 7,
-        "producto": "Minibar",
-        "precio": 20,
-        "cantidad": 50
-      },
-      {
-        "id": 8,
-        "producto": "Servicio de lavandería",
-        "precio": 10,
-        "cantidad": 40
-      },
-      {
-        "id": 9,
-        "producto": "Servicio de habitaciones",
-        "precio": 5,
-        "cantidad": 100
-      },
-     {
-        "id": 10,
-        "producto": "Masaje",
-        "precio": 60,
-        "cantidad": 8
-      },*/
       {
         "id": 11,
         "producto": "Cunas o camas adicionales",
@@ -140,25 +104,7 @@
         "producto": "Parking",
         "precio": 15,
         "cantidad": 50
-      } /* ,
-      {
-        "id": 15,
-        "producto": "Gimnasio",
-        "precio": 10,
-        "cantidad": 100
-      },
-      {
-        "id": 16,
-        "producto": "Spa",
-        "precio": 50,
-        "cantidad": 20
-      },
-      {
-        "id": 17,
-        "producto": "Guardaequipaje",
-        "precio": 5,
-        "cantidad": 150
-      }*/
+      }
     ]
   }
 }

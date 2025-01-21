@@ -1,0 +1,211 @@
+/* Fuentes */
+@font-face {
+    font-family: roboto;
+    src: url(../fonts/Roboto-Medium.ttf);
+}
+
+/* Estructura General */
+.wrapp {
+    display: flex;
+    flex-direction: column;
+    min-height: 1200px;
+    width: 100%;
+}
+
+.wrapp .cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    height: 150px;
+    width: 100%;
+    background-color: #f1f7fe;
+    margin-top: -10px;
+    box-shadow: 0px 5px 10px rgb(99, 98, 98);
+}
+
+.bienvenida {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 150px;
+    width: 1000px;
+    margin-right: 250px;
+}
+
+img {
+    height: 150px;
+    width: 200px;
+    border-radius: 100%;
+}
+
+#bienvenida {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    height: 60px;
+    width: 1000px;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 20px;
+    width: 1000px;
+    list-style: none;
+    font-family: roboto;
+    font-size: 20px;
+}
+
+/* Apartado de Stock */
+.apartadoStock {
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.contenidoStock {
+    width: 100%;
+    padding: 20px;
+}
+
+.stockGson {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Detalle de Stock (Habitación o Servicio) */
+.stockDetails {
+    width: 300px;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(148, 194, 206);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.stockDetails:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.stockField {
+    margin: 10px 0;
+    padding: 5px;
+    font-family: roboto;
+}
+
+.stockField strong {
+    color: #333;
+    font-weight: bold;
+}
+
+.stockField ul {
+    margin: 5px 0;
+    padding-left: 20px;
+    list-style-type: none;
+}
+
+.stockField ul li {
+    margin: 5px 0;
+    color: #444;
+}
+
+/* Elementos de navegación */
+li {
+    list-style: none;
+    cursor: pointer;
+}
+
+li:hover {
+    color: rgb(148, 194, 206);
+}
+
+li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Encabezados de sección */
+h2 {
+    font-family: roboto;
+    color: #333;
+    text-align: center;
+    margin: 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgb(148, 194, 206);
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .wrapp {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bienvenida {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .menu {
+        width: 100%;
+        flex-direction: column;
+        height: auto;
+        gap: 10px;
+    }
+
+    #bienvenida {
+        width: 100%;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .stockDetails {
+        width: 90%;
+        margin: 10px 0;
+    }
+
+    .stockGson {
+        padding: 10px;
+    }
+
+    .contenidoStock {
+        padding: 10px;
+    }
+}
+
+/* Efectos de hover adicionales */
+.stockField strong {
+    transition: color 0.2s ease;
+}
+
+.stockDetails:hover .stockField strong {
+    color: #1a1a1a;
+}
+
+/* Animación de carga */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stockDetails {
+    animation: fadeIn 0.5s ease-out forwards;
+}
