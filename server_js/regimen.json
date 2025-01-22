@@ -18,5 +18,10 @@
     "id": 30,
     "producto": "Pensión completa",
     "precio": 80
+  },
+  {
+    "producto": "Pension nula",
+    "precio": 0,
+    "id": 31
   }
 ]

@@ -39,6 +39,11 @@
       "id": 25,
       "producto": "Habitación para Mascotas",
       "precio": 150
+    },
+    {
+      "producto": "Habitacion superior suprema",
+      "precio": 200,
+      "id": 26
     }
   ]
 }
