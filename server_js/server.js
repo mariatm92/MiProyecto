@@ -351,6 +351,38 @@ app.post('/regimen', (req, res) => {
         });
     });
 });
+app.post('/stock/:tipo', (req, res) => {
+    const filePath = path.join(__dirname, 'stock.json');
+    const tipo = req.params.tipo;
+    const nuevoProducto = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let stockData = JSON.parse(data);
+        
+        if (tipo === 'habitaciones' || tipo === 'servicios') {
+            // Agregar el nuevo producto al stock
+            stockData.stock[tipo].push({
+                id: nuevoProducto.id,
+                producto: nuevoProducto.producto,
+                precio: nuevoProducto.precio,
+                cantidad: nuevoProducto.cantidad
+            });
+
+            fs.writeFile(filePath, JSON.stringify(stockData, null, 2), (err) => {
+                if (err) {
+                    return res.status(500).send('Error al escribir el archivo');
+                }
+                res.status(201).json(nuevoProducto);
+            });
+        } else {
+            res.status(400).send('Tipo de producto no válido');
+        }
+    });
+});
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

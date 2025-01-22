@@ -41,8 +41,9 @@
       "precio": 150
     },
     {
-      "producto": "Habitacion superior suprema",
+      "producto": "Habitacion vista piscina",
       "precio": 200,
+      "cantidad": 20,
       "id": 26
     }
   ]

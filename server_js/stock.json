@@ -54,6 +54,12 @@
         "producto": "Habitación con Vista al Mar/Montaña",
         "precio": 190,
         "cantidad": 15
+      },
+      {
+        "id": 26,
+        "producto": "Habitacion vista piscina",
+        "precio": 200,
+        "cantidad": 20
       }
     ],
     "servicios": [

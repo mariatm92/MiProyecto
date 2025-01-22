@@ -59,6 +59,10 @@
                         <label for="precio">Precio:</label>
                         <input type="number" id="precio" required>
                     </div>
+                    <div class="form-group">
+                        <label for="cantidad">Stock:</label>
+                        <input type="number" id="cantidad" required>
+                    </div>
                     <div class="button-container">
                         <button type="submit">Guardar</button>
                         <button type="button" onclick="cerrarFormulario()">Cancelar</button>
@@ -253,7 +257,8 @@
         
         const nuevoProducto = {
             producto: document.getElementById('producto').value,
-            precio: Number(document.getElementById('precio').value)
+            precio: Number(document.getElementById('precio').value),
+            cantidad: Number(document.getElementById('cantidad').value)
         };
 
         fetch(`http://localhost:3000/${tipoProductoActual}`, {
@@ -267,6 +272,19 @@
             if (!response.ok) throw new Error('Error al agregar el producto');
             return response.json();
         })
+        .then(productoGuardado => {
+        // Segunda llamada para actualizar el stock
+        return fetch(`http://localhost:3000/stock/${tipoProductoActual}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ...nuevoProducto,
+                id: productoGuardado.id
+            })
+        });
+    })
         .then(() => {
             cerrarFormulario();
             mostrarStock();
