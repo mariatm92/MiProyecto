@@ -209,3 +209,65 @@ h2 {
 .stockDetails {
     animation: fadeIn 0.5s ease-out forwards;
 }
+
+.contenidoStock {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.habitacionesht,
+.regimenht,
+.serviciosht {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+}
+
+h2 {
+    font-family: roboto;
+    color: #333;
+    text-align: center;
+    margin: 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgb(148, 194, 206);
+    width: 100%;
+    flex-basis: 100%; /* Asegura que los títulos ocupen toda la línea */
+}
+
+.stockDetails {
+    width: 250px; /* Reducido el ancho para que quepan más elementos en línea */
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(148, 194, 206);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    flex-grow: 0; /* Evita que los elementos se estiren */
+    flex-shrink: 0; /* Mantiene el tamaño constante */
+}
+
+/* Actualiza la media query para dispositivos móviles */
+@media (max-width: 768px) {
+    .contenidoStock {
+        flex-direction: column;
+    }
+
+    .habitacionesht,
+    .regimenht,
+    .serviciosht {
+        flex-direction: column;
+    }
+
+    .stockDetails {
+        width: 90%;
+        margin: 10px auto;
+    }
+}
