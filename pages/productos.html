@@ -44,67 +44,87 @@
             const serviciosStock = document.getElementById('serviciosStock');
 
           
+            habitacioneshotel.innerHTML = '';
+            regimenhotel.innerHTML = '';
+            servicioshotel.innerHTML = '';
             habitacionesStock.innerHTML = '';
             serviciosStock.innerHTML = '';
             
 
-            fetch('http://localhost:3000/habitaciones')  // Aquí apuntas al archivo JSON
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error al cargar el archivo habitaciones.json');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Mostrar habitaciones en la sección "habitacioneshotel"
+            fetch('http://localhost:3000/habitaciones')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al cargar el archivo habitaciones.json');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.habitaciones) {
                     data.habitaciones.forEach(habitacion => {
                         const habitacionDetails = document.createElement('div');
                         habitacionDetails.classList.add('stockDetails');
-
                         habitacionDetails.innerHTML = `
                             <div class="stockField"><strong>ID Producto:</strong> ${habitacion.id}</div>
                             <div class="stockField"><strong>Producto:</strong> ${habitacion.producto}</div>
                             <div class="stockField"><strong>Precio:</strong> ${habitacion.precio}€</div>
                         `;
-
                         habitacioneshotel.appendChild(habitacionDetails);
                     });
-                })
-                .catch(error => {
-                    console.error('Error al cargar las habitaciones:', error);
-                    habitacioneshotel.innerHTML = '<p>Error al cargar las habitaciones</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Error al cargar las habitaciones:', error);
+                habitacioneshotel.innerHTML = '<p>Error al cargar las habitaciones</p>';
+            });
+
+
+            fetch('http://localhost:3000/regimen')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al cargar el archivo regimen.json');
+                }
+                return response.json();
+            })
+            .then(data => {
+                data.forEach(regimen => {
+                    const regimenDetails = document.createElement('div');
+                    regimenDetails.classList.add('stockDetails');
+                    regimenDetails.innerHTML = `
+                        <div class="stockField"><strong>ID Producto:</strong> ${regimen.id}</div>
+                        <div class="stockField"><strong>Producto:</strong> ${regimen.producto}</div>
+                        <div class="stockField"><strong>Precio:</strong> ${regimen.precio}€</div>
+                    `;
+                    regimenhotel.appendChild(regimenDetails);
                 });
+            })
+            .catch(error => {
+                console.error('Error al cargar los regímenes:', error);
+                regimenhotel.innerHTML = '<p>Error al cargar los regímenes</p>';
+            });
 
-
-                fetch('http://localhost:3000/regimen')  // Aquí apuntas al archivo JSON de régimen
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error al cargar el archivo regimen.json');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Mostrar regimenes en la sección "regimenhotel"
-                    data.forEach(regimen => {
-                        const regimenDetails = document.createElement('div');
-                        regimenDetails.classList.add('stockDetails');
-
-                        regimenDetails.innerHTML = `
-                            <div class="stockField"><strong>ID Producto:</strong> ${regimen.id}</div>
-                            <div class="stockField"><strong>Producto:</strong> ${regimen.producto}</div>
-                            <div class="stockField"><strong>Precio:</strong> ${regimen.precio}€</div>
-                        `;
-
-                        regimenhotel.appendChild(regimenDetails);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error al cargar los regímenes:', error);
-                    regimenhotel.innerHTML = '<p>Error al cargar los regímenes</p>';
+            fetch('http://localhost:3000/servicios')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al obtener los servicios');
+                }
+                return response.json();
+            })
+            .then(data => {
+                data.forEach(servicio => {
+                    const servicioDetails = document.createElement('div');
+                    servicioDetails.classList.add('stockDetails');
+                    servicioDetails.innerHTML = `
+                        <div class="stockField"><strong>ID Producto:</strong> ${servicio.id}</div>
+                        <div class="stockField"><strong>Producto:</strong> ${servicio.Producto}</div>
+                        <div class="stockField"><strong>Precio:</strong> ${servicio.Precio}€</div>
+                    `;
+                    servicioshotel.appendChild(servicioDetails);
                 });
-
-
-            
+            })
+            .catch(error => {
+                console.error('Error al cargar los servicios:', error);
+                servicioshotel.innerHTML = '<p>Error al cargar los servicios</p>';
+            });
 
             fetch('http://localhost:3000/stock')
                 .then(response => {
@@ -147,35 +167,11 @@
                 })
                 .catch(error => {
                     console.error('Error al obtener el stock:', error);
-                    habitacionesStock.innerHTML = '<p>Error al cargar las habitaciones</p>';
-                    serviciosStock.innerHTML = '<p>Error al cargar los servicios</p>';
+                    habitacionesStock.innerHTML = '<p>Error al cargar el StockHabitaciones</p>';
+                    serviciosStock.innerHTML = '<p>Error al cargar el StockServicios</p>';
                 });
-                fetch('http://localhost:3000/servicios')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error al obtener los servicios');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Mostrar productos (servicios)
-                    data.forEach(servicio => {
-                        const servicioDetails = document.createElement('div');
-                        servicioDetails.classList.add('stockDetails');
 
-                        servicioDetails.innerHTML = `
-                            <div class="stockField"><strong>ID Producto:</strong> ${servicio.id}</div>
-                            <div class="stockField"><strong>Producto:</strong> ${servicio.Producto}</div>
-                            <div class="stockField"><strong>Precio:</strong> ${servicio.Precio}€</div>
-                        `;
-
-                        servicioshotel.appendChild(servicioDetails);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error al cargar los servicios:', error);
-                    serviciosStock.innerHTML = '<p>Error al cargar los servicios</p>';
-                });
+                
                 
         }
 
