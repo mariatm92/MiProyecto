@@ -12,30 +12,23 @@
                 <div class="bienvenida">
                     <h1 id="bienvenida">Bienvenido administrador, <span id="usuarioCorreo"></span></h1>
                     <div class="menu">
-                        <li><a href="">Clientes</a></li>
+                        <li onclick="redirigirAdmin()" id="IniAdmin">Clientes</li>
                         <li><a href="productos.html">Productos</a></li>
                         <li><a href="reservas.html">Reservas</a></li>
+                        <li><a href="graficos.html">Gráficos</a></li>
                     </div> 
                 </div>         
             </div>
             <div class="apartadoFormu">
                 <button onclick="abrirModal()">Agregar</button>
-                <div class="conrnidousuario">
+                <div class="conrnidousuario"> 
                     <div class="usuarioGson">
                         <!-- Los datos de cada empleado se cargarán aquí dinámicamente -->
                     </div>
                 </div>
             </div>
         </div>
-        <div class="apartadoFormu">
-            <button onclick="abrirModal()">Agregar</button>
-            <div class="conrnidousuario">
-                <div class="usuarioGson">
-                    <!-- Los datos de cada empleado se cargarán aquí dinámicamente -->
-                </div>
-            </div>
-        </div>
-    </div>
+        
 
     <!-- Modal de Agregar Empleado -->
     <div id="addEmployeeModal" class="modal">
