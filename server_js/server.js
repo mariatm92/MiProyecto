@@ -52,7 +52,7 @@ app.get('/habitaciones', (req, res) => {
   });
 });
 
-// eliminar
+// eliminar habitaciones 
 
 app.delete('/habitaciones/:id', (req, res) => {
     const filePath = path.join(__dirname, 'habitaciones.json');
@@ -89,7 +89,29 @@ app.get('/regimen', (req, res) => {
       }
   });
 });
+// eliminar regimen 
+app.delete('/regimen/:id', (req, res) => {
+    const filePath = path.join(__dirname, 'regimen.json');
+    const regimenId = parseInt(req.params.id);
 
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error al leer el archivo:', err);
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let regimenData = JSON.parse(data);
+        regimenData = regimenData.filter(regimen => regimen.id !== regimenId);
+
+        fs.writeFile(filePath, JSON.stringify(regimenData, null, 2), (err) => {
+            if (err) {
+                console.error('Error al escribir el archivo:', err);
+                return res.status(500).send('Error al escribir el archivo');
+            }
+            res.status(200).send('Régimen eliminado correctamente');
+        });
+    });
+}); 
 
 app.get('/servicios', (req, res) => {
   const filePath = path.join(__dirname, 'servicios.json');
@@ -104,7 +126,27 @@ app.get('/servicios', (req, res) => {
   });
 });
 
+//eliminar servicios 
+app.delete('/servicios/:id', (req, res) => {
+    const filePath = path.join(__dirname, 'servicios.json');
+    const servicioId = parseInt(req.params.id);
 
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let serviciosData = JSON.parse(data);
+        serviciosData = serviciosData.filter(servicio => servicio.id !== servicioId);
+
+        fs.writeFile(filePath, JSON.stringify(serviciosData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo');
+            }
+            res.status(200).send('Servicio eliminado correctamente');
+        });
+    });
+});
 
 // Endpoints principales
 

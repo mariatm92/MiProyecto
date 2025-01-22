@@ -18,16 +18,5 @@
     "id": 30,
     "producto": "Pensión completa",
     "precio": 80
-  },
-  {
-    "id": 31,
-    "producto": "Todo incluido",
-    "precio": 120
-  },
-  {
-    "id": 32,
-    "producto": "Todo incluido sin alcohol",
-    "precio": 100
   }
-
 ]
