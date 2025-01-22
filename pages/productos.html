@@ -37,6 +37,29 @@
     </div>
 
     <script>
+
+function eliminarHabitacion(idHabitacion) {
+            if (confirm('¿Está seguro de que desea eliminar esta habitación?')) {
+                fetch(`http://localhost:3000/habitaciones/${idHabitacion}`, {
+                    method: 'DELETE',
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al eliminar la habitación');
+                    }
+                    // Limpiar y recargar la visualización de habitaciones
+                    const habitacioneshotel = document.getElementById('habitacioneshotel');
+                    habitacioneshotel.innerHTML = '';
+                    mostrarStock();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al eliminar la habitación');
+                });
+            }
+        }
+
+
         function mostrarStock() {
             const habitacioneshotel = document.getElementById('habitacioneshotel');
             const regimenhotel = document.getElementById('regimenhotel');
@@ -53,30 +76,33 @@
             
 
             fetch('http://localhost:3000/habitaciones')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al cargar el archivo habitaciones.json');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data && data.habitaciones) {
-                    data.habitaciones.forEach(habitacion => {
-                        const habitacionDetails = document.createElement('div');
-                        habitacionDetails.classList.add('stockDetails');
-                        habitacionDetails.innerHTML = `
-                            <div class="stockField"><strong>ID Producto:</strong> ${habitacion.id}</div>
-                            <div class="stockField"><strong>Producto:</strong> ${habitacion.producto}</div>
-                            <div class="stockField"><strong>Precio:</strong> ${habitacion.precio}€</div>
-                        `;
-                        habitacioneshotel.appendChild(habitacionDetails);
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error al cargar las habitaciones:', error);
-                habitacioneshotel.innerHTML = '<p>Error al cargar las habitaciones</p>';
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al cargar el archivo de habitaciones');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data && data.habitaciones) {
+            data.habitaciones.forEach(habitacion => {
+                const habitacionDetails = document.createElement('div');
+                habitacionDetails.classList.add('stockDetails');
+                habitacionDetails.innerHTML = `
+                    <div class="stockField"><strong>ID Producto:</strong> ${habitacion.id}</div>
+                    <div class="stockField"><strong>Producto:</strong> ${habitacion.producto}</div>
+                    <div class="stockField"><strong>Precio:</strong> ${habitacion.precio}€</div>
+                    <button class="botonEliminar" onclick="eliminarHabitacion(${habitacion.id})">Eliminar</button>
+                `;
+                habitacioneshotel.appendChild(habitacionDetails);
             });
+        }
+    })
+    .catch(error => {
+        console.error('Error al cargar las habitaciones:', error);
+        habitacioneshotel.innerHTML = '<p>Error al cargar las habitaciones</p>';
+    });
+
+
 
 
             fetch('http://localhost:3000/regimen')

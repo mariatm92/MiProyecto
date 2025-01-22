@@ -17,6 +17,27 @@ const projectRoot = path.join(__dirname, '..');
 app.use(express.static(projectRoot));
 
 
+function eliminarHabitacion(idHabitacion) {
+    if (confirm('¿Está seguro de que desea eliminar esta habitación?')) {
+        fetch(`http://localhost:3000/habitaciones/${idHabitacion}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al eliminar la habitación');
+            }
+            // Limpiar y recargar la visualización de habitaciones
+            const habitacioneshotel = document.getElementById('habitacioneshotel');
+            habitacioneshotel.innerHTML = '';
+            mostrarStock();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al eliminar la habitación');
+        });
+    }
+}
+
 
 app.get('/habitaciones', (req, res) => {
   const filePath = path.join(__dirname, 'habitaciones.json');
@@ -29,6 +50,31 @@ app.get('/habitaciones', (req, res) => {
           res.json(JSON.parse(data));
       }
   });
+});
+
+// eliminar
+
+app.delete('/habitaciones/:id', (req, res) => {
+    const filePath = path.join(__dirname, 'habitaciones.json');
+    const roomId = parseInt(req.params.id);
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error al leer el archivo:', err);
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let roomsData = JSON.parse(data);
+        roomsData.habitaciones = roomsData.habitaciones.filter(room => room.id !== roomId);
+
+        fs.writeFile(filePath, JSON.stringify(roomsData, null, 2), (err) => {
+            if (err) {
+                console.error('Error al escribir el archivo:', err);
+                return res.status(500).send('Error al escribir el archivo');
+            }
+            res.status(200).send('Habitación eliminada correctamente');
+        });
+    });
 });
 
 app.get('/regimen', (req, res) => {

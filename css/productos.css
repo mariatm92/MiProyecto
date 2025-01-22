@@ -271,3 +271,17 @@ h2 {
         margin: 10px auto;
     }
 }
+
+.botonEliminar {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.botonEliminar:hover {
+    background-color: #cc0000;
+}
