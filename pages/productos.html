@@ -20,9 +20,9 @@
         </div>
         <div class="apartadoStock">
             <div class="contenidoStock">
-                <h2>Habitaciones</h2>
+                <h2>Stock Habitaciones</h2>
                 <div id="habitacionesStock" class="stockGson"></div>
-                <h2>Servicios</h2>
+                <h2>Stock Servicios</h2>
                 <div id="serviciosStock" class="stockGson"></div>
             </div>
         </div>
@@ -36,7 +36,7 @@
             habitacionesStock.innerHTML = '';
             serviciosStock.innerHTML = '';
 
-            fetch('http://localhost:3000/stock.json')
+            fetch('http://localhost:3000/stock')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
