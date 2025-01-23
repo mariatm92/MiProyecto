@@ -52,30 +52,68 @@ app.get('/habitaciones', (req, res) => {
   });
 });
 
-// eliminar habitaciones 
-
 app.delete('/habitaciones/:id', (req, res) => {
-    const filePath = path.join(__dirname, 'habitaciones.json');
-    const roomId = parseInt(req.params.id);
+    const habitacionesPath = path.join(__dirname, 'habitaciones.json');
+    const stockPath = path.join(__dirname, 'stock.json');
+    const habitacionId = parseInt(req.params.id);
 
-    fs.readFile(filePath, 'utf8', (err, data) => {
+    fs.readFile(habitacionesPath, 'utf8', (err, data) => {
         if (err) {
-            console.error('Error al leer el archivo:', err);
-            return res.status(500).send('Error al leer el archivo');
+            console.error('Error al leer el archivo de habitaciones:', err);
+            return res.status(500).send('Error al leer el archivo de habitaciones');
         }
 
-        let roomsData = JSON.parse(data);
-        roomsData.habitaciones = roomsData.habitaciones.filter(room => room.id !== roomId);
-
-        fs.writeFile(filePath, JSON.stringify(roomsData, null, 2), (err) => {
-            if (err) {
-                console.error('Error al escribir el archivo:', err);
-                return res.status(500).send('Error al escribir el archivo');
+        let roomsData;
+        try {
+            roomsData = JSON.parse(data);
+            if (!Array.isArray(roomsData.habitaciones)) {
+                throw new Error('El contenido de habitaciones.json no es un array');
             }
-            res.status(200).send('Habitación eliminada correctamente');
+        } catch (error) {
+            console.error('Error al parsear el archivo de habitaciones:', error);
+            return res.status(500).send('Error al parsear el archivo de habitaciones');
+        }
+
+        roomsData.habitaciones = roomsData.habitaciones.filter(room => room.id !== habitacionId);
+
+        fs.writeFile(habitacionesPath, JSON.stringify(roomsData, null, 2), (err) => {
+            if (err) {
+                console.error('Error al escribir el archivo de habitaciones:', err);
+                return res.status(500).send('Error al escribir el archivo de habitaciones');
+            }
+
+            // Eliminar del stock
+            fs.readFile(stockPath, 'utf8', (err, stockData) => {
+                if (err) {
+                    console.error('Error al leer el archivo de stock:', err);
+                    return res.status(500).send('Error al leer el archivo de stock');
+                }
+
+                let stock;
+                try {
+                    stock = JSON.parse(stockData);
+                    if (!Array.isArray(stock.stock.habitaciones)) {
+                        throw new Error('El contenido de stock no es un array');
+                    }
+                } catch (error) {
+                    console.error('Error al parsear el archivo de stock:', error);
+                    return res.status(500).send('Error al parsear el archivo de stock');
+                }
+
+                stock.stock.habitaciones = stock.stock.habitaciones.filter(room => room.id !== habitacionId);
+
+                fs.writeFile(stockPath, JSON.stringify(stock, null, 2), (err) => {
+                    if (err) {
+                        console.error('Error al escribir el archivo de stock:', err);
+                        return res.status(500).send('Error al escribir el archivo de stock');
+                    }
+                    res.status(200).send('Habitación eliminada correctamente');
+                });
+            });
         });
     });
 });
+
 
 app.get('/regimen', (req, res) => {
   const filePath = path.join(__dirname, 'regimen.json');
