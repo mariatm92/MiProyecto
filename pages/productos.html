@@ -185,7 +185,6 @@
     });
 })
 
-<<<<<<< HEAD
 fetch('http://localhost:3000/servicios')
     .then(response => {
         if (!response.ok) {
@@ -210,31 +209,6 @@ fetch('http://localhost:3000/servicios')
         console.error('Error al cargar los servicios:', error);
         servicioshotel.innerHTML = '<p>Error al cargar los servicios</p>';
     });
-=======
-            fetch('http://localhost:3000/servicios')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al obtener los servicios');
-                }
-                return response.json();
-            })
-            .then(data => {
-                data.forEach(servicio => {
-                    const servicioDetails = document.createElement('div');
-                    servicioDetails.classList.add('stockDetails');
-                    servicioDetails.innerHTML = `
-                        <div class="stockField"><strong>ID Producto:</strong> ${servicio.id}</div>
-                        <div class="stockField"><strong>Producto:</strong> ${servicio.producto}</div>
-                        <div class="stockField"><strong>Precio:</strong> ${servicio.precio}€</div>
-                    `;
-                    servicioshotel.appendChild(servicioDetails);
-                });
-            })
-            .catch(error => {
-                console.error('Error al cargar los servicios:', error);
-                servicioshotel.innerHTML = '<p>Error al cargar los servicios</p>';
-            });
->>>>>>> beb34a6c78a9d7a1e21525847113c156e93c6a38
 
             fetch('http://localhost:3000/stock')
                 .then(response => {
