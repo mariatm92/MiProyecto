@@ -90,28 +90,56 @@ app.get('/regimen', (req, res) => {
   });
 });
 // eliminar regimen 
-app.delete('/regimen/:id', (req, res) => {
-    const filePath = path.join(__dirname, 'regimen.json');
-    const regimenId = parseInt(req.params.id);
+app.delete('/servicios/:id', (req, res) => {
+    const serviciosPath = path.join(__dirname, 'servicios.json');
+    const stockPath = path.join(__dirname, 'stock.json');
+    const servicioId = parseInt(req.params.id);
 
-    fs.readFile(filePath, 'utf8', (err, data) => {
+    console.log(`Intentando eliminar servicio con ID: ${servicioId}`);
+
+    // Eliminar del archivo de servicios
+    fs.readFile(serviciosPath, 'utf8', (err, serviciosData) => {
         if (err) {
-            console.error('Error al leer el archivo:', err);
-            return res.status(500).send('Error al leer el archivo');
+            console.error('Error al leer servicios:', err);
+            return res.status(500).send('Error al leer servicios');
         }
 
-        let regimenData = JSON.parse(data);
-        regimenData = regimenData.filter(regimen => regimen.id !== regimenId);
+        let servicios = JSON.parse(serviciosData);
+        const servicioOriginal = servicios.find(servicio => servicio.id === servicioId);
+        servicios = servicios.filter(servicio => servicio.id !== servicioId);
 
-        fs.writeFile(filePath, JSON.stringify(regimenData, null, 2), (err) => {
+        console.log('Servicio original:', servicioOriginal);
+
+        fs.writeFile(serviciosPath, JSON.stringify(servicios, null, 2), (err) => {
             if (err) {
-                console.error('Error al escribir el archivo:', err);
-                return res.status(500).send('Error al escribir el archivo');
+                console.error('Error al escribir servicios:', err);
+                return res.status(500).send('Error al escribir servicios');
             }
-            res.status(200).send('Régimen eliminado correctamente');
+
+            // Eliminar del stock
+            fs.readFile(stockPath, 'utf8', (err, stockData) => {
+                if (err) {
+                    console.error('Error al leer stock:', err);
+                    return res.status(500).send('Error al leer stock');
+                }
+
+                let stock = JSON.parse(stockData);
+                const stockAnterior = stock.stock.servicios.length;
+                stock.stock.servicios = stock.stock.servicios.filter(servicio => servicio.id !== servicioId);
+                
+                console.log(`Stock anterior: ${stockAnterior}, Stock después: ${stock.stock.servicios.length}`);
+
+                fs.writeFile(stockPath, JSON.stringify(stock, null, 2), (err) => {
+                    if (err) {
+                        console.error('Error al escribir stock:', err);
+                        return res.status(500).send('Error al escribir stock');
+                    }
+                    res.status(200).send('Servicio eliminado correctamente');
+                });
+            });
         });
     });
-}); 
+});
 
 app.get('/servicios', (req, res) => {
   const filePath = path.join(__dirname, 'servicios.json');

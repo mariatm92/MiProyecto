@@ -70,18 +70,6 @@
         "cantidad": 20
       },
       {
-        "id": 2,
-        "producto": "Alquiler de bicicletas",
-        "precio": 15,
-        "cantidad": 25
-      },
-      {
-        "id": 3,
-        "producto": "Alquiler de salas",
-        "precio": 100,
-        "cantidad": 7
-      },
-      {
         "id": 6,
         "producto": "Excursiones",
         "precio": 40,

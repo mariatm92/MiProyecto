@@ -1,15 +1,5 @@
 [
   {
-    "id": 2,
-    "producto": "Alquiler de bicicletas",
-    "precio": 15
-  },
-  {
-    "id": 3,
-    "producto": "Alquiler de salas",
-    "precio": 100
-  },
-  {
     "id": 4,
     "producto": "Bodas",
     "precio": 3000
