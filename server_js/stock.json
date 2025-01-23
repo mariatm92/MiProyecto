@@ -4,7 +4,7 @@
       {
         "id": 18,
         "producto": "Habitación Standard",
-        "precio": 120,
+        "precio": 140,
         "cantidad": 50
       },
       {
@@ -54,12 +54,6 @@
         "producto": "Habitacion vista piscina",
         "precio": 200,
         "cantidad": 20
-      },
-      {
-        "id": 27,
-        "producto": "Habitación del pánico",
-        "precio": 60,
-        "cantidad": 2
       }
     ],
     "servicios": [

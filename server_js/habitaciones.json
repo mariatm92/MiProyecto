@@ -3,7 +3,48 @@
     {
       "id": 18,
       "producto": "Habitación Standard",
-      "precio": 120
+      "precio": 140
+    },
+    {
+      "id": 19,
+      "producto": "Habitación Doble",
+      "precio": 160
+    },
+    {
+      "id": 20,
+      "producto": "Junior Suite",
+      "precio": 220
+    },
+    {
+      "id": 21,
+      "producto": "Suite Luxe",
+      "precio": 320
+    },
+    {
+      "id": 22,
+      "producto": "Habitación compartida",
+      "precio": 80
+    },
+    {
+      "id": 23,
+      "producto": "Habitación Accesible o Adaptada",
+      "precio": 130
+    },
+    {
+      "id": 24,
+      "producto": "Habitación de Larga Estancia",
+      "precio": 100
+    },
+    {
+      "id": 25,
+      "producto": "Habitación para Mascotas",
+      "precio": 150
+    },
+    {
+      "producto": "Habitacion vista piscina",
+      "precio": 200,
+      "cantidad": 20,
+      "id": 26
     }
   ]
 }

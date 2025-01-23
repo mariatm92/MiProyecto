@@ -59,10 +59,6 @@
                         <label for="precio">Precio:</label>
                         <input type="number" id="precio" required>
                     </div>
-                    <div class="form-group">
-                        <label for="cantidad">Stock:</label>
-                        <input type="number" id="cantidad" required>
-                    </div>
                     <div class="button-container">
                         <button type="submit">Guardar</button>
                         <button type="button" onclick="cerrarFormulario()">Cancelar</button>
@@ -170,6 +166,7 @@ function eliminarServicio(idServicio) {
                     <div class="stockField"><strong>ID Producto:</strong> ${habitacion.id}</div>
                     <div class="stockField"><strong>Producto:</strong> ${habitacion.producto}</div>
                     <div class="stockField"><strong>Precio:</strong> ${habitacion.precio}€</div>
+                    <button class="botonEditar" onclick="editarProducto(${habitacion.id}, '${habitacion.producto}', ${habitacion.precio}, 'habitaciones')">Editar</button>
                     <button class="botonEliminar" onclick="eliminarHabitacion(${habitacion.id})">Eliminar</button>
                 `;
                 habitacioneshotel.appendChild(habitacionDetails);
@@ -199,6 +196,7 @@ function eliminarServicio(idServicio) {
             <div class="stockField"><strong>ID Producto:</strong> ${regimen.id}</div>
             <div class="stockField"><strong>Producto:</strong> ${regimen.producto}</div>
             <div class="stockField"><strong>Precio:</strong> ${regimen.precio}€</div>
+            <button class="botonEditar" onclick="editarProducto(${regimen.id}, '${regimen.producto}', ${regimen.precio}, 'regimenes')">Editar</button>
             <button class="botonEliminar" onclick="eliminarRegimen(${regimen.id})">Eliminar</button>
         `;
         regimenhotel.appendChild(regimenDetails);
@@ -220,6 +218,7 @@ fetch('http://localhost:3000/servicios')
                 <div class="stockField"><strong>ID Producto:</strong> ${servicio.id}</div>
                 <div class="stockField"><strong>Producto:</strong> ${servicio.producto}</div>
                 <div class="stockField"><strong>Precio:</strong> ${servicio.precio}€</div>
+                <button class="botonEditar" onclick="editarProducto(${servicio.id}, '${servicio.producto}', ${servicio.precio}, 'servicios')">Editar</button>
                 <button class="botonEliminar" onclick="eliminarServicio(${servicio.id})">Eliminar</button>
             `;
             servicioshotel.appendChild(servicioDetails);
@@ -335,6 +334,63 @@ fetch('http://localhost:3000/servicios')
             alert('Error al agregar el producto');
         });
     });
+
+    function editarProducto(id, producto, precioActual, tipo) {
+    // Pre-fill the form with current product details
+    document.getElementById('producto').value = producto;
+    document.getElementById('precio').value = precioActual;
+
+    // Change form title and submit behavior
+    document.getElementById('formTitle').textContent = 'Editar Producto';
+    
+    // Remove any existing event listeners and add new one for editing
+    const form = document.getElementById('productoForm');
+    form.onsubmit = function(e) {
+        e.preventDefault();
+        
+        const productoEditado = {
+            id: id,
+            producto: document.getElementById('producto').value,
+            precio: Number(document.getElementById('precio').value)
+        };
+
+        // First, update the specific product list
+        fetch(`http://localhost:3000/${tipo}`, {
+            method: 'PUT', // You'll need to add a PUT endpoint in server.js
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productoEditado)
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Error al actualizar el producto');
+            return response.json();
+        })
+        .then(() => {
+            // Then update the stock
+            return fetch(`http://localhost:3000/stock/${tipo}/update`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(productoEditado)
+            });
+        })
+        .then(() => {
+            cerrarFormulario();
+            window.location.reload();
+            mostrarStock();
+            alert('Producto actualizado correctamente');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al actualizar el producto');
+        });
+    };
+
+    // Show the form
+    document.getElementById('formOverlay').style.display = 'block';
+}
 
         // Cargar el stock al iniciar la página
         mostrarStock();
