@@ -51,15 +51,15 @@
       },
       {
         "id": 26,
-        "producto": "Habitación con Vista al Mar/Montaña",
-        "precio": 190,
-        "cantidad": 15
-      },
-      {
-        "id": 26,
         "producto": "Habitacion vista piscina",
         "precio": 200,
         "cantidad": 20
+      },
+      {
+        "id": 27,
+        "producto": "Habitación del pánico",
+        "precio": 60,
+        "cantidad": 2
       }
     ],
     "servicios": [
