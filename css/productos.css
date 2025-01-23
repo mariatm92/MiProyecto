@@ -286,7 +286,6 @@ h2 {
     background-color: #cc0000;
 }
 
-<<<<<<< HEAD
 .eliminarServicio {
     background-color: #ff4444;
     color: white;
@@ -301,7 +300,6 @@ h2 {
     background-color: #cc0000;
 }
 
-=======
 /*ESTILOS PARA LOS BOTONES Y AGREGAR*/
 .form-overlay {
     display: none;
@@ -338,4 +336,70 @@ h2 {
     display: flex;
     justify-content: space-between;
 }
->>>>>>> beb34a6c78a9d7a1e21525847113c156e93c6a38
+
+/*NUEVOS ESTILOS DE PRUEBA*/
+button{
+    background-color:#4CAF50; /* Verde para los botones normales */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 16px;
+    font-family: roboto;
+}
+
+.botonEliminar{
+    background-color: red; /* Verde para los botones normales */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 16px;
+    font-family: roboto;
+}
+
+button:hover{
+    background-color: #45a049; /* Cambio de color al pasar el cursor */
+    transform: translateY(-2px); /* Efecto de hover para que el botón se "eleve" */
+}
+
+.botonEliminar:hover{
+    background-color: #b63221; 
+    transform: translateY(-2px);
+}
+
+/* Botón de Agregar Producto (similar al de eliminar pero con otro color) */
+button[type="submit"] {
+    background-color: #007bff; /* Azul para el botón de guardar */
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Azul más oscuro en hover */
+}
+
+/* Botón de Cancelar (similar al de eliminar pero con color gris) */
+button[type="button"] {
+    background-color: #6c757d; /* Gris para el botón de cancelar */
+}
+
+button[type="button"]:hover {
+    background-color: #5a6268; /* Gris más oscuro en hover */
+}
+
+/* Estilo para los Botones en la Interfaz de Agregar Producto */
+button {
+    font-size: 18px;
+    padding: 12px 30px;
+    margin: 10px;
+}
+
+/* Asegúrate de que los botones estén alineados y tengan espacio entre ellos */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
