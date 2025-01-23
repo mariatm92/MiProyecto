@@ -207,6 +207,96 @@ app.get('/servicios', (req, res) => {
         res.json(JSON.parse(data));
     });
 });
+
+// Endpoint to delete a product from stock
+app.delete('/stock/:tipo/delete/:id', (req, res) => {
+    const filePath = path.join(__dirname, 'stock.json');
+    const tipo = req.params.tipo;
+    const id = req.params.id;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo de stock');
+        }
+
+        let stockData = JSON.parse(data);
+        const indexInStock = stockData.stock[tipo].findIndex(item => item.id.toString() === id);
+
+        if (indexInStock === -1) {
+            return res.status(404).send('Producto no encontrado en stock');
+        }
+
+        // Remove the item from stock
+        stockData.stock[tipo].splice(indexInStock, 1);
+
+        fs.writeFile(filePath, JSON.stringify(stockData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo de stock');
+            }
+            res.status(200).send('Producto eliminado del stock');
+        });
+    });
+});
+
+// Endpoint to delete a product from habitaciones.json
+app.delete('/habitaciones/delete/:id', (req, res) => {
+    const filePath = path.join(__dirname, 'habitaciones.json');
+    const id = req.params.id;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo de habitaciones');
+        }
+
+        let habitacionesData = JSON.parse(data);
+        const indexInHabitaciones = habitacionesData.habitaciones.findIndex(item => item.id.toString() === id);
+
+        if (indexInHabitaciones === -1) {
+            return res.status(404).send('Habitación no encontrada');
+        }
+
+        // Remove the item from habitaciones
+        habitacionesData.habitaciones.splice(indexInHabitaciones, 1);
+
+        fs.writeFile(filePath, JSON.stringify(habitacionesData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo de habitaciones');
+            }
+            res.status(200).send('Habitación eliminada');
+        });
+});
+
+////// ESTE BOTON NO FUNCIONA ///////////////////////////////////////////////////////////////////////
+
+// Endpoint to delete a product from servicios.json
+app.delete('/servicios/delete/:id', (req, res) => {
+    const filePath = path.join(__dirname, 'servicios.json');
+    const id = req.params.id;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo de servicios');
+        }
+
+        let serviciosData = JSON.parse(data);
+        const indexInServicios = serviciosData.findIndex(item => item.id.toString() === id);
+
+        if (indexInServicios === -1) {
+            return res.status(404).send('Servicio no encontrado');
+        }
+
+        // Remove the item from servicios
+        serviciosData.splice(indexInServicios, 1);
+
+        fs.writeFile(filePath, JSON.stringify(serviciosData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo de servicios');
+            }
+            res.status(200).send('Servicio eliminado');
+        });
+    });
+});
+
 // Endpoint para agregar un producto al stock
 app.post('/stock/:tipo', (req, res) => {
     const filePath = path.join(__dirname, 'stock.json'); // Ruta del archivo
@@ -241,39 +331,6 @@ app.post('/stock/:tipo', (req, res) => {
     });
 });
 
-// Endpoint para actualizar precios de productos en el stock
-app.put('/stock/:tipo/update', (req, res) => {
-    const filePath = path.join(__dirname, 'stock.json'); // Ruta del archivo
-    const productoActualizado = req.body; // Datos del producto actualizado
-    const tipo = req.params.tipo; // Tipo de producto
-
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).send('Error al leer el archivo'); // Error al leer
-        }
-
-        let stockData = JSON.parse(data);
-        const index = stockData.stock[tipo].findIndex(item => item.id === productoActualizado.id); // Busca el índice
-
-        if (index === -1) {
-            return res.status(404).send('Producto no encontrado en stock'); // Error si no se encuentra
-        }
-
-        // Actualiza los detalles del producto
-        stockData.stock[tipo][index] = {
-            ...stockData.stock[tipo][index],
-            producto: productoActualizado.producto,
-            precio: productoActualizado.precio
-        };
-
-        fs.writeFile(filePath, JSON.stringify(stockData, null, 2), (err) => {
-            if (err) {
-                return res.status(500).send('Error al escribir el archivo'); // Error al escribir
-            }
-            res.status(200).json(stockData.stock[tipo][index]); // Devuelve el producto actualizado
-        });
-    });
-});
 
 // Configuración del puerto del servidor
 const PORT = process.env.PORT || 3000;
