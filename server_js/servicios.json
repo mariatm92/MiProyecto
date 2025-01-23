@@ -1,10 +1,5 @@
 [
   {
-    "id": 1,
-    "producto": "Alquiler de coches",
-    "precio": 50
-  },
-  {
     "id": 2,
     "producto": "Alquiler de bicicletas",
     "precio": 15
