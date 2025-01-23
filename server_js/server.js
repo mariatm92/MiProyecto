@@ -362,6 +362,7 @@ app.post('/empleados/modify', (req, res) => {
 });
 
 //NUEVOS ENDPOINTS PARA AGREGAR
+/*
 app.post('/habitaciones', (req, res) => {
     const filePath = path.join(__dirname, 'habitaciones.json');
     const nuevaHabitacion = req.body;
@@ -497,9 +498,9 @@ app.put('/habitaciones', (req, res) => {
         });
     });
 });
-
+*/
 // Similar endpoints for /regimen and /servicios with the same structure
-
+/*
 // Add endpoint to update stock prices
 app.put('/stock/:tipo/update', (req, res) => {
     const filePath = path.join(__dirname, 'stock.json');
@@ -533,6 +534,87 @@ app.put('/stock/:tipo/update', (req, res) => {
         });
     });
 });
+*/
+// Modify the existing /stock endpoint to include more detailed error handling
+app.get('/stock', (req, res) => {
+    const filePath = path.join(__dirname, 'stock.json');
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading stock file:', err);
+            return res.status(500).json({ error: 'Error reading stock data' });
+        }
+        try {
+            const stockData = JSON.parse(data);
+            res.json(stockData);
+        } catch (parseError) {
+            console.error('Error parsing stock data:', parseError);
+            res.status(500).json({ error: 'Error parsing stock data' });
+        }
+    });
+  });
+  
+  // Add comprehensive delete endpoints for different types of products
+  app.delete('/stock/habitaciones/:id', (req, res) => {
+      const stockPath = path.join(__dirname, 'stock.json');
+      const habitacionesPath = path.join(__dirname, 'habitaciones.json');
+      const roomId = parseInt(req.params.id);
+  
+      // Remove from stock
+      fs.readFile(stockPath, 'utf8', (err, stockData) => {
+          if (err) return res.status(500).send('Error reading stock');
+  
+          let stock = JSON.parse(stockData);
+          stock.stock.habitaciones = stock.stock.habitaciones.filter(room => room.id !== roomId);
+  
+          fs.writeFile(stockPath, JSON.stringify(stock, null, 2), (err) => {
+              if (err) return res.status(500).send('Error updating stock');
+  
+              // Remove from habitaciones
+              fs.readFile(habitacionesPath, 'utf8', (err, habitacionesData) => {
+                  if (err) return res.status(500).send('Error reading habitaciones');
+  
+                  let habitaciones = JSON.parse(habitacionesData);
+                  habitaciones.habitaciones = habitaciones.habitaciones.filter(room => room.id !== roomId);
+  
+                  fs.writeFile(habitacionesPath, JSON.stringify(habitaciones, null, 2), (err) => {
+                      if (err) return res.status(500).send('Error updating habitaciones');
+                      res.status(200).send('Room deleted successfully');
+                  });
+              });
+          });
+      });
+  });
+  
+  app.delete('/stock/servicios/:id', (req, res) => {
+      const stockPath = path.join(__dirname, 'stock.json');
+      const serviciosPath = path.join(__dirname, 'servicios.json');
+      const serviceId = parseInt(req.params.id);
+  
+      // Remove from stock
+      fs.readFile(stockPath, 'utf8', (err, stockData) => {
+          if (err) return res.status(500).send('Error reading stock');
+  
+          let stock = JSON.parse(stockData);
+          stock.stock.servicios = stock.stock.servicios.filter(service => service.id !== serviceId);
+  
+          fs.writeFile(stockPath, JSON.stringify(stock, null, 2), (err) => {
+              if (err) return res.status(500).send('Error updating stock');
+  
+              // Remove from servicios
+              fs.readFile(serviciosPath, 'utf8', (err, serviciosData) => {
+                  if (err) return res.status(500).send('Error reading servicios');
+  
+                  let servicios = JSON.parse(serviciosData);
+                  servicios = servicios.filter(service => service.id !== serviceId);
+  
+                  fs.writeFile(serviciosPath, JSON.stringify(servicios, null, 2), (err) => {
+                      if (err) return res.status(500).send('Error updating servicios');
+                      res.status(200).send('Service deleted successfully');
+                  });
+              });
+          });
+      });
+  });
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

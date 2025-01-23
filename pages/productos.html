@@ -38,12 +38,13 @@
                     <button onclick="mostrarFormulario('servicios')">Agregar Servicio</button>
                 </div>
                 <div id="servicioshotel" class="serviciosht"></div>
-    
+                
                 <h2>Stock Habitaciones</h2>
                 <div id="habitacionesStock" class="serviciosht"></div>
-                
+                <!--
                 <h2>Stock Servicios</h2>
                 <div id="serviciosStock" class="serviciosht"></div>
+                -->
             </div>
         </div>
 
@@ -70,7 +71,7 @@
     </div>
 
     <script>
-
+        /*
         function eliminarHabitacion(idHabitacion) {
                 if (confirm('¿Está seguro de que desea eliminar esta habitación?')) {
                     fetch(`http://localhost:3000/habitaciones/${idHabitacion}`, {
@@ -132,54 +133,72 @@ function eliminarServicio(idServicio) {
         });
     }
 }
+*/
 
-
-
-        function mostrarStock() {
-            const habitacioneshotel = document.getElementById('habitacioneshotel');
-            const regimenhotel = document.getElementById('regimenhotel');
-            const servicioshotel = document.getElementById('servicioshotel');
-            const habitacionesStock = document.getElementById('habitacionesStock');
-            const serviciosStock = document.getElementById('serviciosStock');
-
-          
-          //  habitacioneshotel.innerHTML = '';
-           // regimenhotel.innerHTML = '';
-           // servicioshotel.innerHTML = '';
-            habitacionesStock.innerHTML = '';
-            serviciosStock.innerHTML = '';
-            
-
-            fetch('http://localhost:3000/habitaciones')
+function eliminarProductoDelStock(id, tipo) {
+    fetch(`http://localhost:3000/stock/${tipo}/${id}`, {
+        method: 'DELETE',
+    })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Error al cargar el archivo de habitaciones');
+            throw new Error(`Error al eliminar el ${tipo}`);
         }
-        return response.json();
+        mostrarStock();
+        alert(`${tipo.charAt(0).toUpperCase() + tipo.slice(1)} eliminado correctamente`);
     })
-    .then(data => {
-        if (data && data.habitaciones) {
-            data.habitaciones.forEach(habitacion => {
+    .catch(error => {
+        console.error('Error:', error);
+        alert(`Error al eliminar el ${tipo}`);
+    });
+}
+
+
+fetch('http://localhost:3000/stock')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al obtener el stock');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Mostrar Habitaciones
+            data.stock.habitaciones.forEach(habitacion => {
                 const habitacionDetails = document.createElement('div');
                 habitacionDetails.classList.add('stockDetails');
                 habitacionDetails.innerHTML = `
-                    <div class="stockField"><strong>ID Producto:</strong> ${habitacion.id}</div>
+                    <div class="stockField"><strong>ID:</strong> ${habitacion.id}</div>
                     <div class="stockField"><strong>Producto:</strong> ${habitacion.producto}</div>
                     <div class="stockField"><strong>Precio:</strong> ${habitacion.precio}€</div>
+                    <div class="stockField"><strong>Cantidad:</strong> ${habitacion.cantidad}</div>
                     <button class="botonEditar" onclick="editarProducto(${habitacion.id}, '${habitacion.producto}', ${habitacion.precio}, 'habitaciones')">Editar</button>
-                    <button class="botonEliminar" onclick="eliminarHabitacion(${habitacion.id})">Eliminar</button>
+                    <button class="botonEliminar" onclick="eliminarProductoDelStock(${habitacion.id}, 'habitaciones')">Eliminar</button>
                 `;
                 habitacioneshotel.appendChild(habitacionDetails);
+                habitacionesStock.appendChild(habitacionDetails.cloneNode(true));
             });
-        }
-    })
-    .catch(error => {
-        console.error('Error al cargar las habitaciones:', error);
-        habitacioneshotel.innerHTML = '<p>Error al cargar las habitaciones</p>';
-    });
 
-
-
+            // Mostrar Servicios
+            data.stock.servicios.forEach(servicio => {
+                const servicioDetails = document.createElement('div');
+                servicioDetails.classList.add('stockDetails');
+                servicioDetails.innerHTML = `
+                    <div class="stockField"><strong>ID:</strong> ${servicio.id}</div>
+                    <div class="stockField"><strong>Producto:</strong> ${servicio.producto}</div>
+                    <div class="stockField"><strong>Precio:</strong> ${servicio.precio}€</div>
+                    <div class="stockField"><strong>Cantidad:</strong> ${servicio.cantidad}</div>
+                    <button class="botonEditar" onclick="editarProducto(${servicio.id}, '${servicio.producto}', ${servicio.precio}, 'servicios')">Editar</button>
+                    <button class="botonEliminar" onclick="eliminarProductoDelStock(${servicio.id}, 'servicios')">Eliminar</button>
+                `;
+                servicioshotel.appendChild(servicioDetails);
+                serviciosStock.appendChild(servicioDetails.cloneNode(true));
+            });
+        })
+        .catch(error => {
+            console.error('Error al obtener el stock:', error);
+            habitacionesStock.innerHTML = '<p>Error al cargar el Stock de Habitaciones</p>';
+            serviciosStock.innerHTML = '<p>Error al cargar el Stock de Servicios</p>';
+        });
+/*
 
     fetch('http://localhost:3000/regimen')
 .then(response => {
@@ -391,7 +410,7 @@ fetch('http://localhost:3000/servicios')
     // Show the form
     document.getElementById('formOverlay').style.display = 'block';
 }
-
+*/
         // Cargar el stock al iniciar la página
         mostrarStock();
         function redirigirAdmin() {
