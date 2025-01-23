@@ -93,11 +93,5 @@
     "producto": "hola",
     "precio": 23,
     "id": 19
-  },
-  {
-    "producto": "Terapeuta",
-    "precio": 90,
-    "cantidad": 4,
-    "id": 20
   }
 ]
