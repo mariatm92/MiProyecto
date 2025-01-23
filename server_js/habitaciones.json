@@ -45,12 +45,6 @@
       "precio": 200,
       "cantidad": 20,
       "id": 26
-    },
-    {
-      "producto": "Habitación del pánico",
-      "precio": 60,
-      "cantidad": 2,
-      "id": 27
     }
   ]
 }
