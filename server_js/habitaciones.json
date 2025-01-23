@@ -1,11 +1,6 @@
 {
   "habitaciones": [
     {
-      "id": 18,
-      "producto": "Habitación Standard",
-      "precio": 140
-    },
-    {
       "id": 19,
       "producto": "Habitación Doble",
       "precio": 160
