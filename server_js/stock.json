@@ -8,12 +8,6 @@
         "cantidad": 50
       },
       {
-        "id": 19,
-        "producto": "Habitación Doble",
-        "precio": 160,
-        "cantidad": 25
-      },
-      {
         "id": 20,
         "producto": "Junior Suite",
         "precio": 220,
@@ -67,12 +61,6 @@
         "id": 1,
         "producto": "Alquiler de coches",
         "precio": 50,
-        "cantidad": 20
-      },
-      {
-        "id": 6,
-        "producto": "Excursiones",
-        "precio": 40,
         "cantidad": 20
       },
       {
