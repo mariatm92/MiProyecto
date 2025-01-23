@@ -54,6 +54,12 @@
         "producto": "Habitación con Vista al Mar/Montaña",
         "precio": 190,
         "cantidad": 15
+      },
+      {
+        "id": 26,
+        "producto": "Habitacion vista piscina",
+        "precio": 200,
+        "cantidad": 20
       }
     ],
     "servicios": [
@@ -104,6 +110,18 @@
         "producto": "Parking",
         "precio": 15,
         "cantidad": 50
+      },
+      {
+        "id": 20,
+        "producto": "Terapeuta",
+        "precio": 90,
+        "cantidad": 4
+      },
+      {
+        "id": 21,
+        "producto": "Cochero",
+        "precio": 12,
+        "cantidad": 1
       }
     ]
   }

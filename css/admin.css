@@ -1,14 +1,10 @@
-/* Estilos generales */
-form .etiquetas {
-    font-family: roboto;
-}
-
+/* Fuentes */
 @font-face {
     font-family: roboto;
     src: url(../fonts/Roboto-Medium.ttf);
 }
 
-/* --------------A PARTIR DE AQUI ES DE LA PAGINA ADMIN ----------------*/
+/* Estructura General */
 .wrapp {
     display: flex;
     flex-direction: column;
@@ -24,7 +20,7 @@ form .etiquetas {
     align-content: center;
     height: 150px;
     width: 100%;
-    background-color: #f1f7fe; 
+    background-color: #f1f7fe;
     margin-top: -10px;
     box-shadow: 0px 5px 10px rgb(99, 98, 98);
 }
@@ -45,7 +41,7 @@ img {
     border-radius: 100%;
 }
 
-h1 {
+#bienvenida {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,81 +67,98 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    height: 650px;
+    align-items: center; /* Alinear al centro */
+    padding: 20px;
     width: 100%;
-    margin-top: 70px;
+    margin-top: 120px; /* Reducir el margen superior */
+    background: #f1f7fe;
+    box-shadow: 10px 5px 10px rgb(99, 98, 98); /* Sombra ligera */
+   
 }
 
 .wrapp .apartadoFormu button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
     height: 50px;
     width: 110px;
-    margin-left: 70px;
+    margin: 20px 0; /* Espaciado vertical */
+    background-color: #ec0b0b; /* Color de fondo */
+    color: #f1f7fe;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.wrapp .apartadoFormu button:hover {
+    background-color: #ec0b0b; /* Color de hover */
 }
 
 .conrnidousuario {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Cambiado a 'row' para alinear en fila */
     align-items: center;
-    justify-content: flex-start;
-    height: auto;
+    justify-content: center;
+    flex-wrap: wrap; /* Permitir que los elementos envuelvan a la siguiente fila */
     width: 100%;
-    margin-top: 20px;
-  
-}
-.claseInfo{
-    display: flex;
-    justify-content: space-around; /* Separar los campos del empleado */
-    align-items: center;
+    padding: 20px 0; /* Padding superior e inferior */
+    background: #f1f7fe;; /* Fondo claro */
+    border-radius: 10px; /* Bordes redondeados */
     
-    margin: 10px ; /* Espacio entre los elementos de los empleados */
+}
+
+.claseInfo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
     height: 50px;
     width: 100%;
     background-color: rgb(199, 148, 206);
-
-
 }
+
 .usuarioGson {
     display: flex;
-    flex-direction: column;
-    align-items: center; /* Centrado de todos los empleados */
-    justify-content: flex-start;
+    flex-direction: row; /* Cambiado a 'row' para alinear en fila */
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* Permitir que los elementos envuelvan a la siguiente fila */
     width: 100%;
 }
-
 
 .employeeDetails {
     display: flex;
-    justify-content: space-evenly; /* Separar los campos del empleado */
+    flex-direction: column;
     align-items: center;
-    width: 100%;
-    margin: 10px ; /* Espacio entre los elementos de los empleados */
-     background-color: rgb(148, 194, 206);
-    outline: solid 2px black;
+    justify-content: center;
+    width: 20%; /* Ajuste a un tamaño adecuado para distribuir en fila */
+    margin: 10px;
+    padding: 20px;
+    background-color: rgb(148, 194, 206);
     border-radius: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+   
+}
+
+.employeeDetails:hover {
+    transform: scale(1.02); /* Suave incremento al pasar el ratón */
+    box-shadow: 10px 5px 12px rgba(0, 0, 0, 0.5);
 }
 
 .employeeField {
-    margin:20px; /* Separación entre los campos */
-    margin-right: 10px;
-    font-size: 14px;
-    display: flex;
-    width: 250px;
+    margin: 10px 0;
+    font-size: 18px;
+    width: 100%;
    
 }
 
 button {
-    margin-left: 30px;
-    padding: 6px 12px;
+    padding: 8px 16px;
     background-color: red;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 button:hover {
@@ -155,6 +168,7 @@ button:hover {
 li {
     list-style: none;
     cursor: pointer;
+    transition: color 0.3s;
 }
 
 li:hover {
@@ -168,14 +182,14 @@ li a {
 
 /* Estilos para el Modal */
 .modal {
-    display: none; /* Ocultar el modal por defecto */
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
@@ -194,13 +208,11 @@ li a {
     top: 10px;
     right: 20px;
     cursor: pointer;
+    transition: color 0.3s;
 }
 
-.close:hover,
-.close:focus {
+.close:hover {
     color: black;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 /* Formulario */
@@ -224,9 +236,9 @@ form button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 form button:hover {
     background-color: darkgreen;
 }
-

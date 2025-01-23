@@ -13,29 +13,90 @@
                 <h1 id="bienvenida">Bienvenido al apartado de Productos</h1>
                 <div class="menu">
                     <li onclick="redirigirAdmin()" id="IniAdmin">Clientes</li>
+                    <li><a href="productos.html">Productos</a></li>
+                    <li><a href="reservas.html">Reservas</a></li>
                     <li><a href="graficos.html">Gráficos</a></li>
-                    <li><a href="reservas.html">Reservas</a></li><li>
                 </div> 
             </div>         
         </div>
         <div class="apartadoStock">
             <div class="contenidoStock">
-
-                <h2>Habitaciones</h2>
+                <div class="section-header">
+                    <h2>Habitaciones</h2>
+                    <button onclick="mostrarFormulario('habitaciones')">Agregar Habitación</button>
+                </div>
                 <div id="habitacioneshotel" class="habitacionesht"></div>
-                <h2>Regimen</h2>
+    
+                <div class="section-header">
+                    <h2>Regimen</h2>
+                    <button onclick="mostrarFormulario('regimen')">Agregar Régimen</button>
+                </div>
                 <div id="regimenhotel" class="regimenht"></div>
-                <h2>Servicios</h2>
+    
+                <div class="section-header">
+                    <h2>Servicios</h2>
+                    <button onclick="mostrarFormulario('servicios')">Agregar Servicio</button>
+                </div>
                 <div id="servicioshotel" class="serviciosht"></div>
+    
                 <h2>Stock Habitaciones</h2>
                 <div id="habitacionesStock" class="serviciosht"></div>
+                
                 <h2>Stock Servicios</h2>
                 <div id="serviciosStock" class="serviciosht"></div>
             </div>
         </div>
+
+        <div id="formOverlay" class="form-overlay">
+            <div class="form-container">
+                <h3 id="formTitle">Agregar Producto</h3>
+                <form id="productoForm">
+                    <div class="form-group">
+                        <label for="producto">Nombre del Producto:</label>
+                        <input type="text" id="producto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="precio">Precio:</label>
+                        <input type="number" id="precio" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad">Stock:</label>
+                        <input type="number" id="cantidad" required>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit">Guardar</button>
+                        <button type="button" onclick="cerrarFormulario()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
     </div>
 
     <script>
+
+        function eliminarHabitacion(idHabitacion) {
+                if (confirm('¿Está seguro de que desea eliminar esta habitación?')) {
+                    fetch(`http://localhost:3000/habitaciones/${idHabitacion}`, {
+                        method: 'DELETE',
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error al eliminar la habitación');
+                        }
+                        // Limpiar y recargar la visualización de habitaciones
+                        const habitacioneshotel = document.getElementById('habitacioneshotel');
+                        habitacioneshotel.innerHTML = '';
+                        mostrarStock();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error al eliminar la habitación');
+                    });
+                }
+        }
+
+
         function mostrarStock() {
             const habitacioneshotel = document.getElementById('habitacioneshotel');
             const regimenhotel = document.getElementById('regimenhotel');
@@ -44,38 +105,41 @@
             const serviciosStock = document.getElementById('serviciosStock');
 
           
-            habitacioneshotel.innerHTML = '';
-            regimenhotel.innerHTML = '';
-            servicioshotel.innerHTML = '';
+          //  habitacioneshotel.innerHTML = '';
+           // regimenhotel.innerHTML = '';
+           // servicioshotel.innerHTML = '';
             habitacionesStock.innerHTML = '';
             serviciosStock.innerHTML = '';
             
 
             fetch('http://localhost:3000/habitaciones')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al cargar el archivo habitaciones.json');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data && data.habitaciones) {
-                    data.habitaciones.forEach(habitacion => {
-                        const habitacionDetails = document.createElement('div');
-                        habitacionDetails.classList.add('stockDetails');
-                        habitacionDetails.innerHTML = `
-                            <div class="stockField"><strong>ID Producto:</strong> ${habitacion.id}</div>
-                            <div class="stockField"><strong>Producto:</strong> ${habitacion.producto}</div>
-                            <div class="stockField"><strong>Precio:</strong> ${habitacion.precio}€</div>
-                        `;
-                        habitacioneshotel.appendChild(habitacionDetails);
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error al cargar las habitaciones:', error);
-                habitacioneshotel.innerHTML = '<p>Error al cargar las habitaciones</p>';
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al cargar el archivo de habitaciones');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data && data.habitaciones) {
+            data.habitaciones.forEach(habitacion => {
+                const habitacionDetails = document.createElement('div');
+                habitacionDetails.classList.add('stockDetails');
+                habitacionDetails.innerHTML = `
+                    <div class="stockField"><strong>ID Producto:</strong> ${habitacion.id}</div>
+                    <div class="stockField"><strong>Producto:</strong> ${habitacion.producto}</div>
+                    <div class="stockField"><strong>Precio:</strong> ${habitacion.precio}€</div>
+                    <button class="botonEliminar" onclick="eliminarHabitacion(${habitacion.id})">Eliminar</button>
+                `;
+                habitacioneshotel.appendChild(habitacionDetails);
             });
+        }
+    })
+    .catch(error => {
+        console.error('Error al cargar las habitaciones:', error);
+        habitacioneshotel.innerHTML = '<p>Error al cargar las habitaciones</p>';
+    });
+
+
 
 
             fetch('http://localhost:3000/regimen')
@@ -115,8 +179,8 @@
                     servicioDetails.classList.add('stockDetails');
                     servicioDetails.innerHTML = `
                         <div class="stockField"><strong>ID Producto:</strong> ${servicio.id}</div>
-                        <div class="stockField"><strong>Producto:</strong> ${servicio.Producto}</div>
-                        <div class="stockField"><strong>Precio:</strong> ${servicio.Precio}€</div>
+                        <div class="stockField"><strong>Producto:</strong> ${servicio.producto}</div>
+                        <div class="stockField"><strong>Precio:</strong> ${servicio.precio}€</div>
                     `;
                     servicioshotel.appendChild(servicioDetails);
                 });
@@ -174,6 +238,63 @@
                 
                 
         }
+
+        let tipoProductoActual = '';
+
+    function mostrarFormulario(tipo) {
+        tipoProductoActual = tipo;
+        document.getElementById('formOverlay').style.display = 'block';
+        document.getElementById('formTitle').textContent = `Agregar ${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`;
+    }
+
+    function cerrarFormulario() {
+        document.getElementById('formOverlay').style.display = 'none';
+        document.getElementById('productoForm').reset();
+    }
+
+    document.getElementById('productoForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const nuevoProducto = {
+            producto: document.getElementById('producto').value,
+            precio: Number(document.getElementById('precio').value),
+            cantidad: Number(document.getElementById('cantidad').value)
+        };
+
+        fetch(`http://localhost:3000/${tipoProductoActual}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nuevoProducto)
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Error al agregar el producto');
+            return response.json();
+        })
+        .then(productoGuardado => {
+        // Segunda llamada para actualizar el stock
+        return fetch(`http://localhost:3000/stock/${tipoProductoActual}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ...nuevoProducto,
+                id: productoGuardado.id
+            })
+        });
+    })
+        .then(() => {
+            cerrarFormulario();
+            mostrarStock();
+            alert('Producto agregado correctamente');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al agregar el producto');
+        });
+    });
 
         // Cargar el stock al iniciar la página
         mostrarStock();

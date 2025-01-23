@@ -1,7 +1,6 @@
 {
   "empleados": [
     {
-
       "id": "1732870380351",
       "nombre": "Sandra",
       "apellidos": "Gonzalez",
@@ -9,16 +8,6 @@
       "nacionalidad": "Española",
       "genero": "Femenino",
       "hijos": 2
-    },
-    {
-
-      "id": "1736494591747",
-      "nombre": "Pepe",
-      "apellidos": "Paplotes",
-      "edad": 39,
-      "nacionalidad": "Española",
-      "genero": "Masculino",
-      "hijos": 3
     },
     {
       "id": "1736494591748",
@@ -407,7 +396,5 @@
       "genero": "Femenino",
       "hijos": 1
     }
-  
   ]
-
 }

@@ -17,6 +17,27 @@ const projectRoot = path.join(__dirname, '..');
 app.use(express.static(projectRoot));
 
 
+function eliminarHabitacion(idHabitacion) {
+    if (confirm('¿Está seguro de que desea eliminar esta habitación?')) {
+        fetch(`http://localhost:3000/habitaciones/${idHabitacion}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al eliminar la habitación');
+            }
+            // Limpiar y recargar la visualización de habitaciones
+            const habitacioneshotel = document.getElementById('habitacioneshotel');
+            habitacioneshotel.innerHTML = '';
+            mostrarStock();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al eliminar la habitación');
+        });
+    }
+}
+
 
 app.get('/habitaciones', (req, res) => {
   const filePath = path.join(__dirname, 'habitaciones.json');
@@ -31,6 +52,31 @@ app.get('/habitaciones', (req, res) => {
   });
 });
 
+// eliminar habitaciones 
+
+app.delete('/habitaciones/:id', (req, res) => {
+    const filePath = path.join(__dirname, 'habitaciones.json');
+    const roomId = parseInt(req.params.id);
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error al leer el archivo:', err);
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let roomsData = JSON.parse(data);
+        roomsData.habitaciones = roomsData.habitaciones.filter(room => room.id !== roomId);
+
+        fs.writeFile(filePath, JSON.stringify(roomsData, null, 2), (err) => {
+            if (err) {
+                console.error('Error al escribir el archivo:', err);
+                return res.status(500).send('Error al escribir el archivo');
+            }
+            res.status(200).send('Habitación eliminada correctamente');
+        });
+    });
+});
+
 app.get('/regimen', (req, res) => {
   const filePath = path.join(__dirname, 'regimen.json');
   console.log('Intentando leer el archivo:', filePath); // Mensaje de depuración
@@ -43,7 +89,29 @@ app.get('/regimen', (req, res) => {
       }
   });
 });
+// eliminar regimen 
+app.delete('/regimen/:id', (req, res) => {
+    const filePath = path.join(__dirname, 'regimen.json');
+    const regimenId = parseInt(req.params.id);
 
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error al leer el archivo:', err);
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let regimenData = JSON.parse(data);
+        regimenData = regimenData.filter(regimen => regimen.id !== regimenId);
+
+        fs.writeFile(filePath, JSON.stringify(regimenData, null, 2), (err) => {
+            if (err) {
+                console.error('Error al escribir el archivo:', err);
+                return res.status(500).send('Error al escribir el archivo');
+            }
+            res.status(200).send('Régimen eliminado correctamente');
+        });
+    });
+}); 
 
 app.get('/servicios', (req, res) => {
   const filePath = path.join(__dirname, 'servicios.json');
@@ -58,7 +126,27 @@ app.get('/servicios', (req, res) => {
   });
 });
 
+//eliminar servicios 
+app.delete('/servicios/:id', (req, res) => {
+    const filePath = path.join(__dirname, 'servicios.json');
+    const servicioId = parseInt(req.params.id);
 
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let serviciosData = JSON.parse(data);
+        serviciosData = serviciosData.filter(servicio => servicio.id !== servicioId);
+
+        fs.writeFile(filePath, JSON.stringify(serviciosData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo');
+            }
+            res.status(200).send('Servicio eliminado correctamente');
+        });
+    });
+});
 
 // Endpoints principales
 
@@ -187,6 +275,112 @@ app.post('/empleados/modify', (req, res) => {
             }
             res.status(200).json(empleados[employeeIndex]);
         });
+    });
+});
+
+//NUEVOS ENDPOINTS PARA AGREGAR
+app.post('/habitaciones', (req, res) => {
+    const filePath = path.join(__dirname, 'habitaciones.json');
+    const nuevaHabitacion = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let habitacionesData = JSON.parse(data);
+        // Generar nuevo ID
+        const maxId = Math.max(...habitacionesData.habitaciones.map(h => h.id), 0);
+        nuevaHabitacion.id = maxId + 1;
+
+        habitacionesData.habitaciones.push(nuevaHabitacion);
+
+        fs.writeFile(filePath, JSON.stringify(habitacionesData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo');
+            }
+            res.status(201).json(nuevaHabitacion);
+        });
+    });
+});
+
+app.post('/servicios', (req, res) => {
+    const filePath = path.join(__dirname, 'servicios.json');
+    const nuevoServicio = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let servicios = JSON.parse(data);
+        const maxId = Math.max(...servicios.map(s => s.id), 0);
+        nuevoServicio.id = maxId + 1;
+
+        servicios.push(nuevoServicio);
+
+        fs.writeFile(filePath, JSON.stringify(servicios, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo');
+            }
+            res.status(201).json(nuevoServicio);
+        });
+    });
+});
+
+app.post('/regimen', (req, res) => {
+    const filePath = path.join(__dirname, 'regimen.json');
+    const nuevoRegimen = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let regimenes = JSON.parse(data);
+        const maxId = Math.max(...regimenes.map(r => r.id), 0);
+        nuevoRegimen.id = maxId + 1;
+
+        regimenes.push(nuevoRegimen);
+
+        fs.writeFile(filePath, JSON.stringify(regimenes, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo');
+            }
+            res.status(201).json(nuevoRegimen);
+        });
+    });
+});
+app.post('/stock/:tipo', (req, res) => {
+    const filePath = path.join(__dirname, 'stock.json');
+    const tipo = req.params.tipo;
+    const nuevoProducto = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let stockData = JSON.parse(data);
+        
+        if (tipo === 'habitaciones' || tipo === 'servicios') {
+            // Agregar el nuevo producto al stock
+            stockData.stock[tipo].push({
+                id: nuevoProducto.id,
+                producto: nuevoProducto.producto,
+                precio: nuevoProducto.precio,
+                cantidad: nuevoProducto.cantidad
+            });
+
+            fs.writeFile(filePath, JSON.stringify(stockData, null, 2), (err) => {
+                if (err) {
+                    return res.status(500).send('Error al escribir el archivo');
+                }
+                res.status(201).json(nuevoProducto);
+            });
+        } else {
+            res.status(400).send('Tipo de producto no válido');
+        }
     });
 });
 const PORT = process.env.PORT || 3000;

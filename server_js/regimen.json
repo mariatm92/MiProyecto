@@ -20,14 +20,14 @@
     "precio": 80
   },
   {
-    "id": 31,
-    "producto": "Todo incluido",
-    "precio": 120
+    "producto": "Pension nula",
+    "precio": 0,
+    "id": 31
   },
   {
-    "id": 32,
-    "producto": "Todo incluido sin alcohol",
-    "precio": 100
+    "producto": "Pension vitalicia",
+    "precio": 1000,
+    "cantidad": 0,
+    "id": 32
   }
-
 ]
