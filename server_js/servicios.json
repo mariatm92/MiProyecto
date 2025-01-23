@@ -99,11 +99,5 @@
     "precio": 90,
     "cantidad": 4,
     "id": 20
-  },
-  {
-    "producto": "Cochero",
-    "precio": 12,
-    "cantidad": 1,
-    "id": 21
   }
 ]

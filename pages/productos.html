@@ -79,6 +79,26 @@ function eliminarHabitacion(idHabitacion) {
         });
     }
 }
+function eliminarServicio(idServicio) {
+    if (confirm('¿Está seguro de que desea eliminar este servicio?')) {
+        fetch(`http://localhost:3000/servicios/${idServicio}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al eliminar el servicio');
+            }
+            // Limpiar y recargar la visualización de servicios
+            const servicioshotel = document.getElementById('servicioshotel');
+            servicioshotel.innerHTML = '';
+            mostrarStock();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al eliminar el servicio');
+        });
+    }
+}
 
 
 
