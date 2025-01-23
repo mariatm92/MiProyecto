@@ -286,22 +286,6 @@ h2 {
     background-color: #cc0000;
 }
 
-<<<<<<< HEAD
-.eliminarServicio {
-    background-color: #ff4444;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 5px;
-}
-
-.eliminarServicio:hover {
-    background-color: #cc0000;
-}
-
-=======
 /*ESTILOS PARA LOS BOTONES Y AGREGAR*/
 .form-overlay {
     display: none;
@@ -338,4 +322,3 @@ h2 {
     display: flex;
     justify-content: space-between;
 }
->>>>>>> beb34a6c78a9d7a1e21525847113c156e93c6a38
