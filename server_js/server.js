@@ -55,27 +55,60 @@ app.get('/habitaciones', (req, res) => {
 // eliminar habitaciones 
 
 app.delete('/habitaciones/:id', (req, res) => {
-    const filePath = path.join(__dirname, 'habitaciones.json');
-    const roomId = parseInt(req.params.id);
-
-    fs.readFile(filePath, 'utf8', (err, data) => {
+    const habitacionesPath = path.join(__dirname, 'habitaciones.json');
+    const stockPath = path.join(__dirname, 'stock.json');
+    const habitacionId = parseInt(req.params.id);
+    
+    // Leer y modificar archivo de habitaciones
+    fs.readFile(habitacionesPath, 'utf8', (err, habitacionesData) => {
         if (err) {
-            console.error('Error al leer el archivo:', err);
-            return res.status(500).send('Error al leer el archivo');
+            return res.status(500).send('Error al leer habitaciones');
         }
 
-        let roomsData = JSON.parse(data);
-        roomsData.habitaciones = roomsData.habitaciones.filter(room => room.id !== roomId);
+        let habitaciones = JSON.parse(habitacionesData);
+        const habitacionesFiltradas = habitaciones.habitaciones.filter(habitacion => habitacion.id !== habitacionId);
 
-        fs.writeFile(filePath, JSON.stringify(roomsData, null, 2), (err) => {
+        // Verificar si la habitación fue eliminada
+        if (habitacionesFiltradas.length === habitaciones.habitaciones.length) {
+            return res.status(404).send('Habitación no encontrada en habitaciones');
+        }
+
+        // Escribir archivo actualizado de habitaciones
+        habitaciones.habitaciones = habitacionesFiltradas;
+        fs.writeFile(habitacionesPath, JSON.stringify(habitaciones, null, 2), (err) => {
             if (err) {
-                console.error('Error al escribir el archivo:', err);
-                return res.status(500).send('Error al escribir el archivo');
+                return res.status(500).send('Error al escribir habitaciones');
             }
-            res.status(200).send('Habitación eliminada correctamente');
+
+            // Leer y modificar archivo de stock
+            fs.readFile(stockPath, 'utf8', (err, stockData) => {
+                if (err) {
+                    return res.status(500).send('Error al leer stock');
+                }
+
+                let stock = JSON.parse(stockData);
+                const stockFiltrado = stock.stock.habitaciones.filter(habitacion => habitacion.id !== habitacionId);
+
+                // Verificar si la habitación fue eliminada del stock
+                if (stockFiltrado.length === stock.stock.habitaciones.length) {
+                    return res.status(404).send('Habitación no encontrada en stock');
+                }
+
+                // Escribir archivo actualizado de stock
+                stock.stock.habitaciones = stockFiltrado;
+                fs.writeFile(stockPath, JSON.stringify(stock, null, 2), (err) => {
+                    if (err) {
+                        return res.status(500).send('Error al escribir stock');
+                    }
+
+                    // Confirmar la eliminación
+                    res.status(200).send('Habitación eliminada correctamente de habitaciones y stock');
+                });
+            });
         });
     });
 });
+
 
 app.get('/regimen', (req, res) => {
   const filePath = path.join(__dirname, 'regimen.json');

@@ -75,26 +75,26 @@
 
     <script>
 
-        function eliminarHabitacion(idHabitacion) {
-                if (confirm('¿Está seguro de que desea eliminar esta habitación?')) {
-                    fetch(`http://localhost:3000/habitaciones/${idHabitacion}`, {
-                        method: 'DELETE',
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Error al eliminar la habitación');
-                        }
-                        // Limpiar y recargar la visualización de habitaciones
-                        const habitacioneshotel = document.getElementById('habitacioneshotel');
-                        habitacioneshotel.innerHTML = '';
-                        mostrarStock();
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('Error al eliminar la habitación');
-                    });
-                }
-        }
+function eliminarHabitacion(idHabitacion) {
+    if (confirm('¿Está seguro de que desea eliminar esta habitación?')) {
+        fetch(`http://localhost:3000/habitaciones/${idHabitacion}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al eliminar la habitación');
+            }
+            // Limpiar y recargar la visualización de habitaciones
+            const habitacioneshotel = document.getElementById('habitacioneshotel');
+            habitacioneshotel.innerHTML = '';
+            mostrarStock(); // Esto recargará las pantallas de habitaciones y stock
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al eliminar la habitación');
+        });
+    }
+}
 
         function eliminarRegimen(idRegimen) {
     if (confirm('¿Está seguro de que desea eliminar este régimen?')) {
