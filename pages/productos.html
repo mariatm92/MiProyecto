@@ -4,6 +4,16 @@
     <meta charset="utf-8">
     <title>Productos</title>
     <link href="../css/productos.css" rel="stylesheet" type="text/css">
+    <style>
+        .deleteBtn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapp">
@@ -53,7 +63,25 @@
     </div>
 
     <script>
- function mostrarStock() {
+async function deleteProduct(id, type) {
+    try {
+        // Delete from stock
+        const stockResponse = await fetch(`/stock/${type}/delete/${id}`, { method: 'DELETE' });
+        if (!stockResponse.ok) throw new Error('Error deleting from stock');
+
+        // Delete from corresponding JSON (habitaciones or servicios)
+        const jsonResponse = await fetch(`/${type}/delete/${id}`, { method: 'DELETE' });
+        if (!jsonResponse.ok) throw new Error(`Error deleting from ${type}`);
+
+        // Refresh stock display
+        mostrarStock();
+    } catch (error) {
+        console.error('Deletion error:', error);
+        alert(`Error al eliminar el producto: ${error.message}`);
+    }
+}
+
+function mostrarStock() {
     const habitacionesStock = document.getElementById('habitacionesStock');
     const serviciosStock = document.getElementById('serviciosStock');
 
@@ -63,7 +91,7 @@
     Promise.all([
         fetch('http://localhost:3000/stock'),
         fetch('http://localhost:3000/habitaciones'),
-        fetch('http://localhost:3000/servicios')  // Nuevo endpoint para servicios
+        fetch('http://localhost:3000/servicios')
     ])
     .then(([stockResponse, habitacionesResponse, serviciosResponse]) => 
         Promise.all([stockResponse.json(), habitacionesResponse.json(), serviciosResponse.json()])
@@ -82,12 +110,12 @@
                 <div class="stockField"><strong>Nombre:</strong> ${habitacion ? habitacion.producto : 'Desconocido'}</div>
                 <div class="stockField"><strong>Precio:</strong> ${habitacion ? habitacion.precio : 0}€</div>
                 <div class="stockField"><strong>Cantidad:</strong> ${stockItem.cantidad}</div>
+                <button class="deleteBtn" onclick="deleteProduct(${stockItem.id}, 'habitaciones')">Eliminar</button>
             `;
 
             habitacionesStock.appendChild(habitacionDetails);
         });
 
-        // Código para servicios
         stockData.stock.servicios.forEach(stockServicio => {
             const servicio = servicios.find(s => s.id === stockServicio.id);
             
@@ -98,6 +126,7 @@
                 <div class="stockField"><strong>Nombre:</strong> ${servicio ? servicio.producto : 'Desconocido'}</div>
                 <div class="stockField"><strong>Precio:</strong> ${servicio ? servicio.precio : 0}€</div>
                 <div class="stockField"><strong>Cantidad:</strong> ${stockServicio.cantidad}</div>
+                <button class="deleteBtn" onclick="deleteProduct(${stockServicio.id}, 'servicios')">Eliminar</button>
             `;
 
             serviciosStock.appendChild(servicioDetails);
@@ -109,9 +138,8 @@
     });
 }
         
-        // Call the function when page loads
-        window.onload = mostrarStock;
-        </script>
+// Call the function when page loads
+window.onload = mostrarStock;
+    </script>
 </body>
 </html>
-holaaaaSSS
