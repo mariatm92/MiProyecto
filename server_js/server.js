@@ -128,26 +128,43 @@ app.get('/servicios', (req, res) => {
 
 //eliminar servicios 
 app.delete('/servicios/:id', (req, res) => {
-    const filePath = path.join(__dirname, 'servicios.json');
+    const serviciosPath = path.join(__dirname, 'servicios.json');
+    const stockPath = path.join(__dirname, 'stock.json');
     const servicioId = parseInt(req.params.id);
 
-    fs.readFile(filePath, 'utf8', (err, data) => {
+    // Eliminar del archivo de servicios
+    fs.readFile(serviciosPath, 'utf8', (err, serviciosData) => {
         if (err) {
-            return res.status(500).send('Error al leer el archivo');
+            return res.status(500).send('Error al leer servicios');
         }
 
-        let serviciosData = JSON.parse(data);
-        serviciosData = serviciosData.filter(servicio => servicio.id !== servicioId);
+        let servicios = JSON.parse(serviciosData);
+        servicios = servicios.filter(servicio => servicio.id !== servicioId);
 
-        fs.writeFile(filePath, JSON.stringify(serviciosData, null, 2), (err) => {
+        fs.writeFile(serviciosPath, JSON.stringify(servicios, null, 2), (err) => {
             if (err) {
-                return res.status(500).send('Error al escribir el archivo');
+                return res.status(500).send('Error al escribir servicios');
             }
-            res.status(200).send('Servicio eliminado correctamente');
+
+            // Eliminar del stock
+            fs.readFile(stockPath, 'utf8', (err, stockData) => {
+                if (err) {
+                    return res.status(500).send('Error al leer stock');
+                }
+
+                let stock = JSON.parse(stockData);
+                stock.stock.servicios = stock.stock.servicios.filter(servicio => servicio.id !== servicioId);
+
+                fs.writeFile(stockPath, JSON.stringify(stock, null, 2), (err) => {
+                    if (err) {
+                        return res.status(500).send('Error al escribir stock');
+                    }
+                    res.status(200).send('Servicio eliminado correctamente');
+                });
+            });
         });
     });
 });
-
 // Endpoints principales
 
 app.get('/stock', (req, res) => {
