@@ -277,6 +277,112 @@ app.post('/empleados/modify', (req, res) => {
         });
     });
 });
+
+//NUEVOS ENDPOINTS PARA AGREGAR
+app.post('/habitaciones', (req, res) => {
+    const filePath = path.join(__dirname, 'habitaciones.json');
+    const nuevaHabitacion = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let habitacionesData = JSON.parse(data);
+        // Generar nuevo ID
+        const maxId = Math.max(...habitacionesData.habitaciones.map(h => h.id), 0);
+        nuevaHabitacion.id = maxId + 1;
+
+        habitacionesData.habitaciones.push(nuevaHabitacion);
+
+        fs.writeFile(filePath, JSON.stringify(habitacionesData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo');
+            }
+            res.status(201).json(nuevaHabitacion);
+        });
+    });
+});
+
+app.post('/servicios', (req, res) => {
+    const filePath = path.join(__dirname, 'servicios.json');
+    const nuevoServicio = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let servicios = JSON.parse(data);
+        const maxId = Math.max(...servicios.map(s => s.id), 0);
+        nuevoServicio.id = maxId + 1;
+
+        servicios.push(nuevoServicio);
+
+        fs.writeFile(filePath, JSON.stringify(servicios, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo');
+            }
+            res.status(201).json(nuevoServicio);
+        });
+    });
+});
+
+app.post('/regimen', (req, res) => {
+    const filePath = path.join(__dirname, 'regimen.json');
+    const nuevoRegimen = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let regimenes = JSON.parse(data);
+        const maxId = Math.max(...regimenes.map(r => r.id), 0);
+        nuevoRegimen.id = maxId + 1;
+
+        regimenes.push(nuevoRegimen);
+
+        fs.writeFile(filePath, JSON.stringify(regimenes, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo');
+            }
+            res.status(201).json(nuevoRegimen);
+        });
+    });
+});
+app.post('/stock/:tipo', (req, res) => {
+    const filePath = path.join(__dirname, 'stock.json');
+    const tipo = req.params.tipo;
+    const nuevoProducto = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let stockData = JSON.parse(data);
+        
+        if (tipo === 'habitaciones' || tipo === 'servicios') {
+            // Agregar el nuevo producto al stock
+            stockData.stock[tipo].push({
+                id: nuevoProducto.id,
+                producto: nuevoProducto.producto,
+                precio: nuevoProducto.precio,
+                cantidad: nuevoProducto.cantidad
+            });
+
+            fs.writeFile(filePath, JSON.stringify(stockData, null, 2), (err) => {
+                if (err) {
+                    return res.status(500).send('Error al escribir el archivo');
+                }
+                res.status(201).json(nuevoProducto);
+            });
+        } else {
+            res.status(400).send('Tipo de producto no válido');
+        }
+    });
+});
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

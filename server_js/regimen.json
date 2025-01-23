@@ -18,5 +18,16 @@
     "id": 30,
     "producto": "Pensión completa",
     "precio": 80
+  },
+  {
+    "producto": "Pension nula",
+    "precio": 0,
+    "id": 31
+  },
+  {
+    "producto": "Pension vitalicia",
+    "precio": 1000,
+    "cantidad": 0,
+    "id": 32
   }
 ]

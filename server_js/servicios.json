@@ -1,88 +1,109 @@
 [
-    {
-      "id": 1,
-      "Producto": "Alquiler de coches",
-      "Precio": 50
-    },
-    {
-      "id": 2,
-      "Producto": "Alquiler de bicicletas",
-      "Precio": 15
-    },
-    {
-      "id": 3,
-      "Producto": "Alquiler de salas",
-      "Precio": 100
-    },
-    {
-      "id": 4,
-      "Producto": "Bodas",
-      "Precio": 3000
-    },
-    {
-      "id": 5,
-      "Producto": "Transporte",
-      "Precio": 25
-    },
-    {
-      "id": 6,
-      "Producto": "Excursiones",
-      "Precio": 40
-    },
-    {
-      "id": 7,
-      "Producto": "Minibar",
-      "Precio": 20
-    },
-    {
-      "id": 8,
-      "Producto": "Servicio de lavandería",
-      "Precio": 10
-    },
-    {
-      "id": 9,
-      "Producto": "Servicio de habitaciones",
-      "Precio": 5
-    },
-    {
-      "id": 10,
-      "Producto": "Masaje",
-      "Precio": 60
-    },
-    {
-      "id": 11,
-      "Producto": "Cunas o camas adicionales",
-      "Precio": 20
-    },
-    {
-      "id": 12,
-      "Producto": "Alquiler de toallas",
-      "Precio": 5
-    },
-    {
-      "id": 13,
-      "Producto": "Habitación de cortesía",
-      "Precio": 0
-    },
-    {
-      "id": 14,
-      "Producto": "Parking",
-      "Precio": 15
-    },
-    {
-      "id": 15,
-      "Producto": "Gimnasio",
-      "Precio": 10
-    },
-    {
-      "id": 16,
-      "Producto": "Spa",
-      "Precio": 50
-    },
-    {
-      "id": 17,
-      "Producto": "Guardaequipaje",
-      "Precio": 5
-    }
-  ]
-  
+  {
+    "id": 1,
+    "producto": "Alquiler de coches",
+    "precio": 50
+  },
+  {
+    "id": 2,
+    "producto": "Alquiler de bicicletas",
+    "precio": 15
+  },
+  {
+    "id": 3,
+    "producto": "Alquiler de salas",
+    "precio": 100
+  },
+  {
+    "id": 4,
+    "producto": "Bodas",
+    "precio": 3000
+  },
+  {
+    "id": 5,
+    "producto": "Transporte",
+    "precio": 25
+  },
+  {
+    "id": 6,
+    "producto": "Excursiones",
+    "precio": 40
+  },
+  {
+    "id": 7,
+    "producto": "Minibar",
+    "precio": 20
+  },
+  {
+    "id": 8,
+    "producto": "Servicio de lavandería",
+    "precio": 10
+  },
+  {
+    "id": 9,
+    "producto": "Servicio de habitaciones",
+    "precio": 5
+  },
+  {
+    "id": 10,
+    "producto": "Masaje",
+    "precio": 60
+  },
+  {
+    "id": 11,
+    "producto": "Cunas o camas adicionales",
+    "precio": 20
+  },
+  {
+    "id": 12,
+    "producto": "Alquiler de toallas",
+    "precio": 5
+  },
+  {
+    "id": 13,
+    "producto": "Habitación de cortesía",
+    "precio": 0
+  },
+  {
+    "id": 14,
+    "producto": "Parking",
+    "precio": 15
+  },
+  {
+    "id": 15,
+    "producto": "Gimnasio",
+    "precio": 10
+  },
+  {
+    "id": 16,
+    "producto": "Spa",
+    "precio": 50
+  },
+  {
+    "id": 17,
+    "producto": "Guardaequipaje",
+    "precio": 5
+  },
+  {
+    "producto": "Cianuro",
+    "precio": 666,
+    "id": 18
+  },
+  {
+    "producto": "hola",
+    "precio": 23,
+    "id": 19
+  },
+  {
+    "producto": "Terapeuta",
+    "precio": 90,
+    "cantidad": 4,
+    "id": 20
+  },
+  {
+    "producto": "Cochero",
+    "precio": 12,
+    "cantidad": 1,
+    "id": 21
+  }
+]
