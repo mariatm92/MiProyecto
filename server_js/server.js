@@ -52,57 +52,62 @@ app.get('/habitaciones', (req, res) => {
   });
 });
 
-// eliminar habitaciones 
-
 app.delete('/habitaciones/:id', (req, res) => {
     const habitacionesPath = path.join(__dirname, 'habitaciones.json');
     const stockPath = path.join(__dirname, 'stock.json');
     const habitacionId = parseInt(req.params.id);
-    
-    // Leer y modificar archivo de habitaciones
-    fs.readFile(habitacionesPath, 'utf8', (err, habitacionesData) => {
+
+    fs.readFile(habitacionesPath, 'utf8', (err, data) => {
         if (err) {
-            return res.status(500).send('Error al leer habitaciones');
+            console.error('Error al leer el archivo de habitaciones:', err);
+            return res.status(500).send('Error al leer el archivo de habitaciones');
         }
 
-        let habitaciones = JSON.parse(habitacionesData);
-        const habitacionesFiltradas = habitaciones.habitaciones.filter(habitacion => habitacion.id !== habitacionId);
-
-        // Verificar si la habitación fue eliminada
-        if (habitacionesFiltradas.length === habitaciones.habitaciones.length) {
-            return res.status(404).send('Habitación no encontrada en habitaciones');
+        let roomsData;
+        try {
+            roomsData = JSON.parse(data);
+            if (!Array.isArray(roomsData.habitaciones)) {
+                throw new Error('El contenido de habitaciones.json no es un array');
+            }
+        } catch (error) {
+            console.error('Error al parsear el archivo de habitaciones:', error);
+            return res.status(500).send('Error al parsear el archivo de habitaciones');
         }
 
-        // Escribir archivo actualizado de habitaciones
-        habitaciones.habitaciones = habitacionesFiltradas;
-        fs.writeFile(habitacionesPath, JSON.stringify(habitaciones, null, 2), (err) => {
+        roomsData.habitaciones = roomsData.habitaciones.filter(room => room.id !== habitacionId);
+
+        fs.writeFile(habitacionesPath, JSON.stringify(roomsData, null, 2), (err) => {
             if (err) {
-                return res.status(500).send('Error al escribir habitaciones');
+                console.error('Error al escribir el archivo de habitaciones:', err);
+                return res.status(500).send('Error al escribir el archivo de habitaciones');
             }
 
-            // Leer y modificar archivo de stock
+            // Eliminar del stock
             fs.readFile(stockPath, 'utf8', (err, stockData) => {
                 if (err) {
-                    return res.status(500).send('Error al leer stock');
+                    console.error('Error al leer el archivo de stock:', err);
+                    return res.status(500).send('Error al leer el archivo de stock');
                 }
 
-                let stock = JSON.parse(stockData);
-                const stockFiltrado = stock.stock.habitaciones.filter(habitacion => habitacion.id !== habitacionId);
-
-                // Verificar si la habitación fue eliminada del stock
-                if (stockFiltrado.length === stock.stock.habitaciones.length) {
-                    return res.status(404).send('Habitación no encontrada en stock');
+                let stock;
+                try {
+                    stock = JSON.parse(stockData);
+                    if (!Array.isArray(stock.stock.habitaciones)) {
+                        throw new Error('El contenido de stock no es un array');
+                    }
+                } catch (error) {
+                    console.error('Error al parsear el archivo de stock:', error);
+                    return res.status(500).send('Error al parsear el archivo de stock');
                 }
 
-                // Escribir archivo actualizado de stock
-                stock.stock.habitaciones = stockFiltrado;
+                stock.stock.habitaciones = stock.stock.habitaciones.filter(room => room.id !== habitacionId);
+
                 fs.writeFile(stockPath, JSON.stringify(stock, null, 2), (err) => {
                     if (err) {
-                        return res.status(500).send('Error al escribir stock');
+                        console.error('Error al escribir el archivo de stock:', err);
+                        return res.status(500).send('Error al escribir el archivo de stock');
                     }
-
-                    // Confirmar la eliminación
-                    res.status(200).send('Habitación eliminada correctamente de habitaciones y stock');
+                    res.status(200).send('Habitación eliminada correctamente');
                 });
             });
         });
