@@ -3,7 +3,7 @@
     {
       "id": 18,
       "producto": "Habitación Standard",
-      "precio": 120
+      "precio": 140
     },
     {
       "id": 19,
@@ -45,12 +45,6 @@
       "precio": 200,
       "cantidad": 20,
       "id": 26
-    },
-    {
-      "producto": "Habitación del pánico",
-      "precio": 60,
-      "cantidad": 2,
-      "id": 27
     }
   ]
 }
