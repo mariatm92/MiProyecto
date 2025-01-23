@@ -428,6 +428,73 @@ app.post('/stock/:tipo', (req, res) => {
         }
     });
 });
+app.put('/habitaciones', (req, res) => {
+    const filePath = path.join(__dirname, 'habitaciones.json');
+    const productoActualizado = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let habitacionesData = JSON.parse(data);
+        const index = habitacionesData.habitaciones.findIndex(h => h.id === productoActualizado.id);
+
+        if (index === -1) {
+            return res.status(404).send('Producto no encontrado');
+        }
+
+        // Update product details
+        habitacionesData.habitaciones[index] = {
+            ...habitacionesData.habitaciones[index],
+            producto: productoActualizado.producto,
+            precio: productoActualizado.precio
+        };
+
+        fs.writeFile(filePath, JSON.stringify(habitacionesData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo');
+            }
+            res.status(200).json(habitacionesData.habitaciones[index]);
+        });
+    });
+});
+
+// Similar endpoints for /regimen and /servicios with the same structure
+
+// Add endpoint to update stock prices
+app.put('/stock/:tipo/update', (req, res) => {
+    const filePath = path.join(__dirname, 'stock.json');
+    const productoActualizado = req.body;
+    const tipo = req.params.tipo;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo');
+        }
+
+        let stockData = JSON.parse(data);
+        const index = stockData.stock[tipo].findIndex(item => item.id === productoActualizado.id);
+
+        if (index === -1) {
+            return res.status(404).send('Producto no encontrado en stock');
+        }
+
+        // Update stock item details
+        stockData.stock[tipo][index] = {
+            ...stockData.stock[tipo][index],
+            producto: productoActualizado.producto,
+            precio: productoActualizado.precio
+        };
+
+        fs.writeFile(filePath, JSON.stringify(stockData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo');
+            }
+            res.status(200).json(stockData.stock[tipo][index]);
+        });
+    });
+});
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
