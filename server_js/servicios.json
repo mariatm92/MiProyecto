@@ -63,5 +63,11 @@
     "producto": "hola",
     "precio": 23,
     "id": 19
+  },
+  {
+    "id": 1737706109906,
+    "producto": "Prueba",
+    "precio": 34,
+    "cantidad": 123
   }
 ]

@@ -334,6 +334,53 @@ app.post('/stock/:tipo', (req, res) => {
     });
 });
 
+//ENDPOINTS PARA AGREGAR
+// Endpoint to add a product to habitaciones.json
+app.post('/habitaciones', (req, res) => {
+    const filePath = path.join(__dirname, 'habitaciones.json');
+    const nuevoProducto = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo de habitaciones');
+        }
+
+        let habitacionesData = JSON.parse(data);
+        habitacionesData.habitaciones.push(nuevoProducto);
+
+        fs.writeFile(filePath, JSON.stringify(habitacionesData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo de habitaciones');
+            }
+            res.status(201).json(nuevoProducto);
+        });
+    });
+});
+
+// Endpoint to add a product to servicios.json
+app.post('/servicios', (req, res) => {
+    const filePath = path.join(__dirname, 'servicios.json');
+    const nuevoProducto = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo de servicios');
+        }
+
+        let serviciosData = JSON.parse(data);
+        serviciosData.push(nuevoProducto);
+
+        fs.writeFile(filePath, JSON.stringify(serviciosData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo de servicios');
+            }
+            res.status(201).json(nuevoProducto);
+        });
+    });
+});
+
+//FIN ENDPOINTS PARA AGREGAR
+
 
 // Configuración del puerto del servidor
 const PORT = process.env.PORT || 3000;

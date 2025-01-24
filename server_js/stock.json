@@ -32,6 +32,12 @@
       {
         "id": 26,
         "cantidad": 20
+      },
+      {
+        "id": 1737706094329,
+        "producto": "Hola",
+        "precio": 45,
+        "cantidad": 78
       }
     ],
     "servicios": [
@@ -54,6 +60,12 @@
       {
         "id": 13,
         "cantidad": 3
+      },
+      {
+        "id": 1737706109906,
+        "producto": "Prueba",
+        "precio": 34,
+        "cantidad": 123
       }
     ]
   }

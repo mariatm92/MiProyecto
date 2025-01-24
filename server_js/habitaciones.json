@@ -40,6 +40,12 @@
       "precio": 200,
       "cantidad": 20,
       "id": 26
+    },
+    {
+      "id": 1737706094329,
+      "producto": "Hola",
+      "precio": 45,
+      "cantidad": 78
     }
   ]
 }
