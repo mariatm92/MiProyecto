@@ -1,11 +1,6 @@
 {
   "habitaciones": [
     {
-      "id": 18,
-      "producto": "Habitación Standard",
-      "precio": 120
-    },
-    {
       "id": 19,
       "producto": "Habitación Doble",
       "precio": 160
@@ -47,10 +42,16 @@
       "id": 26
     },
     {
-      "producto": "Habitación del pánico",
-      "precio": 60,
-      "cantidad": 2,
-      "id": 27
+      "id": 1737706094329,
+      "producto": "Hola",
+      "precio": 45,
+      "cantidad": 78
+    },
+    {
+      "id": 1737706553128,
+      "producto": "lalal",
+      "precio": 1230,
+      "cantidad": 12
     }
   ]
 }

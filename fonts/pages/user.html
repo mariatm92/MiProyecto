@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link href="css/estilos-user-.css" rel="stylesheet" type="text/css">
+</head>
+
+<div class="wrapp">
+
+    <div class="cabecera">
+
+        <img src="images/erp2.jpg">
+
+        <div class="bienvenida">
+
+            <h1 id="bienvenida">Bienvenido usuario, <span id="usuarioCorreo"></span></h1>
+
+            <div class="menu">
+
+                <li>Inicio</li>
+                <li>Contacto</li>
+
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+</div>
+
+<script>
+    function obtenerParametroURL(nombre) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(nombre);
+    }
+
+    const correo = obtenerParametroURL('correo');
+
+    if (correo) {
+        document.getElementById('usuarioCorreo').textContent = correo;
+    } else {
+        window.location.href = 'index.html';
+    }
+</script>
+
+</html>

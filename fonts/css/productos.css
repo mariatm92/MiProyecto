@@ -1,0 +1,405 @@
+/* Fuentes */
+@font-face {
+    font-family: roboto;
+    src: url(../fonts/Roboto-Medium.ttf);
+}
+
+/* Estructura General */
+.wrapp {
+    display: flex;
+    flex-direction: column;
+    min-height: 1200px;
+    width: 100%;
+}
+
+.wrapp .cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    height: 150px;
+    width: 100%;
+    background-color: #f1f7fe;
+    margin-top: -10px;
+    box-shadow: 0px 5px 10px rgb(99, 98, 98);
+}
+
+.bienvenida {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 150px;
+    width: 1000px;
+    margin-right: 250px;
+}
+
+img {
+    height: 150px;
+    width: 200px;
+    border-radius: 100%;
+}
+
+#bienvenida {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    height: 60px;
+    width: 1000px;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 20px;
+    width: 1000px;
+    list-style: none;
+    font-family: roboto;
+    font-size: 20px;
+}
+
+/* Apartado de Stock */
+.apartadoStock {
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.contenidoStock {
+    width: 100%;
+    padding: 20px;
+}
+
+.stockGson {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Detalle de Stock (Habitación o Servicio) */
+.stockDetails {
+    width: 300px;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(148, 194, 206);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.stockDetails:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.stockField {
+    margin: 10px 0;
+    padding: 5px;
+    font-family: roboto;
+}
+
+.stockField strong {
+    color: #333;
+    font-weight: bold;
+}
+
+.stockField ul {
+    margin: 5px 0;
+    padding-left: 20px;
+    list-style-type: none;
+}
+
+.stockField ul li {
+    margin: 5px 0;
+    color: #444;
+}
+
+/* Elementos de navegación */
+li {
+    list-style: none;
+    cursor: pointer;
+}
+
+li:hover {
+    color: rgb(148, 194, 206);
+}
+
+li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Encabezados de sección */
+h2 {
+    font-family: roboto;
+    color: #333;
+    text-align: center;
+    margin: 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgb(148, 194, 206);
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .wrapp {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bienvenida {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .menu {
+        width: 100%;
+        flex-direction: column;
+        height: auto;
+        gap: 10px;
+    }
+
+    #bienvenida {
+        width: 100%;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .stockDetails {
+        width: 90%;
+        margin: 10px 0;
+    }
+
+    .stockGson {
+        padding: 10px;
+    }
+
+    .contenidoStock {
+        padding: 10px;
+    }
+}
+
+/* Efectos de hover adicionales */
+.stockField strong {
+    transition: color 0.2s ease;
+}
+
+.stockDetails:hover .stockField strong {
+    color: #1a1a1a;
+}
+
+/* Animación de carga */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stockDetails {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.contenidoStock {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.habitacionesht,
+.regimenht,
+.serviciosht {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+}
+
+h2 {
+    font-family: roboto;
+    color: #333;
+    text-align: center;
+    margin: 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgb(148, 194, 206);
+    width: 100%;
+    flex-basis: 100%; /* Asegura que los títulos ocupen toda la línea */
+}
+
+.stockDetails {
+    width: 250px; /* Reducido el ancho para que quepan más elementos en línea */
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(148, 194, 206);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    flex-grow: 0; /* Evita que los elementos se estiren */
+    flex-shrink: 0; /* Mantiene el tamaño constante */
+}
+
+/* Actualiza la media query para dispositivos móviles */
+@media (max-width: 768px) {
+    .contenidoStock {
+        flex-direction: column;
+    }
+
+    .habitacionesht,
+    .regimenht,
+    .serviciosht {
+        flex-direction: column;
+    }
+
+    .stockDetails {
+        width: 90%;
+        margin: 10px auto;
+    }
+}
+
+.botonEliminar {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.botonEliminar:hover {
+    background-color: #cc0000;
+}
+
+.eliminarServicio {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.eliminarServicio:hover {
+    background-color: #cc0000;
+}
+
+/*ESTILOS PARA LOS BOTONES Y AGREGAR*/
+.form-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+.form-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1001;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-group input {
+    width: 100%;
+    padding: 8px;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+/*NUEVOS ESTILOS DE PRUEBA*/
+button{
+    background-color:#4CAF50; /* Verde para los botones normales */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 16px;
+    font-family: roboto;
+}
+
+.botonEliminar{
+    background-color: red; /* Verde para los botones normales */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 16px;
+    font-family: roboto;
+}
+
+button:hover{
+    background-color: #45a049; /* Cambio de color al pasar el cursor */
+    transform: translateY(-2px); /* Efecto de hover para que el botón se "eleve" */
+}
+
+.botonEliminar:hover{
+    background-color: #b63221; 
+    transform: translateY(-2px);
+}
+
+/* Botón de Agregar Producto (similar al de eliminar pero con otro color) */
+button[type="submit"] {
+    background-color: #007bff; /* Azul para el botón de guardar */
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Azul más oscuro en hover */
+}
+
+/* Botón de Cancelar (similar al de eliminar pero con color gris) */
+button[type="button"] {
+    background-color: #6c757d; /* Gris para el botón de cancelar */
+}
+
+button[type="button"]:hover {
+    background-color: #5a6268; /* Gris más oscuro en hover */
+}
+
+/* Estilo para los Botones en la Interfaz de Agregar Producto */
+button {
+    font-size: 18px;
+    padding: 12px 30px;
+    margin: 10px;
+}
+
+/* Asegúrate de que los botones estén alineados y tengan espacio entre ellos */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}

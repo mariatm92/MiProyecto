@@ -1,0 +1,244 @@
+/* Fuentes */
+@font-face {
+    font-family: roboto;
+    src: url(../fonts/Roboto-Medium.ttf);
+}
+
+/* Estructura General */
+.wrapp {
+    display: flex;
+    flex-direction: column;
+    min-height: 1200px;
+    width: 100%;
+}
+
+.wrapp .cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    height: 150px;
+    width: 100%;
+    background-color: #f1f7fe;
+    margin-top: -10px;
+    box-shadow: 0px 5px 10px rgb(99, 98, 98);
+}
+
+.bienvenida {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 150px;
+    width: 1000px;
+    margin-right: 250px;
+}
+
+img {
+    height: 150px;
+    width: 200px;
+    border-radius: 100%;
+}
+
+#bienvenida {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    height: 60px;
+    width: 1000px;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 20px;
+    width: 1000px;
+    list-style: none;
+    font-family: roboto;
+    font-size: 20px;
+}
+
+.apartadoFormu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; /* Alinear al centro */
+    padding: 20px;
+    width: 100%;
+    margin-top: 120px; /* Reducir el margen superior */
+    background: #f1f7fe;
+    box-shadow: 10px 5px 10px rgb(99, 98, 98); /* Sombra ligera */
+   
+}
+
+.wrapp .apartadoFormu button {
+    height: 50px;
+    width: 110px;
+    margin: 20px 0; /* Espaciado vertical */
+    background-color: #ec0b0b; /* Color de fondo */
+    color: #f1f7fe;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.wrapp .apartadoFormu button:hover {
+    background-color: #ec0b0b; /* Color de hover */
+}
+
+.conrnidousuario {
+    display: flex;
+    flex-direction: row; /* Cambiado a 'row' para alinear en fila */
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* Permitir que los elementos envuelvan a la siguiente fila */
+    width: 100%;
+    padding: 20px 0; /* Padding superior e inferior */
+    background: #f1f7fe;; /* Fondo claro */
+    border-radius: 10px; /* Bordes redondeados */
+    
+}
+
+.claseInfo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+    height: 50px;
+    width: 100%;
+    background-color: rgb(199, 148, 206);
+}
+
+.usuarioGson {
+    display: flex;
+    flex-direction: row; /* Cambiado a 'row' para alinear en fila */
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* Permitir que los elementos envuelvan a la siguiente fila */
+    width: 100%;
+}
+
+.employeeDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20%; /* Ajuste a un tamaño adecuado para distribuir en fila */
+    margin: 10px;
+    padding: 20px;
+    background-color: rgb(148, 194, 206);
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+   
+}
+
+.employeeDetails:hover {
+    transform: scale(1.02); /* Suave incremento al pasar el ratón */
+    box-shadow: 10px 5px 12px rgba(0, 0, 0, 0.5);
+}
+
+.employeeField {
+    margin: 10px 0;
+    font-size: 18px;
+    width: 100%;
+   
+}
+
+button {
+    padding: 8px 16px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: darkred;
+}
+
+li {
+    list-style: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+li:hover {
+    color: rgb(148, 194, 206);
+}
+
+li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Estilos para el Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: black;
+}
+
+/* Formulario */
+form label {
+    display: block;
+    margin: 5px 0;
+}
+
+form input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 10px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: darkgreen;
+}
