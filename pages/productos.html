@@ -13,6 +13,21 @@
             margin-left: 10px;
             cursor: pointer;
         }
+        .modifyBtn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+.modifyBtn:hover {
+    background-color: #45a049;
+}
+
     </style>
 </head>
 <body>
@@ -67,17 +82,110 @@
     </div>
 
     <script>
+
+        // Función para abrir formulario de modificación
+function openModifyForm(id, type, producto, precio) {
+    const formOverlay = document.getElementById('formOverlay');
+    const formTitle = document.getElementById('formTitle');
+    const productoInput = document.getElementById('producto');
+    const precioInput = document.getElementById('precio');
+    const submitBtn = document.querySelector('#productoForm button[type="submit"]');
+
+    formTitle.textContent = `Modificar ${type === 'habitaciones' ? 'Habitación' : 'Servicio'}`;
+    productoInput.value = producto;
+    precioInput.value = precio;
+    
+    // Guardar tipo y ID para usar en submit
+    formOverlay.dataset.type = type;
+    formOverlay.dataset.id = id;
+
+    // Cambiar texto del botón
+    submitBtn.textContent = 'Modificar';
+
+    // Mostrar formulario
+    formOverlay.style.display = 'block';
+}
+
+// Modificar en la configuración del formulario
+document.getElementById('productoForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formOverlay = document.getElementById('formOverlay');
+    const type = formOverlay.dataset.type;
+    const id = formOverlay.dataset.id;
+
+    const producto = document.getElementById('producto').value;
+    const precio = parseFloat(document.getElementById('precio').value);
+
+    try {
+        const response = await fetch(`http://localhost:3000/${type}/modify/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ producto, precio })
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al modificar');
+        }
+
+        cerrarFormulario();
+        mostrarStock();
+    } catch (error) {
+        console.error('Error:', error);
+        alert('No se pudo modificar el producto');
+    }
+});
+
+// Modificar en la función mostrarStock
+function mostrarStock() {
+    // ... código anterior ...
+    stockData.stock.habitaciones.forEach(stockItem => {
+        const habitacion = habitaciones.find(h => h.id === stockItem.id);
+        
+        const habitacionDetails = document.createElement('div');
+        habitacionDetails.classList.add('stockDetails');
+        habitacionDetails.innerHTML = `
+            <div class="stockField"><strong>ID:</strong> ${stockItem.id}</div>
+            <div class="stockField"><strong>Nombre:</strong> ${habitacion ? habitacion.producto : 'Desconocido'}</div>
+            <div class="stockField"><strong>Precio:</strong> ${habitacion ? habitacion.precio : 0}€</div>
+            <div class="stockField"><strong>Cantidad:</strong> ${stockItem.cantidad}</div>
+            <button class="deleteBtn" onclick="deleteProduct(${stockItem.id}, 'habitaciones')">Eliminar</button>
+            <button class="deleteBtn" onclick="openModifyForm(${stockItem.id}, 'habitaciones', '${habitacion.producto}', ${habitacion.precio})">Modificar</button>
+        `;
+
+        habitacionesStock.appendChild(habitacionDetails);
+    });
+
+    // Similar para servicios
+    stockData.stock.servicios.forEach(stockServicio => {
+        const servicio = servicios.find(s => s.id === stockServicio.id);
+        
+        const servicioDetails = document.createElement('div');
+        servicioDetails.classList.add('stockDetails');
+        servicioDetails.innerHTML = `
+            <div class="stockField"><strong>ID:</strong> ${stockServicio.id}</div>
+            <div class="stockField"><strong>Nombre:</strong> ${servicio ? servicio.producto : 'Desconocido'}</div>
+            <div class="stockField"><strong>Precio:</strong> ${servicio ? servicio.precio : 0}€</div>
+            <div class="stockField"><strong>Cantidad:</strong> ${stockServicio.cantidad}</div>
+            <button class="deleteBtn" onclick="deleteProduct(${stockServicio.id}, 'servicios')">Eliminar</button>
+            <button class="deleteBtn" onclick="openModifyForm(${servicio.id}, 'servicios', '${servicio.producto}', ${servicio.precio})">Modificar</button>
+        `;
+
+        serviciosStock.appendChild(servicioDetails);
+    });
+}
+
+
 async function deleteProduct(id, type) {
     try {
-        // Delete from stock
-        const stockResponse = await fetch(`/stock/${type}/delete/${id}`, { method: 'DELETE' });
-        if (!stockResponse.ok) throw new Error('Error deleting from stock');
+        // Cambiar a URL completa del servidor
+        const stockResponse = await fetch(`http://localhost:3000/stock/${type}/delete/${id}`, { method: 'DELETE' });
+        const jsonResponse = await fetch(`http://localhost:3000/${type}/delete/${id}`, { method: 'DELETE' });
 
-        // Delete from corresponding JSON (habitaciones or servicios)
-        const jsonResponse = await fetch(`/${type}/delete/${id}`, { method: 'DELETE' });
+        if (!stockResponse.ok) throw new Error('Error deleting from stock');
         if (!jsonResponse.ok) throw new Error(`Error deleting from ${type}`);
 
-        // Refresh stock display
         mostrarStock();
     } catch (error) {
         console.error('Deletion error:', error);

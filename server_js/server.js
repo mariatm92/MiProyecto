@@ -17,32 +17,6 @@ const projectRoot = path.join(__dirname, '..');
 // Sirve archivos estáticos desde el directorio raíz
 app.use(express.static(projectRoot));
 
-<<<<<<< HEAD
-/////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////////
-
-// Endpoints principales
-
-app.get('/stock', (req, res) => {
-  const filePath = path.join(__dirname, 'stock.json');
-  console.log('Intentando leer el archivo:', filePath); // Mensaje de depuración
-  fs.readFile(filePath, 'utf8', (err, data) => {
-      if (err) {
-          console.error('Error leyendo el archivo:', err);
-          res.status(500).send('Error reading the file');
-      } else {
-          res.json(JSON.parse(data));
-      }
-  });
-});
-=======
-
->>>>>>> bb4b67a9c4717936d097ca40d4294c83103e3e37
 
 // Endpoint para obtener reservas desde reservas.json
 app.get('/reservas', (req, res) => {
@@ -163,10 +137,6 @@ app.post('/empleados/modify', (req, res) => {
     });
 });
 
-<<<<<<< HEAD
-
-app.post('/stock/:tipo', (req, res) => {
-=======
 // Endpoint para obtener el stock desde stock.json
 app.get('/stock', (req, res) => {
     const stockPath = path.join(__dirname, 'stock.json');
@@ -239,7 +209,6 @@ app.get('/servicios', (req, res) => {
 
 // Endpoint to delete a product from stock
 app.delete('/stock/:tipo/delete/:id', (req, res) => {
->>>>>>> bb4b67a9c4717936d097ca40d4294c83103e3e37
     const filePath = path.join(__dirname, 'stock.json');
     const tipo = req.params.tipo;
     const id = req.params.id;
@@ -267,7 +236,7 @@ app.delete('/stock/:tipo/delete/:id', (req, res) => {
         });
     });
 });
-
+////// ESTE BOTON NO FUNCIONA ///////////////////////////////////////////////////////////////////////
 // Endpoint to delete a product from habitaciones.json
 app.delete('/habitaciones/delete/:id', (req, res) => {
     const filePath = path.join(__dirname, 'habitaciones.json');
@@ -279,9 +248,10 @@ app.delete('/habitaciones/delete/:id', (req, res) => {
         }
 
         let habitacionesData = JSON.parse(data);
-        const indexInHabitaciones = habitacionesData.habitaciones.findIndex(item => item.id.toString() === id);
+        const indexInHabitaciones = habitacionesData.habitaciones.findIndex(item => item.id === Number(id));
 
         if (indexInHabitaciones === -1) {
+            console.log(`Intentó eliminar habitación con ID: ${id}, pero no se encontró`);
             return res.status(404).send('Habitación no encontrada');
         }
 
@@ -294,9 +264,10 @@ app.delete('/habitaciones/delete/:id', (req, res) => {
             }
             res.status(200).send('Habitación eliminada');
         });
+      });
 });
 
-////// ESTE BOTON NO FUNCIONA ///////////////////////////////////////////////////////////////////////
+
 
 // Endpoint to delete a product from servicios.json
 app.delete('/servicios/delete/:id', (req, res) => {
@@ -361,46 +332,74 @@ app.post('/stock/:tipo', (req, res) => {
     });
 });
 
-
-<<<<<<< HEAD
-// Similar endpoints for /regimen and /servicios with the same structure
-
-// Add endpoint to update stock prices
-app.put('/stock/:tipo/update', (req, res) => {
-    const filePath = path.join(__dirname, 'stock.json');
-    const productoActualizado = req.body;
-    const tipo = req.params.tipo;
+// Endpoint para modificar habitaciones
+app.put('/habitaciones/modify/:id', (req, res) => {
+    const filePath = path.join(__dirname, 'habitaciones.json');
+    const id = req.params.id;
+    const updatedData = req.body;
 
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
-            return res.status(500).send('Error al leer el archivo');
+            return res.status(500).send('Error al leer el archivo de habitaciones');
         }
 
-        let stockData = JSON.parse(data);
-        const index = stockData.stock[tipo].findIndex(item => item.id === productoActualizado.id);
+        let habitacionesData = JSON.parse(data);
+        const habitacionIndex = habitacionesData.habitaciones.findIndex(h => h.id === Number(id));
 
-        if (index === -1) {
-            return res.status(404).send('Producto no encontrado en stock');
+        if (habitacionIndex === -1) {
+            return res.status(404).send('Habitación no encontrada');
         }
 
-        // Update stock item details
-        stockData.stock[tipo][index] = {
-            ...stockData.stock[tipo][index],
-            producto: productoActualizado.producto,
-            precio: productoActualizado.precio
+        // Actualizar la habitación
+        habitacionesData.habitaciones[habitacionIndex] = {
+            ...habitacionesData.habitaciones[habitacionIndex],
+            ...updatedData
         };
 
-        fs.writeFile(filePath, JSON.stringify(stockData, null, 2), (err) => {
+        fs.writeFile(filePath, JSON.stringify(habitacionesData, null, 2), (err) => {
             if (err) {
-                return res.status(500).send('Error al escribir el archivo');
+                return res.status(500).send('Error al escribir el archivo de habitaciones');
             }
-            res.status(200).json(stockData.stock[tipo][index]);
+            res.status(200).json(habitacionesData.habitaciones[habitacionIndex]);
         });
     });
 });
-=======
+
+// Endpoint para modificar servicios
+app.put('/servicios/modify/:id', (req, res) => {
+    const filePath = path.join(__dirname, 'servicios.json');
+    const id = req.params.id;
+    const updatedData = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo de servicios');
+        }
+
+        let serviciosData = JSON.parse(data);
+        const servicioIndex = serviciosData.findIndex(s => s.id === Number(id));
+
+        if (servicioIndex === -1) {
+            return res.status(404).send('Servicio no encontrado');
+        }
+
+        // Actualizar el servicio
+        serviciosData[servicioIndex] = {
+            ...serviciosData[servicioIndex],
+            ...updatedData
+        };
+
+        fs.writeFile(filePath, JSON.stringify(serviciosData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo de servicios');
+            }
+            res.status(200).json(serviciosData[servicioIndex]);
+        });
+    });
+});
+
+
 // Configuración del puerto del servidor
->>>>>>> bb4b67a9c4717936d097ca40d4294c83103e3e37
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`); // Mensaje de confirmación
