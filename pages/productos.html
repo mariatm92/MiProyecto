@@ -48,18 +48,25 @@
         <div class="apartadoStock">
             <div class="contenidoStock">
     
-                <h2>Stock Habitaciones</h2>
+                <div class="stock-header">
+                    <h2>Stock Habitaciones</h2>
+                    <button class="addBtn" onclick="openAddProductForm('habitaciones')">Agregar Habitación</button>
+                </div>
                 <div id="habitacionesStock" class="serviciosht"></div>
-                
-                <h2>Stock Servicios</h2>
+
+                <div class="stock-header">
+                    <h2>Stock Servicios</h2>
+                    <button class="addBtn" onclick="openAddProductForm('servicios')">Agregar Servicio</button>
+                </div>
                 <div id="serviciosStock" class="serviciosht"></div>
             </div>
         </div>
 
-        <div id="formOverlay" class="form-overlay">
+        <div id="formOverlay" class="form-overlay" style="display:none;">
             <div class="form-container">
                 <h3 id="formTitle">Agregar Producto</h3>
                 <form id="productoForm">
+                    <input type="hidden" id="productoTipo" value="">
                     <div class="form-group">
                         <label for="producto">Nombre del Producto:</label>
                         <input type="text" id="producto" required>
@@ -69,7 +76,7 @@
                         <input type="number" id="precio" required>
                     </div>
                     <div class="form-group">
-                        <label for="cantidad">Stock:</label>
+                        <label for="cantidad">Cantidad:</label>
                         <input type="number" id="cantidad" required>
                     </div>
                     <div class="button-container">
@@ -82,16 +89,17 @@
     </div>
 
     <script>
-        
 async function deleteProduct(id, type) {
     try {
-        // Cambiar a URL completa del servidor
-        const stockResponse = await fetch(`http://localhost:3000/stock/${type}/delete/${id}`, { method: 'DELETE' });
-        const jsonResponse = await fetch(`http://localhost:3000/${type}/delete/${id}`, { method: 'DELETE' });
-
+        // Delete from stock
+        const stockResponse = await fetch(`/stock/${type}/delete/${id}`, { method: 'DELETE' });
         if (!stockResponse.ok) throw new Error('Error deleting from stock');
+
+        // Delete from corresponding JSON (habitaciones or servicios)
+        const jsonResponse = await fetch(`/${type}/delete/${id}`, { method: 'DELETE' });
         if (!jsonResponse.ok) throw new Error(`Error deleting from ${type}`);
 
+        // Refresh stock display
         mostrarStock();
     } catch (error) {
         console.error('Deletion error:', error);
@@ -147,6 +155,61 @@ function openAddProductForm(type) {
     document.getElementById('formOverlay').style.display = 'flex';
 }
 
+function cerrarFormulario() {
+    document.getElementById('formOverlay').style.display = 'none';
+    document.getElementById('productoForm').reset();
+}
+
+async function agregarProducto(event) {
+    event.preventDefault();
+    const tipo = document.getElementById('productoTipo').value;
+    const producto = document.getElementById('producto').value;
+    const precio = parseFloat(document.getElementById('precio').value);
+    const cantidad = parseInt(document.getElementById('cantidad').value);
+
+    try {
+        // Generate a unique ID (simple method, could be improved)
+        const nuevoId = Date.now();
+
+        // Prepare producto data
+        const nuevoProducto = {
+            id: nuevoId,
+            producto: producto,
+            precio: precio,
+            cantidad: cantidad
+        };
+
+        // Add to stock
+        const stockResponse = await fetch('http://localhost:3000/stock/'+tipo, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nuevoProducto)
+        });
+
+        if (!stockResponse.ok) throw new Error('Error agregando al stock');
+
+        // Add to corresponding JSON file
+        const jsonResponse = await fetch(`http://localhost:3000/${tipo}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nuevoProducto)
+        });
+
+        if (!jsonResponse.ok) throw new Error(`Error agregando a ${tipo}`);
+
+        // Refresh stock display
+        mostrarStock();
+        cerrarFormulario();
+    } catch (error) {
+        console.error('Error adding product:', error);
+        alert(`Error al agregar producto: ${error.message}`);
+    }
+}
+//TERMINA CODIGO PARA AGREGAR
 
 function mostrarStock() {
     const habitacionesStock = document.getElementById('habitacionesStock');
@@ -224,9 +287,11 @@ function mostrarStock() {
         habitacionesStock.innerHTML = `<p>Error al cargar el Stock: ${error.message}</p>`;
     });
 }
+
+document.getElementById('productoForm').addEventListener('submit', agregarProducto);
         
 // Call the function when page loads
 window.onload = mostrarStock;
     </script>
 </body>
-</html>
+</html> 

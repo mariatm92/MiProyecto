@@ -3,7 +3,7 @@
     "habitaciones": [
       {
         "id": 19,
-        "cantidad": 14
+        "cantidad": 12
       },
       {
         "id": 20,
@@ -38,6 +38,18 @@
         "producto": "Hola",
         "precio": 45,
         "cantidad": 78
+      },
+      {
+        "id": 1737709191570,
+        "producto": "RedRum",
+        "precio": 666,
+        "cantidad": 999
+      },
+      {
+        "id": 1737709278356,
+        "producto": "RedRum",
+        "precio": 666,
+        "cantidad": 999
       }
     ],
     "servicios": [
