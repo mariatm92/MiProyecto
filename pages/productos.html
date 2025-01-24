@@ -13,21 +13,6 @@
             margin-left: 10px;
             cursor: pointer;
         }
-        .modifyBtn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 5px 20px;
-    margin-left: 10px;
-    cursor: pointer;
-    border-radius: 3px;
-    transition: background-color 0.3s ease;
-}
-
-.modifyBtn:hover {
-    background-color: #45a049;
-}
-
     </style>
 </head>
 <body>
@@ -47,25 +32,18 @@
         <div class="apartadoStock">
             <div class="contenidoStock">
     
-                <div class="stock-header">
-                    <h2>Stock Habitaciones</h2>
-                    <button class="addBtn" onclick="openAddProductForm('habitaciones')">Agregar Habitación</button>
-                </div>
+                <h2>Stock Habitaciones</h2>
                 <div id="habitacionesStock" class="serviciosht"></div>
-
-                <div class="stock-header">
-                    <h2>Stock Servicios</h2>
-                    <button class="addBtn" onclick="openAddProductForm('servicios')">Agregar Servicio</button>
-                </div>
+                
+                <h2>Stock Servicios</h2>
                 <div id="serviciosStock" class="serviciosht"></div>
             </div>
         </div>
 
-        <div id="formOverlay" class="form-overlay" style="display:none;">
+        <div id="formOverlay" class="form-overlay">
             <div class="form-container">
                 <h3 id="formTitle">Agregar Producto</h3>
                 <form id="productoForm">
-                    <input type="hidden" id="productoTipo" value="">
                     <div class="form-group">
                         <label for="producto">Nombre del Producto:</label>
                         <input type="text" id="producto" required>
@@ -75,11 +53,7 @@
                         <input type="number" id="precio" required>
                     </div>
                     <div class="form-group">
-<<<<<<< HEAD
                         <label for="cantidad">Stock:</label>
-=======
-                        <label for="cantidad">Cantidad:</label>
->>>>>>> dd87913645b7492977f5001a1431b5c97d573e06
                         <input type="number" id="cantidad" required>
                     </div>
                     <div class="button-container">
@@ -93,101 +67,7 @@
     </div>
 
     <script>
-
-        // Función para abrir formulario de modificación
-function openModifyForm(id, type, producto, precio) {
-    const formOverlay = document.getElementById('formOverlay');
-    const formTitle = document.getElementById('formTitle');
-    const productoInput = document.getElementById('producto');
-    const precioInput = document.getElementById('precio');
-    const submitBtn = document.querySelector('#productoForm button[type="submit"]');
-
-    formTitle.textContent = `Modificar ${type === 'habitaciones' ? 'Habitación' : 'Servicio'}`;
-    productoInput.value = producto;
-    precioInput.value = precio;
-    
-    // Guardar tipo y ID para usar en submit
-    formOverlay.dataset.type = type;
-    formOverlay.dataset.id = id;
-
-    // Cambiar texto del botón
-    submitBtn.textContent = 'Modificar';
-
-    // Mostrar formulario
-    formOverlay.style.display = 'block';
-}
-
-// Modificar en la configuración del formulario
-document.getElementById('productoForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formOverlay = document.getElementById('formOverlay');
-    const type = formOverlay.dataset.type;
-    const id = formOverlay.dataset.id;
-
-    const producto = document.getElementById('producto').value;
-    const precio = parseFloat(document.getElementById('precio').value);
-
-    try {
-        const response = await fetch(`http://localhost:3000/${type}/modify/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ producto, precio })
-        });
-
-        if (!response.ok) {
-            throw new Error('Error al modificar');
-        }
-
-        cerrarFormulario();
-        mostrarStock();
-    } catch (error) {
-        console.error('Error:', error);
-        alert('No se pudo modificar el producto');
-    }
-});
-
-// Modificar en la función mostrarStock
-function mostrarStock() {
-    // ... código anterior ...
-    stockData.stock.habitaciones.forEach(stockItem => {
-        const habitacion = habitaciones.find(h => h.id === stockItem.id);
         
-        const habitacionDetails = document.createElement('div');
-        habitacionDetails.classList.add('stockDetails');
-        habitacionDetails.innerHTML = `
-            <div class="stockField"><strong>ID:</strong> ${stockItem.id}</div>
-            <div class="stockField"><strong>Nombre:</strong> ${habitacion ? habitacion.producto : 'Desconocido'}</div>
-            <div class="stockField"><strong>Precio:</strong> ${habitacion ? habitacion.precio : 0}€</div>
-            <div class="stockField"><strong>Cantidad:</strong> ${stockItem.cantidad}</div>
-            <button class="deleteBtn" onclick="deleteProduct(${stockItem.id}, 'habitaciones')">Eliminar</button>
-            <button class="deleteBtn" onclick="openModifyForm(${stockItem.id}, 'habitaciones', '${habitacion.producto}', ${habitacion.precio})">Modificar</button>
-        `;
-
-        habitacionesStock.appendChild(habitacionDetails);
-    });
-
-    // Similar para servicios
-    stockData.stock.servicios.forEach(stockServicio => {
-        const servicio = servicios.find(s => s.id === stockServicio.id);
-        
-        const servicioDetails = document.createElement('div');
-        servicioDetails.classList.add('stockDetails');
-        servicioDetails.innerHTML = `
-            <div class="stockField"><strong>ID:</strong> ${stockServicio.id}</div>
-            <div class="stockField"><strong>Nombre:</strong> ${servicio ? servicio.producto : 'Desconocido'}</div>
-            <div class="stockField"><strong>Precio:</strong> ${servicio ? servicio.precio : 0}€</div>
-            <div class="stockField"><strong>Cantidad:</strong> ${stockServicio.cantidad}</div>
-            <button class="deleteBtn" onclick="deleteProduct(${stockServicio.id}, 'servicios')">Eliminar</button>
-            <button class="deleteBtn" onclick="openModifyForm(${servicio.id}, 'servicios', '${servicio.producto}', ${servicio.precio})">Modificar</button>
-        `;
-
-        serviciosStock.appendChild(servicioDetails);
-    });
-}
-
-
 async function deleteProduct(id, type) {
     try {
         // Cambiar a URL completa del servidor
@@ -203,68 +83,6 @@ async function deleteProduct(id, type) {
         alert(`Error al eliminar el producto: ${error.message}`);
     }
 }
-//CODIGO PARA AGREGAR
-function openAddProductForm(type) {
-    document.getElementById('productoTipo').value = type;
-    document.getElementById('formTitle').textContent = `Agregar ${type === 'habitaciones' ? 'Habitación' : 'Servicio'}`;
-    document.getElementById('formOverlay').style.display = 'flex';
-}
-
-function cerrarFormulario() {
-    document.getElementById('formOverlay').style.display = 'none';
-    document.getElementById('productoForm').reset();
-}
-
-async function agregarProducto(event) {
-    event.preventDefault();
-    const tipo = document.getElementById('productoTipo').value;
-    const producto = document.getElementById('producto').value;
-    const precio = parseFloat(document.getElementById('precio').value);
-    const cantidad = parseInt(document.getElementById('cantidad').value);
-
-    try {
-        // Generate a unique ID (simple method, could be improved)
-        const nuevoId = Date.now();
-
-        // Prepare producto data
-        const nuevoProducto = {
-            id: nuevoId,
-            producto: producto,
-            precio: precio,
-            cantidad: cantidad
-        };
-
-        // Add to stock
-        const stockResponse = await fetch('http://localhost:3000/stock/'+tipo, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(nuevoProducto)
-        });
-
-        if (!stockResponse.ok) throw new Error('Error agregando al stock');
-
-        // Add to corresponding JSON file
-        const jsonResponse = await fetch(`http://localhost:3000/${tipo}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(nuevoProducto)
-        });
-
-        if (!jsonResponse.ok) throw new Error(`Error agregando a ${tipo}`);
-
-        // Refresh stock display
-        mostrarStock();
-        cerrarFormulario();
-    } catch (error) {
-        console.error('Error adding product:', error);
-        alert(`Error al agregar producto: ${error.message}`);
-    }
-}
-//TERMINA CODIGO PARA AGREGAR
 
 function mostrarStock() {
     const habitacionesStock = document.getElementById('habitacionesStock');
@@ -322,8 +140,6 @@ function mostrarStock() {
         habitacionesStock.innerHTML = `<p>Error al cargar el Stock: ${error.message}</p>`;
     });
 }
-
-document.getElementById('productoForm').addEventListener('submit', agregarProducto);
         
 // Call the function when page loads
 window.onload = mostrarStock;

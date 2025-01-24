@@ -28,8 +28,6 @@
       {
         "id": 25,
         "cantidad": 10
-<<<<<<< HEAD
-=======
       },
       {
         "id": 26,
@@ -40,7 +38,6 @@
         "producto": "Hola",
         "precio": 45,
         "cantidad": 78
->>>>>>> dd87913645b7492977f5001a1431b5c97d573e06
       }
     ],
     "servicios": [
@@ -51,8 +48,6 @@
       {
         "id": 11,
         "cantidad": 20
-<<<<<<< HEAD
-=======
       },
       {
         "id": 12,
@@ -67,7 +62,6 @@
         "producto": "Prueba",
         "precio": 34,
         "cantidad": 123
->>>>>>> dd87913645b7492977f5001a1431b5c97d573e06
       }
     ]
   }
