@@ -52,6 +52,12 @@
       "producto": "lalal",
       "precio": 1230,
       "cantidad": 12
+    },
+    {
+      "id": 1737709278356,
+      "producto": "RedRum",
+      "precio": 666,
+      "cantidad": 999
     }
   ]
 }
