@@ -303,7 +303,7 @@ app.post('/habitaciones', (req, res) => {
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             return res.status(500).send('Error al leer el archivo');
-        }
+        }gfdgdfhfhhrthtrhtrhtr
 
         let habitacionesData = JSON.parse(data);
         // Generar nuevo ID
@@ -312,12 +312,12 @@ app.post('/habitaciones', (req, res) => {
 
         habitacionesData.habitaciones.push(nuevaHabitacion);
 
-        fs.writeFile(filePath, JSON.stringify(habitacionesData, null, 2), (err) => {
+        /*fs.writeFile(filePath, JSON.stringify(habitacionesData, null, 2), (err) => {
             if (err) {
                 return res.status(500).send('Error al escribir el archivo');
             }
             res.status(201).json(nuevaHabitacion);
-        });
+        });*/
     });
 });
 
@@ -336,12 +336,12 @@ app.post('/servicios', (req, res) => {
 
         servicios.push(nuevoServicio);
 
-        fs.writeFile(filePath, JSON.stringify(servicios, null, 2), (err) => {
+       /* fs.writeFile(filePath, JSON.stringify(servicios, null, 2), (err) => {
             if (err) {
                 return res.status(500).send('Error al escribir el archivo');
             }
             res.status(201).json(nuevoServicio);
-        });
+        });*/
     });
 });
 

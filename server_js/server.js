@@ -18,6 +18,7 @@ const projectRoot = path.join(__dirname, '..');
 app.use(express.static(projectRoot));
 
 
+
 // Endpoint para obtener reservas desde reservas.json
 app.get('/reservas', (req, res) => {
     const filePath = path.join(__dirname, 'reservas.json'); // Ruta del archivo
@@ -236,7 +237,7 @@ app.delete('/stock/:tipo/delete/:id', (req, res) => {
         });
     });
 });
-////// ESTE BOTON NO FUNCIONA ///////////////////////////////////////////////////////////////////////
+
 // Endpoint to delete a product from habitaciones.json
 app.delete('/habitaciones/delete/:id', (req, res) => {
     const filePath = path.join(__dirname, 'habitaciones.json');
@@ -248,10 +249,9 @@ app.delete('/habitaciones/delete/:id', (req, res) => {
         }
 
         let habitacionesData = JSON.parse(data);
-        const indexInHabitaciones = habitacionesData.habitaciones.findIndex(item => item.id === Number(id));
+        const indexInHabitaciones = habitacionesData.habitaciones.findIndex(item => item.id.toString() === id);
 
         if (indexInHabitaciones === -1) {
-            console.log(`Intentó eliminar habitación con ID: ${id}, pero no se encontró`);
             return res.status(404).send('Habitación no encontrada');
         }
 
@@ -264,7 +264,8 @@ app.delete('/habitaciones/delete/:id', (req, res) => {
             }
             res.status(200).send('Habitación eliminada');
         });
-      });
+    });
+    
 });
 
 
@@ -332,11 +333,11 @@ app.post('/stock/:tipo', (req, res) => {
     });
 });
 
-// Endpoint para modificar habitaciones
-app.put('/habitaciones/modify/:id', (req, res) => {
+//ENDPOINTS PARA AGREGAR
+// Endpoint to add a product to habitaciones.json
+app.post('/habitaciones', (req, res) => {
     const filePath = path.join(__dirname, 'habitaciones.json');
-    const id = req.params.id;
-    const updatedData = req.body;
+    const nuevoProducto = req.body;
 
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
@@ -344,32 +345,21 @@ app.put('/habitaciones/modify/:id', (req, res) => {
         }
 
         let habitacionesData = JSON.parse(data);
-        const habitacionIndex = habitacionesData.habitaciones.findIndex(h => h.id === Number(id));
-
-        if (habitacionIndex === -1) {
-            return res.status(404).send('Habitación no encontrada');
-        }
-
-        // Actualizar la habitación
-        habitacionesData.habitaciones[habitacionIndex] = {
-            ...habitacionesData.habitaciones[habitacionIndex],
-            ...updatedData
-        };
+        habitacionesData.habitaciones.push(nuevoProducto);
 
         fs.writeFile(filePath, JSON.stringify(habitacionesData, null, 2), (err) => {
             if (err) {
                 return res.status(500).send('Error al escribir el archivo de habitaciones');
             }
-            res.status(200).json(habitacionesData.habitaciones[habitacionIndex]);
+            res.status(201).json(nuevoProducto);
         });
     });
 });
 
-// Endpoint para modificar servicios
-app.put('/servicios/modify/:id', (req, res) => {
+// Endpoint to add a product to servicios.json
+app.post('/servicios', (req, res) => {
     const filePath = path.join(__dirname, 'servicios.json');
-    const id = req.params.id;
-    const updatedData = req.body;
+    const nuevoProducto = req.body;
 
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
@@ -377,26 +367,18 @@ app.put('/servicios/modify/:id', (req, res) => {
         }
 
         let serviciosData = JSON.parse(data);
-        const servicioIndex = serviciosData.findIndex(s => s.id === Number(id));
-
-        if (servicioIndex === -1) {
-            return res.status(404).send('Servicio no encontrado');
-        }
-
-        // Actualizar el servicio
-        serviciosData[servicioIndex] = {
-            ...serviciosData[servicioIndex],
-            ...updatedData
-        };
+        serviciosData.push(nuevoProducto);
 
         fs.writeFile(filePath, JSON.stringify(serviciosData, null, 2), (err) => {
             if (err) {
                 return res.status(500).send('Error al escribir el archivo de servicios');
             }
-            res.status(200).json(serviciosData[servicioIndex]);
+            res.status(201).json(nuevoProducto);
         });
     });
 });
+
+//FIN ENDPOINTS PARA AGREGAR
 
 
 // Configuración del puerto del servidor

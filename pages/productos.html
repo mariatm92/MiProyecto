@@ -13,6 +13,22 @@
             margin-left: 10px;
             cursor: pointer;
         }
+        .cart-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quantity-spinner {
+            width: 50px;
+            text-align: center;
+        }
+        .cart-btn {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -32,18 +48,25 @@
         <div class="apartadoStock">
             <div class="contenidoStock">
     
-                <h2>Stock Habitaciones</h2>
+                <div class="stock-header">
+                    <h2>Stock Habitaciones</h2>
+                    <button class="addBtn" onclick="openAddProductForm('habitaciones')">Agregar Habitación</button>
+                </div>
                 <div id="habitacionesStock" class="serviciosht"></div>
-                
-                <h2>Stock Servicios</h2>
+
+                <div class="stock-header">
+                    <h2>Stock Servicios</h2>
+                    <button class="addBtn" onclick="openAddProductForm('servicios')">Agregar Servicio</button>
+                </div>
                 <div id="serviciosStock" class="serviciosht"></div>
             </div>
         </div>
 
-        <div id="formOverlay" class="form-overlay">
+        <div id="formOverlay" class="form-overlay" style="display:none;">
             <div class="form-container">
                 <h3 id="formTitle">Agregar Producto</h3>
                 <form id="productoForm">
+                    <input type="hidden" id="productoTipo" value="">
                     <div class="form-group">
                         <label for="producto">Nombre del Producto:</label>
                         <input type="text" id="producto" required>
@@ -53,7 +76,7 @@
                         <input type="number" id="precio" required>
                     </div>
                     <div class="form-group">
-                        <label for="cantidad">Stock:</label>
+                        <label for="cantidad">Cantidad:</label>
                         <input type="number" id="cantidad" required>
                     </div>
                     <div class="button-container">
@@ -63,25 +86,160 @@
                 </form>
             </div>
         </div>
-    
     </div>
 
     <script>
-        
-async function deleteProduct(id, type) {
-    try {
-        // Cambiar a URL completa del servidor
-        const stockResponse = await fetch(`http://localhost:3000/stock/${type}/delete/${id}`, { method: 'DELETE' });
-        const jsonResponse = await fetch(`http://localhost:3000/${type}/delete/${id}`, { method: 'DELETE' });
+function deleteProduct(id, type) {
+    // Delete from stock
+    fetch(`http://localhost:3000/stock/${type}/delete/${id}`, { method: 'DELETE' })
+        .then(stockResponse => {
+            if (!stockResponse.ok) throw new Error('Error deleting from stock');
+            
+            // Delete from corresponding JSON (habitaciones or servicios)
+            return fetch(`http://localhost:3000/${type}/delete/${id}`, { method: 'DELETE' });
+        })
+        .then(jsonResponse => {
+            if (!jsonResponse.ok) throw new Error(`Error deleting from ${type}`);
+            
+            // Refresh stock display
+            mostrarStock();
+        })
+        .catch(error => {
+            console.error('Deletion error:', error);
+            alert(`Error al eliminar el producto: ${error.message}`);
+        });
+}
 
-        if (!stockResponse.ok) throw new Error('Error deleting from stock');
-        if (!jsonResponse.ok) throw new Error(`Error deleting from ${type}`);
 
-        mostrarStock();
-    } catch (error) {
-        console.error('Deletion error:', error);
-        alert(`Error al eliminar el producto: ${error.message}`);
+//CODIGO PARA EL CARRITO DE LA COMPRA
+/*async function addToCart(id, type, disponible) {
+    const quantityInput = document.getElementById(`quantity-${type}-${id}`);
+    const cantidad = parseInt(quantityInput.value);
+
+    if (cantidad <= 0) {
+        alert('Por favor, seleccione una cantidad válida');
+        return;
     }
+
+    if (cantidad > disponible) {
+        alert(`Solo hay ${disponible} unidades disponibles`);
+        return;
+    }
+
+    try {
+        // Reduce stock 
+        const stockResponse = await fetch(`/stock/${type}/update/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ cantidad: -cantidad })
+        });
+
+        if (!stockResponse.ok) throw new Error('Error updating stock');
+
+        // Refresh stock display
+        mostrarStock();
+        
+        // Reset quantity input
+        quantityInput.value = 1;
+
+        alert(`Se han añadido ${cantidad} unidades al carrito`);
+    } catch (error) {
+        console.error('Cart error:', error);
+        alert(`Error al añadir al carrito: ${error.message}`);
+    }
+}*/
+//TERMINA EL CARRITO DE LA COMPRA
+
+//CODIGO PARA AGREGAR
+function openAddProductForm(type) {
+    document.getElementById('productoTipo').value = type;
+    document.getElementById('formTitle').textContent = `Agregar ${type === 'habitaciones' ? 'Habitación' : 'Servicio'}`;
+    document.getElementById('formOverlay').style.display = 'flex';
+}
+
+function cerrarFormulario() {
+    document.getElementById('formOverlay').style.display = 'none';
+    document.getElementById('productoForm').reset();
+}
+
+function agregarProducto(event) {
+    event.preventDefault();
+
+    // Obtener los valores del formulario
+    const tipo = document.getElementById('productoTipo').value; // "habitaciones" o "servicios"
+    const producto = document.getElementById('producto').value; // Nombre del producto/habitación
+    const precio = parseFloat(document.getElementById('precio').value); // Precio
+    const cantidad = parseInt(document.getElementById('cantidad').value); // Cantidad
+
+    // Crear el objeto del nuevo producto
+    const nuevoId = Date.now(); // ID único basado en el timestamp actual
+    const nuevoStock = { id: nuevoId, cantidad: cantidad }; // Datos para `stock.json`
+    const nuevoProducto = { id: nuevoId, nombre: producto, precio: precio }; // Datos para `habitaciones.json` o `servicios.json`
+
+    // 1. Agregar al archivo `stock.json`
+    fetch(`http://localhost:3000/stock/${tipo}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(nuevoStock),
+    })
+    .then((stockResponse) => {
+        if (!stockResponse.ok) {
+            throw new Error('Error agregando al stock');
+        }
+
+        // 2. Agregar al archivo correspondiente (`habitaciones.json` o `servicios.json`)
+        const jsonEndpoint = tipo === 'habitaciones' 
+            ? `http://localhost:3000/habitaciones` 
+            : `http://localhost:3000/servicios`;
+
+        return fetch(jsonEndpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(nuevoProducto),
+        });
+    })
+    .then((jsonResponse) => {
+        if (!jsonResponse.ok) {
+            throw new Error('Error agregando al archivo JSON');
+        }
+
+        // Actualizar la interfaz después de agregar
+        mostrarStock();
+        cerrarFormulario();
+    })
+    .catch((error) => {
+        console.error('Error completo:', error);
+        alert(`Error al agregar producto: ${error.message}`);
+    });
+}
+function abrirFormularioModificar(id, tipo, producto, precio, cantidad) {
+    const formularioOverlay = document.getElementById('formOverlay');
+    const tituloFormulario = document.getElementById('formTitle');
+    const inputProducto = document.getElementById('producto');
+    const inputPrecio = document.getElementById('precio');
+    const inputCantidad = document.getElementById('cantidad');
+    const botonEnviar = document.querySelector('#productoForm button[type="submit"]');
+
+    tituloFormulario.textContent = `Modificar ${tipo === 'habitaciones' ? 'Habitación' : 'Servicio'}`;
+    inputProducto.value = producto;
+    inputPrecio.value = precio;
+    inputCantidad.value = cantidad;
+    
+    // Guardar tipo e ID para usar en envío
+    formularioOverlay.dataset.type = tipo;
+    formularioOverlay.dataset.id = id;
+
+    // Cambiar texto del botón
+    botonEnviar.textContent = 'Modificar';
+
+    // Mostrar formulario
+    formularioOverlay.style.display = 'block';
 }
 
 
@@ -101,36 +259,63 @@ function mostrarStock() {
         Promise.all([stockResponse.json(), habitacionesResponse.json(), serviciosResponse.json()])
     )
     .then(([stockData, habitacionesData, serviciosData]) => {
+        console.log(stockData);
         const habitaciones = habitacionesData.habitaciones;
+        console.log(habitaciones);
+        
+
         const servicios = serviciosData;
 
         stockData.stock.habitaciones.forEach(stockItem => {
             const habitacion = habitaciones.find(h => h.id === stockItem.id);
+            console.log(habitacion);
             
             const habitacionDetails = document.createElement('div');
             habitacionDetails.classList.add('stockDetails');
             habitacionDetails.innerHTML = `
                 <div class="stockField"><strong>ID:</strong> ${stockItem.id}</div>
-                <div class="stockField"><strong>Nombre:</strong> ${habitacion ? habitacion.producto : 'Desconocido'}</div>
+                <div class="stockField"><strong>Nombre:</strong> ${habitacion ? habitacion.nombre : 'Desconocido'}</div>
                 <div class="stockField"><strong>Precio:</strong> ${habitacion ? habitacion.precio : 0}€</div>
                 <div class="stockField"><strong>Cantidad:</strong> ${stockItem.cantidad}</div>
+                <div class="cart-container">
+                    <input type="number" id="quantity-habitaciones-${stockItem.id}" 
+                           class="quantity-spinner" 
+                           min="1" 
+                           max="${stockItem.cantidad}" 
+                           value="1">
+                    <button class="cart-btn" onclick="addToCart(${stockItem.id}, 'habitaciones', ${stockItem.cantidad})">
+                        🛒 Añadir
+                    </button>
+                </div>
                 <button class="deleteBtn" onclick="deleteProduct(${stockItem.id}, 'habitaciones')">Eliminar</button>
-            `;
+                <button class="deleteBtn" onclick="abrirFormularioModificar(${stockItem.id}, 'habitaciones', '${habitacion ? habitacion.nombre : "Desconocido"}', '${habitacion ? habitacion.precio : 0}', ${stockItem.cantidad})">Modificar</button>
+                `;
 
             habitacionesStock.appendChild(habitacionDetails);
         });
 
         stockData.stock.servicios.forEach(stockServicio => {
-            const servicio = servicios.find(s => s.id === stockServicio.id);
+            const servicio = serviciosData.find(s => Number(s.id) === Number(stockServicio.id));
             
             const servicioDetails = document.createElement('div');
             servicioDetails.classList.add('stockDetails');
             servicioDetails.innerHTML = `
                 <div class="stockField"><strong>ID:</strong> ${stockServicio.id}</div>
-                <div class="stockField"><strong>Nombre:</strong> ${servicio ? servicio.producto : 'Desconocido'}</div>
+                <div class="stockField"><strong>Nombre:</strong> ${servicio ? servicio.nombre : 'Desconocido'}</div>
                 <div class="stockField"><strong>Precio:</strong> ${servicio ? servicio.precio : 0}€</div>
                 <div class="stockField"><strong>Cantidad:</strong> ${stockServicio.cantidad}</div>
+                <div class="cart-container">
+                    <input type="number" id="quantity-servicios-${stockServicio.id}" 
+                           class="quantity-spinner" 
+                           min="1" 
+                           max="${stockServicio.cantidad}" 
+                           value="1">
+                    <button class="cart-btn" onclick="addToCart(${stockServicio.id}, 'servicios', ${stockServicio.cantidad})">
+                        🛒 Añadir
+                    </button>
+                </div>
                 <button class="deleteBtn" onclick="deleteProduct(${stockServicio.id}, 'servicios')">Eliminar</button>
+                <button class="deleteBtn" onclick="abrirFormularioModificar(${stockServicio.id}, 'servicios', '${servicio ? servicio.nombre : ''}', ${servicio ? servicio.precio : 0}, ${stockServicio.cantidad})">Modificar</button>
             `;
 
             serviciosStock.appendChild(servicioDetails);
@@ -141,9 +326,11 @@ function mostrarStock() {
         habitacionesStock.innerHTML = `<p>Error al cargar el Stock: ${error.message}</p>`;
     });
 }
+
+document.getElementById('productoForm').addEventListener('submit', agregarProducto);
         
 // Call the function when page loads
 window.onload = mostrarStock;
     </script>
 </body>
-</html>
+</html> 
