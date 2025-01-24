@@ -42,10 +42,6 @@
     ],
     "servicios": [
       {
-        "id": 1,
-        "cantidad": 20
-      },
-      {
         "id": 6,
         "cantidad": 20
       },

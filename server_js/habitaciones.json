@@ -46,6 +46,12 @@
       "producto": "Hola",
       "precio": 45,
       "cantidad": 78
+    },
+    {
+      "id": 1737706553128,
+      "producto": "lalal",
+      "precio": 1230,
+      "cantidad": 12
     }
   ]
 }
