@@ -111,45 +111,75 @@ function deleteProduct(id, type) {
 }
 
 
-//CODIGO PARA EL CARRITO DE LA COMPRA
-/*async function addToCart(id, type, disponible) {
+function addToCart(id, type, disponible) {
     const quantityInput = document.getElementById(`quantity-${type}-${id}`);
     const cantidad = parseInt(quantityInput.value);
-
+    
     if (cantidad <= 0) {
         alert('Por favor, seleccione una cantidad válida');
         return;
     }
-
+    
     if (cantidad > disponible) {
         alert(`Solo hay ${disponible} unidades disponibles`);
         return;
     }
+    
+    // Find the product details
+    const stockItems = type === 'habitaciones'
+        ? window.habitacionesStockData.stock.habitaciones
+        : window.serviciosStockData.stock.servicios;
+    
+    const productDetails = stockItems.find(item => item.id === id);
+    
+    const productName = type === 'habitaciones'
+        ? window.habitacionesData.habitaciones.find(h => h.id === id)?.producto
+        : window.serviciosData.find(s => s.id === id)?.producto;
+    
+    // Add to cart
+    cart.push({
+        id: id,
+        type: type,
+        cantidad: cantidad,
+        precio: productDetails.precio,
+        nombre: productName
+    });
+    
+    alert(`Se han añadido ${cantidad} unidades de ${productName} al carrito`);
+    quantityInput.value = 1;
+}
 
-    try {
-        // Reduce stock 
-        const stockResponse = await fetch(`/stock/${type}/update/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ cantidad: -cantidad })
-        });
+// Open cart modal and display items
+function openCartModal() {
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartTotalEl = document.getElementById('cartTotal');
+    
+    cartItemsEl.innerHTML = '';
+    let total = 0;
 
-        if (!stockResponse.ok) throw new Error('Error updating stock');
+    cart.forEach((item, index) => {
+        const itemEl = document.createElement('div');
+        itemEl.innerHTML = `
+            ${item.nombre} - Cantidad: ${item.cantidad} - Precio: ${item.precio * item.cantidad}€
+            <button onclick="removeFromCart(${index})">Eliminar</button>
+        `;
+        cartItemsEl.appendChild(itemEl);
+        total += item.precio * item.cantidad;
+    });
 
-        // Refresh stock display
-        mostrarStock();
-        
-        // Reset quantity input
-        quantityInput.value = 1;
+    cartTotalEl.innerHTML = `Total: ${total}€`;
+    document.getElementById('cartModal').style.display = 'block';
+}
 
-        alert(`Se han añadido ${cantidad} unidades al carrito`);
-    } catch (error) {
-        console.error('Cart error:', error);
-        alert(`Error al añadir al carrito: ${error.message}`);
-    }
-}*/
+// Remove item from cart
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    openCartModal(); // Refresh cart view
+}
+// Close cart modal
+function closeCartModal() {
+    document.getElementById('cartModal').style.display = 'none';
+}
 //TERMINA EL CARRITO DE LA COMPRA
 
 //CODIGO PARA AGREGAR
