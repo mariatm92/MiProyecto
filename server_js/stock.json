@@ -4,6 +4,18 @@
       {
         "id": 1737714622478,
         "cantidad": 1
+      },
+      {
+        "id": 1737715638355,
+        "producto": "qqqq",
+        "precio": 1,
+        "cantidad": 1
+      },
+      {
+        "id": 1737715662454,
+        "producto": "ll",
+        "precio": 2,
+        "cantidad": 5
       }
     ],
     "servicios": [
