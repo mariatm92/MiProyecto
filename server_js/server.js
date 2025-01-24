@@ -381,6 +381,47 @@ app.post('/servicios', (req, res) => {
 
 //FIN ENDPOINTS PARA AGREGAR
 
+//ENDPOINT PARA EL CARRITO DE COMPRA
+// Endpoint to update stock quantity
+app.patch('/stock/:tipo/update/:id', (req, res) => {
+    const filePath = path.join(__dirname, 'stock.json');
+    const tipo = req.params.tipo;
+    const id = req.params.id;
+    const { cantidad } = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error al leer el archivo de stock');
+        }
+
+        let stockData = JSON.parse(data);
+        const stockItemIndex = stockData.stock[tipo].findIndex(item => item.id.toString() === id);
+
+        if (stockItemIndex === -1) {
+            return res.status(404).send('Producto no encontrado en stock');
+        }
+
+        // Update the stock quantity
+        stockData.stock[tipo][stockItemIndex].cantidad += cantidad;
+
+        // Ensure quantity doesn't go negative
+        if (stockData.stock[tipo][stockItemIndex].cantidad < 0) {
+            stockData.stock[tipo][stockItemIndex].cantidad = 0;
+        }
+
+        fs.writeFile(filePath, JSON.stringify(stockData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('Error al escribir el archivo de stock');
+            }
+            res.status(200).json({
+                id: id,
+                nuevaCantidad: stockData.stock[tipo][stockItemIndex].cantidad
+            });
+        });
+    });
+});
+//FIN ENDPOINT CARRITO DE COMPRA 
+
 
 // Configuración del puerto del servidor
 const PORT = process.env.PORT || 3000;

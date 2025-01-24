@@ -13,6 +13,22 @@
             margin-left: 10px;
             cursor: pointer;
         }
+        .cart-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quantity-spinner {
+            width: 50px;
+            text-align: center;
+        }
+        .cart-btn {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -70,7 +86,6 @@
                 </form>
             </div>
         </div>
-    
     </div>
 
     <script>
@@ -91,6 +106,48 @@ async function deleteProduct(id, type) {
         alert(`Error al eliminar el producto: ${error.message}`);
     }
 }
+
+//CODIGO PARA EL CARRITO DE LA COMPRA
+async function addToCart(id, type, disponible) {
+    const quantityInput = document.getElementById(`quantity-${type}-${id}`);
+    const cantidad = parseInt(quantityInput.value);
+
+    if (cantidad <= 0) {
+        alert('Por favor, seleccione una cantidad válida');
+        return;
+    }
+
+    if (cantidad > disponible) {
+        alert(`Solo hay ${disponible} unidades disponibles`);
+        return;
+    }
+
+    try {
+        // Reduce stock 
+        const stockResponse = await fetch(`/stock/${type}/update/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ cantidad: -cantidad })
+        });
+
+        if (!stockResponse.ok) throw new Error('Error updating stock');
+
+        // Refresh stock display
+        mostrarStock();
+        
+        // Reset quantity input
+        quantityInput.value = 1;
+
+        alert(`Se han añadido ${cantidad} unidades al carrito`);
+    } catch (error) {
+        console.error('Cart error:', error);
+        alert(`Error al añadir al carrito: ${error.message}`);
+    }
+}
+//TERMINA EL CARRITO DE LA COMPRA
+
 //CODIGO PARA AGREGAR
 function openAddProductForm(type) {
     document.getElementById('productoTipo').value = type;
@@ -183,6 +240,16 @@ function mostrarStock() {
                 <div class="stockField"><strong>Nombre:</strong> ${habitacion ? habitacion.producto : 'Desconocido'}</div>
                 <div class="stockField"><strong>Precio:</strong> ${habitacion ? habitacion.precio : 0}€</div>
                 <div class="stockField"><strong>Cantidad:</strong> ${stockItem.cantidad}</div>
+                <div class="cart-container">
+                    <input type="number" id="quantity-habitaciones-${stockItem.id}" 
+                           class="quantity-spinner" 
+                           min="1" 
+                           max="${stockItem.cantidad}" 
+                           value="1">
+                    <button class="cart-btn" onclick="addToCart(${stockItem.id}, 'habitaciones', ${stockItem.cantidad})">
+                        🛒 Añadir
+                    </button>
+                </div>
                 <button class="deleteBtn" onclick="deleteProduct(${stockItem.id}, 'habitaciones')">Eliminar</button>
             `;
 
@@ -199,6 +266,16 @@ function mostrarStock() {
                 <div class="stockField"><strong>Nombre:</strong> ${servicio ? servicio.producto : 'Desconocido'}</div>
                 <div class="stockField"><strong>Precio:</strong> ${servicio ? servicio.precio : 0}€</div>
                 <div class="stockField"><strong>Cantidad:</strong> ${stockServicio.cantidad}</div>
+                <div class="cart-container">
+                    <input type="number" id="quantity-servicios-${stockServicio.id}" 
+                           class="quantity-spinner" 
+                           min="1" 
+                           max="${stockServicio.cantidad}" 
+                           value="1">
+                    <button class="cart-btn" onclick="addToCart(${stockServicio.id}, 'servicios', ${stockServicio.cantidad})">
+                        🛒 Añadir
+                    </button>
+                </div>
                 <button class="deleteBtn" onclick="deleteProduct(${stockServicio.id}, 'servicios')">Eliminar</button>
             `;
 
