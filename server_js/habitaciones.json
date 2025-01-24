@@ -1,11 +1,6 @@
 {
   "habitaciones": [
     {
-      "id": 1737714622478,
-      "nombre": "aaaa",
-      "precio": 1
-    },
-    {
       "id": 1737715638355,
       "producto": "qqqq",
       "precio": 1,
