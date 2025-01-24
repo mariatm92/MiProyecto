@@ -29,6 +29,24 @@
             padding: 5px 10px;
             cursor: pointer;
         }
+        #cartModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .cart-modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
     </style>
 </head>
 <body>
@@ -42,6 +60,7 @@
                     <li><a href="productos.html">Productos</a></li>
                     <li><a href="reservas.html">Reservas</a></li>
                     <li><a href="graficos.html">Gráficos</a></li>
+                    <li><button onclick="openCartModal()">🛒 Carrito</button></li>
                 </div> 
             </div>         
         </div>
@@ -59,6 +78,16 @@
                     <button class="addBtn" onclick="openAddProductForm('servicios')">Agregar Servicio</button>
                 </div>
                 <div id="serviciosStock" class="serviciosht"></div>
+            </div>
+        </div>
+
+        <div id="cartModal" class="cart-modal">
+            <div class="cart-modal-content">
+                <h2>Carrito de Compra</h2>
+                <div id="cartItems"></div>
+                <div id="cartTotal"></div>
+                <button onclick="processCart()">Comprar</button>
+                <button onclick="closeCartModal()">Cerrar</button>
             </div>
         </div>
 
@@ -108,7 +137,9 @@ async function deleteProduct(id, type) {
 }
 
 //CODIGO PARA EL CARRITO DE LA COMPRA
-async function addToCart(id, type, disponible) {
+let cart = [];
+
+function addToCart(id, type, disponible) {
     const quantityInput = document.getElementById(`quantity-${type}-${id}`);
     const cantidad = parseInt(quantityInput.value);
 
@@ -122,30 +153,89 @@ async function addToCart(id, type, disponible) {
         return;
     }
 
+    // Find the product details
+    const stockItems = type === 'habitaciones' 
+        ? window.habitacionesStockData.stock.habitaciones 
+        : window.serviciosStockData.stock.servicios;
+    
+    const productDetails = stockItems.find(item => item.id === id);
+    const productName = type === 'habitaciones' 
+        ? window.habitacionesData.habitaciones.find(h => h.id === id)?.producto 
+        : window.serviciosData.find(s => s.id === id)?.producto;
+
+    // Add to cart
+    cart.push({
+        id: id,
+        type: type,
+        cantidad: cantidad,
+        precio: productDetails.precio,
+        nombre: productName
+    });
+
+    alert(`Se han añadido ${cantidad} unidades de ${productName} al carrito`);
+    quantityInput.value = 1;
+}
+
+// Open cart modal and display items
+function openCartModal() {
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartTotalEl = document.getElementById('cartTotal');
+    
+    cartItemsEl.innerHTML = '';
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        const itemEl = document.createElement('div');
+        itemEl.innerHTML = `
+            ${item.nombre} - Cantidad: ${item.cantidad} - Precio: ${item.precio * item.cantidad}€
+            <button onclick="removeFromCart(${index})">Eliminar</button>
+        `;
+        cartItemsEl.appendChild(itemEl);
+        total += item.precio * item.cantidad;
+    });
+
+    cartTotalEl.innerHTML = `Total: ${total}€`;
+    document.getElementById('cartModal').style.display = 'block';
+}
+
+// Remove item from cart
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    openCartModal(); // Refresh cart view
+}
+
+// Process cart - reduce stock and clear cart
+async function processCart() {
     try {
-        // Reduce stock 
-        const stockResponse = await fetch(`http://localhost:3000/stock/${type}/update/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ cantidad: -cantidad })
-        });
+        // Process each item in the cart
+        for (const item of cart) {
+            const stockResponse = await fetch(`http://localhost:3000/stock/${item.type}/update/${item.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ cantidad: -item.cantidad })
+            });
 
-        if (!stockResponse.ok) throw new Error('Error updating stock');
+            if (!stockResponse.ok) throw new Error(`Error updating stock for ${item.nombre}`);
+        }
 
-        // Refresh stock display
+        // Clear cart and refresh stock
+        cart = [];
+        closeCartModal();
         mostrarStock();
-        
-        // Reset quantity input
-        quantityInput.value = 1;
-
-        alert(`Se han añadido ${cantidad} unidades al carrito`);
+        alert('Compra realizada con éxito');
     } catch (error) {
-        console.error('Cart error:', error);
-        alert(`Error al añadir al carrito: ${error.message}`);
+        console.error('Purchase error:', error);
+        alert(`Error al procesar la compra: ${error.message}`);
     }
 }
+
+// Close cart modal
+function closeCartModal() {
+    document.getElementById('cartModal').style.display = 'none';
+}
+
 //TERMINA EL CARRITO DE LA COMPRA
 
 //CODIGO PARA AGREGAR
@@ -229,6 +319,11 @@ function mostrarStock() {
     .then(([stockData, habitacionesData, serviciosData]) => {
         const habitaciones = habitacionesData.habitaciones;
         const servicios = serviciosData;
+
+        window.habitacionesStockData = stockData;
+        window.habitacionesData = habitacionesData;
+        window.serviciosStockData = stockData;
+        window.serviciosData = serviciosData;
 
         stockData.stock.habitaciones.forEach(stockItem => {
             const habitacion = habitaciones.find(h => h.id === stockItem.id);
