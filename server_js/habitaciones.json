@@ -34,6 +34,21 @@
       "id": 25,
       "producto": "Habitación para Mascotas",
       "precio": 150
+<<<<<<< HEAD
+=======
+    },
+    {
+      "producto": "Habitacion vista piscina",
+      "precio": 200,
+      "cantidad": 20,
+      "id": 26
+    },
+    {
+      "id": 1737706094329,
+      "producto": "Hola",
+      "precio": 45,
+      "cantidad": 78
+>>>>>>> dd87913645b7492977f5001a1431b5c97d573e06
     }
   ]
 }
