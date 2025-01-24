@@ -124,7 +124,7 @@ async function addToCart(id, type, disponible) {
 
     try {
         // Reduce stock 
-        const stockResponse = await fetch(`/stock/${type}/update/${id}`, {
+        const stockResponse = await fetch(`http://localhost:3000/stock/${type}/update/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
