@@ -4,6 +4,16 @@
     <meta charset="utf-8">
     <title>Productos</title>
     <link href="../css/productos.css" rel="stylesheet" type="text/css">
+    <style>
+        .deleteBtn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapp">
@@ -21,23 +31,6 @@
         </div>
         <div class="apartadoStock">
             <div class="contenidoStock">
-                <div class="section-header">
-                    <h2>Habitaciones</h2>
-                    <button onclick="mostrarFormulario('habitaciones')">Agregar Habitación</button>
-                </div>
-                <div id="habitacioneshotel" class="habitacionesht"></div>
-    
-                <div class="section-header">
-                    <h2>Regimen</h2>
-                    <button onclick="mostrarFormulario('regimen')">Agregar Régimen</button>
-                </div>
-                <div id="regimenhotel" class="regimenht"></div>
-    
-                <div class="section-header">
-                    <h2>Servicios</h2>
-                    <button onclick="mostrarFormulario('servicios')">Agregar Servicio</button>
-                </div>
-                <div id="servicioshotel" class="serviciosht"></div>
     
                 <h2>Stock Habitaciones</h2>
                 <div id="habitacionesStock" class="serviciosht"></div>
@@ -74,133 +67,83 @@
     </div>
 
     <script>
+async function deleteProduct(id, type) {
+    try {
+        // Delete from stock
+        const stockResponse = await fetch(`/stock/${type}/delete/${id}`, { method: 'DELETE' });
+        if (!stockResponse.ok) throw new Error('Error deleting from stock');
 
-        function mostrarStock() {
-            const habitacionesStock = document.getElementById('habitacionesStock');
-            const serviciosStock = document.getElementById('serviciosStock');
+        // Delete from corresponding JSON (habitaciones or servicios)
+        const jsonResponse = await fetch(`/${type}/delete/${id}`, { method: 'DELETE' });
+        if (!jsonResponse.ok) throw new Error(`Error deleting from ${type}`);
 
-          
-          //  habitacioneshotel.innerHTML = '';
-           // regimenhotel.innerHTML = '';
-           // servicioshotel.innerHTML = '';
-            habitacionesStock.innerHTML = '';
-            serviciosStock.innerHTML = '';
+        // Refresh stock display
+        mostrarStock();
+    } catch (error) {
+        console.error('Deletion error:', error);
+        alert(`Error al eliminar el producto: ${error.message}`);
+    }
+}
+
+function mostrarStock() {
+    const habitacionesStock = document.getElementById('habitacionesStock');
+    const serviciosStock = document.getElementById('serviciosStock');
+
+    habitacionesStock.innerHTML = '';
+    serviciosStock.innerHTML = '';
+
+    Promise.all([
+        fetch('http://localhost:3000/stock'),
+        fetch('http://localhost:3000/habitaciones'),
+        fetch('http://localhost:3000/servicios')
+    ])
+    .then(([stockResponse, habitacionesResponse, serviciosResponse]) => 
+        Promise.all([stockResponse.json(), habitacionesResponse.json(), serviciosResponse.json()])
+    )
+    .then(([stockData, habitacionesData, serviciosData]) => {
+        const habitaciones = habitacionesData.habitaciones;
+        const servicios = serviciosData;
+
+        stockData.stock.habitaciones.forEach(stockItem => {
+            const habitacion = habitaciones.find(h => h.id === stockItem.id);
             
+            const habitacionDetails = document.createElement('div');
+            habitacionDetails.classList.add('stockDetails');
+            habitacionDetails.innerHTML = `
+                <div class="stockField"><strong>ID:</strong> ${stockItem.id}</div>
+                <div class="stockField"><strong>Nombre:</strong> ${habitacion ? habitacion.producto : 'Desconocido'}</div>
+                <div class="stockField"><strong>Precio:</strong> ${habitacion ? habitacion.precio : 0}€</div>
+                <div class="stockField"><strong>Cantidad:</strong> ${stockItem.cantidad}</div>
+                <button class="deleteBtn" onclick="deleteProduct(${stockItem.id}, 'habitaciones')">Eliminar</button>
+            `;
 
-            fetch('http://localhost:3000/stock')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    
-                    // Mostrar Stockhabitaciones
-                    data.stock.habitaciones.forEach(habitacion => {
-                        const habitacionDetails = document.createElement('div');
-                        habitacionDetails.classList.add('stockDetails');
+            habitacionesStock.appendChild(habitacionDetails);
+        });
 
-                        habitacionDetails.innerHTML = `
-                            <div class="stockField"><strong>ID Producto:</strong> ${habitacion.id}</div>
-                            <div class="stockField"><strong>Producto:</strong> ${habitacion.producto}</div>
-                            <div class="stockField"><strong>Precio:</strong> ${habitacion.precio}€</div>
-                            <div class="stockField"><strong>Cantidad:</strong> ${habitacion.cantidad}</div>
-                        `;
+        stockData.stock.servicios.forEach(stockServicio => {
+            const servicio = servicios.find(s => s.id === stockServicio.id);
+            
+            const servicioDetails = document.createElement('div');
+            servicioDetails.classList.add('stockDetails');
+            servicioDetails.innerHTML = `
+                <div class="stockField"><strong>ID:</strong> ${stockServicio.id}</div>
+                <div class="stockField"><strong>Nombre:</strong> ${servicio ? servicio.producto : 'Desconocido'}</div>
+                <div class="stockField"><strong>Precio:</strong> ${servicio ? servicio.precio : 0}€</div>
+                <div class="stockField"><strong>Cantidad:</strong> ${stockServicio.cantidad}</div>
+                <button class="deleteBtn" onclick="deleteProduct(${stockServicio.id}, 'servicios')">Eliminar</button>
+            `;
 
-                        habitacionesStock.appendChild(habitacionDetails);
-                    });
-
-                    // Mostrar Stock servicios
-                    data.stock.servicios.forEach(servicio => {
-                        const servicioDetails = document.createElement('div');
-                        servicioDetails.classList.add('stockDetails');
-
-                        servicioDetails.innerHTML = `
-                            <div class="stockField"><strong>ID Producto:</strong> ${servicio.id}</div>
-                            <div class="stockField"><strong>Producto:</strong> ${servicio.producto}</div>
-                            <div class="stockField"><strong>Precio:</strong> ${servicio.precio}€</div>
-                            <div class="stockField"><strong>Cantidad:</strong> ${servicio.cantidad}</div>
-                        `;
-
-                        serviciosStock.appendChild(servicioDetails);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error al obtener el stock:', error);
-                    habitacionesStock.innerHTML = '<p>Error al cargar el StockHabitaciones</p>';
-                    serviciosStock.innerHTML = '<p>Error al cargar el StockServicios</p>';
-                });
-
-                
-                
-        }
-
-        let tipoProductoActual = '';
-
-    function mostrarFormulario(tipo) {
-        tipoProductoActual = tipo;
-        document.getElementById('formOverlay').style.display = 'block';
-        document.getElementById('formTitle').textContent = `Agregar ${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`;
-    }
-
-    function cerrarFormulario() {
-        document.getElementById('formOverlay').style.display = 'none';
-        document.getElementById('productoForm').reset();
-    }
-
-    document.getElementById('productoForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const nuevoProducto = {
-            producto: document.getElementById('producto').value,
-            precio: Number(document.getElementById('precio').value),
-            cantidad: Number(document.getElementById('cantidad').value)
-        };
-
-        fetch(`http://localhost:3000/${tipoProductoActual}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(nuevoProducto)
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Error al agregar el producto');
-            return response.json();
-        })
-        .then(productoGuardado => {
-        // Segunda llamada para actualizar el stock
-        return fetch(`http://localhost:3000/stock/${tipoProductoActual}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                ...nuevoProducto,
-                id: productoGuardado.id
-            })
+            serviciosStock.appendChild(servicioDetails);
         });
     })
-        .then(() => {
-            cerrarFormulario();
-            mostrarStock();
-            alert('Producto agregado correctamente');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al agregar el producto');
-        });
+    .catch(error => {
+        console.error('Error:', error);
+        habitacionesStock.innerHTML = `<p>Error al cargar el Stock: ${error.message}</p>`;
     });
-
-        // Cargar el stock al iniciar la página
-        mostrarStock();
-        function redirigirAdmin() {
-                var correo = "admin@admin.com";
-                window.location.href = `admin.html?correo=${encodeURIComponent(correo)}`;
-         }
-
-    
+}
+        
+// Call the function when page loads
+window.onload = mostrarStock;
     </script>
 </body>
 </html>
