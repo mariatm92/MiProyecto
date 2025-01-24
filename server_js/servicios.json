@@ -58,10 +58,5 @@
     "producto": "Cianuro",
     "precio": 666,
     "id": 18
-  },
-  {
-    "producto": "hola",
-    "precio": 23,
-    "id": 19
   }
 ]
