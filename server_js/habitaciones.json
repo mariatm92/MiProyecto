@@ -4,6 +4,11 @@
       "id": 1737718154150,
       "nombre": "pop",
       "precio": 5
+    },
+    {
+      "id": 1737817601305,
+      "nombre": "habitacion doble",
+      "precio": 200
     }
   ]
 }

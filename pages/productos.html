@@ -42,6 +42,17 @@
                     <li><a href="productos.html">Productos</a></li>
                     <li><a href="reservas.html">Reservas</a></li>
                     <li><a href="graficos.html">Gráficos</a></li>
+                    <div id="cartModal" style="display:none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+                        <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%;">
+                            <span onclick="closeCartModal()" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+                            <h2>Carrito de Compra</h2>
+                            <div id="cartItems"></div>
+                            <div id="cartTotal"></div>
+                            <button onclick="finalizarCompra()">Finalizar Compra</button>
+                        </div>
+                    </div>
+                    
+                    <button onclick="openCartModal()" style="position: fixed; bottom: 20px; right: 20px;">🛒 Carrito</button>
                 </div> 
             </div>         
         </div>
@@ -125,60 +136,45 @@ function addToCart(id, type, disponible) {
         return;
     }
     
-    // Find the product details
-    const stockItems = type === 'habitaciones'
-        ? window.habitacionesStockData.stock.habitaciones
-        : window.serviciosStockData.stock.servicios;
-    
-    const productDetails = stockItems.find(item => item.id === id);
+    // Encontrar los detalles del producto
+    const productDetails = type === 'habitaciones'
+        ? window.habitacionesStockData.stock.habitaciones.find(item => item.id === id)
+        : window.serviciosStockData.stock.servicios.find(item => item.id === id);
     
     const productName = type === 'habitaciones'
-        ? window.habitacionesData.habitaciones.find(h => h.id === id)?.producto
-        : window.serviciosData.find(s => s.id === id)?.producto;
+        ? window.habitacionesData.habitaciones.find(h => h.id === id)?.nombre
+        : window.serviciosData.find(s => s.id === id)?.nombre;
     
-    // Add to cart
-    cart.push({
-        id: id,
-        type: type,
-        cantidad: cantidad,
-        precio: productDetails.precio,
-        nombre: productName
+    // Restar la cantidad del stock
+    fetch(`http://localhost:3000/stock/${type}/update/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ cantidad: -cantidad })
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Error al actualizar el stock');
+        
+        // Añadir al carrito
+        cart.push({
+            id: id,
+            type: type,
+            cantidad: cantidad,
+            precio: productDetails.precio,
+            nombre: productName
+        });
+        
+        alert(`Se han añadido ${cantidad} unidades de ${productName} al carrito`);
+        quantityInput.value = 1;
+        
+        // Actualizar la vista del stock
+        mostrarStock();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('No se pudo añadir al carrito');
     });
-    
-    alert(`Se han añadido ${cantidad} unidades de ${productName} al carrito`);
-    quantityInput.value = 1;
-}
-
-// Open cart modal and display items
-function openCartModal() {
-    const cartItemsEl = document.getElementById('cartItems');
-    const cartTotalEl = document.getElementById('cartTotal');
-    
-    cartItemsEl.innerHTML = '';
-    let total = 0;
-
-    cart.forEach((item, index) => {
-        const itemEl = document.createElement('div');
-        itemEl.innerHTML = `
-            ${item.nombre} - Cantidad: ${item.cantidad} - Precio: ${item.precio * item.cantidad}€
-            <button onclick="removeFromCart(${index})">Eliminar</button>
-        `;
-        cartItemsEl.appendChild(itemEl);
-        total += item.precio * item.cantidad;
-    });
-
-    cartTotalEl.innerHTML = `Total: ${total}€`;
-    document.getElementById('cartModal').style.display = 'block';
-}
-
-// Remove item from cart
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    openCartModal(); // Refresh cart view
-}
-// Close cart modal
-function closeCartModal() {
-    document.getElementById('cartModal').style.display = 'none';
 }
 //TERMINA EL CARRITO DE LA COMPRA
 
@@ -289,16 +285,15 @@ function mostrarStock() {
         Promise.all([stockResponse.json(), habitacionesResponse.json(), serviciosResponse.json()])
     )
     .then(([stockData, habitacionesData, serviciosData]) => {
-        console.log(stockData);
-        const habitaciones = habitacionesData.habitaciones;
-        console.log(habitaciones);
-        
+        // Establecer variables globales
+        window.habitacionesStockData = stockData;
+        window.habitacionesData = habitacionesData;
+        window.serviciosStockData = { stock: { servicios: stockData.stock.servicios } };
+        window.serviciosData = serviciosData;
 
-        const servicios = serviciosData;
-
+        // Procesar habitaciones
         stockData.stock.habitaciones.forEach(stockItem => {
-            const habitacion = habitaciones.find(h => h.id === stockItem.id);
-            console.log(habitacion);
+            const habitacion = habitacionesData.habitaciones.find(h => Number(h.id) === Number(stockItem.id));
             
             const habitacionDetails = document.createElement('div');
             habitacionDetails.classList.add('stockDetails');
@@ -318,12 +313,13 @@ function mostrarStock() {
                     </button>
                 </div>
                 <button class="deleteBtn" onclick="deleteProduct(${stockItem.id}, 'habitaciones')">Eliminar</button>
-                <button class="deleteBtn" onclick="abrirFormularioModificar(${stockItem.id}, 'habitaciones', '${habitacion ? habitacion.nombre : "Desconocido"}', '${habitacion ? habitacion.precio : 0}', ${stockItem.cantidad})">Modificar</button>
-                `;
+                <button class="deleteBtn" onclick="abrirFormularioModificar(${stockItem.id}, 'habitaciones', '${habitacion ? habitacion.nombre : "Desconocido"}', ${habitacion ? habitacion.precio : 0}, ${stockItem.cantidad})">Modificar</button>
+            `;
 
             habitacionesStock.appendChild(habitacionDetails);
         });
 
+        // Procesar servicios
         stockData.stock.servicios.forEach(stockServicio => {
             const servicio = serviciosData.find(s => Number(s.id) === Number(stockServicio.id));
             
@@ -361,6 +357,71 @@ document.getElementById('productoForm').addEventListener('submit', agregarProduc
         
 // Call the function when page loads
 window.onload = mostrarStock;
+    </script>
+    
+<script>
+    let cart = [];
+    
+    function openCartModal() {
+        const cartItemsEl = document.getElementById('cartItems');
+        const cartTotalEl = document.getElementById('cartTotal');
+        
+        cartItemsEl.innerHTML = '';
+        let total = 0;
+    
+        cart.forEach((item, index) => {
+            const itemEl = document.createElement('div');
+            itemEl.innerHTML = `
+                ${item.nombre} - Cantidad: ${item.cantidad} - Precio: ${item.precio * item.cantidad}€
+                <button onclick="removeFromCart(${index})">Eliminar</button>
+            `;
+            cartItemsEl.appendChild(itemEl);
+            total += item.precio * item.cantidad;
+        });
+    
+        cartTotalEl.innerHTML = `Total: ${total}€`;
+        document.getElementById('cartModal').style.display = 'block';
+    }
+    
+    function removeFromCart(index) {
+        const item = cart[index];
+        
+        // Devolver la cantidad al stock
+        fetch(`http://localhost:3000/stock/${item.type}/update/${item.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ cantidad: item.cantidad })
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Error al actualizar el stock');
+            
+            cart.splice(index, 1);
+            openCartModal();
+            mostrarStock();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    
+    function closeCartModal() {
+        document.getElementById('cartModal').style.display = 'none';
+    }
+    
+    function finalizarCompra() {
+        if (cart.length === 0) {
+            alert('El carrito está vacío');
+            return;
+        }
+        
+        // Aquí podrías añadir la lógica para procesar la compra
+        alert('Compra finalizada. Gracias por su compra.');
+        cart = [];
+        closeCartModal();
+        mostrarStock();
+    }
     </script>
 </body>
 </html> 
