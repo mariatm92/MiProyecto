@@ -422,6 +422,69 @@ app.patch('/stock/:tipo/update/:id', (req, res) => {
 });
 //FIN ENDPOINT CARRITO DE COMPRA 
 
+//--------- ENDPOINTS MODIFICAR STOCK Y HABITACIONES --------------
+app.post('/habitaciones/modify', (req, res) => {
+    const filePath = path.join(__dirname, 'habitaciones.json'); // Ruta del archivo
+    const habitacionesActualizado = req.body; // Datos de las habitaciones actualizado
+    const habitacionesId = habitacionActualizado.id; // ID de la habitacion
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            return res.status(500).send('Error reading the file'); // Error al leer
+        }
+
+        let habitacionesData = JSON.parse(data);
+        let habitaciones = habitacionesData.empleados;
+        const habitacionesIndex = habitaciones.findIndex(hbt => hbt.id.toString() === habitacionesId.toString()); // Busca el índice
+
+        if (habitacionesIndex === -1) {
+            return res.status(404).send('habitacion no encontrado'); // Error si no se encuentra
+        }
+
+        habitaciones[habitacionesIndex] = { ...habitaciones[habitacionesIndex], ...habitacionesActualizado }; // Actualiza datos
+
+        fs.writeFile(filePath, JSON.stringify(habitacionesData, null, 2), (err) => {
+            if (err) {
+                console.error('Error writing file:', err);
+                return res.status(500).send('Error writing the file'); // Error al escribir
+            }
+            res.status(200).json(habitaciones[habitacionesIndex]); // Devuelve el empleado actualizado
+        });
+    });
+});
+
+app.post('/stock/modify', (req, res) => {
+    const filePath = path.join(__dirname, 'stock.json'); // Ruta del archivo
+    const stockActualizado = req.body; // Datos del stock actualizado
+    const stockeId = stockActualizado.id; // ID del stock
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            return res.status(500).send('Error reading the file'); // Error al leer
+        }
+
+        let stockData = JSON.parse(data);
+        let stock = stockData.stock;
+        const stockIndex = stock.findIndex(stk => stk.id.toString() === stockId.toString()); // Busca el índice
+
+        if (stockIndex === -1) {
+            return res.status(404).send('Stock no encontrado'); // Error si no se encuentra
+        }
+
+        stock[stockIndex] = { ...stock[stockIndex], ...stockActualizado }; // Actualiza datos
+
+        fs.writeFile(filePath, JSON.stringify(stockData, null, 2), (err) => {
+            if (err) {
+                console.error('Error writing file:', err);
+                return res.status(500).send('Error writing the file'); // Error al escribir
+            }
+            res.status(200).json(stock[stockIndex]); // Devuelve el empleado actualizado
+        });
+    });
+});
+ // -------- FIN ENDPOINTS MODIFICAR STOCK Y HABITACIONES
 
 // Configuración del puerto del servidor
 const PORT = process.env.PORT || 3000;
