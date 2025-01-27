@@ -68,6 +68,28 @@
       },
       "servicios": [],
       "precioTotal": 1265
+    },
+    {
+      "id": "RES1737991765879",
+      "fecha": "27/01/2025, 16:29",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591754",
+        "nombre": "Yuki",
+        "apellidos": "Tanaka",
+        "edad": 31,
+        "nacionalidad": "Japonesa",
+        "hijos": 0
+      },
+      "habitacion": {
+        "precio": "5"
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 45
     }
   ]
 }
