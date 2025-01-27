@@ -2,10 +2,10 @@
   "habitaciones": [
     {
       "id": "1737718154150",
-      "nombre": "popad",
+      "nombre": "pops",
       "precio": "5",
       "tipo": "habitaciones",
-      "cantidad": "12"
+      "cantidad": "3"
     },
     {
       "id": 1737817601305,
