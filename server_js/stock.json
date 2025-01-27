@@ -2,84 +2,18 @@
   "stock": {
     "habitaciones": [
       {
-        "id": 18,
-        "producto": "Habitación Standard",
-        "precio": 140,
-        "cantidad": 50
+        "id": 1737718154150,
+        "cantidad": 2
       },
       {
-        "id": 20,
-        "producto": "Junior Suite",
-        "precio": 220,
-        "cantidad": 13
-      },
-      {
-        "id": 21,
-        "producto": "Suite Luxe", 
-        "precio": 320,
-        "cantidad": 9
-      },
-      {
-        "id": 22,
-        "producto": "Habitación compartida",
-        "precio": 80,
-        "cantidad": 26
-      },
-      {
-        "id": 23,
-        "producto": "Habitación Accesible o Adaptada",
-        "precio": 130,
-        "cantidad": 9
-      },
-      {
-        "id": 24,
-        "producto": "Habitación de Larga Estancia",
-        "precio": 100,
-        "cantidad": 17
-      },
-      {
-        "id": 25,
-        "producto": "Habitación para Mascotas",
-        "precio": 150,
-        "cantidad": 10
-      },
-      {
-        "id": 26,
-        "producto": "Habitacion vista piscina",
-        "precio": 200,
-        "cantidad": 20
+        "id": 1737817601305,
+        "cantidad": 95
       }
     ],
     "servicios": [
       {
-        "id": 1,
-        "producto": "Alquiler de coches",
-        "precio": 50,
-        "cantidad": 20
-      },
-      {
-        "id": 11,
-        "producto": "Cunas o camas adicionales",
-        "precio": 20,
-        "cantidad": 20
-      },
-      {
-        "id": 12,
-        "producto": "Alquiler de toallas",
-        "precio": 5,
-        "cantidad": 200
-      },
-      {
-        "id": 13,
-        "producto": "Habitación de cortesía",
-        "precio": 0,
-        "cantidad": 3
-      },
-      {
-        "id": 14,
-        "producto": "Parking",
-        "precio": 15,
-        "cantidad": 50
+        "id": 1737715187803,
+        "cantidad": 23
       }
     ]
   }

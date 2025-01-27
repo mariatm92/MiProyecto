@@ -46,15 +46,6 @@
       "hijos": 4
     },
     {
-      "id": "1736494591752",
-      "nombre": "Sophie",
-      "apellidos": "Dubois",
-      "edad": 29,
-      "nacionalidad": "Francesa",
-      "genero": "Femenino",
-      "hijos": 1
-    },
-    {
       "id": "1736494591753",
       "nombre": "Hans",
       "apellidos": "Weber",
@@ -379,22 +370,12 @@
       "hijos": 0
     },
     {
-      "id": "1736494591789",
-      "nombre": "Pablo",
-      "apellidos": "Peralta",
-      "edad": 37,
-      "nacionalidad": "Colombiana",
-      "genero": "Masculino",
-      "hijos": 2
-    },
-    {
-      "id": "1736494591790",
-      "nombre": "Anna",
-      "apellidos": "Jensen",
-      "edad": 40,
-      "nacionalidad": "Danesa",
-      "genero": "Femenino",
-      "hijos": 1
+      "id": "1737652639448",
+      "nombre": "holll",
+      "apellidos": "lll",
+      "edad": "31",
+      "nacionalidad": "lll@m",
+      "genero": "femenina"
     }
   ]
 }

@@ -4,6 +4,32 @@
     <meta charset="utf-8">
     <title>Productos</title>
     <link href="../css/productos.css" rel="stylesheet" type="text/css">
+    <style>
+        .deleteBtn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .cart-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quantity-spinner {
+            width: 50px;
+            text-align: center;
+        }
+        .cart-btn {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapp">
@@ -16,41 +42,42 @@
                     <li><a href="productos.html">Productos</a></li>
                     <li><a href="reservas.html">Reservas</a></li>
                     <li><a href="graficos.html">Gráficos</a></li>
+                    <div id="cartModal" style="display:none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+                        <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%;">
+                            <span onclick="closeCartModal()" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+                            <h2>Carrito de Compra</h2>
+                            <div id="cartItems"></div>
+                            <div id="cartTotal"></div>
+                            <button onclick="finalizarCompra()">Finalizar Compra</button>
+                        </div>
+                    </div>
+                    
+                    <button onclick="openCartModal()" style="position: fixed; bottom: 20px; right: 20px;">🛒 Carrito</button>
                 </div> 
             </div>         
         </div>
         <div class="apartadoStock">
             <div class="contenidoStock">
-                <div class="section-header">
-                    <h2>Habitaciones</h2>
-                    <button onclick="mostrarFormulario('habitaciones')">Agregar Habitación</button>
-                </div>
-                <div id="habitacioneshotel" class="habitacionesht"></div>
     
-                <div class="section-header">
-                    <h2>Regimen</h2>
-                    <button onclick="mostrarFormulario('regimen')">Agregar Régimen</button>
+                <div class="stock-header">
+                    <h2>Stock Habitaciones</h2>
+                    <button class="addBtn" onclick="openAddProductForm('habitaciones')">Agregar Habitación</button>
                 </div>
-                <div id="regimenhotel" class="regimenht"></div>
-    
-                <div class="section-header">
-                    <h2>Servicios</h2>
-                    <button onclick="mostrarFormulario('servicios')">Agregar Servicio</button>
-                </div>
-                <div id="servicioshotel" class="serviciosht"></div>
-    
-                <h2>Stock Habitaciones</h2>
                 <div id="habitacionesStock" class="serviciosht"></div>
-                
-                <h2>Stock Servicios</h2>
+
+                <div class="stock-header">
+                    <h2>Stock Servicios</h2>
+                    <button class="addBtn" onclick="openAddProductForm('servicios')">Agregar Servicio</button>
+                </div>
                 <div id="serviciosStock" class="serviciosht"></div>
             </div>
         </div>
 
-        <div id="formOverlay" class="form-overlay">
+        <div id="formOverlay" class="form-overlay" style="display:none;">
             <div class="form-container">
                 <h3 id="formTitle">Agregar Producto</h3>
                 <form id="productoForm">
+                    <input type="hidden" id="productoTipo" value="">
                     <div class="form-group">
                         <label for="producto">Nombre del Producto:</label>
                         <input type="text" id="producto" required>
@@ -59,6 +86,10 @@
                         <label for="precio">Precio:</label>
                         <input type="number" id="precio" required>
                     </div>
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad:</label>
+                        <input type="number" id="cantidad" required>
+                    </div>
                     <div class="button-container">
                         <button type="submit">Guardar</button>
                         <button type="button" onclick="cerrarFormulario()">Cancelar</button>
@@ -66,340 +97,331 @@
                 </form>
             </div>
         </div>
-    
     </div>
 
     <script>
-
-        function eliminarHabitacion(idHabitacion) {
-                if (confirm('¿Está seguro de que desea eliminar esta habitación?')) {
-                    fetch(`http://localhost:3000/habitaciones/${idHabitacion}`, {
-                        method: 'DELETE',
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Error al eliminar la habitación');
-                        }
-                        // Limpiar y recargar la visualización de habitaciones
-                        const habitacioneshotel = document.getElementById('habitacioneshotel');
-                        habitacioneshotel.innerHTML = '';
-                        mostrarStock();
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('Error al eliminar la habitación');
-                    });
-                }
-        }
-
-        function eliminarRegimen(idRegimen) {
-    if (confirm('¿Está seguro de que desea eliminar este régimen?')) {
-        fetch(`http://localhost:3000/regimen/${idRegimen}`, {
-            method: 'DELETE',
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al eliminar el régimen');
-            }
-            // Limpiar y recargar la visualización de regímenes
-            const regimenhotel = document.getElementById('regimenhotel');
-            regimenhotel.innerHTML = '';
-            mostrarStock();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al eliminar el régimen');
-        });
-    }
-}
-function eliminarServicio(idServicio) {
-    if (confirm('¿Está seguro de que desea eliminar este servicio?')) {
-        fetch(`http://localhost:3000/servicios/${idServicio}`, {
-            method: 'DELETE',
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al eliminar el servicio');
-            }
-            // Limpiar y recargar la visualización de servicios
-            const servicioshotel = document.getElementById('servicioshotel');
-            servicioshotel.innerHTML = '';
-            mostrarStock();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al eliminar el servicio');
-        });
-    }
-}
-
-
-
-        function mostrarStock() {
-            const habitacioneshotel = document.getElementById('habitacioneshotel');
-            const regimenhotel = document.getElementById('regimenhotel');
-            const servicioshotel = document.getElementById('servicioshotel');
-            const habitacionesStock = document.getElementById('habitacionesStock');
-            const serviciosStock = document.getElementById('serviciosStock');
-
-          
-          //  habitacioneshotel.innerHTML = '';
-           // regimenhotel.innerHTML = '';
-           // servicioshotel.innerHTML = '';
-            habitacionesStock.innerHTML = '';
-            serviciosStock.innerHTML = '';
+function deleteProduct(id, type) {
+    // Delete from stock
+    fetch(`http://localhost:3000/stock/${type}/delete/${id}`, { method: 'DELETE' })
+        .then(stockResponse => {
+            if (!stockResponse.ok) throw new Error('Error deleting from stock');
             
+            // Delete from corresponding JSON (habitaciones or servicios)
+            return fetch(`http://localhost:3000/${type}/delete/${id}`, { method: 'DELETE' });
+        })
+        .then(jsonResponse => {
+            if (!jsonResponse.ok) throw new Error(`Error deleting from ${type}`);
+            
+            // Refresh stock display
+            mostrarStock();
+        })
+        .catch(error => {
+            console.error('Deletion error:', error);
+            alert(`Error al eliminar el producto: ${error.message}`);
+        });
+}
 
-            fetch('http://localhost:3000/habitaciones')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error al cargar el archivo de habitaciones');
-        }
-        return response.json();
+
+function addToCart(id, type, disponible) {
+    const quantityInput = document.getElementById(`quantity-${type}-${id}`);
+    const cantidad = parseInt(quantityInput.value);
+    
+    if (cantidad <= 0) {
+        alert('Por favor, seleccione una cantidad válida');
+        return;
+    }
+    
+    if (cantidad > disponible) {
+        alert(`Solo hay ${disponible} unidades disponibles`);
+        return;
+    }
+    
+    // Encontrar los detalles del producto
+    const productDetails = type === 'habitaciones'
+        ? window.habitacionesStockData.stock.habitaciones.find(item => item.id === id)
+        : window.serviciosStockData.stock.servicios.find(item => item.id === id);
+    
+    const productName = type === 'habitaciones'
+        ? window.habitacionesData.habitaciones.find(h => h.id === id)?.nombre
+        : window.serviciosData.find(s => s.id === id)?.nombre;
+    
+    // Restar la cantidad del stock
+    fetch(`http://localhost:3000/stock/${type}/update/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ cantidad: -cantidad })
     })
-    .then(data => {
-        if (data && data.habitaciones) {
-            data.habitaciones.forEach(habitacion => {
-                const habitacionDetails = document.createElement('div');
-                habitacionDetails.classList.add('stockDetails');
-                habitacionDetails.innerHTML = `
-                    <div class="stockField"><strong>ID Producto:</strong> ${habitacion.id}</div>
-                    <div class="stockField"><strong>Producto:</strong> ${habitacion.producto}</div>
-                    <div class="stockField"><strong>Precio:</strong> ${habitacion.precio}€</div>
-                    <button class="botonEditar" onclick="editarProducto(${habitacion.id}, '${habitacion.producto}', ${habitacion.precio}, 'habitaciones')">Editar</button>
-                    <button class="botonEliminar" onclick="eliminarHabitacion(${habitacion.id})">Eliminar</button>
-                `;
-                habitacioneshotel.appendChild(habitacionDetails);
-            });
-        }
+    .then(response => {
+        if (!response.ok) throw new Error('Error al actualizar el stock');
+        
+        // Añadir al carrito
+        cart.push({
+            id: id,
+            type: type,
+            cantidad: cantidad,
+            precio: productDetails.precio,
+            nombre: productName
+        });
+        
+        alert(`Se han añadido ${cantidad} unidades de ${productName} al carrito`);
+        quantityInput.value = 1;
+        
+        // Actualizar la vista del stock
+        mostrarStock();
     })
     .catch(error => {
-        console.error('Error al cargar las habitaciones:', error);
-        habitacioneshotel.innerHTML = '<p>Error al cargar las habitaciones</p>';
+        console.error('Error:', error);
+        alert('No se pudo añadir al carrito');
     });
+}
+//TERMINA EL CARRITO DE LA COMPRA
 
+//CODIGO PARA AGREGAR
+function openAddProductForm(type) {
+    document.getElementById('productoTipo').value = type;
+    document.getElementById('formTitle').textContent = `Agregar ${type === 'habitaciones' ? 'Habitación' : 'Servicio'}`;
+    document.getElementById('formOverlay').style.display = 'flex';
+}
 
+function cerrarFormulario() {
+    document.getElementById('formOverlay').style.display = 'none';
+    document.getElementById('productoForm').reset();
+}
 
+function agregarProducto(event) {
+    event.preventDefault();
 
-    fetch('http://localhost:3000/regimen')
-.then(response => {
-    if (!response.ok) {
-        throw new Error('Error al cargar el archivo regimen.json');
-    }
-    return response.json();
-})
-.then(data => {
-    data.forEach(regimen => {
-        const regimenDetails = document.createElement('div');
-        regimenDetails.classList.add('stockDetails');
-        regimenDetails.innerHTML = `
-            <div class="stockField"><strong>ID Producto:</strong> ${regimen.id}</div>
-            <div class="stockField"><strong>Producto:</strong> ${regimen.producto}</div>
-            <div class="stockField"><strong>Precio:</strong> ${regimen.precio}€</div>
-            <button class="botonEditar" onclick="editarProducto(${regimen.id}, '${regimen.producto}', ${regimen.precio}, 'regimenes')">Editar</button>
-            <button class="botonEliminar" onclick="eliminarRegimen(${regimen.id})">Eliminar</button>
-        `;
-        regimenhotel.appendChild(regimenDetails);
-    });
-})
+    // Obtener los valores del formulario
+    const tipo = document.getElementById('productoTipo').value; // "habitaciones" o "servicios"
+    const producto = document.getElementById('producto').value; // Nombre del producto/habitación
+    const precio = parseFloat(document.getElementById('precio').value); // Precio
+    const cantidad = parseInt(document.getElementById('cantidad').value); // Cantidad
 
-fetch('http://localhost:3000/servicios')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error al obtener los servicios');
-        }
-        return response.json();
+    // Crear el objeto del nuevo producto
+    const nuevoId = Date.now(); // ID único basado en el timestamp actual
+    const nuevoStock = { id: nuevoId, cantidad: cantidad }; // Datos para `stock.json`
+    const nuevoProducto = { id: nuevoId, nombre: producto, precio: precio }; // Datos para `habitaciones.json` o `servicios.json`
+
+    // 1. Agregar al archivo `stock.json`
+    fetch(`http://localhost:3000/stock/${tipo}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(nuevoStock),
     })
-    .then(data => {
-        data.forEach(servicio => {
+    .then((stockResponse) => {
+        if (!stockResponse.ok) {
+            throw new Error('Error agregando al stock');
+        }
+
+        // 2. Agregar al archivo correspondiente (`habitaciones.json` o `servicios.json`)
+        const jsonEndpoint = tipo === 'habitaciones' 
+            ? `http://localhost:3000/habitaciones` 
+            : `http://localhost:3000/servicios`;
+
+        return fetch(jsonEndpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(nuevoProducto),
+        });
+    })
+    .then((jsonResponse) => {
+        if (!jsonResponse.ok) {
+            throw new Error('Error agregando al archivo JSON');
+        }
+
+        // Actualizar la interfaz después de agregar
+        mostrarStock();
+        cerrarFormulario();
+    })
+    .catch((error) => {
+        console.error('Error completo:', error);
+        alert(`Error al agregar producto: ${error.message}`);
+    });
+}
+function abrirFormularioModificar(id, tipo, producto, precio, cantidad) {
+    const formularioOverlay = document.getElementById('formOverlay');
+    const tituloFormulario = document.getElementById('formTitle');
+    const inputProducto = document.getElementById('producto');
+    const inputPrecio = document.getElementById('precio');
+    const inputCantidad = document.getElementById('cantidad');
+    const botonEnviar = document.querySelector('#productoForm button[type="submit"]');
+
+    tituloFormulario.textContent = `Modificar ${tipo === 'habitaciones' ? 'Habitación' : 'Servicio'}`;
+    inputProducto.value = producto;
+    inputPrecio.value = precio;
+    inputCantidad.value = cantidad;
+    
+    // Guardar tipo e ID para usar en envío
+    formularioOverlay.dataset.type = tipo;
+    formularioOverlay.dataset.id = id;
+
+    // Cambiar texto del botón
+    botonEnviar.textContent = 'Modificar';
+
+    // Mostrar formulario
+    formularioOverlay.style.display = 'block';
+}
+
+
+function mostrarStock() {
+    const habitacionesStock = document.getElementById('habitacionesStock');
+    const serviciosStock = document.getElementById('serviciosStock');
+
+    habitacionesStock.innerHTML = '';
+    serviciosStock.innerHTML = '';
+
+    Promise.all([
+        fetch('http://localhost:3000/stock'),
+        fetch('http://localhost:3000/habitaciones'),
+        fetch('http://localhost:3000/servicios')
+    ])
+    .then(([stockResponse, habitacionesResponse, serviciosResponse]) => 
+        Promise.all([stockResponse.json(), habitacionesResponse.json(), serviciosResponse.json()])
+    )
+    .then(([stockData, habitacionesData, serviciosData]) => {
+        // Establecer variables globales
+        window.habitacionesStockData = stockData;
+        window.habitacionesData = habitacionesData;
+        window.serviciosStockData = { stock: { servicios: stockData.stock.servicios } };
+        window.serviciosData = serviciosData;
+
+        // Procesar habitaciones
+        stockData.stock.habitaciones.forEach(stockItem => {
+            const habitacion = habitacionesData.habitaciones.find(h => Number(h.id) === Number(stockItem.id));
+            
+            const habitacionDetails = document.createElement('div');
+            habitacionDetails.classList.add('stockDetails');
+            habitacionDetails.innerHTML = `
+                <div class="stockField"><strong>ID:</strong> ${stockItem.id}</div>
+                <div class="stockField"><strong>Nombre:</strong> ${habitacion ? habitacion.nombre : 'Desconocido'}</div>
+                <div class="stockField"><strong>Precio:</strong> ${habitacion ? habitacion.precio : 0}€</div>
+                <div class="stockField"><strong>Cantidad:</strong> ${stockItem.cantidad}</div>
+                <div class="cart-container">
+                    <input type="number" id="quantity-habitaciones-${stockItem.id}" 
+                           class="quantity-spinner" 
+                           min="1" 
+                           max="${stockItem.cantidad}" 
+                           value="1">
+                    <button class="cart-btn" onclick="addToCart(${stockItem.id}, 'habitaciones', ${stockItem.cantidad})">
+                        🛒 Añadir
+                    </button>
+                </div>
+                <button class="deleteBtn" onclick="deleteProduct(${stockItem.id}, 'habitaciones')">Eliminar</button>
+                <button class="deleteBtn" onclick="abrirFormularioModificar(${stockItem.id}, 'habitaciones', '${habitacion ? habitacion.nombre : "Desconocido"}', ${habitacion ? habitacion.precio : 0}, ${stockItem.cantidad})">Modificar</button>
+            `;
+
+            habitacionesStock.appendChild(habitacionDetails);
+        });
+
+        // Procesar servicios
+        stockData.stock.servicios.forEach(stockServicio => {
+            const servicio = serviciosData.find(s => Number(s.id) === Number(stockServicio.id));
+            
             const servicioDetails = document.createElement('div');
             servicioDetails.classList.add('stockDetails');
             servicioDetails.innerHTML = `
-                <div class="stockField"><strong>ID Producto:</strong> ${servicio.id}</div>
-                <div class="stockField"><strong>Producto:</strong> ${servicio.producto}</div>
-                <div class="stockField"><strong>Precio:</strong> ${servicio.precio}€</div>
-                <button class="botonEditar" onclick="editarProducto(${servicio.id}, '${servicio.producto}', ${servicio.precio}, 'servicios')">Editar</button>
-                <button class="botonEliminar" onclick="eliminarServicio(${servicio.id})">Eliminar</button>
+                <div class="stockField"><strong>ID:</strong> ${stockServicio.id}</div>
+                <div class="stockField"><strong>Nombre:</strong> ${servicio ? servicio.nombre : 'Desconocido'}</div>
+                <div class="stockField"><strong>Precio:</strong> ${servicio ? servicio.precio : 0}€</div>
+                <div class="stockField"><strong>Cantidad:</strong> ${stockServicio.cantidad}</div>
+                <div class="cart-container">
+                    <input type="number" id="quantity-servicios-${stockServicio.id}" 
+                           class="quantity-spinner" 
+                           min="1" 
+                           max="${stockServicio.cantidad}" 
+                           value="1">
+                    <button class="cart-btn" onclick="addToCart(${stockServicio.id}, 'servicios', ${stockServicio.cantidad})">
+                        🛒 Añadir
+                    </button>
+                </div>
+                <button class="deleteBtn" onclick="deleteProduct(${stockServicio.id}, 'servicios')">Eliminar</button>
+                <button class="deleteBtn" onclick="abrirFormularioModificar(${stockServicio.id}, 'servicios', '${servicio ? servicio.nombre : ''}', ${servicio ? servicio.precio : 0}, ${stockServicio.cantidad})">Modificar</button>
             `;
-            servicioshotel.appendChild(servicioDetails);
+
+            serviciosStock.appendChild(servicioDetails);
         });
     })
     .catch(error => {
-        console.error('Error al cargar los servicios:', error);
-        servicioshotel.innerHTML = '<p>Error al cargar los servicios</p>';
+        console.error('Error:', error);
+        habitacionesStock.innerHTML = `<p>Error al cargar el Stock: ${error.message}</p>`;
     });
-
-            fetch('http://localhost:3000/stock')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    
-                    // Mostrar Stockhabitaciones
-                    data.stock.habitaciones.forEach(habitacion => {
-                        const habitacionDetails = document.createElement('div');
-                        habitacionDetails.classList.add('stockDetails');
-
-                        habitacionDetails.innerHTML = `
-                            <div class="stockField"><strong>ID Producto:</strong> ${habitacion.id}</div>
-                            <div class="stockField"><strong>Producto:</strong> ${habitacion.producto}</div>
-                            <div class="stockField"><strong>Precio:</strong> ${habitacion.precio}€</div>
-                            <div class="stockField"><strong>Cantidad:</strong> ${habitacion.cantidad}</div>
-                        `;
-
-                        habitacionesStock.appendChild(habitacionDetails);
-                    });
-
-                    // Mostrar Stock servicios
-                    data.stock.servicios.forEach(servicio => {
-                        const servicioDetails = document.createElement('div');
-                        servicioDetails.classList.add('stockDetails');
-
-                        servicioDetails.innerHTML = `
-                            <div class="stockField"><strong>ID Producto:</strong> ${servicio.id}</div>
-                            <div class="stockField"><strong>Producto:</strong> ${servicio.producto}</div>
-                            <div class="stockField"><strong>Precio:</strong> ${servicio.precio}€</div>
-                            <div class="stockField"><strong>Cantidad:</strong> ${servicio.cantidad}</div>
-                        `;
-
-                        serviciosStock.appendChild(servicioDetails);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error al obtener el stock:', error);
-                    habitacionesStock.innerHTML = '<p>Error al cargar el StockHabitaciones</p>';
-                    serviciosStock.innerHTML = '<p>Error al cargar el StockServicios</p>';
-                });
-
-                
-                
-        }
-
-        let tipoProductoActual = '';
-
-    function mostrarFormulario(tipo) {
-        tipoProductoActual = tipo;
-        document.getElementById('formOverlay').style.display = 'block';
-        document.getElementById('formTitle').textContent = `Agregar ${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`;
-    }
-
-    function cerrarFormulario() {
-        document.getElementById('formOverlay').style.display = 'none';
-        document.getElementById('productoForm').reset();
-    }
-
-    document.getElementById('productoForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const nuevoProducto = {
-            producto: document.getElementById('producto').value,
-            precio: Number(document.getElementById('precio').value),
-            cantidad: Number(document.getElementById('cantidad').value)
-        };
-
-        fetch(`http://localhost:3000/${tipoProductoActual}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(nuevoProducto)
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Error al agregar el producto');
-            return response.json();
-        })
-        .then(productoGuardado => {
-        // Segunda llamada para actualizar el stock
-        return fetch(`http://localhost:3000/stock/${tipoProductoActual}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                ...nuevoProducto,
-                id: productoGuardado.id
-            })
-        });
-    })
-        .then(() => {
-            cerrarFormulario();
-            mostrarStock();
-            alert('Producto agregado correctamente');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al agregar el producto');
-        });
-    });
-
-    function editarProducto(id, producto, precioActual, tipo) {
-    // Pre-fill the form with current product details
-    document.getElementById('producto').value = producto;
-    document.getElementById('precio').value = precioActual;
-
-    // Change form title and submit behavior
-    document.getElementById('formTitle').textContent = 'Editar Producto';
-    
-    // Remove any existing event listeners and add new one for editing
-    const form = document.getElementById('productoForm');
-    form.onsubmit = function(e) {
-        e.preventDefault();
-        
-        const productoEditado = {
-            id: id,
-            producto: document.getElementById('producto').value,
-            precio: Number(document.getElementById('precio').value)
-        };
-
-        // First, update the specific product list
-        fetch(`http://localhost:3000/${tipo}`, {
-            method: 'PUT', // You'll need to add a PUT endpoint in server.js
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(productoEditado)
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Error al actualizar el producto');
-            return response.json();
-        })
-        .then(() => {
-            // Then update the stock
-            return fetch(`http://localhost:3000/stock/${tipo}/update`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(productoEditado)
-            });
-        })
-        .then(() => {
-            cerrarFormulario();
-            window.location.reload();
-            mostrarStock();
-            alert('Producto actualizado correctamente');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al actualizar el producto');
-        });
-    };
-
-    // Show the form
-    document.getElementById('formOverlay').style.display = 'block';
 }
 
-        // Cargar el stock al iniciar la página
-        mostrarStock();
-        function redirigirAdmin() {
-                var correo = "admin@admin.com";
-                window.location.href = `admin.html?correo=${encodeURIComponent(correo)}`;
-         }
-
+document.getElementById('productoForm').addEventListener('submit', agregarProducto);
+        
+// Call the function when page loads
+window.onload = mostrarStock;
+    </script>
     
+<script>
+    let cart = [];
+    
+    function openCartModal() {
+        const cartItemsEl = document.getElementById('cartItems');
+        const cartTotalEl = document.getElementById('cartTotal');
+        
+        cartItemsEl.innerHTML = '';
+        let total = 0;
+    
+        cart.forEach((item, index) => {
+            const itemEl = document.createElement('div');
+            itemEl.innerHTML = `
+                ${item.nombre} - Cantidad: ${item.cantidad} - Precio: ${item.precio * item.cantidad}€
+                <button onclick="removeFromCart(${index})">Eliminar</button>
+            `;
+            cartItemsEl.appendChild(itemEl);
+            total += item.precio * item.cantidad;
+        });
+    
+        cartTotalEl.innerHTML = `Total: ${total}€`;
+        document.getElementById('cartModal').style.display = 'block';
+    }
+    
+    function removeFromCart(index) {
+        const item = cart[index];
+        
+        // Devolver la cantidad al stock
+        fetch(`http://localhost:3000/stock/${item.type}/update/${item.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ cantidad: item.cantidad })
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Error al actualizar el stock');
+            
+            cart.splice(index, 1);
+            openCartModal();
+            mostrarStock();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    
+    function closeCartModal() {
+        document.getElementById('cartModal').style.display = 'none';
+    }
+    
+    function finalizarCompra() {
+        if (cart.length === 0) {
+            alert('El carrito está vacío');
+            return;
+        }
+        
+        // Aquí podrías añadir la lógica para procesar la compra
+        alert('Compra finalizada. Gracias por su compra.');
+        cart = [];
+        closeCartModal();
+        mostrarStock();
+    }
     </script>
 </body>
-</html>
+</html> 
