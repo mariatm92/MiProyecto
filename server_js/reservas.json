@@ -1715,6 +1715,28 @@
       },
       "servicios": [],
       "precioTotal": 845
+    },
+    {
+      "id": "RES1737990057934",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591748",
+        "nombre": "María",
+        "apellidos": "López",
+        "edad": 28,
+        "nacionalidad": "Mexicana",
+        "hijos": 1
+      },
+      "habitacion": {
+        "tipo": "habitacion doble",
+        "precio": 200
+      },
+      "regimen": {
+        "tipo": "media pension",
+        "precio": 45
+      },
+      "servicios": [],
+      "precioTotal": 1245
     }
   ]
 }
