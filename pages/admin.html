@@ -251,11 +251,13 @@
 
                         // Crear un bloque de datos con separación entre cada campo
                         employeeDetails.innerHTML = `
+                                <div class="employeeField"><strong>ID:&nbsp;</strong> ${employee.id}</div>
                                 <div class="employeeField"><strong>Nombre:&nbsp;</strong> ${employee.nombre}</div>
                                 <div class="employeeField"><strong>Apellido:&nbsp;</strong> ${employee.apellidos}</div>
                                 <div class="employeeField"><strong>Edad:&nbsp;</strong> ${employee.edad}</div>
                                 <div class="employeeField"><strong>Nacionalidad:&nbsp;</strong> ${employee.nacionalidad}</div>
                                 <div class="employeeField"><strong>Genero:&nbsp;</strong> ${employee.genero}</div>
+                                <div class="employeeField"><strong>E-mail:&nbsp;</strong> ${employee.email}</div>
                             `;
 
                         // Crear el botón de eliminar
