@@ -70,26 +70,27 @@
       "precioTotal": 1265
     },
     {
-      "id": "RES1737991765879",
-      "fecha": "27/01/2025, 16:29",
+      "id": "RES1737992491680",
+      "fecha": "27/01/2025, 16:41",
       "mes": "enero",
       "cliente": {
-        "id": "1736494591754",
-        "nombre": "Yuki",
-        "apellidos": "Tanaka",
-        "edad": 31,
-        "nacionalidad": "Japonesa",
-        "hijos": 0
+        "id": "1736494591751",
+        "nombre": "Luigi",
+        "apellidos": "Rossi",
+        "edad": 45,
+        "nacionalidad": "Italiana",
+        "hijos": 4
       },
       "habitacion": {
-        "precio": "5"
+        "tipo": "habitación estándar",
+        "precio": 150
       },
       "regimen": {
-        "tipo": "solo desayuno",
-        "precio": 25
+        "tipo": "media pension",
+        "precio": 45
       },
       "servicios": [],
-      "precioTotal": 45
+      "precioTotal": 2345
     }
   ]
 }

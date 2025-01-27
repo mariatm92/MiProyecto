@@ -64,87 +64,6 @@
       "hijos": 0
     },
     {
-      "id": "1736494591755",
-      "nombre": "Carlos",
-      "apellidos": "Santos",
-      "edad": 40,
-      "nacionalidad": "Brasileña",
-      "genero": "Masculino",
-      "hijos": 3
-    },
-    {
-      "id": "1736494591756",
-      "nombre": "Emma",
-      "apellidos": "Anderson",
-      "edad": 36,
-      "nacionalidad": "Estadounidense",
-      "genero": "Femenino",
-      "hijos": 2
-    },
-    {
-      "id": "1736494591757",
-      "nombre": "Pavel",
-      "apellidos": "Ivanov",
-      "edad": 44,
-      "nacionalidad": "Rusa",
-      "genero": "Masculino",
-      "hijos": 1
-    },
-    {
-      "id": "1736494591758",
-      "nombre": "Sara",
-      "apellidos": "Cohen",
-      "edad": 27,
-      "nacionalidad": "Israelí",
-      "genero": "Femenino",
-      "hijos": 0
-    },
-    {
-      "id": "1736494591759",
-      "nombre": "Lars",
-      "apellidos": "Nilsson",
-      "edad": 39,
-      "nacionalidad": "Sueca",
-      "genero": "Masculino",
-      "hijos": 2
-    },
-    {
-      "id": "1736494591760",
-      "nombre": "Ming",
-      "apellidos": "Zhang",
-      "edad": 34,
-      "nacionalidad": "China",
-      "genero": "Femenino",
-      "hijos": 1
-    },
-    {
-      "id": "1736494591761",
-      "nombre": "Aisha",
-      "apellidos": "Khan",
-      "edad": 32,
-      "nacionalidad": "India",
-      "genero": "Femenino",
-      "hijos": 3
-    },
-    {
-      "id": "1736494591762",
-      "nombre": "David",
-      "apellidos": "O'Connor",
-      "edad": 46,
-      "nacionalidad": "Irlandesa",
-      "genero": "Masculino",
-      "hijos": 2
-    },
-    {
-      "id": "1736494591763",
-      "nombre": "Fatima",
-      "apellidos": "Al-Hassan",
-      "edad": 29,
-      "nacionalidad": "Egipcia",
-      "genero": "Femenino",
-      "hijos": 1
-    },
-    {
       "id": "1736494591764",
       "nombre": "Pedro",
       "apellidos": "Martínez",
@@ -190,15 +109,6 @@
       "hijos": 2
     },
     {
-      "id": "1736494591769",
-      "nombre": "Isabel",
-      "apellidos": "Fernández",
-      "edad": 28,
-      "nacionalidad": "Española",
-      "genero": "Femenino",
-      "hijos": 0
-    },
-    {
       "id": "1736494591770",
       "nombre": "Liam",
       "apellidos": "Brown",
@@ -226,15 +136,6 @@
       "hijos": 1
     },
     {
-      "id": "1736494591773",
-      "nombre": "Matteo",
-      "apellidos": "Bianchi",
-      "edad": 43,
-      "nacionalidad": "Italiana",
-      "genero": "Masculino",
-      "hijos": 3
-    },
-    {
       "id": "1736494591774",
       "nombre": "Nadia",
       "apellidos": "Mustafa",
@@ -242,140 +143,6 @@
       "nacionalidad": "Turca",
       "genero": "Femenino",
       "hijos": 2
-    },
-    {
-      "id": "1736494591775",
-      "nombre": "Victor",
-      "apellidos": "Hernandez",
-      "edad": 31,
-      "nacionalidad": "Cubana",
-      "genero": "Masculino",
-      "hijos": 1
-    },
-    {
-      "id": "1736494591776",
-      "nombre": "Lucía",
-      "apellidos": "Torres",
-      "edad": 27,
-      "nacionalidad": "Argentina",
-      "genero": "Femenino",
-      "hijos": 0
-    },
-    {
-      "id": "1736494591777",
-      "nombre": "Ethan",
-      "apellidos": "Johnson",
-      "edad": 45,
-      "nacionalidad": "Canadiense",
-      "genero": "Masculino",
-      "hijos": 3
-    },
-    {
-      "id": "1736494591778",
-      "nombre": "Hana",
-      "apellidos": "Kim",
-      "edad": 33,
-      "nacionalidad": "Coreana",
-      "genero": "Femenino",
-      "hijos": 1
-    },
-    {
-      "id": "1736494591779",
-      "nombre": "Ravi",
-      "apellidos": "Singh",
-      "edad": 40,
-      "nacionalidad": "India",
-      "genero": "Masculino",
-      "hijos": 2
-    },
-    {
-      "id": "1736494591780",
-      "nombre": "Carmen",
-      "apellidos": "Gómez",
-      "edad": 29,
-      "nacionalidad": "Española",
-      "genero": "Femenino",
-      "hijos": 1
-    },
-    {
-      "id": "1736494591781",
-      "nombre": "Jin",
-      "apellidos": "Li",
-      "edad": 32,
-      "nacionalidad": "China",
-      "genero": "Masculino",
-      "hijos": 2
-    },
-    {
-      "id": "1736494591782",
-      "nombre": "Paula",
-      "apellidos": "Silva",
-      "edad": 26,
-      "nacionalidad": "Brasileña",
-      "genero": "Femenino",
-      "hijos": 0
-    },
-    {
-      "id": "1736494591783",
-      "nombre": "Samir",
-      "apellidos": "Hussein",
-      "edad": 42,
-      "nacionalidad": "Egipcia",
-      "genero": "Masculino",
-      "hijos": 3
-    },
-    {
-      "id": "1736494591784",
-      "nombre": "Victoria",
-      "apellidos": "Walker",
-      "edad": 39,
-      "nacionalidad": "Australiana",
-      "genero": "Femenino",
-      "hijos": 2
-    },
-    {
-      "id": "1736494591785",
-      "nombre": "Gabriel",
-      "apellidos": "Santos",
-      "edad": 35,
-      "nacionalidad": "Mexicana",
-      "genero": "Masculino",
-      "hijos": 1
-    },
-    {
-      "id": "1736494591786",
-      "nombre": "Elena",
-      "apellidos": "Morales",
-      "edad": 31,
-      "nacionalidad": "Chilena",
-      "genero": "Femenino",
-      "hijos": 2
-    },
-    {
-      "id": "1736494591787",
-      "nombre": "Olivier",
-      "apellidos": "Laurent",
-      "edad": 38,
-      "nacionalidad": "Francesa",
-      "genero": "Masculino",
-      "hijos": 2
-    },
-    {
-      "id": "1736494591788",
-      "nombre": "Amara",
-      "apellidos": "Diallo",
-      "edad": 28,
-      "nacionalidad": "Senegalesa",
-      "genero": "Femenino",
-      "hijos": 0
-    },
-    {
-      "id": "1737652639448",
-      "nombre": "holll",
-      "apellidos": "lll",
-      "edad": "31",
-      "nacionalidad": "lll@m",
-      "genero": "femenina"
     }
   ]
 }
