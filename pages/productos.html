@@ -422,6 +422,52 @@ window.onload = mostrarStock;
         closeCartModal();
         mostrarStock();
     }
+
+    // -----------FUNCIONES PARA MODIFICAR STOCK Y HABITACIONES --------------
+    function modificarCantidadStock(id, cantidad) {
+        fetch('http://localhost:3000/stock/modify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id, cantidad })
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Error modificando en stock');
+            return response.json();
+        })
+        .then(data => {
+            console.log('Stock modificado:', data);
+        })
+        .catch(error => {
+            console.error('Error al modificar el stock:', error);
+        });
+    }
+
+    function modificarHabitaciones(id, producto, precio) {
+        console.log("funcion modificar habitaciones "+id,producto,precio);
+
+        fetch('http://localhost:3000/habitaciones/modify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id, producto, precio })
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Error modificando en habitaciones');
+            return response.json();
+        })
+        .then(data => {
+            console.log('Habitación modificada:', data);
+        })
+
+
+    .catch(error => {
+        console.error('Error al modificar la habitación:', error);
+    });
+}
+
     </script>
 </body>
 </html> 
