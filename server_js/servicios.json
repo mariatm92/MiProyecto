@@ -1,7 +1,14 @@
 [
   {
-    "id": 1737715187803,
+    "id": "1737715187803",
     "nombre": "zzzz",
-    "precio": 25
+    "precio": "25",
+    "tipo": "servicios",
+    "cantidad": "12"
+  },
+  {
+    "id": 1737990802273,
+    "nombre": "asd",
+    "precio": 12
   }
 ]

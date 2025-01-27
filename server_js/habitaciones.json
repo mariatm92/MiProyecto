@@ -2,15 +2,17 @@
   "habitaciones": [
     {
       "id": "1737718154150",
-      "nombre": "pops",
+      "nombre": "popaasdasd",
       "precio": "5",
       "tipo": "habitaciones",
-      "cantidad": "3"
+      "cantidad": "12"
     },
     {
-      "id": 1737817601305,
+      "id": "1737817601305",
       "nombre": "habitacion doble",
-      "precio": 200
+      "precio": "200",
+      "tipo": "habitaciones",
+      "cantidad": "100"
     },
     {
       "id": "1737718154150",

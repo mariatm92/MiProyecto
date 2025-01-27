@@ -121,7 +121,7 @@
                 <input type="number" id="cantidadInput" required>
             </div>
             <div class="button-container">
-                <button type="button" onclick="modificarHabitacion()">Guardar Cambios</button>
+                <button type="button" onclick="modificarProducto()">Guardar Cambios</button>
                 <button type="button" onclick="cerrarFormularioModificar()">Cancelar</button>
             </div>
         </form>
@@ -300,14 +300,14 @@ function cerrarFormularioModificar() {
     modal.style.display = 'none';
 }
 
-function modificarHabitacion() {
+function modificarProducto() {
     const id = document.getElementById('idInput').value;
     const tipo = document.getElementById('tipoInput').value;
     const nombre = document.getElementById('nombreInput').value;
     const precio = document.getElementById('precioInput').value;
     const cantidad = document.getElementById('cantidadInput').value;
 
-    const habitacionesActualizado = {
+    const productoActualizado = {
         id: id,
         tipo: tipo,
         nombre: nombre,
@@ -315,12 +315,14 @@ function modificarHabitacion() {
         cantidad: cantidad
     };
 
-    fetch('http://localhost:3000/habitaciones/modify', {
+    const endpoint = tipo === 'habitaciones' ? 'http://localhost:3000/habitaciones/modify' : 'http://localhost:3000/servicios/modify';
+
+    fetch(endpoint, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(habitacionesActualizado)
+        body: JSON.stringify(productoActualizado)
     })
     .then(response => {
         if (!response.ok) {
@@ -329,7 +331,6 @@ function modificarHabitacion() {
         return response.json();
     })
     .then(data => {
-        console.log('Habitación modificada:', data);
         mostrarStock();
         cerrarFormularioModificar(); // Cerrar el formulario tras la modificación exitosa
     })
