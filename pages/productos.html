@@ -99,6 +99,35 @@
         </div>
     </div>
 
+    <!-- Modal -->
+<div id="modificarModal" class="form-overlay" style="display:none;">
+    <div class="form-container">
+        <h3 id="formTitle">Modificar Información</h3>
+        <form id="productoForm">
+            <input type="hidden" id="productoTipo" value="">
+            <input type="hidden" id="idInput">
+            <input type="hidden" id="tipoInput">
+
+            <div class="form-group">
+                <label for="producto">Nombre del Producto:</label>
+                <input type="text" id="nombreInput" required>
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio:</label>
+                <input type="number" id="precioInput" required>
+            </div>
+            <div class="form-group">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidadInput" required>
+            </div>
+            <div class="button-container">
+                <button type="button" onclick="modificarHabitacion()">Guardar Cambios</button>
+                <button type="button" onclick="cerrarFormularioModificar()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
     <script>
 function deleteProduct(id, type) {
     // Delete from stock
@@ -244,28 +273,69 @@ function agregarProducto(event) {
         alert(`Error al agregar producto: ${error.message}`);
     });
 }
-function abrirFormularioModificar(id, tipo, producto, precio, cantidad) {
-    const formularioOverlay = document.getElementById('formOverlay');
-    const tituloFormulario = document.getElementById('formTitle');
-    const inputProducto = document.getElementById('producto');
-    const inputPrecio = document.getElementById('precio');
-    const inputCantidad = document.getElementById('cantidad');
-    const botonEnviar = document.querySelector('#productoForm button[type="submit"]');
+function abrirFormularioModificar(id, tipo, nombre, precio, cantidad) {
+    // Obtén el formulario del modal y muestra el modal
+    const modal = document.getElementById('modificarModal');
+    modal.style.display = 'block';
 
-    tituloFormulario.textContent = `Modificar ${tipo === 'habitaciones' ? 'Habitación' : 'Servicio'}`;
-    inputProducto.value = producto;
-    inputPrecio.value = precio;
-    inputCantidad.value = cantidad;
-    
-    // Guardar tipo e ID para usar en envío
-    formularioOverlay.dataset.type = tipo;
-    formularioOverlay.dataset.id = id;
+    // Completa los campos del formulario con los datos proporcionados
+    document.getElementById('idInput').value = id;
+    document.getElementById('tipoInput').value = tipo;
+    document.getElementById('nombreInput').value = nombre;
+    document.getElementById('precioInput').value = precio;
+    document.getElementById('cantidadInput').value = cantidad;
+}
 
-    // Cambiar texto del botón
-    botonEnviar.textContent = 'Modificar';
+// Cierra el formulario modal cuando el usuario haga clic fuera del modal
+window.onclick = function(event) {
+    const modal = document.getElementById('modificarModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+}
 
-    // Mostrar formulario
-    formularioOverlay.style.display = 'block';
+// Cierra el formulario modal cuando el usuario haga clic en el botón "Cerrar"
+function cerrarFormularioModificar() {
+    const modal = document.getElementById('modificarModal');
+    modal.style.display = 'none';
+}
+
+function modificarHabitacion() {
+    const id = document.getElementById('idInput').value;
+    const tipo = document.getElementById('tipoInput').value;
+    const nombre = document.getElementById('nombreInput').value;
+    const precio = document.getElementById('precioInput').value;
+    const cantidad = document.getElementById('cantidadInput').value;
+
+    const habitacionesActualizado = {
+        id: id,
+        tipo: tipo,
+        nombre: nombre,
+        precio: precio,
+        cantidad: cantidad
+    };
+
+    fetch('http://localhost:3000/habitaciones/modify', {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(habitacionesActualizado)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Habitación modificada:', data);
+        mostrarStock();
+        cerrarFormularioModificar(); // Cerrar el formulario tras la modificación exitosa
+    })
+    .catch(error => {
+        console.error('Error en la modificación:', error);
+    });
 }
 
 
@@ -422,52 +492,6 @@ window.onload = mostrarStock;
         closeCartModal();
         mostrarStock();
     }
-
-    // -----------FUNCIONES PARA MODIFICAR STOCK Y HABITACIONES --------------
-    function modificarCantidadStock(id, cantidad) {
-        fetch('http://localhost:3000/stock/modify', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id, cantidad })
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Error modificando en stock');
-            return response.json();
-        })
-        .then(data => {
-            console.log('Stock modificado:', data);
-        })
-        .catch(error => {
-            console.error('Error al modificar el stock:', error);
-        });
-    }
-
-    function modificarHabitaciones(id, producto, precio) {
-        console.log("funcion modificar habitaciones "+id,producto,precio);
-
-        fetch('http://localhost:3000/habitaciones/modify', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id, producto, precio })
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Error modificando en habitaciones');
-            return response.json();
-        })
-        .then(data => {
-            console.log('Habitación modificada:', data);
-        })
-
-
-    .catch(error => {
-        console.error('Error al modificar la habitación:', error);
-    });
-}
-
     </script>
 </body>
 </html> 
