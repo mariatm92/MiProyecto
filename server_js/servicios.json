@@ -1,14 +1,37 @@
 [
   {
-    "id": "1737715187803",
-    "nombre": "zzzz",
-    "precio": "25",
-    "tipo": "servicios",
-    "cantidad": "23"
+    "id": 1737990709914,
+    "nombre": "Coches",
+    "precio": 50
   },
   {
-    "id": 1737990802273,
-    "nombre": "asd",
-    "precio": 12
+    "id": 1737990750145,
+    "nombre": "Bodas",
+    "precio": 1000
+  },
+  {
+    "id": 1737990775651,
+    "nombre": "Alquiler de salas",
+    "precio": 500
+  },
+  {
+    "id": 1737990791428,
+    "nombre": "Excursiones",
+    "precio": 100
+  },
+  {
+    "id": 1737990848119,
+    "nombre": "Servicio de bicicletas",
+    "precio": 20
+  },
+  {
+    "id": 1737990885612,
+    "nombre": "Cuna para bebé",
+    "precio": 15
+  },
+  {
+    "id": 1737990918867,
+    "nombre": "Parking",
+    "precio": 25
   }
 ]
