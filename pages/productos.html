@@ -100,6 +100,14 @@
     </div>
 
     <script>
+
+function redirigirAdmin() {
+            // Aquí tomas el valor del correo desde algún lugar, por ejemplo, un campo de entrada
+            var correo = "admin@admin.com";  // Este valor puede ser dinámico
+
+            // Rediriges a admin.html con el correo como parámetro
+            window.location.href = `admin.html?correo=${encodeURIComponent(correo)}`;
+}
 function deleteProduct(id, type) {
     // Delete from stock
     fetch(`http://localhost:3000/stock/${type}/delete/${id}`, { method: 'DELETE' })
