@@ -1737,6 +1737,32 @@
       },
       "servicios": [],
       "precioTotal": 1245
+    },
+    {
+      "id": "RES1737992483023",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591750",
+        "nombre": "Ana",
+        "apellidos": "García",
+        "edad": 33,
+        "nacionalidad": "Argentina",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "habitación triple",
+        "precio": 250
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [
+        {
+          "nombre": "Parking"
+        }
+      ],
+      "precioTotal": null
     }
   ]
 }
