@@ -486,6 +486,39 @@ app.post('/stock/modify', (req, res) => {
 });
  // -------- FIN ENDPOINTS MODIFICAR STOCK Y HABITACIONES
 
+ //ENDPOINT PARA GUARDAR RESERVAS
+// Endpoint para guardar una nueva reserva
+app.post('/reservas', (req, res) => {
+    const filePath = path.join(__dirname, 'reservas.json');
+    const nuevaReserva = req.body;
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error al leer el archivo:', err);
+            return res.status(500).send('Error al leer el archivo de reservas');
+        }
+
+        let reservasData = JSON.parse(data);
+        
+        // Asegurarse de que reservas es un array
+        if (!Array.isArray(reservasData.reservas)) {
+            reservasData.reservas = [];
+        }
+
+        // Añadir la nueva reserva
+        reservasData.reservas.push(nuevaReserva);
+
+        fs.writeFile(filePath, JSON.stringify(reservasData, null, 2), (err) => {
+            if (err) {
+                console.error('Error al escribir el archivo:', err);
+                return res.status(500).send('Error al escribir el archivo de reservas');
+            }
+            res.status(201).json(nuevaReserva);
+        });
+    });
+});
+ //FIN ENDPPOINT PARA GUARDAR RESERVAS
+
 // Configuración del puerto del servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
