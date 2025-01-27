@@ -424,14 +424,18 @@ app.patch('/stock/:tipo/update/:id', (req, res) => {
 
 //--------- ENDPOINTS MODIFICAR STOCK Y HABITACIONES --------------
 app.patch('/habitaciones/modify', (req, res) => {
-    const filePath = path.join(__dirname, 'habitaciones.json'); // Ruta del archivo
+    const filePathHabitaciones = path.join(__dirname, 'habitaciones.json'); // Ruta del archivo habitaciones
+    const filePathStock = path.join(__dirname, 'stock.json'); // Ruta del archivo stock
     const habitacionesActualizado = req.body; // Datos de las habitaciones actualizado
     const habitacionesId = habitacionesActualizado.id; // ID de la habitacion
 
-    fs.readFile(filePath, 'utf8', (err, data) => {
+    console.log('Received update request for:', habitacionesId);
+
+    // Read and update the habitaciones.json file
+    fs.readFile(filePathHabitaciones, 'utf8', (err, data) => {
         if (err) {
-            console.error('Error reading file:', err);
-            return res.status(500).send('Error reading the file'); // Error al leer
+            console.error('Error reading habitaciones file:', err);
+            return res.status(500).send('Error reading the habitaciones file'); // Error al leer
         }
 
         let habitacionesData = JSON.parse(data);
@@ -439,20 +443,52 @@ app.patch('/habitaciones/modify', (req, res) => {
         const habitacionesIndex = habitaciones.findIndex(hbt => hbt.id.toString() === habitacionesId.toString()); // Busca el índice
 
         if (habitacionesIndex === -1) {
+            console.error('Habitacion no encontrado:', habitacionesId);
             return res.status(404).send('habitacion no encontrado'); // Error si no se encuentra
         }
 
         habitaciones[habitacionesIndex] = { ...habitaciones[habitacionesIndex], ...habitacionesActualizado }; // Actualiza datos
+        console.log('Updated habitaciones:', habitaciones[habitacionesIndex]);
 
-        fs.writeFile(filePath, JSON.stringify(habitacionesData, null, 2), (err) => {
+        fs.writeFile(filePathHabitaciones, JSON.stringify(habitacionesData, null, 2), (err) => {
             if (err) {
-                console.error('Error writing file:', err);
-                return res.status(500).send('Error writing the file'); // Error al escribir
+                console.error('Error writing habitaciones file:', err);
+                return res.status(500).send('Error writing the habitaciones file'); // Error al escribir
             }
-            res.status(200).json(habitaciones[habitacionesIndex]); // Devuelve la habitacion actualizada
+
+            // Read and update the stock.json file
+            fs.readFile(filePathStock, 'utf8', (err, stockData) => {
+                if (err) {
+                    console.error('Error reading stock file:', err);
+                    return res.status(500).send('Error reading the stock file'); // Error al leer
+                }
+
+                let stockJsonData = JSON.parse(stockData);
+                let habitacionesStock = stockJsonData.stock.habitaciones;
+                const stockIndex = habitacionesStock.findIndex(item => item.id.toString() === habitacionesId.toString()); // Busca el índice
+
+                if (stockIndex === -1) {
+                    console.error('Stock item no encontrado:', habitacionesId);
+                    return res.status(404).send('Stock item no encontrado'); // Error si no se encuentra
+                }
+
+                habitacionesStock[stockIndex].cantidad = parseInt(habitacionesActualizado.cantidad, 10); // Actualiza cantidad como entero
+                console.log('Updated stock:', habitacionesStock[stockIndex]);
+
+                fs.writeFile(filePathStock, JSON.stringify(stockJsonData, null, 2), (err) => {
+                    if (err) {
+                        console.error('Error writing stock file:', err);
+                        return res.status(500).send('Error writing the stock file'); // Error al escribir
+                    }
+                    res.status(200).json(habitaciones[habitacionesIndex]); // Devuelve la habitacion actualizada
+                    console.log('Habitación successfully updated:', habitaciones[habitacionesIndex]);
+                });
+            });
         });
     });
 });
+
+
 
 app.post('/stock/modify', (req, res) => {
     const filePath = path.join(__dirname, 'stock.json'); // Ruta del archivo
