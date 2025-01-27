@@ -29,9 +29,43 @@
             padding: 5px 10px;
             cursor: pointer;
         }
+
+        .employee-search {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        .employee-search input {
+            padding: 5px;
+            margin-right: 10px;
+            width: 200px;
+        }
+        .employee-info {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            display: none;
+        }
+        .error-message {
+            color: red;
+            margin-top: 5px;
+            display: none;
+        }
     </style>
 </head>
 <body>
+    <div class="employee-search">
+        <input type="text" id="employeeSearch" placeholder="Buscar empleado por ID o nombre">
+        <button onclick="buscarEmpleado()">Buscar</button>
+        <div id="employeeInfo" class="employee-info"></div>
+        <div id="errorMessage" class="error-message"></div>
+    </div>
     <div class="wrapp">
         <div class="cabecera">
             <img src="../images/erp2.jpg"> 
@@ -42,12 +76,21 @@
                     <li><a href="productos.html">Productos</a></li>
                     <li><a href="reservas.html">Reservas</a></li>
                     <li><a href="graficos.html">Gráficos</a></li>
+
                     <div id="cartModal" style="display:none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
                         <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%;">
                             <span onclick="closeCartModal()" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
                             <h2>Carrito de Compra</h2>
                             <div id="cartItems"></div>
                             <div id="cartTotal"></div>
+                            <div id="regimenselection" style="margin-top: 15px;">
+                                <h3>Seleccionar Régimen</h3>
+                                <select id="regimen">
+                                    <option value="solo_desayuno,25">Solo desayuno - 25€</option>
+                                    <option value="media_pension,45">Media pensión - 45€</option>
+                                    <option value="pension_completa,65">Pensión completa - 65€</option>
+                                </select>
+                            </div>
                             <button onclick="finalizarCompra()">Finalizar Compra</button>
                         </div>
                     </div>
@@ -129,6 +172,14 @@
 </div>
 
     <script>
+
+function redirigirAdmin() {
+            // Aquí tomas el valor del correo desde algún lugar, por ejemplo, un campo de entrada
+            var correo = "admin@admin.com";  // Este valor puede ser dinámico
+
+            // Rediriges a admin.html con el correo como parámetro
+            window.location.href = `admin.html?correo=${encodeURIComponent(correo)}`;
+}
 function deleteProduct(id, type) {
     // Delete from stock
     fetch(`http://localhost:3000/stock/${type}/delete/${id}`, { method: 'DELETE' })
@@ -480,18 +531,122 @@ window.onload = mostrarStock;
     function closeCartModal() {
         document.getElementById('cartModal').style.display = 'none';
     }
+
+    let selectedEmployee = null;
+
+    function buscarEmpleado() {
+        const searchTerm = document.getElementById('employeeSearch').value;
+        const employeeInfo = document.getElementById('employeeInfo');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        fetch('http://localhost:3000/empleados')
+            .then(response => response.json())
+            .then(data => {
+                const empleado = data.empleados.find(emp => 
+                    emp.id === searchTerm || 
+                    emp.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+
+                if (empleado) {
+                    selectedEmployee = empleado;
+                    employeeInfo.innerHTML = `
+                        Empleado: ${empleado.nombre} ${empleado.apellidos}<br>
+                        ID: ${empleado.id}
+                    `;
+                    employeeInfo.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                } else {
+                    selectedEmployee = null;
+                    employeeInfo.style.display = 'none';
+                    errorMessage.innerHTML = 'Empleado no encontrado';
+                    errorMessage.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                errorMessage.innerHTML = 'Error al buscar empleado';
+                errorMessage.style.display = 'block';
+            });
+    }
     
     function finalizarCompra() {
+        if (!selectedEmployee) {
+            alert('Por favor, seleccione un empleado antes de finalizar la compra');
+            return;
+        }
+
         if (cart.length === 0) {
             alert('El carrito está vacío');
             return;
         }
-        
-        // Aquí podrías añadir la lógica para procesar la compra
-        alert('Compra finalizada. Gracias por su compra.');
-        cart = [];
-        closeCartModal();
-        mostrarStock();
+
+        // Get selected régimen
+        const regimenSelect = document.getElementById('regimen');
+        const [regimenTipo, regimenPrecio] = regimenSelect.value.split(',');
+
+        // Calculate total price
+        let total = parseFloat(regimenPrecio);
+        const servicios = [];
+        let habitacion = null;
+
+        cart.forEach(item => {
+            total += item.precio * item.cantidad;
+            if (item.type === 'habitaciones') {
+                habitacion = {
+                    tipo: item.nombre,
+                    precio: item.precio
+                };
+            } else {
+                servicios.push({
+                    nombre: item.nombre,
+                    precio: item.precio
+                });
+            }
+        });
+
+        // Create reservation object
+        const reserva = {
+            id: `RES${Date.now()}`,
+            mes: new Date().toLocaleString('es-ES', { month: 'long' }),
+            cliente: {
+                id: selectedEmployee.id,
+                nombre: selectedEmployee.nombre,
+                apellidos: selectedEmployee.apellidos,
+                edad: selectedEmployee.edad,
+                nacionalidad: selectedEmployee.nacionalidad,
+                hijos: selectedEmployee.hijos
+            },
+            habitacion: habitacion || {
+                tipo: "Sin habitación",
+                precio: 0
+            },
+            regimen: {
+                tipo: regimenTipo.replace(/_/g, ' '),
+                precio: parseFloat(regimenPrecio)
+            },
+            servicios: servicios,
+            precioTotal: total
+        };
+
+        // Save reservation
+        fetch('http://localhost:3000/reservas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(reserva)
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Error al guardar la reserva');
+            alert('Compra finalizada y reserva registrada correctamente');
+            cart = [];
+            closeCartModal();
+            mostrarStock();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al procesar la compra');
+        });
     }
     </script>
 </body>

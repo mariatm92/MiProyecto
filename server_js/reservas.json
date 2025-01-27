@@ -798,916 +798,945 @@
       ],
       "precioTotal": 630
     },
-                    {
-                      "id": "RES055",
-                      "mes": "abril",
-                      "cliente": {
-                        "id": "3456789012456",
-                        "nombre": "Fatima",
-                        "apellidos": "El-Tayeb",
-                        "edad": 38,
-                        "nacionalidad": "Marroquí",
-                        "hijos": 2
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Familiar",
-                        "precio": 250
-                      },
-                      "regimen": {
-                        "tipo": "Media pensión",
-                        "precio": 120
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Guardería",
-                          "precio": 60
-                        }
-                      ],
-                      "precioTotal": 430
-                    },
-                    {
-                      "id": "RES056",
-                      "mes": "marzo",
-                      "cliente": {
-                        "id": "5678901234890",
-                        "nombre": "Maria",
-                        "apellidos": "González",
-                        "edad": 32,
-                        "nacionalidad": "Española",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Standard",
-                        "precio": 120
-                      },
-                      "regimen": {
-                        "tipo": "Desayuno incluido",
-                        "precio": 50
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Minibar",
-                          "precio": 20
-                        }
-                      ],
-                      "precioTotal": 190
-                    },
-                    {
-                      "id": "RES057",
-                      "mes": "febrero",
-                      "cliente": {
-                        "id": "6789012345789",
-                        "nombre": "Mohamed",
-                        "apellidos": "Fathy",
-                        "edad": 41,
-                        "nacionalidad": "Egipcia",
-                        "hijos": 1
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Deluxe",
-                        "precio": 200
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 150
-                      },
-                      "servicios": [],
-                      "precioTotal": 350
-                    },
-                    {
-                      "id": "RES058",
-                      "mes": "julio",
-                      "cliente": {
-                        "id": "8901234567234",
-                        "nombre": "Emma",
-                        "apellidos": "Schmidt",
-                        "edad": 27,
-                        "nacionalidad": "Alemana",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Standard",
-                        "precio": 120
-                      },
-                      "regimen": {
-                        "tipo": "Desayuno incluido",
-                        "precio": 50
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Minibar",
-                          "precio": 20
-                        }
-                      ],
-                      "precioTotal": 190
-                    },
-                    {
-                      "id": "RES059",
-                      "mes": "noviembre",
-                      "cliente": {
-                        "id": "1234567890123",
-                        "nombre": "Sophia",
-                        "apellidos": "Evans",
-                        "edad": 31,
-                        "nacionalidad": "Británica",
-                        "hijos": 1
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Deluxe",
-                        "precio": 200
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 150
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Jacuzzi",
-                          "precio": 100
-                        }
-                      ],
-                      "precioTotal": 450
-                    },
-                    {
-                      "id": "RES060",
-                      "mes": "agosto",
-                      "cliente": {
-                        "id": "2345678901234",
-                        "nombre": "Carlos",
-                        "apellidos": "Hernández",
-                        "edad": 39,
-                        "nacionalidad": "Costarricense",
-                        "hijos": 2
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Familiar",
-                        "precio": 250
-                      },
-                      "regimen": {
-                        "tipo": "Media pensión",
-                        "precio": 120
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Spa",
-                          "precio": 50
-                        }
-                      ],
-                      "precioTotal": 420
-                    },
-                    {
-                      "id": "RES061",
-                      "mes": "octubre",
-                      "cliente": {
-                        "id": "3456789012345",
-                        "nombre": "Liam",
-                        "apellidos": "Anderson",
-                        "edad": 45,
-                        "nacionalidad": "Canadiense",
-                        "hijos": 3
-                      },
-                      "habitacion": {
-                        "tipo": "Suite",
-                        "precio": 300
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 200
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Guardería",
-                          "precio": 60
-                        },
-                        {
-                          "nombre": "Jacuzzi",
-                          "precio": 100
-                        }
-                      ],
-                      "precioTotal": 660
-                    }
-                    ,
-                    {
-                      "id": "RES062",
-                      "mes": "junio",
-                      "cliente": {
-                        "id": "4567890123456",
-                        "nombre": "Ava",
-                        "apellidos": "Garcia",
-                        "edad": 28,
-                        "nacionalidad": "Mexicana",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Standard",
-                        "precio": 120
-                      },
-                      "regimen": {
-                        "tipo": "Desayuno incluido",
-                        "precio": 50
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Minibar",
-                          "precio": 20
-                        }
-                      ],
-                      "precioTotal": 190
-                    },
-                    {
-                      "id": "RES063",
-                      "mes": "septiembre",
-                      "cliente": {
-                        "id": "5678901234567",
-                        "nombre": "Noah",
-                        "apellidos": "Kim",
-                        "edad": 40,
-                        "nacionalidad": "Coreana",
-                        "hijos": 1
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Deluxe",
-                        "precio": 200
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 150
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Spa",
-                          "precio": 50
-                        }
-                      ],
-                      "precioTotal": 400
-                    },
-                    {
-                      "id": "RES064",
-                      "mes": "enero",
-                      "cliente": {
-                        "id": "6789012345678",
-                        "nombre": "Elena",
-                        "apellidos": "Romero",
-                        "edad": 34,
-                        "nacionalidad": "Española",
-                        "hijos": 2
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Familiar",
-                        "precio": 250
-                      },
-                      "regimen": {
-                        "tipo": "Media pensión",
-                        "precio": 120
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Guardería",
-                          "precio": 60
-                        }
-                      ],
-                      "precioTotal": 430
-                    },
-                    {
-                      "id": "RES065",
-                      "mes": "octubre",
-                      "cliente": {
-                        "id": "7890123456789",
-                        "nombre": "Amir",
-                        "apellidos": "Khan",
-                        "edad": 37,
-                        "nacionalidad": "Pakistaní",
-                        "hijos": 3
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Familiar",
-                        "precio": 300
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 200
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Jacuzzi",
-                          "precio": 80
-                        },
-                        {
-                          "nombre": "Spa",
-                          "precio": 50
-                        }
-                      ],
-                      "precioTotal": 630
-                    },
-                    {
-                      "id": "RES066",
-                      "mes": "mayo",
-                      "cliente": {
-                        "id": "8901234567890",
-                        "nombre": "Emma",
-                        "apellidos": "Jones",
-                        "edad": 29,
-                        "nacionalidad": "Australiana",
-                        "hijos": 1
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Standard",
-                        "precio": 120
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 150
-                      },
-                      "servicios": [],
-                      "precioTotal": 270
-                    },
-                    {
-                      "id": "RES067",
-                      "mes": "diciembre",
-                      "cliente": {
-                        "id": "9012345678901",
-                        "nombre": "Oliver",
-                        "apellidos": "Brown",
-                        "edad": 41,
-                        "nacionalidad": "Canadiense",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Deluxe",
-                        "precio": 200
-                      },
-                      "regimen": {
-                        "tipo": "Media pensión",
-                        "precio": 100
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Spa",
-                          "precio": 50
-                        }
-                      ],
-                      "precioTotal": 350
-                    },
-                    {
-                      "id": "RES068",
-                      "mes": "abril",
-                      "cliente": {
-                        "id": "2345678909876",
-                        "nombre": "Isabella",
-                        "apellidos": "Martínez",
-                        "edad": 33,
-                        "nacionalidad": "Argentina",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Suite",
-                        "precio": 300
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 200
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Jacuzzi",
-                          "precio": 100
-                        }
-                      ],
-                      "precioTotal": 600
-                    },
-                    {
-                      "id": "RES069",
-                      "mes": "febrero",
-                      "cliente": {
-                        "id": "1234567890124",
-                        "nombre": "Laura",
-                        "apellidos": "Smith",
-                        "edad": 20,
-                        "nacionalidad": "Estadounidense",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Standard",
-                        "precio": 120
-                      },
-                      "regimen": {
-                        "tipo": "Desayuno incluido",
-                        "precio": 50
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Minibar",
-                          "precio": 20
-                        }
-                      ],
-                      "precioTotal": 190
-                    },
-                    {
-                      "id": "RES070",
-                      "mes": "marzo",
-                      "cliente": {
-                        "id": "2345678901235",
-                        "nombre": "Ahmed",
-                        "apellidos": "Khaled",
-                        "edad": 22,
-                        "nacionalidad": "Egipcia",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Standard",
-                        "precio": 120
-                      },
-                      "regimen": {
-                        "tipo": "Media pensión",
-                        "precio": 100
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Spa",
-                          "precio": 50
-                        }
-                      ],
-                      "precioTotal": 270
-                    },
-                    {
-                      "id": "RES071",
-                      "mes": "julio",
-                      "cliente": {
-                        "id": "3456789012346",
-                        "nombre": "Sofia",
-                        "apellidos": "Martínez",
-                        "edad": 19,
-                        "nacionalidad": "Española",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Deluxe",
-                        "precio": 200
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 150
-                      },
-                      "servicios": [],
-                      "precioTotal": 350
-                    }
-                    ,
-                    {
-                      "id": "RES072",
-                      "mes": "junio",
-                      "cliente": {
-                        "id": "4567890123457",
-                        "nombre": "Lucas",
-                        "apellidos": "Hernández",
-                        "edad": 25,
-                        "nacionalidad": "Mexicana",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Standard",
-                        "precio": 120
-                      },
-                      "regimen": {
-                        "tipo": "Desayuno incluido",
-                        "precio": 50
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Minibar",
-                          "precio": 20
-                        }
-                      ],
-                      "precioTotal": 190
-                    },
-                    {
-                      "id": "RES073",
-                      "mes": "septiembre",
-                      "cliente": {
-                        "id": "5678901234568",
-                        "nombre": "Emilia",
-                        "apellidos": "Garcia",
-                        "edad": 21,
-                        "nacionalidad": "Argentina",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Deluxe",
-                        "precio": 200
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 150
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Jacuzzi",
-                          "precio": 80
-                        }
-                      ],
-                      "precioTotal": 430
-                    },
-                    {
-                      "id": "RES074",
-                      "mes": "febrero",
-                      "cliente": {
-                        "id": "6789012345679",
-                        "nombre": "Noah",
-                        "apellidos": "Williams",
-                        "edad": 23,
-                        "nacionalidad": "Canadiense",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Standard",
-                        "precio": 120
-                      },
-                      "regimen": {
-                        "tipo": "Media pensión",
-                        "precio": 100
-                      },
-                      "servicios": [],
-                      "precioTotal": 220
-                    },
-                    {
-                      "id": "RES075",
-                      "mes": "agosto",
-                      "cliente": {
-                        "id": "7890123456780",
-                        "nombre": "Emma",
-                        "apellidos": "Brown",
-                        "edad": 18,
-                        "nacionalidad": "Británica",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Deluxe",
-                        "precio": 200
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 150
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Spa",
-                          "precio": 50
-                        }
-                      ],
-                      "precioTotal": 400
-                    },
-                    {
-                      "id": "RES076",
-                      "mes": "mayo",
-                      "cliente": {
-                        "id": "8901234567891",
-                        "nombre": "Ethan",
-                        "apellidos": "Taylor",
-                        "edad": 24,
-                        "nacionalidad": "Estadounidense",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Standard",
-                        "precio": 120
-                      },
-                      "regimen": {
-                        "tipo": "Desayuno incluido",
-                        "precio": 50
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Minibar",
-                          "precio": 20
-                        }
-                      ],
-                      "precioTotal": 190
-                    },
-                    {
-                      "id": "RES077",
-                      "mes": "enero",
-                      "cliente": {
-                        "id": "9012345678902",
-                        "nombre": "Ava",
-                        "apellidos": "Kim",
-                        "edad": 20,
-                        "nacionalidad": "Coreana",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Deluxe",
-                        "precio": 200
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 150
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Jacuzzi",
-                          "precio": 80
-                        }
-                      ],
-                      "precioTotal": 430
-                    },
-                    {
-                      "id": "RES078",
-                      "mes": "julio",
-                      "cliente": {
-                        "id": "2345678901236",
-                        "nombre": "Liam",
-                        "apellidos": "Thompson",
-                        "edad": 22,
-                        "nacionalidad": "Australiana",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Standard",
-                        "precio": 120
-                      },
-                      "regimen": {
-                        "tipo": "Media pensión",
-                        "precio": 100
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Spa",
-                          "precio": 50
-                        }
-                      ],
-                      "precioTotal": 270
-                    },
-                    {
-                      "id": "RES079",
-                      "mes": "octubre",
-                      "cliente": {
-                        "id": "1234567890127",
-                        "nombre": "William",
-                        "apellidos": "Johnson",
-                        "edad": 65,
-                        "nacionalidad": "Estadounidense",
-                        "hijos": 3
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Deluxe",
-                        "precio": 200
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 150
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Spa",
-                          "precio": 50
-                        }
-                      ],
-                      "precioTotal": 400
-                    },
-                    {
-                      "id": "RES080",
-                      "mes": "diciembre",
-                      "cliente": {
-                        "id": "2345678901237",
-                        "nombre": "Margaret",
-                        "apellidos": "Thompson",
-                        "edad": 72,
-                        "nacionalidad": "Británica",
-                        "hijos": 2
-                      },
-                      "habitacion": {
-                        "tipo": "Suite",
-                        "precio": 300
-                      },
-                      "regimen": {
-                        "tipo": "Media pensión",
-                        "precio": 120
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Jacuzzi",
-                          "precio": 80
-                        }
-                      ],
-                      "precioTotal": 500
-                    }
-                    ,
-                    {
-                      "id": "RES081",
-                      "mes": "octubre",
-                      "cliente": {
-                        "id": "3456789012348",
-                        "nombre": "Hassan",
-                        "apellidos": "Ahmed",
-                        "edad": 68,
-                        "nacionalidad": "Egipcia",
-                        "hijos": 4
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Familiar",
-                        "precio": 250
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 200
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Guardería",
-                          "precio": 60
-                        }
-                      ],
-                      "precioTotal": 510
-                    },
-                    {
-                      "id": "RES082",
-                      "mes": "mayo",
-                      "cliente": {
-                        "id": "4567890123459",
-                        "nombre": "Barbara",
-                        "apellidos": "Miller",
-                        "edad": 75,
-                        "nacionalidad": "Canadiense",
-                        "hijos": 5
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Deluxe",
-                        "precio": 200
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 150
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Spa",
-                          "precio": 50
-                        }
-                      ],
-                      "precioTotal": 400
-                    },
-                    {
-                      "id": "RES083",
-                      "mes": "abril",
-                      "cliente": {
-                        "id": "5678901234570",
-                        "nombre": "John",
-                        "apellidos": "Wilson",
-                        "edad": 80,
-                        "nacionalidad": "Australiana",
-                        "hijos": 2
-                      },
-                      "habitacion": {
-                        "tipo": "Suite",
-                        "precio": 300
-                      },
-                      "regimen": {
-                        "tipo": "Desayuno incluido",
-                        "precio": 50
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Jacuzzi",
-                          "precio": 100
-                        }
-                      ],
-                      "precioTotal": 450
-                    },
-                    {
-                      "id": "RES084",
-                      "mes": "febrero",
-                      "cliente": {
-                        "id": "6789012345681",
-                        "nombre": "Maria",
-                        "apellidos": "Garcia",
-                        "edad": 63,
-                        "nacionalidad": "Española",
-                        "hijos": 1
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Standard",
-                        "precio": 120
-                      },
-                      "regimen": {
-                        "tipo": "Media pensión",
-                        "precio": 100
-                      },
-                      "servicios": [],
-                      "precioTotal": 220
-                    },
-                    {
-                      "id": "RES085",
-                      "mes": "junio",
-                      "cliente": {
-                        "id": "7890123456782",
-                        "nombre": "Walter",
-                        "apellidos": "Brown",
-                        "edad": 69,
-                        "nacionalidad": "Estadounidense",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Deluxe",
-                        "precio": 200
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 150
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Spa",
-                          "precio": 50
-                        }
-                      ],
-                      "precioTotal": 400
-                    },
-                    {
-                      "id": "RES086",
-                      "mes": "agosto",
-                      "cliente": {
-                        "id": "8901234567893",
-                        "nombre": "Helen",
-                        "apellidos": "Taylor",
-                        "edad": 76,
-                        "nacionalidad": "Canadiense",
-                        "hijos": 3
-                      },
-                      "habitacion": {
-                        "tipo": "Suite",
-                        "precio": 300
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 200
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Jacuzzi",
-                          "precio": 80
-                        }
-                      ],
-                      "precioTotal": 580
-                    },
-                    {
-                      "id": "RES087",
-                      "mes": "noviembre",
-                      "cliente": {
-                        "id": "9012345678904",
-                        "nombre": "James",
-                        "apellidos": "Lee",
-                        "edad": 81,
-                        "nacionalidad": "Coreana",
-                        "hijos": 0
-                      },
-                      "habitacion": {
-                        "tipo": "Habitación Standard",
-                        "precio": 120
-                      },
-                      "regimen": {
-                        "tipo": "Desayuno incluido",
-                        "precio": 50
-                      },
-                      "servicios": [],
-                      "precioTotal": 170
-                    },
-                    {
-                      "id": "RES088",
-                      "mes": "enero",
-                      "cliente": {
-                        "id": "2345678901238",
-                        "nombre": "Dorothy",
-                        "apellidos": "Martinez",
-                        "edad": 84,
-                        "nacionalidad": "Mexicana",
-                        "hijos": 2
-                      },
-                      "habitacion": {
-                        "tipo": "Suite",
-                        "precio": 300
-                      },
-                      "regimen": {
-                        "tipo": "Todo incluido",
-                        "precio": 200
-                      },
-                      "servicios": [
-                        {
-                          "nombre": "Jacuzzi",
-                          "precio": 100
-                        }
-                      ],
-                      "precioTotal": 600
-                    }
-                    
-               ]
+    {
+      "id": "RES055",
+      "mes": "abril",
+      "cliente": {
+        "id": "3456789012456",
+        "nombre": "Fatima",
+        "apellidos": "El-Tayeb",
+        "edad": 38,
+        "nacionalidad": "Marroquí",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "Habitación Familiar",
+        "precio": 250
+      },
+      "regimen": {
+        "tipo": "Media pensión",
+        "precio": 120
+      },
+      "servicios": [
+        {
+          "nombre": "Guardería",
+          "precio": 60
         }
-                            
-          
-        
-
-
-      
-    
-    
-
-  
-
+      ],
+      "precioTotal": 430
+    },
+    {
+      "id": "RES056",
+      "mes": "marzo",
+      "cliente": {
+        "id": "5678901234890",
+        "nombre": "Maria",
+        "apellidos": "González",
+        "edad": 32,
+        "nacionalidad": "Española",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Standard",
+        "precio": 120
+      },
+      "regimen": {
+        "tipo": "Desayuno incluido",
+        "precio": 50
+      },
+      "servicios": [
+        {
+          "nombre": "Minibar",
+          "precio": 20
+        }
+      ],
+      "precioTotal": 190
+    },
+    {
+      "id": "RES057",
+      "mes": "febrero",
+      "cliente": {
+        "id": "6789012345789",
+        "nombre": "Mohamed",
+        "apellidos": "Fathy",
+        "edad": 41,
+        "nacionalidad": "Egipcia",
+        "hijos": 1
+      },
+      "habitacion": {
+        "tipo": "Habitación Deluxe",
+        "precio": 200
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 150
+      },
+      "servicios": [],
+      "precioTotal": 350
+    },
+    {
+      "id": "RES058",
+      "mes": "julio",
+      "cliente": {
+        "id": "8901234567234",
+        "nombre": "Emma",
+        "apellidos": "Schmidt",
+        "edad": 27,
+        "nacionalidad": "Alemana",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Standard",
+        "precio": 120
+      },
+      "regimen": {
+        "tipo": "Desayuno incluido",
+        "precio": 50
+      },
+      "servicios": [
+        {
+          "nombre": "Minibar",
+          "precio": 20
+        }
+      ],
+      "precioTotal": 190
+    },
+    {
+      "id": "RES059",
+      "mes": "noviembre",
+      "cliente": {
+        "id": "1234567890123",
+        "nombre": "Sophia",
+        "apellidos": "Evans",
+        "edad": 31,
+        "nacionalidad": "Británica",
+        "hijos": 1
+      },
+      "habitacion": {
+        "tipo": "Habitación Deluxe",
+        "precio": 200
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 150
+      },
+      "servicios": [
+        {
+          "nombre": "Jacuzzi",
+          "precio": 100
+        }
+      ],
+      "precioTotal": 450
+    },
+    {
+      "id": "RES060",
+      "mes": "agosto",
+      "cliente": {
+        "id": "2345678901234",
+        "nombre": "Carlos",
+        "apellidos": "Hernández",
+        "edad": 39,
+        "nacionalidad": "Costarricense",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "Habitación Familiar",
+        "precio": 250
+      },
+      "regimen": {
+        "tipo": "Media pensión",
+        "precio": 120
+      },
+      "servicios": [
+        {
+          "nombre": "Spa",
+          "precio": 50
+        }
+      ],
+      "precioTotal": 420
+    },
+    {
+      "id": "RES061",
+      "mes": "octubre",
+      "cliente": {
+        "id": "3456789012345",
+        "nombre": "Liam",
+        "apellidos": "Anderson",
+        "edad": 45,
+        "nacionalidad": "Canadiense",
+        "hijos": 3
+      },
+      "habitacion": {
+        "tipo": "Suite",
+        "precio": 300
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 200
+      },
+      "servicios": [
+        {
+          "nombre": "Guardería",
+          "precio": 60
+        },
+        {
+          "nombre": "Jacuzzi",
+          "precio": 100
+        }
+      ],
+      "precioTotal": 660
+    },
+    {
+      "id": "RES062",
+      "mes": "junio",
+      "cliente": {
+        "id": "4567890123456",
+        "nombre": "Ava",
+        "apellidos": "Garcia",
+        "edad": 28,
+        "nacionalidad": "Mexicana",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Standard",
+        "precio": 120
+      },
+      "regimen": {
+        "tipo": "Desayuno incluido",
+        "precio": 50
+      },
+      "servicios": [
+        {
+          "nombre": "Minibar",
+          "precio": 20
+        }
+      ],
+      "precioTotal": 190
+    },
+    {
+      "id": "RES063",
+      "mes": "septiembre",
+      "cliente": {
+        "id": "5678901234567",
+        "nombre": "Noah",
+        "apellidos": "Kim",
+        "edad": 40,
+        "nacionalidad": "Coreana",
+        "hijos": 1
+      },
+      "habitacion": {
+        "tipo": "Habitación Deluxe",
+        "precio": 200
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 150
+      },
+      "servicios": [
+        {
+          "nombre": "Spa",
+          "precio": 50
+        }
+      ],
+      "precioTotal": 400
+    },
+    {
+      "id": "RES064",
+      "mes": "enero",
+      "cliente": {
+        "id": "6789012345678",
+        "nombre": "Elena",
+        "apellidos": "Romero",
+        "edad": 34,
+        "nacionalidad": "Española",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "Habitación Familiar",
+        "precio": 250
+      },
+      "regimen": {
+        "tipo": "Media pensión",
+        "precio": 120
+      },
+      "servicios": [
+        {
+          "nombre": "Guardería",
+          "precio": 60
+        }
+      ],
+      "precioTotal": 430
+    },
+    {
+      "id": "RES065",
+      "mes": "octubre",
+      "cliente": {
+        "id": "7890123456789",
+        "nombre": "Amir",
+        "apellidos": "Khan",
+        "edad": 37,
+        "nacionalidad": "Pakistaní",
+        "hijos": 3
+      },
+      "habitacion": {
+        "tipo": "Habitación Familiar",
+        "precio": 300
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 200
+      },
+      "servicios": [
+        {
+          "nombre": "Jacuzzi",
+          "precio": 80
+        },
+        {
+          "nombre": "Spa",
+          "precio": 50
+        }
+      ],
+      "precioTotal": 630
+    },
+    {
+      "id": "RES066",
+      "mes": "mayo",
+      "cliente": {
+        "id": "8901234567890",
+        "nombre": "Emma",
+        "apellidos": "Jones",
+        "edad": 29,
+        "nacionalidad": "Australiana",
+        "hijos": 1
+      },
+      "habitacion": {
+        "tipo": "Habitación Standard",
+        "precio": 120
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 150
+      },
+      "servicios": [],
+      "precioTotal": 270
+    },
+    {
+      "id": "RES067",
+      "mes": "diciembre",
+      "cliente": {
+        "id": "9012345678901",
+        "nombre": "Oliver",
+        "apellidos": "Brown",
+        "edad": 41,
+        "nacionalidad": "Canadiense",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Deluxe",
+        "precio": 200
+      },
+      "regimen": {
+        "tipo": "Media pensión",
+        "precio": 100
+      },
+      "servicios": [
+        {
+          "nombre": "Spa",
+          "precio": 50
+        }
+      ],
+      "precioTotal": 350
+    },
+    {
+      "id": "RES068",
+      "mes": "abril",
+      "cliente": {
+        "id": "2345678909876",
+        "nombre": "Isabella",
+        "apellidos": "Martínez",
+        "edad": 33,
+        "nacionalidad": "Argentina",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Suite",
+        "precio": 300
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 200
+      },
+      "servicios": [
+        {
+          "nombre": "Jacuzzi",
+          "precio": 100
+        }
+      ],
+      "precioTotal": 600
+    },
+    {
+      "id": "RES069",
+      "mes": "febrero",
+      "cliente": {
+        "id": "1234567890124",
+        "nombre": "Laura",
+        "apellidos": "Smith",
+        "edad": 20,
+        "nacionalidad": "Estadounidense",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Standard",
+        "precio": 120
+      },
+      "regimen": {
+        "tipo": "Desayuno incluido",
+        "precio": 50
+      },
+      "servicios": [
+        {
+          "nombre": "Minibar",
+          "precio": 20
+        }
+      ],
+      "precioTotal": 190
+    },
+    {
+      "id": "RES070",
+      "mes": "marzo",
+      "cliente": {
+        "id": "2345678901235",
+        "nombre": "Ahmed",
+        "apellidos": "Khaled",
+        "edad": 22,
+        "nacionalidad": "Egipcia",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Standard",
+        "precio": 120
+      },
+      "regimen": {
+        "tipo": "Media pensión",
+        "precio": 100
+      },
+      "servicios": [
+        {
+          "nombre": "Spa",
+          "precio": 50
+        }
+      ],
+      "precioTotal": 270
+    },
+    {
+      "id": "RES071",
+      "mes": "julio",
+      "cliente": {
+        "id": "3456789012346",
+        "nombre": "Sofia",
+        "apellidos": "Martínez",
+        "edad": 19,
+        "nacionalidad": "Española",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Deluxe",
+        "precio": 200
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 150
+      },
+      "servicios": [],
+      "precioTotal": 350
+    },
+    {
+      "id": "RES072",
+      "mes": "junio",
+      "cliente": {
+        "id": "4567890123457",
+        "nombre": "Lucas",
+        "apellidos": "Hernández",
+        "edad": 25,
+        "nacionalidad": "Mexicana",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Standard",
+        "precio": 120
+      },
+      "regimen": {
+        "tipo": "Desayuno incluido",
+        "precio": 50
+      },
+      "servicios": [
+        {
+          "nombre": "Minibar",
+          "precio": 20
+        }
+      ],
+      "precioTotal": 190
+    },
+    {
+      "id": "RES073",
+      "mes": "septiembre",
+      "cliente": {
+        "id": "5678901234568",
+        "nombre": "Emilia",
+        "apellidos": "Garcia",
+        "edad": 21,
+        "nacionalidad": "Argentina",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Deluxe",
+        "precio": 200
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 150
+      },
+      "servicios": [
+        {
+          "nombre": "Jacuzzi",
+          "precio": 80
+        }
+      ],
+      "precioTotal": 430
+    },
+    {
+      "id": "RES074",
+      "mes": "febrero",
+      "cliente": {
+        "id": "6789012345679",
+        "nombre": "Noah",
+        "apellidos": "Williams",
+        "edad": 23,
+        "nacionalidad": "Canadiense",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Standard",
+        "precio": 120
+      },
+      "regimen": {
+        "tipo": "Media pensión",
+        "precio": 100
+      },
+      "servicios": [],
+      "precioTotal": 220
+    },
+    {
+      "id": "RES075",
+      "mes": "agosto",
+      "cliente": {
+        "id": "7890123456780",
+        "nombre": "Emma",
+        "apellidos": "Brown",
+        "edad": 18,
+        "nacionalidad": "Británica",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Deluxe",
+        "precio": 200
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 150
+      },
+      "servicios": [
+        {
+          "nombre": "Spa",
+          "precio": 50
+        }
+      ],
+      "precioTotal": 400
+    },
+    {
+      "id": "RES076",
+      "mes": "mayo",
+      "cliente": {
+        "id": "8901234567891",
+        "nombre": "Ethan",
+        "apellidos": "Taylor",
+        "edad": 24,
+        "nacionalidad": "Estadounidense",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Standard",
+        "precio": 120
+      },
+      "regimen": {
+        "tipo": "Desayuno incluido",
+        "precio": 50
+      },
+      "servicios": [
+        {
+          "nombre": "Minibar",
+          "precio": 20
+        }
+      ],
+      "precioTotal": 190
+    },
+    {
+      "id": "RES077",
+      "mes": "enero",
+      "cliente": {
+        "id": "9012345678902",
+        "nombre": "Ava",
+        "apellidos": "Kim",
+        "edad": 20,
+        "nacionalidad": "Coreana",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Deluxe",
+        "precio": 200
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 150
+      },
+      "servicios": [
+        {
+          "nombre": "Jacuzzi",
+          "precio": 80
+        }
+      ],
+      "precioTotal": 430
+    },
+    {
+      "id": "RES078",
+      "mes": "julio",
+      "cliente": {
+        "id": "2345678901236",
+        "nombre": "Liam",
+        "apellidos": "Thompson",
+        "edad": 22,
+        "nacionalidad": "Australiana",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Standard",
+        "precio": 120
+      },
+      "regimen": {
+        "tipo": "Media pensión",
+        "precio": 100
+      },
+      "servicios": [
+        {
+          "nombre": "Spa",
+          "precio": 50
+        }
+      ],
+      "precioTotal": 270
+    },
+    {
+      "id": "RES079",
+      "mes": "octubre",
+      "cliente": {
+        "id": "1234567890127",
+        "nombre": "William",
+        "apellidos": "Johnson",
+        "edad": 65,
+        "nacionalidad": "Estadounidense",
+        "hijos": 3
+      },
+      "habitacion": {
+        "tipo": "Habitación Deluxe",
+        "precio": 200
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 150
+      },
+      "servicios": [
+        {
+          "nombre": "Spa",
+          "precio": 50
+        }
+      ],
+      "precioTotal": 400
+    },
+    {
+      "id": "RES080",
+      "mes": "diciembre",
+      "cliente": {
+        "id": "2345678901237",
+        "nombre": "Margaret",
+        "apellidos": "Thompson",
+        "edad": 72,
+        "nacionalidad": "Británica",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "Suite",
+        "precio": 300
+      },
+      "regimen": {
+        "tipo": "Media pensión",
+        "precio": 120
+      },
+      "servicios": [
+        {
+          "nombre": "Jacuzzi",
+          "precio": 80
+        }
+      ],
+      "precioTotal": 500
+    },
+    {
+      "id": "RES081",
+      "mes": "octubre",
+      "cliente": {
+        "id": "3456789012348",
+        "nombre": "Hassan",
+        "apellidos": "Ahmed",
+        "edad": 68,
+        "nacionalidad": "Egipcia",
+        "hijos": 4
+      },
+      "habitacion": {
+        "tipo": "Habitación Familiar",
+        "precio": 250
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 200
+      },
+      "servicios": [
+        {
+          "nombre": "Guardería",
+          "precio": 60
+        }
+      ],
+      "precioTotal": 510
+    },
+    {
+      "id": "RES082",
+      "mes": "mayo",
+      "cliente": {
+        "id": "4567890123459",
+        "nombre": "Barbara",
+        "apellidos": "Miller",
+        "edad": 75,
+        "nacionalidad": "Canadiense",
+        "hijos": 5
+      },
+      "habitacion": {
+        "tipo": "Habitación Deluxe",
+        "precio": 200
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 150
+      },
+      "servicios": [
+        {
+          "nombre": "Spa",
+          "precio": 50
+        }
+      ],
+      "precioTotal": 400
+    },
+    {
+      "id": "RES083",
+      "mes": "abril",
+      "cliente": {
+        "id": "5678901234570",
+        "nombre": "John",
+        "apellidos": "Wilson",
+        "edad": 80,
+        "nacionalidad": "Australiana",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "Suite",
+        "precio": 300
+      },
+      "regimen": {
+        "tipo": "Desayuno incluido",
+        "precio": 50
+      },
+      "servicios": [
+        {
+          "nombre": "Jacuzzi",
+          "precio": 100
+        }
+      ],
+      "precioTotal": 450
+    },
+    {
+      "id": "RES084",
+      "mes": "febrero",
+      "cliente": {
+        "id": "6789012345681",
+        "nombre": "Maria",
+        "apellidos": "Garcia",
+        "edad": 63,
+        "nacionalidad": "Española",
+        "hijos": 1
+      },
+      "habitacion": {
+        "tipo": "Habitación Standard",
+        "precio": 120
+      },
+      "regimen": {
+        "tipo": "Media pensión",
+        "precio": 100
+      },
+      "servicios": [],
+      "precioTotal": 220
+    },
+    {
+      "id": "RES085",
+      "mes": "junio",
+      "cliente": {
+        "id": "7890123456782",
+        "nombre": "Walter",
+        "apellidos": "Brown",
+        "edad": 69,
+        "nacionalidad": "Estadounidense",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Deluxe",
+        "precio": 200
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 150
+      },
+      "servicios": [
+        {
+          "nombre": "Spa",
+          "precio": 50
+        }
+      ],
+      "precioTotal": 400
+    },
+    {
+      "id": "RES086",
+      "mes": "agosto",
+      "cliente": {
+        "id": "8901234567893",
+        "nombre": "Helen",
+        "apellidos": "Taylor",
+        "edad": 76,
+        "nacionalidad": "Canadiense",
+        "hijos": 3
+      },
+      "habitacion": {
+        "tipo": "Suite",
+        "precio": 300
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 200
+      },
+      "servicios": [
+        {
+          "nombre": "Jacuzzi",
+          "precio": 80
+        }
+      ],
+      "precioTotal": 580
+    },
+    {
+      "id": "RES087",
+      "mes": "noviembre",
+      "cliente": {
+        "id": "9012345678904",
+        "nombre": "James",
+        "apellidos": "Lee",
+        "edad": 81,
+        "nacionalidad": "Coreana",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación Standard",
+        "precio": 120
+      },
+      "regimen": {
+        "tipo": "Desayuno incluido",
+        "precio": 50
+      },
+      "servicios": [],
+      "precioTotal": 170
+    },
+    {
+      "id": "RES088",
+      "mes": "enero",
+      "cliente": {
+        "id": "2345678901238",
+        "nombre": "Dorothy",
+        "apellidos": "Martinez",
+        "edad": 84,
+        "nacionalidad": "Mexicana",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "Suite",
+        "precio": 300
+      },
+      "regimen": {
+        "tipo": "Todo incluido",
+        "precio": 200
+      },
+      "servicios": [
+        {
+          "nombre": "Jacuzzi",
+          "precio": 100
+        }
+      ],
+      "precioTotal": 600
+    },
+    {
+      "id": "RES1737989797246",
+      "mes": "enero",
+      "cliente": {
+        "id": "1732870380351",
+        "nombre": "Sandra",
+        "apellidos": "Gonzalez",
+        "edad": 30,
+        "nacionalidad": "Española",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "habitacion doble",
+        "precio": 200
+      },
+      "regimen": {
+        "tipo": "media pension",
+        "precio": 45
+      },
+      "servicios": [],
+      "precioTotal": 845
+    },
+    {
+      "id": "RES1737990057934",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591748",
+        "nombre": "María",
+        "apellidos": "López",
+        "edad": 28,
+        "nacionalidad": "Mexicana",
+        "hijos": 1
+      },
+      "habitacion": {
+        "tipo": "habitacion doble",
+        "precio": 200
+      },
+      "regimen": {
+        "tipo": "media pension",
+        "precio": 45
+      },
+      "servicios": [],
+      "precioTotal": 1245
+    }
+  ]
+}
