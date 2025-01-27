@@ -52,6 +52,7 @@
 
                         reservaDetails.innerHTML = `
                                 <div class="reservaField"><strong>ID Reserva:</strong> ${reserva.id}</div>
+                                <div class="reservaField"><strong>Fecha de Reserva:</strong> ${reserva.fecha || 'No disponible'}</div>
                                 <div class="reservaField"><strong>Cliente:</strong> ${reserva.cliente.nombre} ${reserva.cliente.apellidos}</div>
                                 <div class="reservaField"><strong>Edad:</strong> ${reserva.cliente.edad} años</div>
                                 <div class="reservaField"><strong>Hijos:</strong> ${reserva.cliente.hijos} hijo/s</div>
