@@ -3,7 +3,7 @@
     "habitaciones": [
       {
         "id": 1737718154150,
-        "cantidad": 3
+        "cantidad": 12
       },
       {
         "id": 1737817601305,
@@ -13,7 +13,11 @@
     "servicios": [
       {
         "id": 1737715187803,
-        "cantidad": 23
+        "cantidad": 12
+      },
+      {
+        "id": 1737990802273,
+        "cantidad": 12
       }
     ]
   }

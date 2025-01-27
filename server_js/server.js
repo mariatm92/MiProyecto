@@ -424,102 +424,174 @@ app.patch('/stock/:tipo/update/:id', (req, res) => {
 
 //--------- ENDPOINTS MODIFICAR STOCK Y HABITACIONES --------------
 app.patch('/habitaciones/modify', (req, res) => {
-    const filePathHabitaciones = path.join(__dirname, 'habitaciones.json'); // Ruta del archivo habitaciones
-    const filePathStock = path.join(__dirname, 'stock.json'); // Ruta del archivo stock
-    const habitacionesActualizado = req.body; // Datos de las habitaciones actualizado
-    const habitacionesId = habitacionesActualizado.id; // ID de la habitacion
+    const filePathHabitaciones = path.join(__dirname, 'habitaciones.json');
+    const filePathServicios = path.join(__dirname, 'servicios.json');
+    const filePathStock = path.join(__dirname, 'stock.json');
+    const productoActualizado = req.body;
+    const productoId = productoActualizado.id;
+    const productoTipo = productoActualizado.tipo;
 
-    console.log('Received update request for:', habitacionesId);
+    console.log('Received update request for:', productoId);
 
-    // Read and update the habitaciones.json file
-    fs.readFile(filePathHabitaciones, 'utf8', (err, data) => {
+    let filePathProducto;
+    let productoKey;
+
+    if (productoTipo === 'habitaciones') {
+        filePathProducto = filePathHabitaciones;
+        productoKey = 'habitaciones';
+    } else if (productoTipo === 'servicios') {
+        filePathProducto = filePathServicios;
+        productoKey = 'servicios';
+    } else {
+        return res.status(400).send('Tipo de producto no válido');
+    }
+
+    // Read and update the habitaciones/servicios file
+    fs.readFile(filePathProducto, 'utf8', (err, data) => {
         if (err) {
-            console.error('Error reading habitaciones file:', err);
-            return res.status(500).send('Error reading the habitaciones file'); // Error al leer
+            console.error('Error reading file:', err);
+            return res.status(500).send(`Error reading the ${productoKey} file`);
         }
 
-        let habitacionesData = JSON.parse(data);
-        let habitaciones = habitacionesData.habitaciones;
-        const habitacionesIndex = habitaciones.findIndex(hbt => hbt.id.toString() === habitacionesId.toString()); // Busca el índice
+        let productoData = JSON.parse(data);
+        let productos = productoData[productoKey];
+        const productoIndex = productos.findIndex(prd => prd.id.toString() === productoId.toString());
 
-        if (habitacionesIndex === -1) {
-            console.error('Habitacion no encontrado:', habitacionesId);
-            return res.status(404).send('habitacion no encontrado'); // Error si no se encuentra
+        if (productoIndex === -1) {
+            console.error(`${productoTipo} no encontrado:`, productoId);
+            return res.status(404).send(`${productoTipo} no encontrado`);
         }
 
-        habitaciones[habitacionesIndex] = { ...habitaciones[habitacionesIndex], ...habitacionesActualizado }; // Actualiza datos
-        console.log('Updated habitaciones:', habitaciones[habitacionesIndex]);
+        productos[productoIndex] = { ...productos[productoIndex], ...productoActualizado };
+        console.log(`Updated ${productoTipo}:`, productos[productoIndex]);
 
-        fs.writeFile(filePathHabitaciones, JSON.stringify(habitacionesData, null, 2), (err) => {
+        fs.writeFile(filePathProducto, JSON.stringify(productoData, null, 2), (err) => {
             if (err) {
-                console.error('Error writing habitaciones file:', err);
-                return res.status(500).send('Error writing the habitaciones file'); // Error al escribir
+                console.error('Error writing file:', err);
+                return res.status(500).send(`Error writing the ${productoKey} file`);
             }
 
             // Read and update the stock.json file
             fs.readFile(filePathStock, 'utf8', (err, stockData) => {
                 if (err) {
                     console.error('Error reading stock file:', err);
-                    return res.status(500).send('Error reading the stock file'); // Error al leer
+                    return res.status(500).send('Error reading the stock file');
                 }
 
                 let stockJsonData = JSON.parse(stockData);
-                let habitacionesStock = stockJsonData.stock.habitaciones;
-                const stockIndex = habitacionesStock.findIndex(item => item.id.toString() === habitacionesId.toString()); // Busca el índice
+                let productoStock = stockJsonData.stock[productoKey];
+                const stockIndex = productoStock.findIndex(item => item.id.toString() === productoId.toString());
 
                 if (stockIndex === -1) {
-                    console.error('Stock item no encontrado:', habitacionesId);
-                    return res.status(404).send('Stock item no encontrado'); // Error si no se encuentra
+                    console.error('Stock item no encontrado:', productoId);
+                    return res.status(404).send('Stock item no encontrado');
                 }
 
-                habitacionesStock[stockIndex].cantidad = parseInt(habitacionesActualizado.cantidad, 10); // Actualiza cantidad como entero
-                console.log('Updated stock:', habitacionesStock[stockIndex]);
+                productoStock[stockIndex].cantidad = parseInt(productoActualizado.cantidad, 10);
+                console.log('Updated stock:', productoStock[stockIndex]);
 
                 fs.writeFile(filePathStock, JSON.stringify(stockJsonData, null, 2), (err) => {
                     if (err) {
                         console.error('Error writing stock file:', err);
-                        return res.status(500).send('Error writing the stock file'); // Error al escribir
+                        return res.status(500).send('Error writing the stock file');
                     }
-                    res.status(200).json(habitaciones[habitacionesIndex]); // Devuelve la habitacion actualizada
-                    console.log('Habitación successfully updated:', habitaciones[habitacionesIndex]);
+                    res.status(200).json(productos[productoIndex]);
+                    console.log(`${productoTipo} successfully updated:`, productos[productoIndex]);
                 });
             });
         });
     });
 });
 
+// Endpoint to modify servicios
+app.patch('/servicios/modify', (req, res) => {
+    const filePathServicios = path.join(__dirname, 'servicios.json');
+    const filePathStock = path.join(__dirname, 'stock.json');
+    const servicioActualizado = req.body;
+    const servicioId = servicioActualizado.id;
 
+    console.log('Received update request for:', servicioId);
 
-app.post('/stock/modify', (req, res) => {
-    const filePath = path.join(__dirname, 'stock.json'); // Ruta del archivo
-    const stockActualizado = req.body; // Datos del stock actualizado
-    const stockeId = stockActualizado.id; // ID del stock
-
-    fs.readFile(filePath, 'utf8', (err, data) => {
+    // Read and update the servicios.json file
+    fs.readFile(filePathServicios, 'utf8', (err, data) => {
         if (err) {
-            console.error('Error reading file:', err);
-            return res.status(500).send('Error reading the file'); // Error al leer
+            console.error('Error reading servicios file:', err);
+            return res.status(500).send('Error reading the servicios file');
         }
 
-        let stockData = JSON.parse(data);
-        let stock = stockData.stock;
-        const stockIndex = stock.findIndex(stk => stk.id.toString() === stockId.toString()); // Busca el índice
-
-        if (stockIndex === -1) {
-            return res.status(404).send('Stock no encontrado'); // Error si no se encuentra
+        let servicios;
+        try {
+            servicios = JSON.parse(data);
+        } catch (parseError) {
+            console.error('Error parsing servicios file:', parseError);
+            return res.status(500).send('Error parsing the servicios file');
         }
 
-        stock[stockIndex] = { ...stock[stockIndex], ...stockActualizado }; // Actualiza datos
+        if (!Array.isArray(servicios)) {
+            console.error('Servicios data is not an array');
+            return res.status(500).send('Invalid servicios data structure');
+        }
 
-        fs.writeFile(filePath, JSON.stringify(stockData, null, 2), (err) => {
+        const servicioIndex = servicios.findIndex(srv => srv.id.toString() === servicioId.toString());
+
+        if (servicioIndex === -1) {
+            console.error('Servicio no encontrado:', servicioId);
+            return res.status(404).send('servicio no encontrado');
+        }
+
+        servicios[servicioIndex] = { ...servicios[servicioIndex], ...servicioActualizado };
+        console.log('Updated servicio:', servicios[servicioIndex]);
+
+        fs.writeFile(filePathServicios, JSON.stringify(servicios, null, 2), (err) => {
             if (err) {
-                console.error('Error writing file:', err);
-                return res.status(500).send('Error writing the file'); // Error al escribir
+                console.error('Error writing servicios file:', err);
+                return res.status(500).send('Error writing the servicios file');
             }
-            res.status(200).json(stock[stockIndex]); // Devuelve el empleado actualizado
+
+            // Read and update the stock.json file
+            fs.readFile(filePathStock, 'utf8', (err, stockData) => {
+                if (err) {
+                    console.error('Error reading stock file:', err);
+                    return res.status(500).send('Error reading the stock file');
+                }
+
+                let stockJsonData;
+                try {
+                    stockJsonData = JSON.parse(stockData);
+                } catch (parseError) {
+                    console.error('Error parsing stock file:', parseError);
+                    return res.status(500).send('Error parsing the stock file');
+                }
+
+                if (!Array.isArray(stockJsonData.stock.servicios)) {
+                    console.error('Servicios key is missing or not an array in stock file');
+                    return res.status(500).send('Invalid stock data structure');
+                }
+
+                let serviciosStock = stockJsonData.stock.servicios;
+                const stockIndex = serviciosStock.findIndex(item => item.id.toString() === servicioId.toString());
+
+                if (stockIndex === -1) {
+                    console.error('Stock item no encontrado:', servicioId);
+                    return res.status(404).send('Stock item no encontrado');
+                }
+
+                serviciosStock[stockIndex].cantidad = parseInt(servicioActualizado.cantidad, 10);
+                console.log('Updated stock:', serviciosStock[stockIndex]);
+
+                fs.writeFile(filePathStock, JSON.stringify(stockJsonData, null, 2), (err) => {
+                    if (err) {
+                        console.error('Error writing stock file:', err);
+                        return res.status(500).send('Error writing the stock file');
+                    }
+                    res.status(200).json(servicios[servicioIndex]);
+                    console.log('Servicio successfully updated:', servicios[servicioIndex]);
+                });
+            });
         });
     });
 });
+
  // -------- FIN ENDPOINTS MODIFICAR STOCK Y HABITACIONES
 
  //ENDPOINT PARA GUARDAR RESERVAS
