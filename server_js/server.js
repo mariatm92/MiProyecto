@@ -423,10 +423,10 @@ app.patch('/stock/:tipo/update/:id', (req, res) => {
 //FIN ENDPOINT CARRITO DE COMPRA 
 
 //--------- ENDPOINTS MODIFICAR STOCK Y HABITACIONES --------------
-app.post('/habitaciones/modify', (req, res) => {
+app.patch('/habitaciones/modify', (req, res) => {
     const filePath = path.join(__dirname, 'habitaciones.json'); // Ruta del archivo
     const habitacionesActualizado = req.body; // Datos de las habitaciones actualizado
-    const habitacionesId = habitacionActualizado.id; // ID de la habitacion
+    const habitacionesId = habitacionesActualizado.id; // ID de la habitacion
 
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
@@ -435,7 +435,7 @@ app.post('/habitaciones/modify', (req, res) => {
         }
 
         let habitacionesData = JSON.parse(data);
-        let habitaciones = habitacionesData.empleados;
+        let habitaciones = habitacionesData.habitaciones;
         const habitacionesIndex = habitaciones.findIndex(hbt => hbt.id.toString() === habitacionesId.toString()); // Busca el índice
 
         if (habitacionesIndex === -1) {
@@ -449,7 +449,7 @@ app.post('/habitaciones/modify', (req, res) => {
                 console.error('Error writing file:', err);
                 return res.status(500).send('Error writing the file'); // Error al escribir
             }
-            res.status(200).json(habitaciones[habitacionesIndex]); // Devuelve el empleado actualizado
+            res.status(200).json(habitaciones[habitacionesIndex]); // Devuelve la habitacion actualizada
         });
     });
 });
