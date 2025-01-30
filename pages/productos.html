@@ -8,41 +8,24 @@
 <body>
     <div class="employee-search">
         <input type="text" id="employeeSearch" placeholder="Buscar empleado por ID o nombre">
-        <button onclick="buscarEmpleado()">Buscar</button>
+        <button id="employee-info"  onclick="buscarEmpleado()">Buscar</button>
         <div id="employeeInfo" class="employee-info"></div>
         <div id="errorMessage" class="error-message"></div>
     </div>
     <div class="wrapp">
         <div class="cabecera">
-            <img src="../images/erp2.jpg"> 
+            <img src="../images/Logo.jpg"> 
             <div class="bienvenida">
-                <h1 id="bienvenida">Bienvenido al apartado de Productos</h1>
+              
                 <div class="menu">
                     <li onclick="redirigirAdmin()" id="IniAdmin">Clientes</li>
                     <li><a href="productos.html">Productos</a></li>
                     <li><a href="reservas.html">Reservas</a></li>
                     <li><a href="graficos.html">Gráficos</a></li>
-
-                    <div id="cartModal" style="display:none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
-                        <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%;">
-                            <span onclick="closeCartModal()" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
-                            <h2>Carrito de Compra</h2>
-                            <div id="cartItems"></div>
-                            <div id="cartTotal"></div>
-                            <div id="regimenselection" style="margin-top: 15px;">
-                                <h3>Seleccionar Régimen</h3>
-                                <select id="regimen">
-                                    <option value="solo_desayuno,25">Solo desayuno - 25€</option>
-                                    <option value="media_pension,45">Media pensión - 45€</option>
-                                    <option value="pension_completa,65">Pensión completa - 65€</option>
-                                </select>
-                            </div>
-                            <button onclick="finalizarCompra()">Finalizar Compra</button>
-                        </div>
-                    </div>
-                    
                     <button onclick="openCartModal()" style="position: fixed; bottom: 20px; right: 20px;">🛒 Carrito</button>
+                
                 </div> 
+                
             </div>         
         </div>
         <div class="apartadoStock">
