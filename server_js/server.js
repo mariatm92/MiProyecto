@@ -600,6 +600,10 @@ app.post('/reservas', (req, res) => {
     const filePath = path.join(__dirname, 'reservas.json');
     const nuevaReserva = req.body;
 
+    if (!nuevaReserva.id || !nuevaReserva.fecha || !nuevaReserva.cliente || !nuevaReserva.precioTotal) {
+        return res.status(400).send('Datos incompletos para la reserva');
+    }
+
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             console.error('Error al leer el archivo:', err);

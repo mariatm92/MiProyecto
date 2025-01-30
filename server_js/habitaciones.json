@@ -1,18 +1,6 @@
 {
   "habitaciones": [
     {
-      "id": "1737817601305",
-      "nombre": "habitacion doble",
-      "precio": "200",
-      "tipo": "habitaciones",
-      "cantidad": "82"
-    },
-    {
-      "id": 1737990467104,
-      "nombre": "habitacion sencilla",
-      "precio": 120
-    },
-    {
       "id": 1738056793245,
       "nombre": "suite presidencial",
       "precio": 1000
