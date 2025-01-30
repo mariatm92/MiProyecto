@@ -91,6 +91,79 @@
       },
       "servicios": [],
       "precioTotal": 2345
+    },
+    {
+      "id": "RES1738237323653",
+      "fecha": "30/01/2025, 12:42",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591768",
+        "nombre": "Omar",
+        "apellidos": "Ahmed",
+        "edad": 38,
+        "nacionalidad": "Marroquí",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "habitación triple",
+        "precio": 250
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 1275
+    },
+    {
+      "id": "RES1738237386794",
+      "fecha": "30/01/2025, 12:43",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591768",
+        "nombre": "Omar",
+        "apellidos": "Ahmed",
+        "edad": 38,
+        "nacionalidad": "Marroquí",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "habitación cuádruple",
+        "precio": 300
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 575
+    },
+    {
+      "id": "RES1738237406092",
+      "fecha": "30/01/2025, 12:43",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591768",
+        "nombre": "Omar",
+        "apellidos": "Ahmed",
+        "edad": 38,
+        "nacionalidad": "Marroquí",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "habitación con cama king size",
+        "precio": 350
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [
+        {
+          "nombre": "Alquiler de salas"
+        }
+      ],
+      "precioTotal": null
     }
   ]
 }

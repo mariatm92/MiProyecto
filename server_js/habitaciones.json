@@ -2,10 +2,10 @@
   "habitaciones": [
     {
       "id": "1737817601305",
-      "nombre": "habitacion doble",
-      "precio": "200",
+      "nombre": "Habitacion Doble",
+      "precio": "150",
       "tipo": "habitaciones",
-      "cantidad": "82"
+      "cantidad": "50"
     },
     {
       "id": 1737990467104,

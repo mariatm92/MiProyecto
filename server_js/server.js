@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
-
 require('dotenv').config(); // Carga las variables de entorno desde un archivo .env
 
 const app = express(); // Inicializa la aplicación Express
