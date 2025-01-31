@@ -14,9 +14,11 @@
     "cantidad": "22"
   },
   {
-    "id": 1737990775651,
+    "id": "1737990775651",
     "nombre": "Alquiler de salas",
-    "precio": 500
+    "precio": "500",
+    "tipo": "servicios",
+    "cantidad": "2"
   },
   {
     "id": 1737990791428,

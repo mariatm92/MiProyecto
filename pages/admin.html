@@ -133,109 +133,117 @@
         });
         // Función para mostrar el formulario de modificación de Cliente
         function mostrarFormularioModificar(employee) {
+    // Crear el modal de modificación si no existe
+    let modifyModal = document.getElementById('modifyEmployeeModal');
+    if (!modifyModal) {
+        modifyModal = document.createElement('div');
+        modifyModal.id = 'modifyEmployeeModal';
+        modifyModal.className = 'modal';
+        modifyModal.innerHTML = `
+            <div class="modal-content">
+                <span class="close" onclick="cerrarModalModificar()">&times;</span>
+                <h2>Modificar Cliente</h2>
+                <form id="modifyEmployeeForm">
+                    <input type="hidden" id="modifyId" name="id">
 
+                    <label for="modifyNombre">Nombre:</label>
+                    <input type="text" id="modifyNombre" name="nombre" required><br>
 
-            // Crear el modal de modificación si no existe
-            let modifyModal = document.getElementById('modifyEmployeeModal');
-            if (!modifyModal) {
-                modifyModal = document.createElement('div');
-                modifyModal.id = 'modifyEmployeeModal';
-                modifyModal.className = 'modal';
-                modifyModal.innerHTML = `
-                        <div class="modal-content">
-                            <span class="close" onclick="cerrarModalModificar()">&times;</span>
-                            <h2>Modificar Cliente</h2>
-                            <form id="modifyEmployeeForm">
-                                <input type="hidden" id="modifyId" name="id">
+                    <label for="modifyApellidos">Apellidos:</label>
+                    <input type="text" id="modifyApellidos" name="apellidos" required><br>
 
-                                <label for="modifyNombre">Nombre:</label>
-                                <input type="text" id="modifyNombre" name="nombre" required><br>
+                    <label for="modifyEdad">Edad:</label>
+                    <input type="text" id="modifyEdad" name="edad" required><br>
 
-                                <label for="modifyApellidos">Apellidos:</label>
-                                <input type="text" id="modifyApellidos" name="apellidos" required><br>
+                    <label for="modifyNacionalidad">Nacionalidad:</label>
+                    <input type="nacionalidad" id="modifyNacionalidad" name="nacionalidad" required><br>
 
-                                <label for="modifyTelefono">Edad:</label>
-                                <input type="text" id="modifyEdad" name="edad" required><br>
+                    <label for="modifyGenero">Género:</label>
+                    <input type="text" id="modifyGenero" name="genero" required><br>
 
-                                <label for="modifyNacionalidad">Nacionalidad:</label>
-                                <input type="nacionalidad" id="modifyNacionalidad" name="nacionalidad" required><br>
+                    <label for="modifyHijos">Hijos:</label>
+                    <input type="number" id="modifyHijos" name="hijos" required><br>
 
-                                <label for="modifyGenero">Genero:</label>
-                                <input type="text" id="modifyGenero" name="genero" required><br>
+                    <label for="modifyEmail">Email:</label>
+                    <input type="email" id="modifyEmail" name="email" required><br>
 
-                                <button type="submit">Aceptar Cambios</button>
-                            </form>
-                        </div>
-                    `;
-                document.body.appendChild(modifyModal);
+                    <button type="submit">Aceptar Cambios</button>
+                </form>
+            </div>
+        `;
+        document.body.appendChild(modifyModal);
 
-                // Agregar event listener para el formulario de modificación
-                document.getElementById('modifyEmployeeForm').addEventListener('submit', function (event) {
-                    event.preventDefault();
+        // Agregar event listener para el formulario de modificación
+        document.getElementById('modifyEmployeeForm').addEventListener('submit', function (event) {
+            event.preventDefault();
 
-                    // Obtener los valores del formulario
+            // Obtener los valores del formulario
+            const id = document.getElementById('modifyId').value;
+            const nombre = document.getElementById('modifyNombre').value;
+            const apellidos = document.getElementById('modifyApellidos').value;
+            const edad = document.getElementById('modifyEdad').value;
+            const nacionalidad = document.getElementById('modifyNacionalidad').value;
+            const genero = document.getElementById('modifyGenero').value;
+            const hijos = document.getElementById('modifyHijos').value;
+            const email = document.getElementById('modifyEmail').value;
 
-                    const id = document.getElementById('modifyId').value;
-                    //console.log(id);
-                    const nombre = document.getElementById('modifyNombre').value;
-                    const apellidos = document.getElementById('modifyApellidos').value;
-                    const edad = document.getElementById('modifyEdad').value;
-                    const nacionalidad = document.getElementById('modifyNacionalidad').value;
-                    const genero = document.getElementById('modifyGenero').value;
+            // Crear objeto de Cliente modificado
+            const empleadoModificado = {
+                id: id,
+                nombre: nombre,
+                apellidos: apellidos,
+                edad: edad,
+                nacionalidad: nacionalidad,
+                genero: genero,
+                hijos: hijos,
+                email: email
+            };
 
-                    // Crear objeto de Cliente modificado
-                    const empleadoModificado = {
-                        id: id,
-                        nombre: nombre,
-                        apellidos: apellidos,
-                        edad: edad,
-                        nacionalidad: nacionalidad,
-                        genero: genero
-                    };
-
-                    // Enviar solicitud de modificación al servidor
-                    fetch('http://localhost:3000/empleados/modify', {
-                        method: 'POST ',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(empleadoModificado), // Cliente Modificado debe contener el id
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log('Empleado modificado:', data);
-                            cerrarModalModificar();
-                            actualizarListaEmpleados();
-                        })
-                        .catch(error => {
-                            console.error('Error al modificar el cliente:', error);
-                            alert('No se pudo modificar el cliente. Intenta nuevamente.');
-                        });
+            // Enviar solicitud de modificación al servidor
+            fetch('http://localhost:3000/empleados/modify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(empleadoModificado), // Cliente Modificado debe contener el id
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Empleado modificado:', data);
+                    cerrarModalModificar();
+                    actualizarListaEmpleados();
+                })
+                .catch(error => {
+                    console.error('Error al modificar el cliente:', error);
+                    alert('No se pudo modificar el cliente. Intenta nuevamente.');
                 });
-            }
-            // Rellenar los campos con los datos del Cliente
-            document.getElementById('modifyId').value = employee.id;
-            document.getElementById('modifyNombre').value = employee.nombre;
-            document.getElementById('modifyApellidos').value = employee.apellidos;
-            document.getElementById('modifyEdad').value = employee.edad;
-            document.getElementById('modifyNacionalidad').value = employee.nacionalidad;
-            document.getElementById('modifyGenero').value = employee.genero;
-
-            // Mostrar el modal
-            modifyModal.style.display = 'block';
-        }
-
-        // Función para cerrar el modal de modificación
-        function cerrarModalModificar() {
-            document.getElementById('modifyEmployeeModal').style.display = 'none';
-        }
-
-        window.addEventListener('click', function (event) {
-            const modal = document.getElementById('modifyEmployeeModal');
-            if (event.target === modal) {
-                cerrarModalModificar();
-            }
         });
+    }
+    // Rellenar los campos con los datos del Cliente
+    document.getElementById('modifyId').value = employee.id;
+    document.getElementById('modifyNombre').value = employee.nombre;
+    document.getElementById('modifyApellidos').value = employee.apellidos;
+    document.getElementById('modifyEdad').value = employee.edad;
+    document.getElementById('modifyNacionalidad').value = employee.nacionalidad;
+    document.getElementById('modifyGenero').value = employee.genero;
+    document.getElementById('modifyHijos').value = employee.hijos;
+    document.getElementById('modifyEmail').value = employee.email;
+
+    // Mostrar el modal
+    modifyModal.style.display = 'block';
+}
+
+// Función para cerrar el modal de modificación
+function cerrarModalModificar() {
+    document.getElementById('modifyEmployeeModal').style.display = 'none';
+}
+
+window.addEventListener('click', function (event) {
+    const modal = document.getElementById('modifyEmployeeModal');
+    if (event.target === modal) {
+        cerrarModalModificar();
+    }
+});
         // Función para actualizar la lista de Clientes
         function actualizarListaEmpleados() {
             const usuarioGson = document.querySelector('.usuarioGson');
@@ -257,6 +265,7 @@
                                 <div class="employeeField"><strong>Edad:&nbsp;</strong> ${employee.edad}</div>
                                 <div class="employeeField"><strong>Nacionalidad:&nbsp;</strong> ${employee.nacionalidad}</div>
                                 <div class="employeeField"><strong>Genero:&nbsp;</strong> ${employee.genero}</div>
+                                <div class="employeeField"><strong>Hijos:&nbsp;</strong> ${employee.hijos}</div>
                                 <div class="employeeField"><strong>E-mail:&nbsp;</strong> ${employee.email}</div>
                             `;
 
