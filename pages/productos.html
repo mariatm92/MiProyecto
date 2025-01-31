@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     
-                    <button onclick="openCartModal()" style="position: fixed; bottom: 20px; right: 20px;">🛒 Carrito</button>
+                    <button onclick="openCartModal()" class="carrito-btn">🛒 Carrito</button>
                 </div> 
             </div>         
         </div>
@@ -166,11 +166,20 @@ function addToCart(id, type, disponible) {
     const productDetails = type === 'habitaciones'
         ? window.habitacionesStockData.stock.habitaciones.find(item => item.id === id)
         : window.serviciosStockData.stock.servicios.find(item => item.id === id);
+        console.log('Producto encontrado:', productDetails);
+        console.log('Precio encontrado:', productDetails?.precio);
+
+
     
     const productName = type === 'habitaciones'
         ? window.habitacionesData.habitaciones.find(h => h.id === id)?.nombre
         : window.serviciosData.find(s => s.id === id)?.nombre;
+
+        console.log('Producto encontrado:', productName);
     
+        console.log('Servicios Data:', window.serviciosData);
+        console.log('Servicios Stock Data:', window.serviciosStockData);
+
     // Restar la cantidad del stock
     fetch(`http://localhost:3000/stock/${type}/update/${id}`, {
         method: 'PATCH',
@@ -182,7 +191,7 @@ function addToCart(id, type, disponible) {
     .then(response => {
         if (!response.ok) throw new Error('Error al actualizar el stock');
         
-        // Añadir al carrito
+        // Añadir al    
         cart.push({
             id: id,
             type: type,

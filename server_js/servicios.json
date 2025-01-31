@@ -1,10 +1,9 @@
 [
   {
-    "id": "1737990709914",
+    "id": 1737990709914,
     "nombre": "Coche",
-    "precio": "150",
-    "tipo": "servicios",
-    "cantidad": "5"
+    "precio": 150
+ 
   },
   {
     "id": 1737990750145,
