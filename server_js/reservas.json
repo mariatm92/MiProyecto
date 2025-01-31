@@ -1,126 +1,148 @@
 {
   "reservas": [
     {
-      "id": "RES1737989797246",
-      "fecha": "27/01/2025 14:30",
+      "id": "RES1738238943211",
+      "fecha": "30/01/2025, 13:09",
       "mes": "enero",
       "cliente": {
-        "id": "1732870380351",
-        "nombre": "Sandra",
-        "apellidos": "Gonzalez",
-        "edad": 30,
-        "nacionalidad": "Española",
+        "id": "1736494591768",
+        "nombre": "Omar",
+        "apellidos": "Ahmed",
+        "edad": 38,
+        "nacionalidad": "Marroquí",
         "hijos": 2
       },
       "habitacion": {
-        "tipo": "habitacion doble",
-        "precio": 200
+        "tipo": "suite presidencial",
+        "precio": 1000
       },
       "regimen": {
-        "tipo": "media pension",
-        "precio": 45
+        "tipo": "solo desayuno",
+        "precio": 25
       },
-      "servicios": [],
-      "precioTotal": 845
+      "servicios": [
+        {
+          "nombre": "Parking",
+          "precio": 0
+        }
+      ],
+      "precioTotal": 1025
     },
     {
-      "id": "RES1737990057934",
-      "fecha": "27/01/2025 15:45",
+      "id": "RES1738239061723",
+      "fecha": "30/01/2025, 13:11",
       "mes": "enero",
       "cliente": {
-        "id": "1736494591748",
-        "nombre": "María",
-        "apellidos": "López",
-        "edad": 28,
-        "nacionalidad": "Mexicana",
-        "hijos": 1
-      },
-      "habitacion": {
-        "tipo": "habitacion doble",
-        "precio": 200
-      },
-      "regimen": {
-        "tipo": "media pension",
-        "precio": 45
-      },
-      "servicios": [],
-      "precioTotal": 1245
-    },
-    {
-      "id": "RES1737991270610",
-      "fecha": "27/01/2025, 16:21",
-      "mes": "enero",
-      "cliente": {
-        "id": "1736494591750",
-        "nombre": "Ana",
-        "apellidos": "García",
-        "edad": 33,
-        "nacionalidad": "Argentina",
+        "id": "1736494591768",
+        "nombre": "Omar",
+        "apellidos": "Ahmed",
+        "edad": 38,
+        "nacionalidad": "Marroquí",
         "hijos": 2
       },
       "habitacion": {
-        "tipo": "habitacion doble",
-        "precio": 200
+        "tipo": "habitación triple",
+        "precio": 250
       },
       "regimen": {
         "tipo": "pension completa",
         "precio": 65
       },
-      "servicios": [],
-      "precioTotal": 1265
+      "servicios": [
+        {
+          "nombre": "Parking",
+          "precio": 0
+        }
+      ],
+      "precioTotal": 315
     },
     {
-      "id": "RES1737992491680",
-      "fecha": "27/01/2025, 16:41",
+      "id": "RES1738239812829",
+      "fecha": "30/01/2025, 13:23",
       "mes": "enero",
       "cliente": {
-        "id": "1736494591751",
-        "nombre": "Luigi",
-        "apellidos": "Rossi",
-        "edad": 45,
-        "nacionalidad": "Italiana",
-        "hijos": 4
+        "id": "1736494591768",
+        "nombre": "Omar",
+        "apellidos": "Ahmed",
+        "edad": 38,
+        "nacionalidad": "Marroquí",
+        "hijos": 2
       },
       "habitacion": {
         "tipo": "habitación estándar",
-        "precio": 150
-      },
-      "regimen": {
-        "tipo": "media pension",
         "precio": 45
       },
-      "servicios": [],
-      "precioTotal": 2345
-    },
-    {
-      "id": "RES1738232390685",
-      "fecha": "30/01/2025, 11:19",
-      "mes": "enero",
-      "cliente": {
-        "id": "1736494591748",
-        "nombre": "María",
-        "apellidos": "López",
-        "edad": 28,
-        "nacionalidad": "Mexicana",
-        "hijos": 1
-      },
-      "habitacion": {
-        "tipo": "habitación con jacuzzi",
-        "precio": 700
-      },
       "regimen": {
-        "tipo": "media pension",
-        "precio": 45
+        "tipo": "solo desayuno",
+        "precio": 25
       },
       "servicios": [
         {
-          "nombre": "Servicio de bicicletas"
-        },
-        {
-          "nombre": "Excursiones"
+          "nombre": "Alquiler de salas",
+          "precio": 45
         }
       ],
-      "precioTotal": null
+      "precioTotal": 115
+    },
+    {
+      "id": "RES1738240137261",
+      "fecha": "30/01/2025, 13:28",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591754",
+        "nombre": "Yuki",
+        "apellidos": "Tanaka",
+        "edad": 31,
+        "nacionalidad": "Japonesa",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Sin habitación",
+        "precio": 0
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [
+        {
+          "nombre": "Excursiones",
+          "precio": 50
+        }
+      ],
+      "precioTotal": 75
+    },
+    {
+      "id": "RES1738311396707",
+      "fecha": "31/01/2025, 09:16",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591768",
+        "nombre": "Omar",
+        "apellidos": "Ahmed",
+        "edad": 38,
+        "nacionalidad": "Marroquí",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "habitación cuádruple",
+        "precio": 300
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [
+        {
+          "nombre": "Excursiones",
+          "precio": 100
+        },
+        {
+          "nombre": "Servicio de bicicletas",
+          "precio": 20
+        }
+      ],
+      "precioTotal": 445
     }
   ]
 }

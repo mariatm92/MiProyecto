@@ -2,44 +2,36 @@
   "stock": {
     "habitaciones": [
       {
-        "id": 1737817601305,
-        "cantidad": 82
-      },
-      {
-        "id": 1737990467104,
-        "cantidad": 20
-      },
-      {
         "id": 1738056793245,
-        "cantidad": 12
+        "cantidad": 7
       },
       {
         "id": 1738123456789,
-        "cantidad": 29
+        "cantidad": 26
       },
       {
         "id": 1738234591234,
-        "cantidad": 25
+        "cantidad": 24
       },
       {
         "id": 1738345678921,
-        "cantidad": 40
+        "cantidad": 38
       },
       {
         "id": 1738456792348,
-        "cantidad": 10
+        "cantidad": 9
       },
       {
         "id": 1738567890345,
-        "cantidad": 33
+        "cantidad": 30
       },
       {
         "id": 1738678923456,
-        "cantidad": 12
+        "cantidad": 11
       },
       {
         "id": 1738789452347,
-        "cantidad": 6
+        "cantidad": 7
       },
       {
         "id": 1738896754321,
@@ -51,7 +43,7 @@
       },
       {
         "id": 1739012345678,
-        "cantidad": 20
+        "cantidad": 19
       },
       {
         "id": 1739123456780,
@@ -65,19 +57,19 @@
     "servicios": [
       {
         "id": 1737990709914,
-        "cantidad": 15
+        "cantidad": 20
       },
       {
         "id": 1737990750145,
-        "cantidad": 4
+        "cantidad": 22
       },
       {
         "id": 1737990775651,
-        "cantidad": 8
+        "cantidad": 1
       },
       {
         "id": 1737990791428,
-        "cantidad": 18
+        "cantidad": 13
       },
       {
         "id": 1737990848119,
@@ -85,11 +77,11 @@
       },
       {
         "id": 1737990885612,
-        "cantidad": 25
+        "cantidad": 23
       },
       {
         "id": 1737990918867,
-        "cantidad": 48
+        "cantidad": 43
       }
     ]
   }

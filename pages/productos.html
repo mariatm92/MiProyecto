@@ -8,15 +8,15 @@
 <body>
     <div class="employee-search">
         <input type="text" id="employeeSearch" placeholder="Buscar empleado por ID o nombre">
-        <button onclick="buscarEmpleado()">Buscar</button>
+        <button id="employee-info"  onclick="buscarEmpleado()">Buscar</button>
         <div id="employeeInfo" class="employee-info"></div>
         <div id="errorMessage" class="error-message"></div>
     </div>
     <div class="wrapp">
         <div class="cabecera">
-            <img src="../images/erp2.jpg"> 
+            <img src="../images/Logo.jpg"> 
             <div class="bienvenida">
-                <h1 id="bienvenida">Bienvenido al apartado de Productos</h1>
+              
                 <div class="menu">
                     <li onclick="redirigirAdmin()" id="IniAdmin">Clientes</li>
                     <li><a href="productos.html">Productos</a></li>
@@ -41,8 +41,9 @@
                         </div>
                     </div>
                     
-                    <button onclick="openCartModal()" style="position: fixed; bottom: 20px; right: 20px;">🛒 Carrito</button>
+                    <button onclick="openCartModal()" class="carrito-btn">🛒 Carrito</button>
                 </div> 
+                
             </div>         
         </div>
         <div class="apartadoStock">
@@ -163,14 +164,36 @@ function addToCart(id, type, disponible) {
     }
     
     // Encontrar los detalles del producto
-    const productDetails = type === 'habitaciones'
-        ? window.habitacionesStockData.stock.habitaciones.find(item => item.id === id)
-        : window.serviciosStockData.stock.servicios.find(item => item.id === id);
+    //NUEVA LOGICA PARA ENCONTRAR LOS SERVICIOS Y HABITACIONES
+    let productDetails;
+    let productname;
+    if (type === 'habitaciones') {
+        productDetails = window.habitacionesStockData.stock.habitaciones.find(item => item.id === id);
+        productName = window.habitacionesData.habitaciones.find(h => h.id === id)?.nombre;
+        // Obtener el precio de habitaciones
+        const habitacion = window.habitacionesData.habitaciones.find(h => Number(h.id) === Number(id));
+        if (habitacion) {
+            productDetails = { ...productDetails, precio: habitacion.precio };
+        }
+    } else {
+        productDetails = window.serviciosStockData.stock.servicios.find(item => item.id === id);
+        // Obtener el precio de servicios
+        const servicio = window.serviciosData.find(s => Number(s.id) === Number(id));
+        productName = servicio?.nombre;
+        if (servicio) {
+            productDetails = { ...productDetails, precio: servicio.precio };
+        }
+    }
+
+    if (!productDetails || !productName) {
+        alert('Error: No se encontraron los detalles del producto');
+        return;
+    }
+    //FIN LOGICA
     
-    const productName = type === 'habitaciones'
-        ? window.habitacionesData.habitaciones.find(h => h.id === id)?.nombre
-        : window.serviciosData.find(s => s.id === id)?.nombre;
-    
+        console.log('Servicios Data:', window.serviciosData);
+        console.log('Servicios Stock Data:', window.serviciosStockData);
+
     // Restar la cantidad del stock
     fetch(`http://localhost:3000/stock/${type}/update/${id}`, {
         method: 'PATCH',
@@ -182,7 +205,7 @@ function addToCart(id, type, disponible) {
     .then(response => {
         if (!response.ok) throw new Error('Error al actualizar el stock');
         
-        // Añadir al carrito
+        // Añadir al    
         cart.push({
             id: id,
             type: type,
@@ -356,8 +379,11 @@ function mostrarStock() {
         // Establecer variables globales
         window.habitacionesStockData = stockData;
         window.habitacionesData = habitacionesData;
-        window.serviciosStockData = { stock: { servicios: stockData.stock.servicios } };
+        
+        window.serviciosStockData = stockData;
         window.serviciosData = serviciosData;
+
+        console.log('Datos de servicios:', serviciosData); // Depuración
 
         // Procesar habitaciones
         stockData.stock.habitaciones.forEach(stockItem => {
@@ -425,9 +451,6 @@ document.getElementById('productoForm').addEventListener('submit', agregarProduc
         
 // Call the function when page loads
 window.onload = mostrarStock;
-    </script>
-    
-<script>
     let cart = [];
     
     function openCartModal() {
@@ -438,6 +461,7 @@ window.onload = mostrarStock;
         let total = 0;
     
         cart.forEach((item, index) => {
+            console.log(item);
             const itemEl = document.createElement('div');
             itemEl.innerHTML = `
                 ${item.nombre} - Cantidad: ${item.cantidad} - Precio: ${item.precio * item.cantidad}€
@@ -532,33 +556,36 @@ window.onload = mostrarStock;
 
         // Calculate total price
         let total = parseFloat(regimenPrecio);
-        const servicios = [];
         let habitacion = null;
+        let servicios = [];
 
         cart.forEach(item => {
-            total += item.precio * item.cantidad;
+            const itemPrecio = parseFloat(item.precio) || 50;
+            const itemCantidad = parseInt(item.cantidad) || 1;
+            total += itemPrecio  * itemCantidad;
+            
             if (item.type === 'habitaciones') {
                 habitacion = {
                     tipo: item.nombre,
-                    precio: item.precio
+                    precio: itemPrecio
                 };
-            } else {
+            } else if (item.type === 'servicios') { // Asumiendo que tienes un type para servicios
                 servicios.push({
                     nombre: item.nombre,
-                    precio: item.precio
+                    precio: itemPrecio
                 });
             }
         });
 
         // Crear fecha actual en formato legible
-    const fechaActual = new Date();
-    const fechaReserva = fechaActual.toLocaleString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    });
+        const fechaActual = new Date();
+        const fechaReserva = fechaActual.toLocaleString('es-ES', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
 
 
         // Create reservation object
@@ -585,6 +612,7 @@ window.onload = mostrarStock;
             servicios: servicios,
             precioTotal: total
         };
+        console.log('Reserva a enviar:', reserva); // Para debug
 
         // Save reservation
         fetch('http://localhost:3000/reservas', {
@@ -595,7 +623,11 @@ window.onload = mostrarStock;
             body: JSON.stringify(reserva)
         })
         .then(response => {
-            if (!response.ok) throw new Error('Error al guardar la reserva');
+            if (!response.ok) {
+                return response.text().then(text => { // Obtener el mensaje de error del servidor
+                    throw new Error(text || 'Error desconocido al guardar la reserva');
+                });
+            }
             alert('Compra finalizada y reserva registrada correctamente');
             cart = [];
             closeCartModal();
