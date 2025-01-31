@@ -505,7 +505,7 @@ app.patch('/habitaciones/modify', (req, res) => {
 
 // Endpoint to modify servicios
 app.patch('/servicios/modify', (req, res) => {
-    const filePathServicios = path.join(__dirname, 'servicios.json');
+    const zilePathServicios = path.join(__dirname, 'servicios.json');
     const filePathStock = path.join(__dirname, 'stock.json');
     const servicioActualizado = req.body;
     const servicioId = servicioActualizado.id;
