@@ -111,6 +111,38 @@
         }
       ],
       "precioTotal": 75
+    },
+    {
+      "id": "RES1738311396707",
+      "fecha": "31/01/2025, 09:16",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591768",
+        "nombre": "Omar",
+        "apellidos": "Ahmed",
+        "edad": 38,
+        "nacionalidad": "Marroquí",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "habitación cuádruple",
+        "precio": 300
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [
+        {
+          "nombre": "Excursiones",
+          "precio": 100
+        },
+        {
+          "nombre": "Servicio de bicicletas",
+          "precio": 20
+        }
+      ],
+      "precioTotal": 445
     }
   ]
 }
