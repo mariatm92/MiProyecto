@@ -8,15 +8,15 @@
 <body>
     <div class="employee-search">
         <input type="text" id="employeeSearch" placeholder="Buscar empleado por ID o nombre">
-        <button onclick="buscarEmpleado()">Buscar</button>
+        <button id="employee-info"  onclick="buscarEmpleado()">Buscar</button>
         <div id="employeeInfo" class="employee-info"></div>
         <div id="errorMessage" class="error-message"></div>
     </div>
     <div class="wrapp">
         <div class="cabecera">
-            <img src="../images/erp2.jpg"> 
+            <img src="../images/Logo.jpg"> 
             <div class="bienvenida">
-                <h1 id="bienvenida">Bienvenido al apartado de Productos</h1>
+              
                 <div class="menu">
                     <li onclick="redirigirAdmin()" id="IniAdmin">Clientes</li>
                     <li><a href="productos.html">Productos</a></li>
@@ -41,8 +41,9 @@
                         </div>
                     </div>
                     
-                    <button onclick="openCartModal()" style="position: fixed; bottom: 20px; right: 20px;">🛒 Carrito</button>
+                    <button onclick="openCartModal()" class="carrito-btn">🛒 Carrito</button>
                 </div> 
+                
             </div>         
         </div>
         <div class="apartadoStock">
@@ -190,6 +191,9 @@ function addToCart(id, type, disponible) {
     }
     //FIN LOGICA
     
+        console.log('Servicios Data:', window.serviciosData);
+        console.log('Servicios Stock Data:', window.serviciosStockData);
+
     // Restar la cantidad del stock
     fetch(`http://localhost:3000/stock/${type}/update/${id}`, {
         method: 'PATCH',
@@ -201,7 +205,7 @@ function addToCart(id, type, disponible) {
     .then(response => {
         if (!response.ok) throw new Error('Error al actualizar el stock');
         
-        // Añadir al carrito
+        // Añadir al    
         cart.push({
             id: id,
             type: type,

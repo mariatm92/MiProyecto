@@ -8,9 +8,9 @@
     <body>
         <div class="wrapp">
             <div class="cabecera">
-                <a href="index.html"><img src="../images/erp2.jpg" alt="ERP"></a>
+                <a href="index.html"><img src="../images/Logo.jpg" alt="ERP"></a>
                 <div class="bienvenida">
-                    <h1 id="bienvenida">Bienvenido administrador, <span id="usuarioCorreo"></span></h1>
+                    <h1 id="bienvenida">Bienvenido &nbsp <span id="usuarioCorreo"></span></h1>
                     <div class="menu">
                         <li onclick="redirigirAdmin()" id="IniAdmin">Clientes</li>
                         <li><a href="productos.html">Productos</a></li>
@@ -20,7 +20,7 @@
                 </div>         
             </div>
             <div class="apartadoFormu">
-                <button onclick="abrirModal()">Agregar</button>
+                <button onclick="abrirModal()" class="agregar">Agregar</button>
                 <div class="conrnidousuario"> 
                     <div class="usuarioGson">
                         <!-- Los datos de cada empleado se cargarán aquí dinámicamente -->
@@ -30,7 +30,7 @@
         </div>
         
 
-    <!-- Modal de Agregar Empleado -->
+    <!-- Modal de Agregar Cliente -->
     <div id="addEmployeeModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="cerrarModal()">&times;</span>
@@ -131,7 +131,7 @@
                     alert('No se pudo agregar el cliente. Intenta nuevamente.');
                 });
         });
-        // Función para mostrar el formulario de modificación de empleado
+        // Función para mostrar el formulario de modificación de Cliente
         function mostrarFormularioModificar(employee) {
 
 
@@ -183,7 +183,7 @@
                     const nacionalidad = document.getElementById('modifyNacionalidad').value;
                     const genero = document.getElementById('modifyGenero').value;
 
-                    // Crear objeto de empleado modificado
+                    // Crear objeto de Cliente modificado
                     const empleadoModificado = {
                         id: id,
                         nombre: nombre,
@@ -199,7 +199,7 @@
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(empleadoModificado), // empleadoModificado debe contener el id
+                        body: JSON.stringify(empleadoModificado), // Cliente Modificado debe contener el id
                     })
                         .then(response => response.json())
                         .then(data => {
@@ -213,7 +213,7 @@
                         });
                 });
             }
-            // Rellenar los campos con los datos del empleado
+            // Rellenar los campos con los datos del Cliente
             document.getElementById('modifyId').value = employee.id;
             document.getElementById('modifyNombre').value = employee.nombre;
             document.getElementById('modifyApellidos').value = employee.apellidos;
@@ -236,16 +236,16 @@
                 cerrarModalModificar();
             }
         });
-        // Función para actualizar la lista de empleados
+        // Función para actualizar la lista de Clientes
         function actualizarListaEmpleados() {
             const usuarioGson = document.querySelector('.usuarioGson');
-            usuarioGson.innerHTML = ''; // Limpiar la lista antes de cargar los empleados
+            usuarioGson.innerHTML = ''; // Limpiar la lista antes de cargar los Cliente
 
             fetch('http://localhost:3000/empleados')
                 .then(response => response.json())
                 .then(data => {
                     data.empleados.forEach(employee => {
-                        // Crear un div contenedor para los datos del empleado
+                        // Crear un div contenedor para los datos del Cliente
                         const employeeDetails = document.createElement('div');
                         employeeDetails.classList.add('employeeDetails'); // Se puede usar esta clase para estilizar el contenedor
 
@@ -270,12 +270,12 @@
                         modifyButton.textContent = 'Modificar';
                         modifyButton.onclick = () => mostrarFormularioModificar(employee);
 
-                        // Añadir el botón al div del empleado
+                        // Añadir el botón al div del Cliente
                         employeeDetails.appendChild(deleteButton);
 
                         employeeDetails.appendChild(modifyButton);
 
-                        // Añadir el div con los detalles del empleado al contenedor .usuarioGson
+                        // Añadir el div con los detalles del Cliente al contenedor .usuarioGson
                         usuarioGson.appendChild(employeeDetails);
                     });
                 })
@@ -283,7 +283,7 @@
         }
 
 
-        // Función para eliminar un empleado
+        // Función para eliminar un Cliente
         function eliminarEmpleado(id) {
             fetch(`http://localhost:3000/empleados/${id}`, {
                 method: 'DELETE'
@@ -297,7 +297,7 @@
                 .catch(error => console.error('Error deleting employee:', error));
         }
 
-        // Inicializar la lista de empleados al cargar la página
+        // Inicializar la lista de Cliente al cargar la página
         actualizarListaEmpleados();
     </script>
 </body>
