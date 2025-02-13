@@ -30,6 +30,7 @@
     height: 150px;
     width: 1000px;
     margin-right: 250px;
+    margin-bottom: 15px;
 }
 
 img {
@@ -48,6 +49,7 @@ img {
     height: 60px;
     width: 1000px;
 }
+
 
 .menu {
     display: flex;
@@ -73,6 +75,7 @@ h1 {
     color: #333;
     margin-bottom: 30px;
     font-family: 'Courier New', Courier, monospace;
+    
 }
 .chart {
     margin-bottom: 40px;

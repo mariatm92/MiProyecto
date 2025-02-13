@@ -4,6 +4,7 @@
       "id": 1738056793245,
       "nombre": "suite presidencial",
       "precio": 1000
+      
     },
     {
       "id": 1738123456789,
@@ -36,9 +37,11 @@
       "precio": 500
     },
     {
-      "id": 1738789452347,
+      "id": "1738789452347",
       "nombre": "habitación con jacuzzi",
-      "precio": 700
+      "precio": "700",
+      "tipo": "habitaciones",
+      "cantidad": "9"
     },
     {
       "id": 1738896754321,

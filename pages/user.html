@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Login</title>
-    <link href="css/estilos-user-.css" rel="stylesheet" type="text/css">
+    <link href="../css/estilos-user-.css" rel="stylesheet" type="text/css">
 </head>
 
 <div class="wrapp">
@@ -25,13 +25,67 @@
 
         </div>
 
-
+        
 
 
     </div>
+
+
+    <div id="habitacionesStock" class="serviciosht">
+
+    </div>
+
 </div>
 
 <script>
+    console.log("Antes de la funcion")
+
+
+function mostrarStock() {
+   
+    const habitacionesStock = document.getElementById('habitacionesStock');
+  
+    habitacionesStock.innerHTML = '';
+ 
+  
+        fetch('http://localhost:3000/habitaciones')
+    
+        .then(response => response.json())  // Convierte la respuesta en formato JSON
+    
+        .then(data => {
+       
+           // Procesar habitaciones
+           data.habitaciones.forEach(habitacionesItem => {
+            
+            const habitacionDetails = document.createElement('div');
+            habitacionDetails.classList.add('stockDetails');
+            
+            habitacionDetails.innerHTML = `
+                
+                <div class="stockField"><strong>Nombre:</strong> ${habitacionesItem.nombre}</div>
+                <div class="stockField"><strong>Precio:</strong> ${habitacionesItem.precio}€</div>
+                
+            `;
+
+            habitacionesStock.appendChild(habitacionDetails);
+        });
+        
+    })
+    .catch(error => {
+        // Maneja cualquier error que ocurra en la solicitud
+        console.error('Error:', error);
+    });
+
+     
+        
+       
+
+       
+  
+}
+
+
+
     function obtenerParametroURL(nombre) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(nombre);
@@ -44,6 +98,8 @@
     } else {
         window.location.href = 'index.html';
     }
+
+    mostrarStock();
 </script>
 
 </html>
