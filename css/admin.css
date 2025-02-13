@@ -21,7 +21,6 @@
     height: 150px;
     width: 100%;
     background-color: #f1f7fe;
-    margin-top: -10px;
     box-shadow: 0px 5px 10px rgb(99, 98, 98);
 }
 
@@ -91,7 +90,21 @@ img {
 .wrapp .apartadoFormu button:hover {
     background-color: #ec0b0b; /* Color de hover */
 }
+.wrapp .apartadoFormu .agregar{
+    background-color:#4CAF50; /* Verde para los botones normales */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 16px;
+    font-family: roboto;
+}
 
+.wrapp .apartadoFormu .agregar:hover {
+    background-color: #45a049; /* Color de hover */
+}
 .conrnidousuario {
     display: flex;
     flex-direction: row; /* Cambiado a 'row' para alinear en fila */

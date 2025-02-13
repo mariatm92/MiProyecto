@@ -7,10 +7,27 @@
     <link href="../css/estilos-user-.css" rel="stylesheet" type="text/css">
 </head>
 
+<<<<<<< HEAD
 <body>
     <div class="wrapp">
         <div class="cabecera">
             <img id="logo" src="../images/erp2.jpg">
+=======
+<div class="wrapp">
+
+    <div class="cabecera">
+
+        <img src="images/Logo.jpg">
+
+        <div class="bienvenida">
+
+            <h1 id="bienvenida">Bienvenido usuario, <span id="usuarioCorreo"></span></h1>
+
+            <div class="menu">
+
+                <li>Inicio</li>
+                <li>Contacto</li>
+>>>>>>> fdb6975e28ab1b048a21d38c72ba982b589738b4
 
             <div class="bienvenida">
                 <h1 id="bienvenida">Bienvenido usuario, <span id="usuarioCorreo"></span></h1>
@@ -19,6 +36,7 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         <div id="Habitacion"></div> <!-- Aquí se agregarán las habitaciones -->
     </div>
 
@@ -28,15 +46,94 @@
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(nombre);  // Devolvemos el valor del parámetro
         }
+=======
+
+        
+
+
+    </div>
+
+
+    <div id="habitacionesStock" class="serviciosht">
+
+    </div>
+
+</div>
+
+<script>
+    console.log("Antes de la funcion")
+
+
+function mostrarStock() {
+   
+    const habitacionesStock = document.getElementById('habitacionesStock');
+  
+    habitacionesStock.innerHTML = '';
+ 
+  
+        fetch('http://localhost:3000/habitaciones')
+    
+        .then(response => response.json())  // Convierte la respuesta en formato JSON
+    
+        .then(data => {
+       
+           // Procesar habitaciones
+           data.habitaciones.forEach(habitacionesItem => {
+            
+            const habitacionDetails = document.createElement('div');
+            habitacionDetails.classList.add('stockDetails');
+            
+            habitacionDetails.innerHTML = `
+                
+                <div class="stockField"><strong>Nombre:</strong> ${habitacionesItem.nombre}</div>
+                <div class="stockField"><strong>Precio:</strong> ${habitacionesItem.precio}€</div>
+                
+            `;
+
+            habitacionesStock.appendChild(habitacionDetails);
+        });
+        
+    })
+    .catch(error => {
+        // Maneja cualquier error que ocurra en la solicitud
+        console.error('Error:', error);
+    });
+
+     
+        
+       
+
+       
+  
+}
+
+
+
+    function obtenerParametroURL(nombre) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(nombre);
+    }
+>>>>>>> fdb6975e28ab1b048a21d38c72ba982b589738b4
 
         // Obtener el correo de la URL y mostrarlo
         const correo = obtenerParametroURL('correo');
 
+<<<<<<< HEAD
         if (correo) {
             document.getElementById('usuarioCorreo').textContent = correo; // Mostramos el correo en el HTML
         } else {
             window.location.href = 'index.html';  // Si no se encuentra el parámetro, redirigimos
         }
+=======
+    if (correo) {
+        document.getElementById('usuarioCorreo').textContent = correo;
+    } else {
+        window.location.href = 'index.html';
+    }
+
+    mostrarStock();
+</script>
+>>>>>>> fdb6975e28ab1b048a21d38c72ba982b589738b4
 
         // Función para mostrar las habitaciones
         function mostrarHabitaciones(){

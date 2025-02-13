@@ -111,6 +111,254 @@
         }
       ],
       "precioTotal": 75
+    },
+    {
+      "id": "RES1738311396707",
+      "fecha": "31/01/2025, 09:16",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591768",
+        "nombre": "Omar",
+        "apellidos": "Ahmed",
+        "edad": 38,
+        "nacionalidad": "Marroquí",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "habitación cuádruple",
+        "precio": 300
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [
+        {
+          "nombre": "Excursiones",
+          "precio": 100
+        },
+        {
+          "nombre": "Servicio de bicicletas",
+          "precio": 20
+        }
+      ],
+      "precioTotal": 445
+    },
+    {
+      "id": "RES1738312819829",
+      "fecha": "31/01/2025, 09:40",
+      "mes": "enero",
+      "cliente": {
+        "id": "1732870380351",
+        "nombre": "Sandra",
+        "apellidos": "Gonzalez",
+        "edad": 30,
+        "nacionalidad": "Española",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "habitación económica",
+        "precio": 90
+      },
+      "regimen": {
+        "tipo": "pension completa",
+        "precio": 65
+      },
+      "servicios": [
+        {
+          "nombre": "Coche",
+          "precio": 150
+        },
+        {
+          "nombre": "Parking",
+          "precio": 25
+        }
+      ],
+      "precioTotal": 570
+    },
+    {
+      "id": "RES1738312860572",
+      "fecha": "31/01/2025, 09:41",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591748",
+        "nombre": "María",
+        "apellidos": "López",
+        "edad": 28,
+        "nacionalidad": "Mexicana",
+        "hijos": 1
+      },
+      "habitacion": {
+        "tipo": "habitación cuádruple",
+        "precio": 300
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [
+        {
+          "nombre": "Alquiler de salas",
+          "precio": 500
+        }
+      ],
+      "precioTotal": 825
+    },
+    {
+      "id": "RES1738312894184",
+      "fecha": "31/01/2025, 09:41",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591749",
+        "nombre": "John",
+        "apellidos": "Smith",
+        "edad": 42,
+        "nacionalidad": "Británica",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "habitación con vista al mar",
+        "precio": 500
+      },
+      "regimen": {
+        "tipo": "media pension",
+        "precio": 45
+      },
+      "servicios": [
+        {
+          "nombre": "Excursiones",
+          "precio": 100
+        }
+      ],
+      "precioTotal": 745
+    },
+    {
+      "id": "RES1738312924660",
+      "fecha": "31/01/2025, 09:42",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591750",
+        "nombre": "Ana",
+        "apellidos": "García",
+        "edad": 33,
+        "nacionalidad": "Argentina",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "habitación de lujo",
+        "precio": 800
+      },
+      "regimen": {
+        "tipo": "pension completa",
+        "precio": 65
+      },
+      "servicios": [
+        {
+          "nombre": "Bodas",
+          "precio": 1000
+        }
+      ],
+      "precioTotal": 1865
+    },
+    {
+      "id": "RES1738312973252",
+      "fecha": "31/01/2025, 09:42",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591753",
+        "nombre": "Hans",
+        "apellidos": "Weber",
+        "edad": 38,
+        "nacionalidad": "Alemana",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "habitación familiar",
+        "precio": 350
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 375
+    },
+    {
+      "id": "RES1738312995319",
+      "fecha": "31/01/2025, 09:43",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591754",
+        "nombre": "Yuki",
+        "apellidos": "Tanaka",
+        "edad": 31,
+        "nacionalidad": "Japonesa",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "habitación económica",
+        "precio": 90
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 385
+    },
+    {
+      "id": "RES1738313023555",
+      "fecha": "31/01/2025, 09:43",
+      "mes": "enero",
+      "cliente": {
+        "id": "1736494591764",
+        "nombre": "Pedro",
+        "apellidos": "Martínez",
+        "edad": 41,
+        "nacionalidad": "Española",
+        "hijos": 2
+      },
+      "habitacion": {
+        "tipo": "suite presidencial",
+        "precio": 1000
+      },
+      "regimen": {
+        "tipo": "pension completa",
+        "precio": 65
+      },
+      "servicios": [
+        {
+          "nombre": "Coche",
+          "precio": 150
+        },
+        {
+          "nombre": "Parking",
+          "precio": 25
+        }
+      ],
+      "precioTotal": 1415
+    },
+    {
+      "id": "RES1738313417289",
+      "fecha": "31/01/2025, 09:50",
+      "mes": "enero",
+      "cliente": {
+        "id": "1738313273873",
+        "nombre": "Pepe",
+        "apellidos": "tomas",
+        "edad": "23",
+        "nacionalidad": "Italiana"
+      },
+      "habitacion": {
+        "tipo": "habitación triple",
+        "precio": 250
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 275
     }
   ]
 }

@@ -3,6 +3,10 @@
   font-family: 'MiFuente';
   src: url('../fonts/SourGummy-Italic-VariableFont_wdth\,wght.ttf') format('truetype');
 }
+@font-face {
+  font-family: 'Titulo';
+  src: url('../fonts/PlaywriteIN-VariableFont_wght.ttf') format('truetype');
+}
 body{
     display:flex;
     justify-content:center;
@@ -23,16 +27,29 @@ body{
 header {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  /*align-items: center;*/
   background-color: #f1f7fe; 
   width: 100%;
   height: 150px;
   border-bottom: 4px outset #0066ff;
   
 }
+header h1 {
+  font-size: 50px;
+  font-style: normal;
+  font-family:Titulo;
+  color: #94740a;
+  
+
+}
 .logo img {
   width: 100%;
-
   height: 150px;
+  margin-left: 10%;
+position: relative;
+  
+
   
 
   

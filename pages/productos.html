@@ -8,15 +8,15 @@
 <body>
     <div class="employee-search">
         <input type="text" id="employeeSearch" placeholder="Buscar empleado por ID o nombre">
-        <button onclick="buscarEmpleado()">Buscar</button>
+        <button id="employee-info"  onclick="buscarEmpleado()">Buscar</button>
         <div id="employeeInfo" class="employee-info"></div>
         <div id="errorMessage" class="error-message"></div>
     </div>
     <div class="wrapp">
         <div class="cabecera">
-            <img src="../images/erp2.jpg"> 
+            <img src="../images/Logo.jpg"> 
             <div class="bienvenida">
-                <h1 id="bienvenida">Bienvenido al apartado de Productos</h1>
+                <h1 id="bienvenida">Apartado de productos</span></h1>
                 <div class="menu">
                     <li onclick="redirigirAdmin()" id="IniAdmin">Clientes</li>
                     <li><a href="productos.html">Productos</a></li>
@@ -41,8 +41,9 @@
                         </div>
                     </div>
                     
-                    <button onclick="openCartModal()" style="position: fixed; bottom: 20px; right: 20px;">🛒 Carrito</button>
+                    <button onclick="openCartModal()" class="carrito-btn">🛒 Carrito</button>
                 </div> 
+                
             </div>         
         </div>
         <div class="apartadoStock">
@@ -163,16 +164,36 @@ function addToCart(id, type, disponible) {
     }
     
     // Encontrar los detalles del producto
-    const productDetails = type === 'habitaciones'
-        ? window.habitacionesStockData.stock.habitaciones.find(item => item.id === id)
-        : window.serviciosStockData.stock.servicios.find(item => item.id === id);
-    console.log(productDetails);
-    //----------------------------------------------------------------------------------------------------------
-    const productName = type === 'habitaciones'
-        ? window.habitacionesData.habitaciones.find(h => h.id === id)?.nombre
-        : window.serviciosData.find(s => s.id === id)?.nombre;
-    console.log(productName);
+    //NUEVA LOGICA PARA ENCONTRAR LOS SERVICIOS Y HABITACIONES
+    let productDetails;
+    let productname;
+    if (type === 'habitaciones') {
+        productDetails = window.habitacionesStockData.stock.habitaciones.find(item => item.id === id);
+        productName = window.habitacionesData.habitaciones.find(h => h.id === id)?.nombre;
+        // Obtener el precio de habitaciones
+        const habitacion = window.habitacionesData.habitaciones.find(h => Number(h.id) === Number(id));
+        if (habitacion) {
+            productDetails = { ...productDetails, precio: habitacion.precio };
+        }
+    } else {
+        productDetails = window.serviciosStockData.stock.servicios.find(item => item.id === id);
+        // Obtener el precio de servicios
+        const servicio = window.serviciosData.find(s => Number(s.id) === Number(id));
+        productName = servicio?.nombre;
+        if (servicio) {
+            productDetails = { ...productDetails, precio: servicio.precio };
+        }
+    }
+
+    if (!productDetails || !productName) {
+        alert('Error: No se encontraron los detalles del producto');
+        return;
+    }
+    //FIN LOGICA
     
+        console.log('Servicios Data:', window.serviciosData);
+        console.log('Servicios Stock Data:', window.serviciosStockData);
+
     // Restar la cantidad del stock
     fetch(`http://localhost:3000/stock/${type}/update/${id}`, {
         method: 'PATCH',
@@ -184,7 +205,7 @@ function addToCart(id, type, disponible) {
     .then(response => {
         if (!response.ok) throw new Error('Error al actualizar el stock');
         
-        // Añadir al carrito
+        // Añadir al    
         cart.push({
             id: id,
             type: type,
@@ -351,6 +372,8 @@ function mostrarStock() {
         fetch('http://localhost:3000/habitaciones'),
         fetch('http://localhost:3000/servicios')
     ])
+
+    /*----------------------Esto no lo entiendo -------------------*/
     .then(([stockResponse, habitacionesResponse, serviciosResponse]) => 
         Promise.all([stockResponse.json(), habitacionesResponse.json(), serviciosResponse.json()])
     )
@@ -362,10 +385,8 @@ function mostrarStock() {
         window.serviciosStockData = stockData;
         window.serviciosData = serviciosData;
 
-        console.log(window.serviciosStockData);
-        //console.log("CACAACA")
-        //console.log(window.serviciosData);
-//-----------------------------------------------------------------------------------------------------------------
+        console.log('Datos de servicios:', serviciosData); // Depuración
+
         // Procesar habitaciones
         stockData.stock.habitaciones.forEach(stockItem => {
             const habitacion = habitacionesData.habitaciones.find(h => Number(h.id) === Number(stockItem.id));
@@ -618,6 +639,7 @@ window.onload = mostrarStock;
             console.error('Error:', error);
             alert('Error al procesar la compra');
         });
+        
     }
     </script>
 </body>

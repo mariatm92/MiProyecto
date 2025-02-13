@@ -43,7 +43,7 @@
       "img": "../images/habMar.jpg"
     },
     {
-      "id": 1738789452347,
+      "id": "1738789452347",
       "nombre": "habitación con jacuzzi",
       "precio": 700,
       "img": "../images/habJacuzzi.jpg"

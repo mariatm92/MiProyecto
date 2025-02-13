@@ -5,6 +5,13 @@
 }
 
 /* Estructura General */
+/* Fuentes */
+@font-face {
+    font-family: roboto;
+    src: url(../fonts/Roboto-Medium.ttf);
+}
+
+/* Estructura General */
 .wrapp {
     display: flex;
     flex-direction: column;
@@ -21,7 +28,6 @@
     height: 150px;
     width: 100%;
     background-color: #f1f7fe;
-    margin-top: -10px;
     box-shadow: 0px 5px 10px rgb(99, 98, 98);
 }
 
@@ -29,16 +35,18 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
+    align-content: flex-end;
     height: 150px;
     width: 1000px;
     margin-right: 250px;
+    margin-bottom: 35px;
 }
 
 img {
     height: 150px;
     width: 200px;
     border-radius: 100%;
+    margin-top: 15px;
 }
 
 #bienvenida {
@@ -52,6 +60,14 @@ img {
     width: 1000px;
 }
 
+.carrito-btn {
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px;
+    z-index: 9999; 
+}
+
+
 .menu {
     display: flex;
     justify-content: space-around;
@@ -63,6 +79,83 @@ img {
     font-size: 20px;
 }
 
+/* Responsive Design - Pantallas pequeñas */
+@media (max-width: 1000px) {
+    
+ 
+
+    .bienvenida{
+       
+        width:400px;
+    }
+
+    .cabecera img{
+
+        height: 120px;
+        width: 120px;
+        margin-top: 10px;
+    }
+
+    /* Hacer que el menú ocupe toda la pantalla y se apile en una columna */
+    .menu {
+        width: 100%;
+        flex-direction: row;
+        gap: 0px;
+        font-size: 18px;
+        margin-left: 0px;
+    }
+
+    .menu li {
+        text-align: center;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .menu li:hover {
+        background-color: #c1d9e4;
+    }
+
+    .employee-search{
+        display: flex;
+    justify-content: space-around;
+    align-items: center;
+        height: 20px;
+        width:260px;
+       
+
+    }
+   #employeeSearch{
+
+    height: 20px;
+    width: 90px;
+   
+    
+   }
+    #employee-info{
+
+        height: 40px;
+        width: 110px;
+    }
+}
+
+/* Asegura que el contenido se vea bien en pantallas grandes */
+@media (min-width: 769px) {
+    /* Mostrar todo como estaba antes */
+    .cabecera img,
+    .bienvenida {
+        display: block;
+    }
+
+    .menu {
+        display: flex;
+     
+        justify-content: space-around;
+        align-items: center;
+        
+    }
+    
+}
 /* Apartado de Stock */
 .apartadoStock {
     padding: 20px;
