@@ -1,49 +1,71 @@
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <title>Login</title>
-    <link href="css/estilos-user-.css" rel="stylesheet" type="text/css">
+    <link href="../css/estilos-user-.css" rel="stylesheet" type="text/css">
 </head>
 
-<div class="wrapp">
+<body>
+    <div class="wrapp">
+        <div class="cabecera">
+            <img id="logo" src="../images/erp2.jpg">
 
-    <div class="cabecera">
-
-        <img src="images/erp2.jpg">
-
-        <div class="bienvenida">
-
-            <h1 id="bienvenida">Bienvenido usuario, <span id="usuarioCorreo"></span></h1>
-
-            <div class="menu">
-
-                <li>Inicio</li>
-                <li>Contacto</li>
-
+            <div class="bienvenida">
+                <h1 id="bienvenida">Bienvenido usuario, <span id="usuarioCorreo"></span></h1>
+                <div class="menu">
+                    <li>Inicio</li>
+                </div>
             </div>
-
         </div>
-
-
-
-
+        <div id="Habitacion"></div> <!-- Aquí se agregarán las habitaciones -->
     </div>
-</div>
 
-<script>
-    function obtenerParametroURL(nombre) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(nombre);
-    }
+    <script>
+        // Función para obtener parámetros de la URL
+        function obtenerParametroURL(nombre) {
+            const urlParams = new URLSearchParams(window.location.search);
+            mostrarHabitaciones();  // Llamamos a la función para mostrar las habitaciones
+            return urlParams.get(nombre);  // Devolvemos el valor del parámetro
+        }
 
-    const correo = obtenerParametroURL('correo');
+        // Obtener el correo de la URL y mostrarlo
+        const correo = obtenerParametroURL('correo');
 
-    if (correo) {
-        document.getElementById('usuarioCorreo').textContent = correo;
-    } else {
-        window.location.href = 'index.html';
-    }
-</script>
+        if (correo) {
+            document.getElementById('usuarioCorreo').textContent = correo; // Mostramos el correo en el HTML
+        } else {
+            window.location.href = 'index.html';  // Si no se encuentra el parámetro, redirigimos
+        }
+
+        // Función para mostrar las habitaciones
+        function mostrarHabitaciones(){
+            fetch('http://localhost:3000/habitaciones')
+                .then(response => response.json())
+                .then(data => {
+                    // Accedemos al contenedor 'Habitacion' donde mostraremos las habitaciones
+                    const contenedorHabitaciones = document.getElementById('Habitacion');
+                    
+                    // Recorremos las habitaciones y agregamos la información al contenedor
+                    data.habitaciones.forEach(habitacion => {
+                        const detalleHabitacion = document.createElement('div');
+                        detalleHabitacion.classList.add('detallesHabitacion');
+                        
+                        // Definimos el HTML para cada habitación
+                        detalleHabitacion.innerHTML = `
+                            <img src=${habitacion.img}>
+                            <div class="campoRoom">${habitacion.nombre}</div>
+                            <div class="campoRoom">${habitacion.precio}</div>
+                        `;
+                        
+                        // Añadimos la habitación al contenedor
+                        contenedorHabitaciones.appendChild(detalleHabitacion);
+                    });
+                })
+                .catch(error => console.error('Error fetching rooms:', error));
+        }
+    </script>
+</body>
 
 </html>
