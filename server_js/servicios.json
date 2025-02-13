@@ -1,19 +1,24 @@
 [
   {
-    "id": 1737990709914,
+    "id": "1737990709914",
     "nombre": "Coche",
-    "precio": 150
- 
+    "precio": "150",
+    "tipo": "servicios",
+    "cantidad": "20"
   },
   {
-    "id": 1737990750145,
+    "id": "1737990750145",
     "nombre": "Bodas",
-    "precio": 1000
+    "precio": "1000",
+    "tipo": "servicios",
+    "cantidad": "22"
   },
   {
-    "id": 1737990775651,
+    "id": "1737990775651",
     "nombre": "Alquiler de salas",
-    "precio": 500
+    "precio": "500",
+    "tipo": "servicios",
+    "cantidad": "2"
   },
   {
     "id": 1737990791428,

@@ -104,7 +104,11 @@
       "id": "1736494591768",
       "nombre": "Omar",
       "apellidos": "Ahmed",
+<<<<<<< HEAD
       "edad": 38,
+=======
+      "edad": 23,
+>>>>>>> d3a905f01da2a0fbf9d0f364c66acd28fd21ebb9
       "nacionalidad": "Marroquí",
       "genero": "Masculino",
       "hijos": 2,
@@ -141,6 +145,7 @@
       "email": "anika.schmidt@gmail.com"
     },
     {
+<<<<<<< HEAD
       "id": "1736494591774",
       "nombre": "Nadia",
       "apellidos": "Mustafa",
@@ -157,6 +162,14 @@
       "edad": "39",
       "nacionalidad": "Tusabes",
       "genero": "Noloseniyo"
+=======
+      "id": "1738313273873",
+      "nombre": "Pepe",
+      "apellidos": "tomas",
+      "edad": "23",
+      "nacionalidad": "Italiana",
+      "genero": "Masculino"
+>>>>>>> d3a905f01da2a0fbf9d0f364c66acd28fd21ebb9
     }
   ]
 }
