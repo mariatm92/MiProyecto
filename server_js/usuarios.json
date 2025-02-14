@@ -7,7 +7,12 @@
   {
     "correo": "user@user.com",
     "pw": "user",
-    "type":"user"
+    "type":"user",
+    "nombre":"Pepito",
+    "apellidos":"delospalotes",
+    "edad":"25",
+    "nacionalidad":"Español",
+    "hijos":"53"
   } 
 
 ]

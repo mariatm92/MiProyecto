@@ -243,6 +243,28 @@
       },
       "servicios": [],
       "precioTotal": 1300
+    },
+    {
+      "id": "RES1739524892444",
+      "fecha": "14/02/2025, 10:21",
+      "mes": "febrero",
+      "cliente": {
+        "nombre": "Pepito",
+        "apellidos": "delospalotes",
+        "edad": "25",
+        "nacionalidad": "Español",
+        "hijos": "53"
+      },
+      "habitacion": {
+        "tipo": "Habitación cuádruple",
+        "precio": 300
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 325
     }
   ]
 }
