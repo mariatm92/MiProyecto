@@ -217,39 +217,7 @@ function obtenerTipoRegimen(precio) {
     }
 }
 
-// La función agregarAlCarrito permanece igual
-function agregarAlCarrito(id, nombre, precio) {
-    fetch(`http://localhost:3000/stock`)
-        .then(response => response.json())
-        .then(stockData => {
-            const habitacion = stockData.stock.habitaciones.find(h => h.id.toString() === id);
-            
-            if (!habitacion || habitacion.cantidad <= 0) {
-                alert('Lo sentimos, no hay disponibilidad para esta habitación');
-                return;
-            }
 
-            const regimen = document.getElementById(`regimen-${id}`);
-            const precioRegimen = parseInt(regimen.value);
-            
-            carrito.push({
-                id: id,
-                nombre: nombre,
-                precio: precio,
-                precioRegimen: precioRegimen,
-                precioTotal: precio + precioRegimen
-            });
-            
-            const botonCarrito = document.querySelector('.cabecera button');
-            botonCarrito.innerHTML = `🛒 Carrito (${carrito.length})`;
-            
-            alert('Habitación añadida al carrito');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al verificar el stock');
-        });
-}
 // También modificamos agregarAlCarrito para verificar el stock antes de agregar
 function agregarAlCarrito(id, nombre, precio) {
     // Primero verificamos el stock disponible

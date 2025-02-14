@@ -1,10 +1,12 @@
 {
   "habitaciones": [
     {
-      "id": 1738056793245,
+      "id": "1738056793245",
       "nombre": "Suite presidencial",
-      "precio": 1000,
-      "img": "../images/suitePresidencial.jpg"
+      "precio": "1000",
+      "img": "../images/suitePresidencial.jpg",
+      "tipo": "habitaciones",
+      "cantidad": "8"
     },
     {
       "id": 1738123456789,
