@@ -39,33 +39,252 @@
         }
 
         // Función para mostrar las habitaciones
-        function mostrarHabitaciones(){
+       // Modificamos la función mostrarHabitaciones para incluir el botón de carrito
+        function mostrarHabitaciones() {
+            // Primero añadimos el botón del carrito en la cabecera
+            const cabecera = document.querySelector('.cabecera');
+            const botonCarrito = document.createElement('button');
+            botonCarrito.innerHTML = '🛒 Carrito (0)';
+            botonCarrito.style.position = 'absolute';
+            botonCarrito.style.right = '20px';
+            botonCarrito.style.top = '20px';
+            botonCarrito.onclick = mostrarCarrito;
+            cabecera.appendChild(botonCarrito);
+
+            // Luego cargamos las habitaciones
             fetch('http://localhost:3000/habitaciones')
                 .then(response => response.json())
                 .then(data => {
-                    // Accedemos al contenedor 'Habitacion' donde mostraremos las habitaciones
                     const contenedorHabitaciones = document.getElementById('Habitacion');
                     
-                    // Recorremos las habitaciones y agregamos la información al contenedor
                     data.habitaciones.forEach(habitacion => {
                         const detalleHabitacion = document.createElement('div');
                         detalleHabitacion.classList.add('detallesHabitacion');
                         
-                        // Definimos el HTML para cada habitación
                         detalleHabitacion.innerHTML = `
                             <img id="roomImg" src=${habitacion.img}>
                             <div class="roomAux">
                                 <div class="campoRoom">Habitación: ${habitacion.nombre}</div>
-                                <div class="campoRoom">Precio: ${habitacion.precio}€/noche</div>
+                                <div class="campoRoom">Precio: ${habitacion.precio}€/Noche</div>
                             </div>
+                            <select id="regimen-${habitacion.id}">
+                                <option value="25">Solo desayuno - 25€</option>
+                                <option value="45">Media pensión - 45€</option>
+                                <option value="65">Pensión completa - 65€</option>
+                            </select>
+                            <button onclick="agregarAlCarrito('${habitacion.id}', '${habitacion.nombre}', ${habitacion.precio})">
+                                Añadir al Carrito
+                            </button>
                         `;
                         
-                        // Añadimos la habitación al contenedor
                         contenedorHabitaciones.appendChild(detalleHabitacion);
                     });
                 })
-                .catch(error => console.error('Error fetching rooms:', error));
+                .catch(error => console.error('Error:', error));
         }
+
+        // Array para almacenar los items del carrito
+        let carrito = [];
+
+        // Función para agregar items al carrito
+        function mostrarCarrito() {
+    if (carrito.length === 0) {
+        alert('El carrito está vacío');
+        return;
+    }
+
+    let total = 0;
+    let mensaje = 'Carrito de compra:\n\n';
+    
+    carrito.forEach((item, index) => {
+        mensaje += `${item.nombre} - ${item.precioTotal}€\n`;
+        total += item.precioTotal;
+    });
+    
+    mensaje += `\nTotal: ${total}€\n\n`;
+    
+    if (confirm(mensaje + '¿Desea confirmar la reserva?')) {
+        // Primero obtenemos los datos del usuario
+        fetch('http://localhost:3000/usuarios')
+            .then(response => response.json())
+            .then(usuarios => {
+                // Buscamos el usuario por su correo
+                const correoUsuario = document.getElementById('usuarioCorreo').textContent;
+                const usuario = usuarios.find(u => u.correo === correoUsuario);
+
+                if (!usuario) {
+                    throw new Error('Usuario no encontrado');
+                }
+
+                // Creamos la reserva con el formato correcto
+                const reserva = {
+                    id: "RES" + Date.now(), // Formato: RES + timestamp
+                    fecha: new Date().toLocaleString('es-ES', { 
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }),
+                    mes: new Date().toLocaleString('es-ES', { month: 'long' }),
+                    cliente: {
+                        id: usuario.id,
+                        nombre: usuario.nombre,
+                        apellidos: usuario.apellidos,
+                        edad: usuario.edad,
+                        nacionalidad: usuario.nacionalidad,
+                        hijos: usuario.hijos
+                    },
+                    habitacion: {
+                        tipo: carrito[0].nombre, // Asumimos una habitación por reserva
+                        precio: carrito[0].precio
+                    },
+                    regimen: {
+                        tipo: obtenerTipoRegimen(carrito[0].precioRegimen),
+                        precio: carrito[0].precioRegimen
+                    },
+                    servicios: [], // Por ahora sin servicios
+                    precioTotal: total
+                };
+
+                // Actualizamos el stock
+                let actualizacionesCompletadas = 0;
+
+                carrito.forEach(item => {
+                    fetch(`http://localhost:3000/stock/habitaciones/update/${item.id}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            cantidad: -1
+                        })
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            actualizacionesCompletadas++;
+                            
+                            if (actualizacionesCompletadas === carrito.length) {
+                                // Crear la reserva
+                                fetch('http://localhost:3000/reservas', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify(reserva)
+                                })
+                                .then(response => {
+                                    if (response.ok) {
+                                        alert('Reserva realizada con éxito');
+                                        carrito = []; // Vaciar el carrito
+                                        const botonCarrito = document.querySelector('.cabecera button');
+                                        botonCarrito.innerHTML = '🛒 Carrito (0)';
+                                    } else {
+                                        throw new Error('Error en la reserva');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    alert('Error al procesar la reserva');
+                                });
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al actualizar stock:', error);
+                        alert('Error al actualizar el stock');
+                    });
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al obtener datos del usuario');
+            });
+    }
+}
+
+// Función auxiliar para obtener el tipo de régimen basado en el precio
+function obtenerTipoRegimen(precio) {
+    switch(precio) {
+        case 25:
+            return "solo desayuno";
+        case 45:
+            return "media pension";
+        case 65:
+            return "pension completa";
+        default:
+            return "solo desayuno";
+    }
+}
+
+// La función agregarAlCarrito permanece igual
+function agregarAlCarrito(id, nombre, precio) {
+    fetch(`http://localhost:3000/stock`)
+        .then(response => response.json())
+        .then(stockData => {
+            const habitacion = stockData.stock.habitaciones.find(h => h.id.toString() === id);
+            
+            if (!habitacion || habitacion.cantidad <= 0) {
+                alert('Lo sentimos, no hay disponibilidad para esta habitación');
+                return;
+            }
+
+            const regimen = document.getElementById(`regimen-${id}`);
+            const precioRegimen = parseInt(regimen.value);
+            
+            carrito.push({
+                id: id,
+                nombre: nombre,
+                precio: precio,
+                precioRegimen: precioRegimen,
+                precioTotal: precio + precioRegimen
+            });
+            
+            const botonCarrito = document.querySelector('.cabecera button');
+            botonCarrito.innerHTML = `🛒 Carrito (${carrito.length})`;
+            
+            alert('Habitación añadida al carrito');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al verificar el stock');
+        });
+}
+// También modificamos agregarAlCarrito para verificar el stock antes de agregar
+function agregarAlCarrito(id, nombre, precio) {
+    // Primero verificamos el stock disponible
+    fetch(`http://localhost:3000/stock`)
+        .then(response => response.json())
+        .then(stockData => {
+            const habitacion = stockData.stock.habitaciones.find(h => h.id.toString() === id);
+            
+            if (!habitacion || habitacion.cantidad <= 0) {
+                alert('Lo sentimos, no hay disponibilidad para esta habitación');
+                return;
+            }
+
+            const regimen = document.getElementById(`regimen-${id}`);
+            const precioRegimen = parseInt(regimen.value);
+            
+            carrito.push({
+                id: id,
+                nombre: nombre,
+                precio: precio,
+                precioRegimen: precioRegimen,
+                precioTotal: precio + precioRegimen
+            });
+            
+            // Actualizamos el contador del carrito
+            const botonCarrito = document.querySelector('.cabecera button');
+            botonCarrito.innerHTML = `🛒 Carrito (${carrito.length})`;
+            
+            alert('Habitación añadida al carrito');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al verificar el stock');
+        });
+}
         mostrarHabitaciones();
     </script>
 </body>
