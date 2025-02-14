@@ -1,83 +1,117 @@
-
-form .etiquetas{
-    font-family:roboto;
-}
-
+/* Fuentes */
 @font-face {
     font-family: roboto;
     src: url(../fonts/Roboto-Medium.ttf);
 }
 
-
-/* --------------A PARTIR DE AQUI ES DE LA PAGINA ADMIN ----------------*/
-.wrapp{
-    display:flex;
-    justify-content: center;
+/* Estructura General */
+.wrapp {
+    display: flex;
+    flex-direction: column;
     min-height: 1200px;
     width: 100%;
-
 }
-.wrapp .cabecera{
-    display:flex;
+
+.wrapp .cabecera {
+    display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-around;
     align-content: center;
     height: 150px;
-    width:100%;
-    background-color: rgb(255, 255, 255);
+    width: 100%;
+    background-color: #f1f7fe;
     margin-top: -10px;
-    box-shadow: 0px 5px 10px rgb(99, 98, 98) ;
-    
-    
-
-    
+    box-shadow: 0px 5px 10px rgb(99, 98, 98);
 }
-.bienvenida{
 
-    display:flex;
+.bienvenida {
+    display: flex;
     flex-direction: column;
     justify-content: center;
-   align-content: center;
+    align-content: center;
     height: 150px;
-    width:1000px;
+    width: 1000px;
     margin-right: 250px;
-  
-   
 }
 
-
- img{
+img {
     height: 150px;
     width: 200px;
     border-radius: 100%;
-
 }
-h1{
+
+.wrapp #Habitacion #roomImg{
+    height: 300px;
+    width: 300px;
+    border-radius: 0%;
+    outline: solid black 2px;
+}
+
+#bienvenida {
     display: flex;
     justify-content: center;
     align-items: center;
-
     font-size: 30px;
     color: black;
-    font-family:'Courier New', Courier, monospace;
-    
+    font-family: 'Courier New', Courier, monospace;
     height: 60px;
     width: 1000px;
-
 }
-.menu{
 
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 20px;
-    width: 1000px;
+li {
     list-style: none;
-    font-family: roboto;
-    font-size: 20px;
-
-    font-family: pooooooooo;
-
+    cursor: pointer;
+    transition: color 0.3s;
 }
+
+li:hover {
+    color: rgb(148, 194, 206);
+}
+
+li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Estilo de la sección de habitaciones */
+#Habitacion {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    margin-top: 120px;
+    background: #f1f7fe;
+    box-shadow: 10px 5px 10px rgb(99, 98, 98);
+}
+
+.detallesHabitacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 500px;
+    height:500px;
+    margin: 10px;
+    padding: 20px;
+    background-color: rgb(148, 194, 206);
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.detallesHabitacion:hover {
+    box-shadow: 10px 5px 12px rgba(0, 0, 0, 0.5);
+}
+
+.campoRoom {
+    margin: 10px 0;
+    font-size: 18px;
+    text-align: center;
+    flex: 1;
+    font-family: roboto;
+}
+
 

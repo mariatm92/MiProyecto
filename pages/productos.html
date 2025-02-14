@@ -16,7 +16,7 @@
         <div class="cabecera">
             <img src="../images/Logo.jpg"> 
             <div class="bienvenida">
-              
+                <h1 id="bienvenida">Apartado de productos</span></h1>
                 <div class="menu">
                     <li onclick="redirigirAdmin()" id="IniAdmin">Clientes</li>
                     <li><a href="productos.html">Productos</a></li>
@@ -372,6 +372,8 @@ function mostrarStock() {
         fetch('http://localhost:3000/habitaciones'),
         fetch('http://localhost:3000/servicios')
     ])
+
+    /*----------------------Esto no lo entiendo -------------------*/
     .then(([stockResponse, habitacionesResponse, serviciosResponse]) => 
         Promise.all([stockResponse.json(), habitacionesResponse.json(), serviciosResponse.json()])
     )
@@ -637,6 +639,7 @@ window.onload = mostrarStock;
             console.error('Error:', error);
             alert('Error al procesar la compra');
         });
+        
     }
     </script>
 </body>

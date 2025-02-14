@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
@@ -8,90 +7,65 @@
     <link href="../css/estilos-user-.css" rel="stylesheet" type="text/css">
 </head>
 
-<div class="wrapp">
+<body>
+    <div class="wrapp">
+        <div class="cabecera">
+            <a href="index.html"><img src="../images/Logo.jpg" alt="ERP"></a>
 
-    <div class="cabecera">
-
-        <img src="images/Logo.jpg">
-
-        <div class="bienvenida">
-
-            <h1 id="bienvenida">Bienvenido usuario, <span id="usuarioCorreo"></span></h1>
-
-            <div class="menu">
-
-                <li>Inicio</li>
-                <li>Contacto</li>
-
+            <div class="bienvenida">
+                <h1 id="bienvenida">Bienvenido usuario, <span id="usuarioCorreo"></span></h1>
+                <div class="menu">
+                    <!--<li>Inicio</li>-->
+                </div>
             </div>
-
         </div>
-
+        <div id="Habitacion"></div> <!-- Aquí se agregarán las habitaciones -->
     </div>
 
-    <div id="Habitacion"></div>
+    <script>
+        // Función para obtener parámetros de la URL
+        function obtenerParametroURL(nombre) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(nombre);  // Devolvemos el valor del parámetro
+        }
 
+        // Obtener el correo de la URL y mostrarlo
+        const correo = obtenerParametroURL('correo');
 
+        if (correo) {
+            document.getElementById('usuarioCorreo').textContent = correo; // Mostramos el correo en el HTML
+        } else {
+            window.location.href = 'index.html';  // Si no se encuentra el parámetro, redirigimos
+        }
 
-</div>
-
-<script>
-   
-   function obtenerParametroURL(nombre) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(nombre);
-    }
-
-    const correo = obtenerParametroURL('correo');
-
-    if (correo) {
-        document.getElementById('usuarioCorreo').textContent = correo;
-    } else {
-        window.location.href = 'index.html';
-    }
-
-  ///////////////////////////////////////////////
-
-    function obtenerHAbitaciones() {
-
-    
-        const variablehabitacionesStock = document.getElementById('Habitacion');
-    
-        variablehabitacionesStock.innerHTML = '';
-     
-        fetch('http://localhost:3000/habitaciones')
-
-        .then(response => response.json())
-       
-        .then(data => {
-
-            data.habitaciones.forEach(element => {
-
-                //esto es crear un div en java
-                const habitacionDiv = document.createElement('div');
-
-                habitacionDiv.innerHTML=`
-
-                    <div class="employeeField">${element.nombre}</div>
-                    <div class="employeeField">${element.precio}</div> ` ;
-                
-                variablehabitacionesStock.appendChild(habitacionDiv);
-            })
-
-           
-
-        })
-        .catch(error => {
-        console.error('Error NO SE PUEDE MOSTRAR', error);
-        
-        }); 
-
-
-    }
-
-       obtenerHAbitaciones();
-
-
-</script>
+        // Función para mostrar las habitaciones
+        function mostrarHabitaciones(){
+            fetch('http://localhost:3000/habitaciones')
+                .then(response => response.json())
+                .then(data => {
+                    // Accedemos al contenedor 'Habitacion' donde mostraremos las habitaciones
+                    const contenedorHabitaciones = document.getElementById('Habitacion');
+                    
+                    // Recorremos las habitaciones y agregamos la información al contenedor
+                    data.habitaciones.forEach(habitacion => {
+                        const detalleHabitacion = document.createElement('div');
+                        detalleHabitacion.classList.add('detallesHabitacion');
+                        
+                        // Definimos el HTML para cada habitación
+                        detalleHabitacion.innerHTML = `
+                            <img id="roomImg" src=${habitacion.img}>
+                            <div class="campoRoom">Habitación: ${habitacion.nombre}</div>
+                            <div class="campoRoom">Precio: ${habitacion.precio}€/noche</div>
+                        `;
+                        
+                        // Añadimos la habitación al contenedor
+                        contenedorHabitaciones.appendChild(detalleHabitacion);
+                    });
+                })
+                .catch(error => console.error('Error fetching rooms:', error));
+        }
+        mostrarHabitaciones();
+    </script>
+</body>
 
 </html>
