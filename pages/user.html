@@ -10,12 +10,12 @@
 <body>
     <div class="wrapp">
         <div class="cabecera">
-            <img id="logo" src="../images/erp2.jpg">
+            <a href="index.html"><img src="../images/Logo.jpg" alt="ERP"></a>
 
             <div class="bienvenida">
                 <h1 id="bienvenida">Bienvenido usuario, <span id="usuarioCorreo"></span></h1>
                 <div class="menu">
-                    <li>Inicio</li>
+                    <!--<li>Inicio</li>-->
                 </div>
             </div>
         </div>
@@ -53,9 +53,9 @@
                         
                         // Definimos el HTML para cada habitación
                         detalleHabitacion.innerHTML = `
-                            <img src=${habitacion.img}>
-                            <div class="campoRoom">${habitacion.nombre}</div>
-                            <div class="campoRoom">${habitacion.precio}</div>
+                            <img id="roomImg" src=${habitacion.img}>
+                            <div class="campoRoom">Habitación: ${habitacion.nombre}</div>
+                            <div class="campoRoom">Precio: ${habitacion.precio}€/noche</div>
                         `;
                         
                         // Añadimos la habitación al contenedor

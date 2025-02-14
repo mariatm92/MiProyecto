@@ -36,14 +36,16 @@
 }
 
 img {
-    height: 300px;
-    width: 300px;
-}
-
-#logo{
     height: 150px;
     width: 200px;
     border-radius: 100%;
+}
+
+.wrapp #Habitacion #roomImg{
+    height: 300px;
+    width: 300px;
+    border-radius: 0%;
+    outline: solid black 2px;
 }
 
 #bienvenida {
@@ -55,6 +57,21 @@ img {
     font-family: 'Courier New', Courier, monospace;
     height: 60px;
     width: 1000px;
+}
+
+li {
+    list-style: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+li:hover {
+    color: rgb(148, 194, 206);
+}
+
+li a {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* Estilo de la sección de habitaciones */
@@ -94,6 +111,7 @@ img {
     font-size: 18px;
     text-align: center;
     flex: 1;
+    font-family: roboto;
 }
 
 
