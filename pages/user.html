@@ -54,8 +54,10 @@
                         // Definimos el HTML para cada habitación
                         detalleHabitacion.innerHTML = `
                             <img id="roomImg" src=${habitacion.img}>
-                            <div class="campoRoom">Habitación: ${habitacion.nombre}</div>
-                            <div class="campoRoom">Precio: ${habitacion.precio}€/noche</div>
+                            <div class="roomAux">
+                                <div class="campoRoom">Habitación: ${habitacion.nombre}</div>
+                                <div class="campoRoom">Precio: ${habitacion.precio}€/noche</div>
+                            </div>
                         `;
                         
                         // Añadimos la habitación al contenedor
