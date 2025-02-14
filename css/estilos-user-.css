@@ -106,6 +106,15 @@ li a {
     box-shadow: 10px 5px 12px rgba(0, 0, 0, 0.5);
 }
 
+.roomAux{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width:300px;
+    outline: solid black 1px;
+    background-color: rgb(124, 218, 255);
+}
+
 .campoRoom {
     margin: 10px 0;
     font-size: 18px;
