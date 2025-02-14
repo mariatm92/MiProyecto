@@ -1,9 +1,11 @@
+<!DOCTYPE html>
+
 <html>
 
 <head>
     <meta charset="utf-8">
     <title>Login</title>
-    <link href="css/estilos-user-.css" rel="stylesheet" type="text/css">
+    <link href="../css/estilos-user-.css" rel="stylesheet" type="text/css">
 </head>
 
 <div class="wrapp">
@@ -25,14 +27,17 @@
 
         </div>
 
-
-
-
     </div>
+
+    <div id="Habitacion"></div>
+
+
+
 </div>
 
 <script>
-    function obtenerParametroURL(nombre) {
+   
+   function obtenerParametroURL(nombre) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(nombre);
     }
@@ -44,6 +49,49 @@
     } else {
         window.location.href = 'index.html';
     }
+
+  ///////////////////////////////////////////////
+
+    function obtenerHAbitaciones() {
+
+    
+        const variablehabitacionesStock = document.getElementById('Habitacion');
+    
+        variablehabitacionesStock.innerHTML = '';
+     
+        fetch('http://localhost:3000/habitaciones')
+
+        .then(response => response.json())
+       
+        .then(data => {
+
+            data.habitaciones.forEach(element => {
+
+                //esto es crear un div en java
+                const habitacionDiv = document.createElement('div');
+
+                habitacionDiv.innerHTML=`
+
+                    <div class="employeeField">${element.nombre}</div>
+                    <div class="employeeField">${element.precio}</div> ` ;
+                
+                variablehabitacionesStock.appendChild(habitacionDiv);
+            })
+
+           
+
+        })
+        .catch(error => {
+        console.error('Error NO SE PUEDE MOSTRAR', error);
+        
+        }); 
+
+
+    }
+
+       obtenerHAbitaciones();
+
+
 </script>
 
 </html>
