@@ -13,6 +13,50 @@
     "edad":"25",
     "nacionalidad":"Español",
     "hijos":"53"
-  } 
+  } ,
+
+  {
+    "correo": "maria@maria.com",
+    "pw": "user",
+    "type": "user",
+    "nombre": "María",
+    "apellidos": "González",
+    "edad": "30",
+    "nacionalidad": "Mexicana",
+    "hijos": "2"
+  },
+
+  {
+    "correo": "pedro@pedro.com",
+    "pw": "user",
+    "type": "user",
+    "nombre": "Pedro",
+    "apellidos": "López",
+    "edad": "28",
+    "nacionalidad": "Argentino",
+    "hijos": "0"
+  },
+
+  {
+    "correo": "laura@laura.com",
+    "pw": "user",
+    "type": "user",
+    "nombre": "Luara",
+    "apellidos": "López",
+    "edad": "18",
+    "nacionalidad": "Argentino",
+    "hijos": "0"
+  },
+  
+  {
+    "correo": "luis@luis.com",
+    "pw": "user",
+    "type": "user",
+    "nombre": "Luis",
+    "apellidos": "Martínez",
+    "edad": "35",
+    "nacionalidad": "Colombiana",
+    "hijos": "3"
+  }
 
 ]
