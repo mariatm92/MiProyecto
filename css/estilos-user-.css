@@ -43,9 +43,10 @@ img {
 
 .wrapp #Habitacion #roomImg{
     height: 300px;
-    width: 300px;
+    width: 350px;
     border-radius: 0%;
-    outline: solid black 2px;
+    /*outline: solid black 2px;*/
+    border-radius: 5%;
 }
 
 #bienvenida {
@@ -82,10 +83,10 @@ li a {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    width: 100%;
-    margin-top: 120px;
+    width: 97.9%;
+    margin-top: 20px;
     background: #f1f7fe;
-    box-shadow: 10px 5px 10px rgb(99, 98, 98);
+    /*box-shadow: 10px 5px 10px rgb(99, 98, 98);*/
 }
 
 .detallesHabitacion {
@@ -111,8 +112,9 @@ li a {
     flex-wrap: wrap;
     flex-direction: column;
     width:300px;
-    outline: solid black 1px;
-    background-color: rgb(124, 218, 255);
+    /*outline: solid black 1px;*/
+    background-color: rgb(186, 228, 238);
+    box-shadow: 10px 5px 12px rgb(0, 0, 0);
 }
 
 .campoRoom {
