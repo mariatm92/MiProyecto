@@ -160,11 +160,17 @@ function confirmarReserva() {
         return;
     }
 
+    // Get the URL parameter for email
+    const correoUsuario = obtenerParametroURL('correo');
+    if (!correoUsuario) {
+        alert('Error: No se pudo identificar el usuario');
+        return;
+    }
+
     fetch('http://localhost:3000/usuarios')
         .then(response => response.json())
         .then(usuarios => {
-            // Buscamos el usuario por su correo
-            const correoUsuario = document.getElementById('usuarioCorreo').textContent;
+            // Find user by email
             const usuario = usuarios.find(u => u.correo === correoUsuario);
 
             if (!usuario) {
@@ -173,19 +179,18 @@ function confirmarReserva() {
 
             const total = carrito.reduce((sum, item) => sum + item.precioTotal, 0);
 
-            // Creamos un array de habitaciones a partir del carrito
+            // Create arrays for rooms and meal plans from cart
             const habitaciones = carrito.map(item => ({
                 tipo: item.nombre,
                 precio: item.precio
             }));
 
-            // Creamos un array de regímenes a partir del carrito
             const regimenes = carrito.map(item => ({
                 tipo: obtenerTipoRegimen(item.precioRegimen),
                 precio: item.precioRegimen
             }));
 
-            // Creamos la reserva con múltiples habitaciones
+            // Create reservation object
             const reserva = {
                 id: "RES" + Date.now(),
                 fecha: new Date().toLocaleString('es-ES', { 
@@ -202,42 +207,38 @@ function confirmarReserva() {
                     nacionalidad: usuario.nacionalidad,
                     hijos: usuario.hijos
                 },
-                habitaciones: habitaciones, // Array de habitaciones
-                regimenes: regimenes,      // Array de regímenes
+                habitaciones: habitaciones,
+                regimenes: regimenes,
                 servicios: [],
                 precioTotal: total
             };
 
-            // Enviamos la reserva al servidor
-            fetch('http://localhost:3000/reservas', {
+            // Send reservation to server
+            return fetch('http://localhost:3000/reservas', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(reserva)
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Actualizamos el stock
-                    actualizarStock().then(() => {
-                        alert('Reserva realizada con éxito');
-                        carrito = []; // Vaciamos el carrito
-                        const botonCarrito = document.querySelector('.cabecera button');
-                        botonCarrito.innerHTML = '🛒 Carrito (0)';
-                        cerrarCarrito(); // Cerramos el modal del carrito
-                    });
-                } else {
-                    throw new Error('Error al crear la reserva');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error al procesar la reserva');
             });
+        })
+        .then(response => {
+            if (response.ok) {
+                return actualizarStock();
+            } else {
+                throw new Error('Error al crear la reserva');
+            }
+        })
+        .then(() => {
+            alert('Reserva realizada con éxito');
+            carrito = [];
+            const botonCarrito = document.querySelector('.cabecera button');
+            botonCarrito.innerHTML = '🛒 Carrito (0)';
+            cerrarCarrito();
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Error al obtener datos del usuario');
+            alert('Error al procesar la reserva: ' + error.message);
         });
 }
 
@@ -308,7 +309,6 @@ function agregarAlCarrito(id, nombre, precio) {
         });
 }
         mostrarHabitaciones();
-        mostrarServicios();
     </script>
     <div id="cartModalContainer" class="modal-container">
         <div id="cartModalContent" class="modal-content">
