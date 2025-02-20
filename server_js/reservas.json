@@ -117,176 +117,6 @@
       "precioTotal": 900
     },
     {
-      "id": "RES1739523427338",
-      "fecha": "14/02/2025, 09:57",
-      "mes": "febrero",
-      "cliente": {},
-      "habitacion": {
-        "tipo": "Suite presidencial",
-        "precio": 1000
-      },
-      "regimen": {
-        "tipo": "solo desayuno",
-        "precio": 25
-      },
-      "servicios": [],
-      "precioTotal": 1300
-    },
-    {
-      "id": "RES1739523483601",
-      "fecha": "14/02/2025, 09:58",
-      "mes": "febrero",
-      "cliente": {},
-      "habitacion": {
-        "tipo": "Suite presidencial",
-        "precio": 1000
-      },
-      "regimen": {
-        "tipo": "solo desayuno",
-        "precio": 25
-      },
-      "servicios": [],
-      "precioTotal": 1300
-    },
-    {
-      "id": "RES1739523551263",
-      "fecha": "14/02/2025, 09:59",
-      "mes": "febrero",
-      "cliente": {},
-      "habitacion": {
-        "tipo": "Habitación estándar",
-        "precio": 150
-      },
-      "regimen": {
-        "tipo": "solo desayuno",
-        "precio": 25
-      },
-      "servicios": [],
-      "precioTotal": 650
-    },
-    {
-      "id": "RES1739524025006",
-      "fecha": "14/02/2025, 10:07",
-      "mes": "febrero",
-      "cliente": {},
-      "habitacion": {
-        "tipo": "Suite presidencial",
-        "precio": 1000
-      },
-      "regimen": {
-        "tipo": "solo desayuno",
-        "precio": 25
-      },
-      "servicios": [],
-      "precioTotal": 1300
-    },
-    {
-      "id": "RES1739524045061",
-      "fecha": "14/02/2025, 10:07",
-      "mes": "febrero",
-      "cliente": {},
-      "habitacion": {
-        "tipo": "Suite presidencial",
-        "precio": 1000
-      },
-      "regimen": {
-        "tipo": "solo desayuno",
-        "precio": 25
-      },
-      "servicios": [],
-      "precioTotal": 2050
-    },
-    {
-      "id": "RES1739524063190",
-      "fecha": "14/02/2025, 10:07",
-      "mes": "febrero",
-      "cliente": {},
-      "habitacion": {
-        "tipo": "Habitación cuádruple",
-        "precio": 300
-      },
-      "regimen": {
-        "tipo": "solo desayuno",
-        "precio": 25
-      },
-      "servicios": [],
-      "precioTotal": 325
-    },
-    {
-      "id": "RES1739524585360",
-      "fecha": "14/02/2025, 10:16",
-      "mes": "febrero",
-      "cliente": {},
-      "habitacion": {
-        "tipo": "Suite presidencial",
-        "precio": 1000
-      },
-      "regimen": {
-        "tipo": "solo desayuno",
-        "precio": 25
-      },
-      "servicios": [],
-      "precioTotal": 1300
-    },
-    {
-      "id": "RES1739524670578",
-      "fecha": "14/02/2025, 10:17",
-      "mes": "febrero",
-      "cliente": {},
-      "habitacion": {
-        "tipo": "Suite presidencial",
-        "precio": 1000
-      },
-      "regimen": {
-        "tipo": "solo desayuno",
-        "precio": 25
-      },
-      "servicios": [],
-      "precioTotal": 1300
-    },
-    {
-      "id": "RES1740048205899",
-      "fecha": "20/02/2025, 11:43",
-      "cliente": {},
-      "habitacion": {
-        "tipo": "Habitación familiar",
-        "precio": 350
-      },
-      "regimen": {
-        "tipo": "solo desayuno",
-        "precio": 25
-      },
-      "servicios": [],
-      "precioTotal": 850
-    },
-    {
-      "id": "RES1740048557309",
-      "fecha": "20/02/2025, 11:49",
-      "cliente": {},
-      "habitaciones": [
-        {
-          "tipo": "Habitación con vista al mar",
-          "precio": 500
-        },
-        {
-          "tipo": "Habitación con jacuzzi",
-          "precio": 700
-        }
-      ],
-      "regimenes": [
-        {
-          "tipo": "solo desayuno",
-          "precio": 25
-        },
-        {
-          "tipo": "solo desayuno",
-          "precio": 25
-        }
-      ],
-      "servicios": [],
-      "precioTotal": 1250
-    },
-    {
       "id": "RES1740048630937",
       "fecha": "20/02/2025, 11:50",
       "mes": "febrero",
@@ -310,29 +140,46 @@
       "precioTotal": 645
     },
     {
-      "id": "RES1740048850696",
-      "fecha": "20/02/2025, 11:54",
-      "cliente": {},
-      "habitaciones": [
-        {
-          "tipo": "Habitación cuádruple",
-          "precio": 300
-        },
-        {
-          "tipo": "Habitación cuádruple",
-          "precio": 300
-        }
-      ],
-      "regimenes": [
-        {
-          "tipo": "solo desayuno",
-          "precio": 25
-        },
-        {
-          "tipo": "solo desayuno",
-          "precio": 25
-        }
-      ],
+      "id": "RES1740052229495",
+      "fecha": "20/02/2025, 12:50",
+      "mes": "febrero",
+      "cliente": {
+        "nombre": "Pedro",
+        "apellidos": "López",
+        "edad": "28",
+        "nacionalidad": "Argentino",
+        "hijos": "0"
+      },
+      "habitacion": {
+        "tipo": "Familiar",
+        "precio": 350
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 375
+    },
+    {
+      "id": "RES1740052299439",
+      "fecha": "20/02/2025, 12:51",
+      "mes": "febrero",
+      "cliente": {
+        "nombre": "Pedro",
+        "apellidos": "López",
+        "edad": "28",
+        "nacionalidad": "Argentino",
+        "hijos": "0"
+      },
+      "habitacion": {
+        "tipo": "Deluxe",
+        "precio": 450
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
       "servicios": [],
       "precioTotal": 650
     }
