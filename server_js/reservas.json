@@ -182,6 +182,158 @@
       },
       "servicios": [],
       "precioTotal": 650
+    },
+    {
+      "id": "RES1740053134894",
+      "fecha": "20/02/2025, 13:05",
+      "mes": "febrero",
+      "cliente": {
+        "nombre": "Pedro",
+        "apellidos": "López",
+        "edad": "28",
+        "nacionalidad": "Argentino",
+        "hijos": "0"
+      },
+      "habitacion": {
+        "tipo": "Vistas al mar",
+        "precio": 500
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 1250
+    },
+    {
+      "id": "RES1740053700988",
+      "fecha": "20/02/2025, 13:15",
+      "mes": "febrero",
+      "cliente": {
+        "nombre": "Pedro",
+        "apellidos": "López",
+        "edad": "28",
+        "nacionalidad": "Argentino",
+        "hijos": "0"
+      },
+      "habitacion": {
+        "id": "1739012345678",
+        "tipo": "King size bed",
+        "precio": 350
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "habitaciones": [
+        {
+          "id": "1739012345678",
+          "tipo": "King size bed",
+          "precio": 350
+        },
+        {
+          "id": "1739123456780",
+          "tipo": "Queen size bed",
+          "precio": 200
+        }
+      ],
+      "regimenes": [
+        {
+          "tipo": "solo desayuno",
+          "precio": 25
+        },
+        {
+          "tipo": "solo desayuno",
+          "precio": 25
+        }
+      ],
+      "servicios": [],
+      "precioTotal": 600
+    },
+    {
+      "id": "RES1740053929316",
+      "fecha": "20/02/2025, 13:18",
+      "mes": "febrero",
+      "cliente": {
+        "id": "1736494591754",
+        "nombre": "Yuki",
+        "apellidos": "Tanaka",
+        "edad": 31,
+        "nacionalidad": "Japonesa",
+        "hijos": 0
+      },
+      "habitaciones": [
+        {
+          "id": "1738345678921-0",
+          "tipo": "Familiar",
+          "precio": 350
+        },
+        {
+          "id": "1738998765432-0",
+          "tipo": "Económica",
+          "precio": 90
+        }
+      ],
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 465
+    },
+    {
+      "id": "RES1740054085390",
+      "fecha": "20/02/2025, 13:21",
+      "mes": "febrero",
+      "cliente": {
+        "id": "1736494591754",
+        "nombre": "Yuki",
+        "apellidos": "Tanaka",
+        "edad": 31,
+        "nacionalidad": "Japonesa",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Vistas al mar",
+        "precio": 500
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 1125
+    },
+    {
+      "id": "RES1740054128292",
+      "fecha": "20/02/2025, 13:22",
+      "mes": "febrero",
+      "cliente": {
+        "id": "1732870380351",
+        "nombre": "Sandra",
+        "apellidos": "Gonzalez",
+        "edad": 30,
+        "nacionalidad": "Española",
+        "hijos": 2
+      },
+      "habitaciones": [
+        {
+          "id": "1738345678921-0",
+          "tipo": "Familiar",
+          "precio": 350
+        },
+        {
+          "id": "1738456792348-0",
+          "tipo": "Deluxe",
+          "precio": 450
+        }
+      ],
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 825
     }
   ]
 }

@@ -542,105 +542,109 @@ window.onload = mostrarStock;
     }
     
     function finalizarCompra() {
-        if (!selectedEmployee) {
-            alert('Por favor, seleccione un empleado antes de finalizar la compra');
-            return;
-        }
+    if (!selectedEmployee) {
+        alert('Por favor, seleccione un empleado antes de finalizar la compra');
+        return;
+    }
 
-        if (cart.length === 0) {
-            alert('El carrito está vacío');
-            return;
-        }
+    if (cart.length === 0) {
+        alert('El carrito está vacío');
+        return;
+    }
 
-        // Get selected régimen
-        const regimenSelect = document.getElementById('regimen');
-        const [regimenTipo, regimenPrecio] = regimenSelect.value.split(',');
+    // Get selected régimen
+    const regimenSelect = document.getElementById('regimen');
+    const [regimenTipo, regimenPrecio] = regimenSelect.value.split(',');
 
-        // Calculate total price
-        let total = parseFloat(regimenPrecio);
-        let habitacion = null;
-        let servicios = [];
+    // Calculate total price
+    let total = parseFloat(regimenPrecio);
+    let habitaciones = [];
+    let servicios = [];
 
-        cart.forEach(item => {
-            const itemPrecio = parseFloat(item.precio) || 50;
-            const itemCantidad = parseInt(item.cantidad) || 1;
-            total += itemPrecio  * itemCantidad;
-            
-            if (item.type === 'habitaciones') {
-                habitacion = {
+    cart.forEach(item => {
+        const itemPrecio = parseFloat(item.precio) || 50;
+        const itemCantidad = parseInt(item.cantidad) || 1;
+        total += itemPrecio * itemCantidad;
+        
+        if (item.type === 'habitaciones') {
+            // Crear tantas entradas de habitación como la cantidad comprada
+            for (let i = 0; i < itemCantidad; i++) {
+                habitaciones.push({
+                    id: `${item.id}-${i}`,
                     tipo: item.nombre,
                     precio: itemPrecio
-                };
-            } else if (item.type === 'servicios') { // Asumiendo que tienes un type para servicios
-                servicios.push({
-                    nombre: item.nombre,
-                    precio: itemPrecio
                 });
             }
-        });
+        } else if (item.type === 'servicios') {
+            servicios.push({
+                nombre: item.nombre,
+                precio: itemPrecio,
+                cantidad: itemCantidad
+            });
+        }
+    });
 
-        // Crear fecha actual en formato legible
-        const fechaActual = new Date();
-        const fechaReserva = fechaActual.toLocaleString('es-ES', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
+    // Crear fecha actual en formato legible
+    const fechaActual = new Date();
+    const fechaReserva = fechaActual.toLocaleString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
 
+    // Create reservation object
+    const reserva = {
+        id: `RES${Date.now()}`,
+        fecha: fechaReserva,
+        mes: new Date().toLocaleString('es-ES', { month: 'long' }),
+        cliente: {
+            id: selectedEmployee.id,
+            nombre: selectedEmployee.nombre,
+            apellidos: selectedEmployee.apellidos,
+            edad: selectedEmployee.edad,
+            nacionalidad: selectedEmployee.nacionalidad,
+            hijos: selectedEmployee.hijos
+        },
+        habitaciones: habitaciones.length > 0 ? habitaciones : [{
+            tipo: "Sin habitación",
+            precio: 0
+        }],
+        regimen: {
+            tipo: regimenTipo.replace(/_/g, ' '),
+            precio: parseFloat(regimenPrecio)
+        },
+        servicios: servicios,
+        precioTotal: total
+    };
+    
+    console.log('Reserva a enviar:', reserva);
 
-        // Create reservation object
-        const reserva = {
-            id: `RES${Date.now()}`,
-            fecha: fechaReserva,
-            mes: new Date().toLocaleString('es-ES', { month: 'long' }),
-            cliente: {
-                id: selectedEmployee.id,
-                nombre: selectedEmployee.nombre,
-                apellidos: selectedEmployee.apellidos,
-                edad: selectedEmployee.edad,
-                nacionalidad: selectedEmployee.nacionalidad,
-                hijos: selectedEmployee.hijos
-            },
-            habitacion: habitacion || {
-                tipo: "Sin habitación",
-                precio: 0
-            },
-            regimen: {
-                tipo: regimenTipo.replace(/_/g, ' '),
-                precio: parseFloat(regimenPrecio)
-            },
-            servicios: servicios,
-            precioTotal: total
-        };
-        console.log('Reserva a enviar:', reserva); // Para debug
-
-        // Save reservation
-        fetch('http://localhost:3000/reservas', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(reserva)
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.text().then(text => { // Obtener el mensaje de error del servidor
-                    throw new Error(text || 'Error desconocido al guardar la reserva');
-                });
-            }
-            alert('Compra finalizada y reserva registrada correctamente');
-            cart = [];
-            closeCartModal();
-            mostrarStock();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al procesar la compra');
-        });
-        
-    }
+    // Save reservation
+    fetch('http://localhost:3000/reservas', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reserva)
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(text => {
+                throw new Error(text || 'Error desconocido al guardar la reserva');
+            });
+        }
+        alert('Compra finalizada y reserva registrada correctamente');
+        cart = [];
+        closeCartModal();
+        mostrarStock();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error al procesar la compra');
+    });
+}
     </script>
 </body>
 </html> 
