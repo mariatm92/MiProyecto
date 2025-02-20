@@ -165,8 +165,10 @@ function confirmarReserva() {
         .then(usuarios => {
             // Buscamos el usuario por su correo
             const correoUsuario = document.getElementById('usuarioCorreo').textContent;
+            
+         
             const usuario = usuarios.find(u => u.correo === correoUsuario);
-
+   
             if (!usuario) {
                 throw new Error('Usuario no encontrado');
             }
@@ -185,7 +187,7 @@ function confirmarReserva() {
                 precio: item.precioRegimen
             }));
 
-            // Creamos la reserva con múltiples habitaciones
+    
             const reserva = {
                 id: "RES" + Date.now(),
                 fecha: new Date().toLocaleString('es-ES', { 
@@ -308,7 +310,7 @@ function agregarAlCarrito(id, nombre, precio) {
         });
 }
         mostrarHabitaciones();
-        mostrarServicios();
+      
     </script>
     <div id="cartModalContainer" class="modal-container">
         <div id="cartModalContent" class="modal-content">
