@@ -27,11 +27,12 @@
 .bienvenida {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-content: center;
+    
+    
     height: 150px;
     width: 1000px;
     margin-right: 250px;
+  
 }
 
 img {
@@ -40,15 +41,22 @@ img {
     border-radius: 100%;
 }
 
-#bienvenida {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
-    height: 60px;
-    width: 1000px;
+@font-face {
+    font-family: 'Titulo';
+    src: url('../fonts/PlaywriteIN-VariableFont_wght.ttf') format('truetype');
+  }
+h1 {
+    width: 600px;
+    height: 100px;
+    margin-left: 20%;
+    font-size: 45px;
+    font-style: normal;
+    font-family:Titulo;
+    color: #94740a;
+    margin-top: 5px;
+   
+   
+   
 }
 
 .menu {
@@ -60,6 +68,8 @@ img {
     list-style: none;
     font-family: roboto;
     font-size: 20px;
+    margin-top: -10px;
+
 }
 
 .apartadoFormu {
