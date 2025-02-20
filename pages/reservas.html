@@ -39,6 +39,7 @@
         }
 
         // Función para mostrar las reservas
+        /*
         function mostrarReservas() {
             const usuarioGson = document.querySelector('.usuarioGson');
             usuarioGson.innerHTML = '';
@@ -75,7 +76,65 @@
                     usuarioGson.innerHTML = '<p>Error al cargar las reservas</p>';
                 });
         }
+        */
+        function mostrarReservas() {
+    const usuarioGson = document.querySelector('.usuarioGson');
+    usuarioGson.innerHTML = '';
 
+    fetch('http://localhost:3000/reservas')
+        .then(response => response.json())
+        .then(data => {
+            data.reservas.forEach(reserva => {
+                const reservaDetails = document.createElement('div');
+                reservaDetails.classList.add('reservaDetails');
+
+                // Creamos el HTML para todas las habitaciones
+                const habitacionesHTML = reserva.habitaciones ? 
+                    reserva.habitaciones.map(hab => 
+                        `<div class="reservaField">
+                            <strong>Habitación:</strong> ${hab.tipo} - Precio: ${hab.precio}€
+                        </div>`
+                    ).join('') :
+                    `<div class="reservaField">
+                        <strong>Habitación:</strong> ${reserva.habitacion.tipo} - Precio: ${reserva.habitacion.precio}€
+                    </div>`;
+
+                // Creamos el HTML para todos los regímenes
+                const regimenesHTML = reserva.regimenes ?
+                    reserva.regimenes.map(reg =>
+                        `<div class="reservaField">
+                            <strong>Régimen:</strong> ${reg.tipo} - Precio: ${reg.precio}€
+                        </div>`
+                    ).join('') :
+                    `<div class="reservaField">
+                        <strong>Régimen:</strong> ${reserva.regimen.tipo} - Precio: ${reserva.regimen.precio}€
+                    </div>`;
+
+                reservaDetails.innerHTML = `
+                    <div class="reservaField"><strong>ID Reserva:</strong> ${reserva.id}</div>
+                    <div class="reservaField"><strong>Fecha de Reserva:</strong> ${reserva.fecha || 'No disponible'}</div>
+                    <div class="reservaField"><strong>Cliente:</strong> ${reserva.cliente.nombre} ${reserva.cliente.apellidos}</div>
+                    <div class="reservaField"><strong>Edad:</strong> ${reserva.cliente.edad} años</div>
+                    <div class="reservaField"><strong>Hijos:</strong> ${reserva.cliente.hijos} hijo/s</div>
+                    <div class="reservaField"><strong>Nacionalidad:</strong> ${reserva.cliente.nacionalidad}</div>
+                    ${habitacionesHTML}
+                    ${regimenesHTML}
+                    <div class="reservaField"><strong>Servicios:</strong>
+                        <ul>
+                            ${reserva.servicios.map(servicio => `<li>${servicio.nombre} - Precio: ${servicio.precio}€</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="reservaField"><strong>Precio Total:</strong> ${reserva.precioTotal}€</div>
+                `;
+
+                usuarioGson.appendChild(reservaDetails);
+            });
+        })
+        .catch(error => {
+            console.error('Error al obtener reservas:', error);
+            usuarioGson.innerHTML = '<p>Error al cargar las reservas</p>';
+        });
+}
         // Cargar las reservas al iniciar la página
         mostrarReservas();
 

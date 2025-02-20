@@ -20,6 +20,9 @@
             </div>
         </div>
         <div id="Habitacion"></div> <!-- Aquí se agregarán las habitaciones -->
+
+        <div id="servicios"></div> <!-- Aqui se agregaran los servicios-->
+        
     </div>
 
     <script>
@@ -40,8 +43,9 @@
             // Primero añadimos el botón del carrito en la cabecera
             const cabecera = document.querySelector('.cabecera');
             const botonCarrito = document.createElement('button');
+            
             botonCarrito.innerHTML = '🛒 Carrito (0)';
-            botonCarrito.style.position = 'absolute';
+            botonCarrito.style.position = 'fixed';
             botonCarrito.style.right = '20px';
             botonCarrito.style.top = '20px';
             botonCarrito.onclick = mostrarCarrito;
@@ -60,7 +64,7 @@
                         detalleHabitacion.innerHTML = `
                             <img id="roomImg" src=${habitacion.img}>
                             <div class="roomAux">
-                                <div class="campoRoom">Habitación: ${habitacion.nombre}</div>
+                                <div class="campoRoom">${habitacion.nombre}</div>
                                 <div class="campoRoom">Precio: ${habitacion.precio}€/Noche</div>
                             </div>
                             <select id="regimen-${habitacion.id}">
@@ -69,7 +73,7 @@
                                 <option value="65">Pensión completa - 65€</option>
                             </select>
                             <button onclick="agregarAlCarrito('${habitacion.id}', '${habitacion.nombre}', ${habitacion.precio})">
-                                Añadir al Carrito
+                                Añadir
                             </button>
                         `;
                         
@@ -79,124 +83,178 @@
                 .catch(error => console.error('Error:', error));
         }
 
+        
+
         // Array para almacenar los items del carrito
         let carrito = [];
+        let isCartOpen = false;
 
         // Función para agregar items al carrito
         function mostrarCarrito() {
+    isCartOpen = true;
+    const modalContainer = document.getElementById('cartModalContainer');
+    modalContainer.style.display = 'flex';
+    renderizarCarrito();
+}
+
+function cerrarCarrito() {
+    isCartOpen = false;
+    const modalContainer = document.getElementById('cartModalContainer');
+    modalContainer.style.display = 'none';
+}
+
+function eliminarDelCarrito(index) {
+    carrito.splice(index, 1);
+    const botonCarrito = document.querySelector('.cabecera button');
+    botonCarrito.innerHTML = `🛒 Carrito (${carrito.length})`;
+    renderizarCarrito();
+}
+
+function renderizarCarrito() {
+    const modalContent = document.getElementById('cartModalContent');
+    const total = carrito.reduce((sum, item) => sum + item.precioTotal, 0);
+    
+    // Añadimos el botón de cierre al principio del HTML
+    let html = '<button onclick="cerrarCarrito()" class="close-button">×</button>';
+    
+    if (carrito.length === 0) {
+        html += '<p class="empty-cart">El carrito está vacío</p>';
+        modalContent.innerHTML = html;
+        return;
+    }
+
+    html += '<div class="cart-items">';
+    carrito.forEach((item, index) => {
+        html += `
+            <div class="cart-item">
+                <div class="item-details">
+                    <h3>${item.nombre}</h3>
+                    <p>Precio habitación: ${item.precio}€</p>
+                    <p>Régimen: ${item.precioRegimen}€</p>
+                </div>
+                <div class="item-actions">
+                    <span class="item-total">${item.precioTotal}€</span>
+                    <button onclick="eliminarDelCarrito(${index})" class="delete-btn">✕</button>
+                </div>
+            </div>
+        `;
+    });
+
+    html += `
+        <div class="cart-total">
+            <span>Total:</span>
+            <span>${total}€</span>
+        </div>
+        <div class="cart-actions">
+            <button onclick="cerrarCarrito()" class="cancel-btn">Cancelar</button>
+            <button onclick="confirmarReserva()" class="confirm-btn">Confirmar Reserva</button>
+        </div>
+    `;
+    html += '</div>';
+    modalContent.innerHTML = html;
+}
+
+function confirmarReserva() {
     if (carrito.length === 0) {
         alert('El carrito está vacío');
         return;
     }
 
-    let total = 0;
-    let mensaje = 'Carrito de compra:\n\n';
-    
-    carrito.forEach((item, index) => {
-        mensaje += `${item.nombre} - ${item.precioTotal}€\n`;
-        total += item.precioTotal;
-    });
-    
-    mensaje += `\nTotal: ${total}€\n\n`;
-    
-    if (confirm(mensaje + '¿Desea confirmar la reserva?')) {
-        // Primero obtenemos los datos del usuario
-        fetch('http://localhost:3000/usuarios')
-            .then(response => response.json())
-            .then(usuarios => {
-                // Buscamos el usuario por su correo
-                const correoUsuario = document.getElementById('usuarioCorreo').textContent;
-                const usuario = usuarios.find(u => u.correo === correoUsuario);
+    fetch('http://localhost:3000/usuarios')
+        .then(response => response.json())
+        .then(usuarios => {
+            // Buscamos el usuario por su correo
+            const correoUsuario = document.getElementById('usuarioCorreo').textContent;
+            const usuario = usuarios.find(u => u.correo === correoUsuario);
 
-                if (!usuario) {
-                    throw new Error('Usuario no encontrado');
-                }
+            if (!usuario) {
+                throw new Error('Usuario no encontrado');
+            }
 
-                // Creamos la reserva con el formato correcto
-                const reserva = {
-                    id: "RES" + Date.now(), // Formato: RES + timestamp
-                    fecha: new Date().toLocaleString('es-ES', { 
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    }),
-                    mes: new Date().toLocaleString('es-ES', { month: 'long' }),
-                    cliente: {
-                        id: usuario.id,
-                        nombre: usuario.nombre,
-                        apellidos: usuario.apellidos,
-                        edad: usuario.edad,
-                        nacionalidad: usuario.nacionalidad,
-                        hijos: usuario.hijos
-                    },
-                    habitacion: {
-                        tipo: carrito[0].nombre, // Asumimos una habitación por reserva
-                        precio: carrito[0].precio
-                    },
-                    regimen: {
-                        tipo: obtenerTipoRegimen(carrito[0].precioRegimen),
-                        precio: carrito[0].precioRegimen
-                    },
-                    servicios: [], // Por ahora sin servicios
-                    precioTotal: total
-                };
+            const total = carrito.reduce((sum, item) => sum + item.precioTotal, 0);
 
-                // Actualizamos el stock
-                let actualizacionesCompletadas = 0;
+            // Creamos un array de habitaciones a partir del carrito
+            const habitaciones = carrito.map(item => ({
+                tipo: item.nombre,
+                precio: item.precio
+            }));
 
-                carrito.forEach(item => {
-                    fetch(`http://localhost:3000/stock/habitaciones/update/${item.id}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            cantidad: -1
-                        })
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            actualizacionesCompletadas++;
-                            
-                            if (actualizacionesCompletadas === carrito.length) {
-                                // Crear la reserva
-                                fetch('http://localhost:3000/reservas', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                    },
-                                    body: JSON.stringify(reserva)
-                                })
-                                .then(response => {
-                                    if (response.ok) {
-                                        alert('Reserva realizada con éxito');
-                                        carrito = []; // Vaciar el carrito
-                                        const botonCarrito = document.querySelector('.cabecera button');
-                                        botonCarrito.innerHTML = '🛒 Carrito (0)';
-                                    } else {
-                                        throw new Error('Error en la reserva');
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    alert('Error al procesar la reserva');
-                                });
-                            }
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error al actualizar stock:', error);
-                        alert('Error al actualizar el stock');
+            // Creamos un array de regímenes a partir del carrito
+            const regimenes = carrito.map(item => ({
+                tipo: obtenerTipoRegimen(item.precioRegimen),
+                precio: item.precioRegimen
+            }));
+
+            // Creamos la reserva con múltiples habitaciones
+            const reserva = {
+                id: "RES" + Date.now(),
+                fecha: new Date().toLocaleString('es-ES', { 
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
+                cliente: {
+                    nombre: usuario.nombre,
+                    apellidos: usuario.apellidos,
+                    edad: usuario.edad,
+                    nacionalidad: usuario.nacionalidad,
+                    hijos: usuario.hijos
+                },
+                habitaciones: habitaciones, // Array de habitaciones
+                regimenes: regimenes,      // Array de regímenes
+                servicios: [],
+                precioTotal: total
+            };
+
+            // Enviamos la reserva al servidor
+            fetch('http://localhost:3000/reservas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(reserva)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Actualizamos el stock
+                    actualizarStock().then(() => {
+                        alert('Reserva realizada con éxito');
+                        carrito = []; // Vaciamos el carrito
+                        const botonCarrito = document.querySelector('.cabecera button');
+                        botonCarrito.innerHTML = '🛒 Carrito (0)';
+                        cerrarCarrito(); // Cerramos el modal del carrito
                     });
-                });
+                } else {
+                    throw new Error('Error al crear la reserva');
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error al obtener datos del usuario');
+                alert('Error al procesar la reserva');
             });
-    }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al obtener datos del usuario');
+        });
+}
+
+function actualizarStock() {
+    const promesas = carrito.map(item => {
+        return fetch(`http://localhost:3000/stock/habitaciones/update/${item.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                cantidad: -1
+            })
+        });
+    });
+
+    return Promise.all(promesas);
 }
 
 // Función auxiliar para obtener el tipo de régimen basado en el precio
@@ -250,7 +308,12 @@ function agregarAlCarrito(id, nombre, precio) {
         });
 }
         mostrarHabitaciones();
+        mostrarServicios();
     </script>
+    <div id="cartModalContainer" class="modal-container">
+        <div id="cartModalContent" class="modal-content">
+        </div>
+    </div>
 </body>
 
 </html>

@@ -2,7 +2,7 @@
   "habitaciones": [
     {
       "id": "1738056793245",
-      "nombre": "Suite presidencial",
+      "nombre": "Suite Presidencial",
       "precio": "1000",
       "img": "../images/suitePresidencial.jpg",
       "tipo": "habitaciones",
@@ -10,73 +10,73 @@
     },
     {
       "id": 1738123456789,
-      "nombre": "Habitación triple",
+      "nombre": "Triple",
       "precio": 250,
       "img": "../images/habTriple.jpg"
     },
     {
       "id": 1738234591234,
-      "nombre": "Habitación cuádruple",
+      "nombre": "Cuádruple",
       "precio": 300,
       "img": "../images/habCuadruple.jpg"
     },
     {
       "id": 1738345678921,
-      "nombre": "Habitación familiar",
+      "nombre": "Familiar",
       "precio": 350,
       "img": "../images/habFamiliar.jpg"
     },
     {
       "id": 1738456792348,
-      "nombre": "Habitación deluxe",
+      "nombre": "Deluxe",
       "precio": 450,
       "img": "../images/habDeluxe.jpg"
     },
     {
       "id": 1738567890345,
-      "nombre": "Habitación estándar",
+      "nombre": "Estándar",
       "precio": 150,
       "img": "../images/habEstandar.jpg"
     },
     {
       "id": 1738678923456,
-      "nombre": "Habitación con vista al mar",
+      "nombre": "Vistas al mar",
       "precio": 500,
       "img": "../images/habMar.jpg"
     },
     {
       "id": "1738789452347",
-      "nombre": "Habitación con jacuzzi",
+      "nombre": "Jacuzzi",
       "precio": 700,
       "img": "../images/habJacuzzi.jpg"
     },
     {
       "id": 1738896754321,
-      "nombre": "Habitación de lujo",
+      "nombre": "De lujo",
       "precio": 800,
       "img": "../images/habLujo.jpg"
     },
     {
       "id": 1738998765432,
-      "nombre": "Habitación económica",
+      "nombre": "Económica",
       "precio": 90,
       "img": "../images/habEcon.jpg"
     },
     {
       "id": 1739012345678,
-      "nombre": "Habitación con cama king size",
+      "nombre": "King size bed",
       "precio": 350,
       "img": "../images/habKing.jpg"
     },
     {
       "id": 1739123456780,
-      "nombre": "Habitación con cama queen size",
+      "nombre": "Queen size bed",
       "precio": 200,
       "img": "../images/habQueen.jpg"
     },
     {
       "id": 1739234567890,
-      "nombre": "Habitación superior",
+      "nombre": "Superior",
       "precio": 600,
       "img": "../images/habSuperior.jpg"
     }

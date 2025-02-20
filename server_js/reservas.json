@@ -245,26 +245,96 @@
       "precioTotal": 1300
     },
     {
-      "id": "RES1739524892444",
-      "fecha": "14/02/2025, 10:21",
-      "mes": "febrero",
-      "cliente": {
-        "nombre": "Pepito",
-        "apellidos": "delospalotes",
-        "edad": "25",
-        "nacionalidad": "Español",
-        "hijos": "53"
-      },
+      "id": "RES1740048205899",
+      "fecha": "20/02/2025, 11:43",
+      "cliente": {},
       "habitacion": {
-        "tipo": "Habitación cuádruple",
-        "precio": 300
+        "tipo": "Habitación familiar",
+        "precio": 350
       },
       "regimen": {
         "tipo": "solo desayuno",
         "precio": 25
       },
       "servicios": [],
-      "precioTotal": 325
+      "precioTotal": 850
+    },
+    {
+      "id": "RES1740048557309",
+      "fecha": "20/02/2025, 11:49",
+      "cliente": {},
+      "habitaciones": [
+        {
+          "tipo": "Habitación con vista al mar",
+          "precio": 500
+        },
+        {
+          "tipo": "Habitación con jacuzzi",
+          "precio": 700
+        }
+      ],
+      "regimenes": [
+        {
+          "tipo": "solo desayuno",
+          "precio": 25
+        },
+        {
+          "tipo": "solo desayuno",
+          "precio": 25
+        }
+      ],
+      "servicios": [],
+      "precioTotal": 1250
+    },
+    {
+      "id": "RES1740048630937",
+      "fecha": "20/02/2025, 11:50",
+      "mes": "febrero",
+      "cliente": {
+        "id": "1736494591754",
+        "nombre": "Yuki",
+        "apellidos": "Tanaka",
+        "edad": 31,
+        "nacionalidad": "Japonesa",
+        "hijos": 0
+      },
+      "habitacion": {
+        "tipo": "Habitación familiar",
+        "precio": 350
+      },
+      "regimen": {
+        "tipo": "media pension",
+        "precio": 45
+      },
+      "servicios": [],
+      "precioTotal": 645
+    },
+    {
+      "id": "RES1740048850696",
+      "fecha": "20/02/2025, 11:54",
+      "cliente": {},
+      "habitaciones": [
+        {
+          "tipo": "Habitación cuádruple",
+          "precio": 300
+        },
+        {
+          "tipo": "Habitación cuádruple",
+          "precio": 300
+        }
+      ],
+      "regimenes": [
+        {
+          "tipo": "solo desayuno",
+          "precio": 25
+        },
+        {
+          "tipo": "solo desayuno",
+          "precio": 25
+        }
+      ],
+      "servicios": [],
+      "precioTotal": 650
     }
   ]
 }

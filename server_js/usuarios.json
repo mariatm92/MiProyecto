@@ -13,7 +13,17 @@
     "edad":"25",
     "nacionalidad":"Español",
     "hijos":"53"
-  } ,
+  }, 
+  {
+    "correo": "dvega@hotelbrisas.com",
+    "pw": "1234",
+    "type":"user",
+    "nombre":"Daniel",
+    "apellidos":"Vega",
+    "edad":"39",
+    "nacionalidad":"Español",
+    "hijos":"1"
+  },
 
   {
     "correo": "maria@maria.com",
