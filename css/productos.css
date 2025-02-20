@@ -49,15 +49,22 @@ img {
     margin-top: 15px;
 }
 
-#bienvenida {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
-    height: 60px;
-    width: 1000px;
+@font-face {
+    font-family: 'Titulo';
+    src: url('../fonts/PlaywriteIN-VariableFont_wght.ttf') format('truetype');
+  }
+h1 {
+    width: 600px;
+    height: 100px;
+    margin-left: 20%;
+    font-size: 45px;
+    font-style: normal;
+    font-family:Titulo;
+    color: #94740a;
+    margin-top: 5px;
+   
+   
+   
 }
 
 .carrito-btn {
@@ -78,7 +85,17 @@ img {
     list-style: none;
     font-family: roboto;
     font-size: 20px;
+    margin-bottom: 15px;
 }
+.carrito-btn {
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px;
+    z-index: 9999; 
+}
+
+
+
 
 /* Responsive Design - Pantallas pequeñas */
 @media (max-width: 1000px) {

@@ -159,11 +159,16 @@ function confirmarReserva() {
         return;
     }
 
+    // Get the URL parameter for email
+    const correoUsuario = obtenerParametroURL('correo');
+    if (!correoUsuario) {
+        alert('Error: No se pudo identificar el usuario');
+        return;
+    }
+
     fetch('http://localhost:3000/usuarios')
         .then(response => response.json())
         .then(usuarios => {
-            // Buscamos el usuario por su correo
-            const correoUsuario = document.getElementById('usuarioCorreo').textContent;
             const usuario = usuarios.find(u => u.correo === correoUsuario);
              debug.log("Esto es usuario "  + usuario);
             debug.log("Esto es usuario "  + usuario);
@@ -172,20 +177,32 @@ function confirmarReserva() {
             }
 
             const total = carrito.reduce((sum, item) => sum + item.precioTotal, 0);
+            
+            // Separar habitaciones y servicios
+            const itemsHabitacion = carrito.filter(item => item.tipo !== 'servicio');
+            const itemsServicio = carrito.filter(item => item.tipo === 'servicio');
 
-            // Creamos un array de habitaciones a partir del carrito
-            const habitaciones = carrito.map(item => ({
+            // Preparar las habitaciones
+            const habitaciones = itemsHabitacion.map(item => ({
+                id: item.id,
                 tipo: item.nombre,
                 precio: item.precio
             }));
 
-            // Creamos un array de regímenes a partir del carrito
-            const regimenes = carrito.map(item => ({
+            // Preparar los regímenes
+            const regimenes = itemsHabitacion.map(item => ({
                 tipo: obtenerTipoRegimen(item.precioRegimen),
                 precio: item.precioRegimen
             }));
+            
+            // Preparar los servicios
+            const servicios = itemsServicio.map(item => ({
+                id: item.id,
+                nombre: item.nombre,
+                precio: item.precio
+            }));
 
-            // Creamos la reserva con múltiples habitaciones
+            // Crear la reserva con los datos solicitados
             const reserva = {
                 id: "RES" + Date.now(),
                 fecha: new Date().toLocaleString('es-ES', { 
@@ -195,54 +212,96 @@ function confirmarReserva() {
                     hour: '2-digit',
                     minute: '2-digit'
                 }),
+                mes: new Date().toLocaleString('es-ES', { month: 'long' }),
                 cliente: {
+                    id: usuario.id,
                     nombre: usuario.nombre,
                     apellidos: usuario.apellidos,
                     edad: usuario.edad,
                     nacionalidad: usuario.nacionalidad,
                     hijos: usuario.hijos
                 },
-                habitaciones: habitaciones, // Array de habitaciones
-                regimenes: regimenes,      // Array de regímenes
-                servicios: [],
+                // Mantenemos la estructura original para compatibilidad
+                habitacion: habitaciones.length > 0 ? habitaciones[0] : { tipo: "N/A", precio: 0 },
+                regimen: regimenes.length > 0 ? regimenes[0] : { tipo: "N/A", precio: 0 },
+                // Añadimos los arrays de múltiples habitaciones y regímenes
+                habitaciones: habitaciones,
+                regimenes: regimenes,
+                servicios: servicios,
                 precioTotal: total
             };
 
-            // Enviamos la reserva al servidor
-            fetch('http://localhost:3000/reservas', {
+            // Enviar la reserva al servidor
+            return fetch('http://localhost:3000/reservas', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(reserva)
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Actualizamos el stock
-                    actualizarStock().then(() => {
-                        alert('Reserva realizada con éxito');
-                        carrito = []; // Vaciamos el carrito
-                        const botonCarrito = document.querySelector('.cabecera button');
-                        botonCarrito.innerHTML = '🛒 Carrito (0)';
-                        cerrarCarrito(); // Cerramos el modal del carrito
-                    });
-                } else {
-                    throw new Error('Error al crear la reserva');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error al procesar la reserva');
             });
+        })
+        .then(response => {
+            if (response.ok) {
+                return actualizarStock();
+            } else {
+                throw new Error('Error al crear la reserva');
+            }
+        })
+        .then(() => {
+            alert('Reserva realizada con éxito');
+            carrito = [];
+            const botonCarrito = document.querySelector('.cabecera button');
+            botonCarrito.innerHTML = '🛒 Carrito (0)';
+            cerrarCarrito();
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Error al obtener datos del usuario');
+            alert('Error al procesar la reserva: ' + error.message);
         });
 }
 
+// Actualizar la función agregarAlCarrito para marcar los items como 'habitacion'
+function agregarAlCarrito(id, nombre, precio) {
+    // Primero verificamos el stock disponible
+    fetch(`http://localhost:3000/stock`)
+        .then(response => response.json())
+        .then(stockData => {
+            const habitacion = stockData.stock.habitaciones.find(h => h.id.toString() === id);
+            
+            if (!habitacion || habitacion.cantidad <= 0) {
+                alert('Lo sentimos, no hay disponibilidad para esta habitación');
+                return;
+            }
+
+            const regimen = document.getElementById(`regimen-${id}`);
+            const precioRegimen = parseInt(regimen.value);
+            
+            carrito.push({
+                id: id,
+                nombre: nombre,
+                precio: precio,
+                precioRegimen: precioRegimen,
+                precioTotal: precio + precioRegimen,
+                tipo: 'habitacion'
+            });
+            
+            // Actualizamos el contador del carrito
+            const botonCarrito = document.querySelector('.cabecera button');
+            botonCarrito.innerHTML = `🛒 Carrito (${carrito.length})`;
+            
+            alert('Habitación añadida al carrito');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al verificar el stock');
+        });
+}
+
+// Modificar también esta función para actualizar stock solo de las habitaciones
 function actualizarStock() {
-    const promesas = carrito.map(item => {
+    const habitaciones = carrito.filter(item => item.tipo === 'habitacion');
+    
+    const promesas = habitaciones.map(item => {
         return fetch(`http://localhost:3000/stock/habitaciones/update/${item.id}`, {
             method: 'PATCH',
             headers: {
@@ -271,44 +330,7 @@ function obtenerTipoRegimen(precio) {
     }
 }
 
-
-// También modificamos agregarAlCarrito para verificar el stock antes de agregar
-function agregarAlCarrito(id, nombre, precio) {
-    // Primero verificamos el stock disponible
-    fetch(`http://localhost:3000/stock`)
-        .then(response => response.json())
-        .then(stockData => {
-            const habitacion = stockData.stock.habitaciones.find(h => h.id.toString() === id);
-            
-            if (!habitacion || habitacion.cantidad <= 0) {
-                alert('Lo sentimos, no hay disponibilidad para esta habitación');
-                return;
-            }
-
-            const regimen = document.getElementById(`regimen-${id}`);
-            const precioRegimen = parseInt(regimen.value);
-            
-            carrito.push({
-                id: id,
-                nombre: nombre,
-                precio: precio,
-                precioRegimen: precioRegimen,
-                precioTotal: precio + precioRegimen
-            });
-            
-            // Actualizamos el contador del carrito
-            const botonCarrito = document.querySelector('.cabecera button');
-            botonCarrito.innerHTML = `🛒 Carrito (${carrito.length})`;
-            
-            alert('Habitación añadida al carrito');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al verificar el stock');
-        });
-}
         mostrarHabitaciones();
-       
     </script>
     <div id="cartModalContainer" class="modal-container">
         <div id="cartModalContent" class="modal-content">
