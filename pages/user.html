@@ -45,9 +45,7 @@
             const botonCarrito = document.createElement('button');
             
             botonCarrito.innerHTML = '🛒 Carrito (0)';
-            botonCarrito.style.position = 'fixed';
-            botonCarrito.style.right = '20px';
-            botonCarrito.style.top = '20px';
+            botonCarrito.classList.add('carrito-btn')
             botonCarrito.onclick = mostrarCarrito;
             cabecera.appendChild(botonCarrito);
 
@@ -72,10 +70,11 @@
                                 <option value="45">Media pensión - 45€</option>
                                 <option value="65">Pensión completa - 65€</option>
                             </select>
-                            <button onclick="agregarAlCarrito('${habitacion.id}', '${habitacion.nombre}', ${habitacion.precio})">
+                            <button class="anadircarrito" onclick="agregarAlCarrito('${habitacion.id}', '${habitacion.nombre}', ${habitacion.precio})">
                                 Añadir
                             </button>
                         `;
+                        
                         
                         contenedorHabitaciones.appendChild(detalleHabitacion);
                     });
@@ -166,7 +165,8 @@ function confirmarReserva() {
             // Buscamos el usuario por su correo
             const correoUsuario = document.getElementById('usuarioCorreo').textContent;
             const usuario = usuarios.find(u => u.correo === correoUsuario);
-
+             debug.log("Esto es usuario "  + usuario);
+            debug.log("Esto es usuario "  + usuario);
             if (!usuario) {
                 throw new Error('Usuario no encontrado');
             }
@@ -308,7 +308,7 @@ function agregarAlCarrito(id, nombre, precio) {
         });
 }
         mostrarHabitaciones();
-        mostrarServicios();
+       
     </script>
     <div id="cartModalContainer" class="modal-container">
         <div id="cartModalContent" class="modal-content">

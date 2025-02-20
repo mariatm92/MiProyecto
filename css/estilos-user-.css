@@ -11,7 +11,44 @@
     min-height: 1200px;
     width: 100%;
 }
+.carrito-btn {
+    position: fixed; 
+    bottom: 25px; 
+    right: 25px;
+    z-index: 9999;
+    background-color:#4CAF50; /* Verde para los botones normales */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 16px;
+    font-family: roboto; 
+}
+.carrito-btn:hover{
+    background-color:#3b8a3e; 
+    padding: 11px 21px; 
 
+}
+.anadircarrito{
+    bottom: 10px; 
+    right: 10px;
+    background-color:#4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 13px;
+    font-family: roboto;
+}
+.anadircarrito:hover{
+    background-color:#3b8a3e; 
+    padding: 11px 21px; 
+
+}
 .wrapp .cabecera {
     display: flex;
     flex-wrap: wrap;
@@ -59,12 +96,7 @@ h1 {
     font-family:Titulo;
     color: #94740a;
 }
-.carrito {
-    position: fixed; 
-    bottom: 20px; 
-    right: 20px;
-    z-index: 9999; 
-}
+
 
 
 
