@@ -265,6 +265,50 @@
       },
       "servicios": [],
       "precioTotal": 325
+    },
+    {
+      "id": "RES1740046153927",
+      "fecha": "20/02/2025, 11:09",
+      "mes": "febrero",
+      "cliente": {
+        "nombre": "Pepito",
+        "apellidos": "delospalotes",
+        "edad": "25",
+        "nacionalidad": "Español",
+        "hijos": "53"
+      },
+      "habitacion": {
+        "tipo": "Habitación con jacuzzi",
+        "precio": 700
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 725
+    },
+    {
+      "id": "RES1740046842110",
+      "fecha": "20/02/2025, 11:20",
+      "mes": "febrero",
+      "cliente": {
+        "nombre": "Daniel",
+        "apellidos": "Vega",
+        "edad": "39",
+        "nacionalidad": "Español",
+        "hijos": "1"
+      },
+      "habitacion": {
+        "tipo": "Habitación triple",
+        "precio": 250
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 275
     }
   ]
 }

@@ -59,6 +59,14 @@ img {
     height: 60px;
     width: 1000px;
 }
+.carrito {
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px;
+    z-index: 9999; 
+}
+
+
 
 li {
     list-style: none;

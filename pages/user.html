@@ -20,6 +20,9 @@
             </div>
         </div>
         <div id="Habitacion"></div> <!-- Aquí se agregarán las habitaciones -->
+
+        <div id="servicios"></div> <!-- Aqui se agregaran los servicios-->
+        
     </div>
 
     <script>
@@ -44,8 +47,9 @@
             // Primero añadimos el botón del carrito en la cabecera
             const cabecera = document.querySelector('.cabecera');
             const botonCarrito = document.createElement('button');
+            
             botonCarrito.innerHTML = '🛒 Carrito (0)';
-            botonCarrito.style.position = 'absolute';
+            botonCarrito.style.position = 'fixed';
             botonCarrito.style.right = '20px';
             botonCarrito.style.top = '20px';
             botonCarrito.onclick = mostrarCarrito;
@@ -64,7 +68,7 @@
                         detalleHabitacion.innerHTML = `
                             <img id="roomImg" src=${habitacion.img}>
                             <div class="roomAux">
-                                <div class="campoRoom">Habitación: ${habitacion.nombre}</div>
+                                <div class="campoRoom">${habitacion.nombre}</div>
                                 <div class="campoRoom">Precio: ${habitacion.precio}€/Noche</div>
                             </div>
                             <select id="regimen-${habitacion.id}">
@@ -73,7 +77,7 @@
                                 <option value="65">Pensión completa - 65€</option>
                             </select>
                             <button onclick="agregarAlCarrito('${habitacion.id}', '${habitacion.nombre}', ${habitacion.precio})">
-                                Añadir al Carrito
+                                Añadir
                             </button>
                         `;
                         
@@ -83,9 +87,40 @@
                 .catch(error => console.error('Error:', error));
         }
 
+        function mostrarServicios() {
+
+          
+            // Luego cargamos los servicios
+            fetch('http://localhost:3000/servicios')
+                .then(response => response.json())
+                .then(data => {
+                    const contenedorservicios = document.getElementById('servicios');
+                    
+                    data.servicios.forEach(servicio => {
+                        const detalleServicio = document.createElement('div');
+                        detalleServicio.classList.add('detallesServicio');
+                        
+                        detalleServicio.innerHTML = `
+                            
+                            <div class="Botones">
+                                <button class="boton-check" onclick="toggleCheckbox()">${servicio.nombre}</button>
+                                <button class="boton-check" onclick="toggleCheckbox()">${servicio.precio}</button>
+                            </div>
+                            <button onclick="agregarAlCarrito('${servicio.id}', '${servicio.nombre}', ${servicio.precio})">
+                                Añadir al Carrito
+                            </button>
+                        `;
+                        
+                        contenedorServicio.appendChild(detalleServicio);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+
+        
         // Array para almacenar los items del carrito
         let carrito = [];
-
         // Función para agregar items al carrito
         function mostrarCarrito() {
     if (carrito.length === 0) {
@@ -254,6 +289,7 @@ function agregarAlCarrito(id, nombre, precio) {
         });
 }
         mostrarHabitaciones();
+        mostrarServicios();
     </script>
 </body>
 
