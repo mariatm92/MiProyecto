@@ -48,16 +48,16 @@ img {
     /*outline: solid black 2px;*/
     border-radius: 5%;
 }
-
-#bienvenida {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
-    height: 60px;
-    width: 1000px;
+@font-face {
+    font-family: 'Titulo';
+    src: url('../fonts/PlaywriteIN-VariableFont_wght.ttf') format('truetype');
+  }
+h1 {
+    margin-left: 13%;
+    font-size: 50px;
+    font-style: normal;
+    font-family:Titulo;
+    color: #94740a;
 }
 
 li {

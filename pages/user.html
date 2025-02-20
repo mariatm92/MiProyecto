@@ -13,7 +13,7 @@
             <a href="index.html"><img src="../images/Logo.jpg" alt="ERP"></a>
 
             <div class="bienvenida">
-                <h1 id="bienvenida">Bienvenido usuario, <span id="usuarioCorreo"></span></h1>
+                <h1 >Hotel Brisa del Mar </h1>
                 <div class="menu">
                     <!--<li>Inicio</li>-->
                 </div>
@@ -32,11 +32,7 @@
         // Obtener el correo de la URL y mostrarlo
         const correo = obtenerParametroURL('correo');
 
-        if (correo) {
-            document.getElementById('usuarioCorreo').textContent = correo; // Mostramos el correo en el HTML
-        } else {
-            window.location.href = 'index.html';  // Si no se encuentra el parámetro, redirigimos
-        }
+
 
         // Función para mostrar las habitaciones
        // Modificamos la función mostrarHabitaciones para incluir el botón de carrito
