@@ -140,8 +140,9 @@
       "precioTotal": 645
     },
     {
-      "id": "RES1740050893778",
-      "fecha": "20/02/2025, 12:28",
+      "id": "RES1740052229495",
+      "fecha": "20/02/2025, 12:50",
+      "mes": "febrero",
       "cliente": {
         "nombre": "Pedro",
         "apellidos": "López",
@@ -149,20 +150,38 @@
         "nacionalidad": "Argentino",
         "hijos": "0"
       },
-      "habitaciones": [
-        {
-          "tipo": "Triple",
-          "precio": 250
-        }
-      ],
-      "regimenes": [
-        {
-          "tipo": "solo desayuno",
-          "precio": 25
-        }
-      ],
+      "habitacion": {
+        "tipo": "Familiar",
+        "precio": 350
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
       "servicios": [],
-      "precioTotal": 275
+      "precioTotal": 375
+    },
+    {
+      "id": "RES1740052299439",
+      "fecha": "20/02/2025, 12:51",
+      "mes": "febrero",
+      "cliente": {
+        "nombre": "Pedro",
+        "apellidos": "López",
+        "edad": "28",
+        "nacionalidad": "Argentino",
+        "hijos": "0"
+      },
+      "habitacion": {
+        "tipo": "Deluxe",
+        "precio": 450
+      },
+      "regimen": {
+        "tipo": "solo desayuno",
+        "precio": 25
+      },
+      "servicios": [],
+      "precioTotal": 650
     }
   ]
 }

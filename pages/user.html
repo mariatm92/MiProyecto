@@ -155,92 +155,88 @@ function renderizarCarrito() {
 }
 
 function confirmarReserva() {
-    if (carrito.length === 0) {
-        alert('El carrito está vacío');
-        return;
-    }
-
-    // Get the URL parameter for email
-    const correoUsuario = obtenerParametroURL('correo');
-    if (!correoUsuario) {
-        alert('Error: No se pudo identificar el usuario');
-        return;
-    }
-
-    fetch('http://localhost:3000/usuarios')
-        .then(response => response.json())
-        .then(usuarios => {
-            // Find user by email
-            const usuario = usuarios.find(u => u.correo === correoUsuario);
-
-            if (!usuario) {
-                throw new Error('Usuario no encontrado');
+            if (carrito.length === 0) {
+                alert('El carrito está vacío');
+                return;
             }
 
-            const total = carrito.reduce((sum, item) => sum + item.precioTotal, 0);
-
-            // Create arrays for rooms and meal plans from cart
-            const habitaciones = carrito.map(item => ({
-                tipo: item.nombre,
-                precio: item.precio
-            }));
-
-            const regimenes = carrito.map(item => ({
-                tipo: obtenerTipoRegimen(item.precioRegimen),
-                precio: item.precioRegimen
-            }));
-
-            // Create reservation object
-            const reserva = {
-                id: "RES" + Date.now(),
-                fecha: new Date().toLocaleString('es-ES', { 
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                }),
-                cliente: {
-                    nombre: usuario.nombre,
-                    apellidos: usuario.apellidos,
-                    edad: usuario.edad,
-                    nacionalidad: usuario.nacionalidad,
-                    hijos: usuario.hijos
-                },
-                habitaciones: habitaciones,
-                regimenes: regimenes,
-                servicios: [],
-                precioTotal: total
-            };
-
-            // Send reservation to server
-            return fetch('http://localhost:3000/reservas', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(reserva)
-            });
-        })
-        .then(response => {
-            if (response.ok) {
-                return actualizarStock();
-            } else {
-                throw new Error('Error al crear la reserva');
+            // Get the URL parameter for email
+            const correoUsuario = obtenerParametroURL('correo');
+            if (!correoUsuario) {
+                alert('Error: No se pudo identificar el usuario');
+                return;
             }
-        })
-        .then(() => {
-            alert('Reserva realizada con éxito');
-            carrito = [];
-            const botonCarrito = document.querySelector('.cabecera button');
-            botonCarrito.innerHTML = '🛒 Carrito (0)';
-            cerrarCarrito();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al procesar la reserva: ' + error.message);
-        });
-}
+
+            fetch('http://localhost:3000/usuarios')
+                .then(response => response.json())
+                .then(usuarios => {
+                    const usuario = usuarios.find(u => u.correo === correoUsuario);
+
+                    if (!usuario) {
+                        throw new Error('Usuario no encontrado');
+                    }
+
+                    const total = carrito.reduce((sum, item) => sum + item.precioTotal, 0);
+
+                    // Crear la reserva con los datos solicitados
+                    const reserva = {
+                        id: "RES" + Date.now(),
+                        fecha: new Date().toLocaleString('es-ES', { 
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        }),
+                        mes: new Date().toLocaleString('es-ES', { month: 'long' }),
+                        cliente: {
+                            id: usuario.id, // Asegúrate de que cada usuario tiene un 'id' único
+                            nombre: usuario.nombre,
+                            apellidos: usuario.apellidos,
+                            edad: usuario.edad,
+                            nacionalidad: usuario.nacionalidad,
+                            hijos: usuario.hijos
+                        },
+                        habitacion: {
+                            tipo: carrito[0].nombre, // Asumimos que solo hay una habitación en el carrito
+                            precio: carrito[0].precio
+                        },
+                        regimen: {
+                            tipo: obtenerTipoRegimen(carrito[0].precioRegimen),
+                            precio: carrito[0].precioRegimen
+                        },
+                        servicios: [],
+                        precioTotal: total
+                    };
+
+                    // Enviar la reserva al servidor
+                    return fetch('http://localhost:3000/reservas', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(reserva)
+                    });
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return actualizarStock();
+                    } else {
+                        throw new Error('Error al crear la reserva');
+                    }
+                })
+                .then(() => {
+                    alert('Reserva realizada con éxito');
+                    carrito = [];
+                    const botonCarrito = document.querySelector('.cabecera button');
+                    botonCarrito.innerHTML = '🛒 Carrito (0)';
+                    cerrarCarrito();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al procesar la reserva: ' + error.message);
+                });
+        }
 
 function actualizarStock() {
     const promesas = carrito.map(item => {
